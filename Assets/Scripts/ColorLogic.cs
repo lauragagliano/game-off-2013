@@ -97,4 +97,9 @@ public class ColorLogic : MonoBehaviour
 			break;
 		}
 	}
+	
+	public void Refresh()
+	{
+	SetMaterialToCurrentColor();
+	}
 }

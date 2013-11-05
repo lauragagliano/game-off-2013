@@ -19,6 +19,10 @@ public class ColorLogic : MonoBehaviour
 		orange
 	}
 	
+	void Awake () {
+		SetMaterialToCurrentColor ();
+	}
+	
 	/*
 	 * Check whether the color of the object this script is attached to is
 	 * compatible with the passed in color. Compatible colors are those that
@@ -63,5 +67,34 @@ public class ColorLogic : MonoBehaviour
 			break;
 		}
 		return false;
+	}
+	
+	/*
+	 * Set the renderer's color to whatever color this script is set to. This will
+	 * keep our display color in sync with our logic. We can update these colors
+	 * to custom colors later.
+	 */
+	void SetMaterialToCurrentColor ()
+	{
+		switch (color) {
+		case ColorWheel.red:
+			renderer.material.color = Color.red;
+			break;
+		case ColorWheel.blue:
+			renderer.material.color = Color.blue;
+			break;
+		case ColorWheel.yellow:
+			renderer.material.color = Color.yellow;
+			break;
+		case ColorWheel.purple:
+			renderer.material.color = Color.magenta;
+			break;
+		case ColorWheel.green:
+			renderer.material.color = Color.green;
+			break;
+		case ColorWheel.orange:
+			renderer.material.color = new Color(1f, 0.5f, 0f, 1f);
+			break;
+		}
 	}
 }

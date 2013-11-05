@@ -24,7 +24,8 @@ public class ColorLogic : MonoBehaviour
 	 * compatible with the passed in color. Compatible colors are those that
 	 * either match or match one of the component colors in the color wheel.
 	 */
-	public bool isCompatible (ColorWheel theirColor) {
+	public bool isCompatible (ColorLogic theirColorLogic) {
+		ColorWheel theirColor = theirColorLogic.color;
 		// Short-circuit if colors are the exact same
 		if (theirColor == color) {
 			return true;

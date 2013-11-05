@@ -3,12 +3,28 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {
-	
+	float worldZClamp;
 	public float movespeed = 20.0f;
+	
+	void Awake ()
+	{
+		// Remember their initial Z position and keep them there forever.
+		worldZClamp = transform.position.z;
+	}
 	
 	void Update ()
 	{
 		TryMove ();
+		ClampToWorldZ (worldZClamp);
+	}
+	
+	/*
+	 * Sets the character's position to the specified worldZ, preventing
+	 * him from shifting.
+	 */
+	void ClampToWorldZ (float worldZ)
+	{
+		transform.position = new Vector3 (transform.position.x, transform.position.y, worldZ);
 	}
 	
 	/*

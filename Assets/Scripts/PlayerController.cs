@@ -8,10 +8,25 @@ public class PlayerController : MonoBehaviour
 	
 	void Update ()
 	{
+		TryMove ();
+	}
 	
-		float vertical = Input.GetAxis ("Vertical");
-		if (Mathf.Abs (vertical) > 0) {
-			transform.Translate (new Vector3 (-(vertical * movespeed * Time.deltaTime), 0, 0));
-		}
+	/*
+	 * Polls input and moves the character accordingly
+	 */
+	void TryMove ()
+	{
+		float direction = Input.GetAxis ("Horizontal");
+		Move (new Vector3 (direction, 0.0f, 0.0f), movespeed);
+	}
+
+	void Move (Vector3 direction, float speed)
+	{
+		Vector3 movement = (direction.normalized * speed);
+		movement *= Time.deltaTime;
+
+		// Apply movement vector
+		CharacterController biped = GetComponent<CharacterController> ();
+		biped.Move (movement);
 	}
 }

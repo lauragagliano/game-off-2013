@@ -48,6 +48,9 @@ public class PlayerController : MonoBehaviour
 	{
 		float direction = Input.GetAxis ("Horizontal");
 		Move (new Vector3 (direction, 0.0f, 0.0f), movespeed);
+		if (direction == 0) {
+			transform.Translate (0, 0, 0);
+		}
 	}
 	
 	void TrySwapColor ()

@@ -1,25 +1,28 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BlockLogic : MonoBehaviour
+public class GateLogic : MonoBehaviour
 {
-	ColorLogic blockColor;
+	ColorLogic gateColor;
 	
 	void Awake ()
 	{
-		blockColor = GetComponent<ColorLogic> ();
+		gateColor = GetComponent<ColorLogic> ();
 	}
 	
 	// Update is called once per frame
-	void OnTriggerStay (Collider other)
+	void OnTriggerEnter (Collider other)
 	{
 		ColorLogic otherColor = other.gameObject.GetComponent<ColorLogic> ();
 		if (otherColor == null) {
 			Debug.LogWarning ("Had a collision between objects that don't both have color logic.");
 			return;
 		}
-		if (otherColor.isCompatible (blockColor)) {
-			ScoreKeeper.Instance.ScorePoint();
+		if (other.tag != Tags.PLAYER) {
+			Debug.LogWarning ("Had a collision with a non-player object.");
+			return;
+		}
+		if (otherColor.isCompatible (gateColor)) {
 		} else {
 			Debug.Log ("DEAD");
 			other.gameObject.SetActive(false);

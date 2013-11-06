@@ -103,6 +103,6 @@ public class ColorLogic : MonoBehaviour
 	
 	public void Refresh()
 	{
-	SetMaterialToCurrentColor();
+		SetMaterialToCurrentColor();
 	}
 }

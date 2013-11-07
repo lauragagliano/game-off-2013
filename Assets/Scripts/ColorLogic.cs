@@ -8,11 +8,10 @@ using System.Collections;
 public class ColorLogic : MonoBehaviour
 {
 	public ColorWheel color;
-	
-	ColorManager colorManager;
-	
+
 	public enum ColorWheel
 	{
+		black,
 		red,
 		blue,
 		yellow,
@@ -23,7 +22,6 @@ public class ColorLogic : MonoBehaviour
 	
 	void Awake () {
 		SetMaterialToCurrentColor ();
-		colorManager = GameObject.Find (ObjectNames.GAMEMANAGER).GetComponent<ColorManager> ();
 	}
 	
 	/*
@@ -68,6 +66,9 @@ public class ColorLogic : MonoBehaviour
 				return true;
 			}
 			break;
+		case ColorWheel.black:
+			// Black is bad for everyone but black
+			return false;
 		}
 		return false;
 	}
@@ -97,6 +98,9 @@ public class ColorLogic : MonoBehaviour
 			break;
 		case ColorWheel.orange:
 			renderer.material = ColorManager.Instance.orange;
+			break;
+		case ColorWheel.black:
+			renderer.material = ColorManager.Instance.black;
 			break;
 		}
 	}

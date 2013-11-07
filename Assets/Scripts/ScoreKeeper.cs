@@ -3,10 +3,22 @@ using System.Collections;
 
 public class ScoreKeeper : Singleton<ScoreKeeper>
 {
-	public int gatesCrossed = 0;
+	public int blueScore = 0;
+	public int redScore = 0;
+	public int yellowScore = 0;
 	
-	public void ScorePoint ()
+	public void ScorePoint (ColorWheel color)
 	{
-		gatesCrossed++;
+		switch (color) {
+		case ColorWheel.red:
+			redScore++;
+			break;
+		case ColorWheel.blue:
+			blueScore++;
+			break;
+		case ColorWheel.yellow:
+			yellowScore++;
+			break;
+		}
 	}
 }

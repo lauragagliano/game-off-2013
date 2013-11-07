@@ -67,6 +67,10 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 	 */
 	public void OnDestroy ()
 	{
-		applicationIsQuitting = true;
+		//HACK this IF check is just to allow us to restart the level. If we don't do this
+		// then singleton objects are destroyed and not reinstantiated on loadLevel.
+		if (Application.loadedLevel != 0) {
+			applicationIsQuitting = true;
+		}
 	}
 }

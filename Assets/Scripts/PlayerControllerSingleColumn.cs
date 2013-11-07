@@ -6,7 +6,7 @@ public class PlayerControllerSingleColumn : MonoBehaviour
 {
 	float worldZClamp;
 	ColorLogic colorLogic;
-	ColorLogic.ColorWheel[] myColors;
+	ColorWheel[] myColors;
 	public float movespeed = 20.0f;
 	
 	#region #1 Awake and Update
@@ -18,10 +18,10 @@ public class PlayerControllerSingleColumn : MonoBehaviour
 		// Initialize the colors according to the level rules
 		colorLogic = (ColorLogic)GetComponent<ColorLogic> ();
 		int NUM_COLORS = 3;
-		myColors = new ColorLogic.ColorWheel[NUM_COLORS];
-		myColors [0] = ColorLogic.ColorWheel.blue;
-		myColors [1] = ColorLogic.ColorWheel.yellow;
-		myColors [2] = ColorLogic.ColorWheel.red;
+		myColors = new ColorWheel[NUM_COLORS];
+		myColors [0] = ColorWheel.blue;
+		myColors [1] = ColorWheel.yellow;
+		myColors [2] = ColorWheel.red;
 		
 		// Cycle and render colors
 		//CycleColor(true);

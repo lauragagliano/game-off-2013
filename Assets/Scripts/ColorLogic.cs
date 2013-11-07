@@ -10,17 +10,6 @@ public class ColorLogic : MonoBehaviour
 	public ColorWheel color;
 	ColorManager colorManager;
 	
-	public enum ColorWheel
-	{
-		black,
-		red,
-		blue,
-		yellow,
-		purple,
-		green,
-		orange
-	}
-	
 	void Awake () {
 		colorManager = (ColorManager)GameObject.Find(ObjectNames.GAMEMANAGER).GetComponent<ColorManager> ();
 		SetMaterialToCurrentColor ();

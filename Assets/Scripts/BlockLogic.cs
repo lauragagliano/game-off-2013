@@ -19,7 +19,7 @@ public class BlockLogic : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void OnTriggerStay (Collider other)
+	void OnTriggerEnter (Collider other)
 	{
 		Debug.Log ("triggered");
 		ColorLogic otherColor = other.gameObject.GetComponent<ColorLogic> ();
@@ -28,7 +28,7 @@ public class BlockLogic : MonoBehaviour
 			return;
 		}
 		if (otherColor.isCompatible (blockColor)) {
-			ScoreKeeper.Instance.ScorePoint();
+			ScoreKeeper.Instance.ScorePoint(blockColor.color);
 			SuckUpBlock ();
 		} else {
 			other.gameObject.SetActive(false);

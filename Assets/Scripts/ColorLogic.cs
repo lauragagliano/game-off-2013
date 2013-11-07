@@ -8,7 +8,8 @@ using System.Collections;
 public class ColorLogic : MonoBehaviour
 {
 	public ColorWheel color;
-
+	ColorManager colorManager;
+	
 	public enum ColorWheel
 	{
 		black,
@@ -21,6 +22,7 @@ public class ColorLogic : MonoBehaviour
 	}
 	
 	void Awake () {
+		colorManager = (ColorManager)GameObject.Find(ObjectNames.GAMEMANAGER).GetComponent<ColorManager> ();
 		SetMaterialToCurrentColor ();
 	}
 	
@@ -82,31 +84,34 @@ public class ColorLogic : MonoBehaviour
 	{
 		switch (color) {
 		case ColorWheel.red:
-			renderer.material = ColorManager.Instance.red;
+			renderer.material = colorManager.red;
 			break;
 		case ColorWheel.blue:
-			renderer.material = ColorManager.Instance.blue;
+			renderer.material = colorManager.blue;
 			break;
 		case ColorWheel.yellow:
-			renderer.material = ColorManager.Instance.yellow;
+			renderer.material = colorManager.yellow;
 			break;
 		case ColorWheel.purple:
-			renderer.material = ColorManager.Instance.purple;
+			renderer.material = colorManager.purple;
 			break;
 		case ColorWheel.green:
-			renderer.material = ColorManager.Instance.green;
+			renderer.material = colorManager.green;
 			break;
 		case ColorWheel.orange:
-			renderer.material = ColorManager.Instance.orange;
+			renderer.material = colorManager.orange;
 			break;
 		case ColorWheel.black:
-			renderer.material = ColorManager.Instance.black;
+			renderer.material = colorManager.black;
 			break;
 		}
 	}
 	
 	public void Refresh()
 	{
+		if (colorManager == null) {
+			colorManager = (ColorManager)GameObject.Find(ObjectNames.GAMEMANAGER).GetComponent<ColorManager> ();
+		}
 		SetMaterialToCurrentColor();
 	}
 }

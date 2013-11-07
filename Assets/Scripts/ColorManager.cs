@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ColorManager : Singleton<ColorManager>
+public class ColorManager : MonoBehaviour
 {
 	public Material red;
 	public Material blue;
@@ -9,4 +9,5 @@ public class ColorManager : Singleton<ColorManager>
 	public Material purple;
 	public Material green;
 	public Material orange;
+	public Material black;
 }

@@ -9,6 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400000}
   - 114: {fileID: 11400000}
+  - 114: {fileID: 11400002}
   m_Layer: 0
   m_Name: _GameManager
   m_TagString: Untagged
@@ -44,6 +45,19 @@ MonoBehaviour:
   purple: {fileID: 2100000, guid: 60e82001e3f50674b8261b0c7d25c531, type: 2}
   green: {fileID: 2100000, guid: de95a5669d65fa341ba620ec66bb8a84, type: 2}
   orange: {fileID: 2100000, guid: 78c684e193c9bac45aef808f0e9e422a, type: 2}
+  black: {fileID: 2100000, guid: 5545a405383484642bc6073294a996ed, type: 2}
+--- !u!114 &11400002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48747155d29c8be44a2d59b2baaeca91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gatesCrossed: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

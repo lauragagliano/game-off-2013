@@ -24,3 +24,14 @@ available.
 [CodeGreen](http://freesound.org/people/Serithi/sounds/150316/) by [Serithi](http://freesound.org/people/Serithi/)
 [CodeBlue](http://freesound.org/people/Serithi/sounds/150317/) by [Serithi](http://freesound.org/people/Serithi/)
 [Robot_Ready](http://freesound.org/people/mazk1985/sounds/187404/) by [mazk1985](http://freesound.org/people/mazk1985/)
+[PowerDown_1](http://freesound.org/people/noirenex/sounds/159399/) by [noirenex](http://freesound.org/people/noirenex/)
+[Electric Drip Drop](http://freesound.org/people/NoiseCollector/sounds/5937/) by [NoiseCollector](http://freesound.org/people/NoiseCollector/)
+[Bricks Falling 2](http://freesound.org/people/Benboncan/sounds/77086/) by [Benboncan](http://freesound.org/people/Benboncan/)
+[Drinking](http://freesound.org/people/sagetyrtle/sounds/37226/) by [sagetyrtle](http://freesound.org/people/sagetyrtle/)
+
+### Music
+
+The following music is or was at one point in our source code and may
+be used in the final cut.
+
+[Rising](http://freesound.org/people/noirenex/sounds/159401/) by [noirenex](http://freesound.org/people/noirenex/)

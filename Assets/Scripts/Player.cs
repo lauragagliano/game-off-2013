@@ -11,7 +11,13 @@ public class Player : MonoBehaviour
 	public ColorLogic playerColor;
 	
 	const int POWER_UNIT = 1;
-
+	
+	public AudioClip pickupSound;
+	public AudioClip damageSound;
+	public AudioClip deathSound;
+	public AudioClip slowDownSound;
+	public AudioClip regenHealthSound;
+	
 	#region #1 Awake and Update
 	void Awake ()
 	{
@@ -27,6 +33,11 @@ public class Player : MonoBehaviour
 	public void HandleBlockCollision (ColorLogic blockColor)
 	{
 		bool goodCollision = playerColor.isCompatible (blockColor);
+		if (goodCollision) {
+			audio.PlayOneShot (pickupSound);
+		} else {
+			audio.PlayOneShot (damageSound);
+		}
 		switch (blockColor.color) {
 		case ColorWheel.blue:
 			if (!goodCollision){
@@ -84,10 +95,11 @@ public class Player : MonoBehaviour
 			redPower.ExhaustPower ();
 		}
 	}
-
+	
 	public void RegenHealth ()
 	{
 		if (greenPower.IsCharged ()) {
+			audio.PlayOneShot (regenHealthSound);
 			curHealth = maxHealth;
 			greenPower.ExhaustPower ();
 		}
@@ -97,6 +109,7 @@ public class Player : MonoBehaviour
 	{
 		if (bluePower.IsCharged ()) {
 			//TODO This is a case where we could have a protected get component call that null checks.
+			audio.PlayOneShot (slowDownSound);
 			GameObject.Find (ObjectNames.GROUND).GetComponent<Treadmill> ().SlowDown ();
 			bluePower.ExhaustPower ();
 		}

@@ -4,17 +4,18 @@ using System.Collections;
 
 public class PlayerControllerRGB : MonoBehaviour
 {
+	Player player;
 	float worldZClamp;
 	ColorLogic colorLogic;
 	ColorWheel[] myColors;
 	public float movespeed = 20.0f;
-	
 	public Transform[] lanes;
 	int laneIndex = 1; // 0, 1, 2
 	
 	#region #1 Awake and Update
-	void Awake () 
+	void Awake ()
 	{
+		player = (Player)GetComponent<Player> ();
 		// Remember their initial Z position and keep them there forever.
 		worldZClamp = transform.position.z;
 		
@@ -58,14 +59,31 @@ public class PlayerControllerRGB : MonoBehaviour
 		}
 	}
 	
+	/*
+	 * Logic for switching colors or using abilities. If player is
+	 * already the color of the button they are pushing, try to use
+	 * that color's special power.
+	 */
 	void TrySwapColor ()
 	{
-		if (Input.GetKeyDown ("q")) {
-			colorLogic.color = myColors [0];
-		} else if (Input.GetKeyDown ("w")) {
-			colorLogic.color = myColors [1];
-		} else if (Input.GetKeyDown ("e")) {
-			colorLogic.color = myColors [2];
+		if (Input.GetKeyDown ("j")) {
+			if (colorLogic.color == myColors [0]) {
+				player.RegenHealth ();
+			} else {
+				colorLogic.color = myColors [0];
+			}
+		} else if (Input.GetKeyDown ("k")) {
+			if (colorLogic.color == myColors [1]) {
+				player.RegenHealth ();
+			} else {
+				colorLogic.color = myColors [1];
+			}
+		} else if (Input.GetKeyDown ("l")) {
+			if (colorLogic.color == myColors [2]) {
+				player.SlowDown ();
+			} else {
+				colorLogic.color = myColors [2];
+			}
 		}
 	}
 	#endregion
@@ -84,18 +102,20 @@ public class PlayerControllerRGB : MonoBehaviour
 		biped.Move (movement);
 	}
 	
-	void ShiftLeft () {
+	void ShiftLeft ()
+	{
 		if (laneIndex >= 1) {
 			laneIndex--;
 		}
-		transform.position = (lanes[laneIndex].position);
+		transform.position = (lanes [laneIndex].position);
 	}
 	
-	void ShiftRight () {
+	void ShiftRight ()
+	{
 		if (laneIndex <= 1) {
 			laneIndex++;
 		}
-		transform.position = (lanes[laneIndex].position);
+		transform.position = (lanes [laneIndex].position);
 	}
 	
 	/*

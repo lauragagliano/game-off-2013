@@ -11,7 +11,8 @@ public class Player : MonoBehaviour
 	public ColorLogic playerColor;
 	
 	const int POWER_UNIT = 1;
-	
+
+	#region #1 Awake and Update
 	void Awake ()
 	{
 		curHealth = maxHealth;
@@ -20,7 +21,9 @@ public class Player : MonoBehaviour
 		redPower = (RedPower) GetComponent<RedPower> ();
 		greenPower = (GreenPower) GetComponent<GreenPower> ();
 	}
+	#endregion
 	
+	#region #2 Player and Block interaction
 	public void HandleBlockCollision (ColorLogic blockColor)
 	{
 		bool goodCollision = playerColor.isCompatible (blockColor);
@@ -72,4 +75,31 @@ public class Player : MonoBehaviour
 	{
 		gameObject.SetActive (false);
 	}
+	#endregion
+	
+	#region #2 Player Powers
+	public void Magnet ()
+	{
+		if (redPower.IsCharged ()) {
+			redPower.ExhaustPower ();
+		}
+	}
+
+	public void RegenHealth ()
+	{
+		if (greenPower.IsCharged ()) {
+			curHealth = maxHealth;
+			greenPower.ExhaustPower ();
+		}
+	}
+	
+	public void SlowDown ()
+	{
+		if (bluePower.IsCharged ()) {
+			//TODO This is a case where we could have a protected get component call that null checks.
+			GameObject.Find (ObjectNames.GROUND).GetComponent<Treadmill> ().SlowDown ();
+			bluePower.ExhaustPower ();
+		}
+	}
+	#endregion
 }

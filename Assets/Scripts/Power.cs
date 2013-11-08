@@ -10,7 +10,7 @@ public abstract class Power : MonoBehaviour
 {
 	protected ColorWheel color;
 	public int curValue;
-	int maxValue = 10;
+	int maxValue = 5;
 	
 	public void AddPower (int amount)
 	{
@@ -34,5 +34,10 @@ public abstract class Power : MonoBehaviour
 	public bool IsCharged () 
 	{
 		return curValue == maxValue;
+	}
+	
+	public void ExhaustPower ()
+	{
+		curValue = 0;
 	}
 }

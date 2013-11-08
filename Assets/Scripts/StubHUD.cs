@@ -3,6 +3,7 @@ using System.Collections;
 
 public class StubHUD : MonoBehaviour
 {
+	public Player player;
 	public GUIText startEndText;
 	public GUIText helpText;
 	public GUIText scoreText;
@@ -28,7 +29,7 @@ public class StubHUD : MonoBehaviour
 			}
 			GUILayout.EndArea ();
 		}
-		scoreText.text = string.Format("Score:\nRed: {0}\nBlue: {1}\nYellow: {2}", 
-			ScoreKeeper.Instance.redScore,ScoreKeeper.Instance.blueScore,ScoreKeeper.Instance.yellowScore);
+		scoreText.text = string.Format ("Power:\nRed: {0}\nBlue: {1}\nYellow: {2}\n\nHealth: {3}", 
+			player.redPower.curValue, player.bluePower.curValue, player.yellowPower.curValue, player.curHealth);
 	}
 }

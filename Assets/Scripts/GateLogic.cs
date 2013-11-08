@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class GateLogic : MonoBehaviour
@@ -23,7 +23,7 @@ public class GateLogic : MonoBehaviour
 			return;
 		}
 		if (otherColor.isCompatible (gateColor)) {
-			ScoreKeeper.Instance.ScorePoint (gateColor.color);
+			StatTracker.Instance.ScorePoint (gateColor.color);
 		} else {
 			Debug.Log ("DEAD");
 			other.gameObject.SetActive(false);

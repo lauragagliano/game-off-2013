@@ -3,7 +3,7 @@ using System.Collections;
 
 public class BlockLogic : MonoBehaviour
 {
-	bool suckedUp;
+	bool usedUp;
 	ColorLogic blockColor;
 	
 	void Awake ()
@@ -13,7 +13,7 @@ public class BlockLogic : MonoBehaviour
 	
 	void Update ()
 	{
-		if (suckedUp) {
+		if (usedUp) {
 			SuckUpBlock ();
 		}	
 	}
@@ -21,19 +21,22 @@ public class BlockLogic : MonoBehaviour
 	// Update is called once per frame
 	void OnTriggerEnter (Collider other)
 	{
-		Debug.Log ("triggered");
-		ColorLogic otherColor = other.gameObject.GetComponent<ColorLogic> ();
-		if (otherColor == null) {
-			Debug.LogWarning ("Had a collision between objects that don't both have color logic.");
+		if (!other.CompareTag(Tags.PLAYER)) {
+			Debug.LogWarning ("Had a block collision with something that's not the player. Exiting method.");
 			return;
 		}
-		if (otherColor.isCompatible (blockColor)) {
-			if (!suckedUp) {
-				ScoreKeeper.Instance.ScorePoint(blockColor.color);
+		if (!usedUp) {
+			Player player = other.GetComponent<Player> ();
+			player.HandleBlockCollision (blockColor);
+			if (player.playerColor.isCompatible (blockColor)) {
 				SuckUpBlock ();
+			} else {
+				// BLOW UP BIG
+				if (particleEmitter != null) {
+					particleEmitter.Emit ();
+				}
+				renderer.enabled = false;
 			}
-		} else {
-			other.gameObject.SetActive(false);
 		}
 	}
 	
@@ -42,7 +45,7 @@ public class BlockLogic : MonoBehaviour
 	 */
 	void SuckUpBlock()
 	{
-		suckedUp = true;
+		usedUp = true;
 		transform.localScale = transform.localScale * 0.9f;
 		if (transform.localScale.magnitude < 0.05f) {
 			Destroy (gameObject);

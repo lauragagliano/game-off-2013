@@ -54,10 +54,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48747155d29c8be44a2d59b2baaeca91, type: 3}
+  m_Script: {fileID: 11500000, guid: db0cceabc0fbc3d449bc4a4bb1958a34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gatesCrossed: 0
+  curBluePoints: 0
+  curRedPoints: 0
+  curYellowPoints: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

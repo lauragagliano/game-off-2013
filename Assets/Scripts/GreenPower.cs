@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class YellowPower : Power
+public class GreenPower : Power
 {
 	void Awake ()
 	{

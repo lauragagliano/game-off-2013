@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class Player : MonoBehaviour
@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
 	int maxHealth = 10;
 	public BluePower bluePower;
 	public RedPower redPower;
-	public Power yellowPower;
+	public Power greenPower;
 	public ColorLogic playerColor;
 	
 	const int POWER_UNIT = 1;
@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
 		playerColor = (ColorLogic) GetComponent<ColorLogic> ();
 		bluePower = (BluePower) GetComponent<BluePower> ();
 		redPower = (RedPower) GetComponent<RedPower> ();
-		yellowPower = (YellowPower) GetComponent<YellowPower> ();
+		greenPower = (GreenPower) GetComponent<GreenPower> ();
 	}
 	
 	public void HandleBlockCollision (ColorLogic blockColor)
@@ -43,13 +43,13 @@ public class Player : MonoBehaviour
 				redPower.AddPower (POWER_UNIT);
 			}
 			break;
-		case ColorWheel.yellow:
+		case ColorWheel.green:
 			if (!goodCollision) {
 				LoseHealth (1);
-			} else if (yellowPower.IsCharged ()) {
+			} else if (greenPower.IsCharged ()) {
 				// Logic for spillover could go here....
 			} else {
-				yellowPower.AddPower (POWER_UNIT);
+				greenPower.AddPower (POWER_UNIT);
 			}
 			break;
 		case ColorWheel.black:

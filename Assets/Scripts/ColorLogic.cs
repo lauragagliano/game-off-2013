@@ -25,7 +25,7 @@ public class ColorLogic : MonoBehaviour
 		// Short-circuit if colors are the exact same
 		if (theirColor == color) {
 			return true;
-		}
+		}/*
 		switch (color) {
 		case ColorWheel.red:
 			if (theirColor == ColorWheel.purple || theirColor == ColorWheel.orange) {
@@ -60,7 +60,7 @@ public class ColorLogic : MonoBehaviour
 		case ColorWheel.black:
 			// Black is bad for everyone but black
 			return false;
-		}
+		}*/
 		return false;
 	}
 	

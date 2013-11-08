@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class StubHUD : MonoBehaviour
@@ -29,7 +29,7 @@ public class StubHUD : MonoBehaviour
 			}
 			GUILayout.EndArea ();
 		}
-		scoreText.text = string.Format ("Power:\nRed: {0}\nBlue: {1}\nYellow: {2}\n\nHealth: {3}", 
-			player.redPower.curValue, player.bluePower.curValue, player.yellowPower.curValue, player.curHealth);
+		scoreText.text = string.Format ("Power:\nRed: {0}\nBlue: {1}\nGreen: {2}\n\nHealth: {3}",
+			player.redPower.curValue, player.bluePower.curValue, player.greenPower.curValue, player.curHealth);
 	}
 }

@@ -8,6 +8,7 @@ using System.Collections;
  */
 public abstract class Power : MonoBehaviour
 {
+	public AudioClip powerReadySound;
 	protected ColorWheel color;
 	public int curValue;
 	int maxValue = 5;
@@ -16,6 +17,9 @@ public abstract class Power : MonoBehaviour
 	{
 		if (curValue < maxValue) {
 			curValue += amount;
+			if (curValue == maxValue) {
+				audio.PlayOneShot (powerReadySound);
+			}
 		}
 	}
 	

@@ -10,8 +10,7 @@ public class StubHUD : MonoBehaviour
 	
 	void Awake ()
 	{
-		helpText.text = "A: LEFT\nD: RIGHT\n\nQ: BLUE\nW: YELLOW\nE: RED\n\n" +
-			"1. EASY LEVEL\n2. MEDIUM LEVEL\n3. HARD LEVEL";
+		helpText.text = "A: LEFT\nD: RIGHT\n\nJ: RED\nK: GREEN\nL: BLUE\n\n(Tap Twice for POAWAHH";
 	}
 	
 	void Update ()

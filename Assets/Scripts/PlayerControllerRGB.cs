@@ -48,15 +48,15 @@ public class PlayerControllerRGB : MonoBehaviour
 	void TryMove ()
 	{
 		float direction = Input.GetAxis ("Horizontal");
-		//Move (new Vector3 (direction, 0.0f, 0.0f), movespeed);
+		Move (new Vector3 (direction, 0.0f, 0.0f), movespeed);
 		if (direction == 0) {
 			transform.Translate (0, 0, 0);
 		}
-		if (Input.GetButtonDown ("LaneShiftLeft")) {
-			ShiftLeft ();
-		} else if (Input.GetButtonDown ("LaneShiftRight")) {
-			ShiftRight ();
-		}
+		//if (Input.GetButtonDown ("LaneShiftLeft")) {
+		//	ShiftLeft ();
+		//} else if (Input.GetButtonDown ("LaneShiftRight")) {
+		//	ShiftRight ();
+		//}
 	}
 	
 	/*

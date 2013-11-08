@@ -47931,7 +47931,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 567228c6376a61243b5bcc1b79ab7974, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movespeed: 35
+  movespeed: 40
   lanes:
   - {fileID: 987136674}
   - {fileID: 22689417}
@@ -53265,6 +53265,10 @@ Prefab:
       propertyPath: lanes.Array.data[2]
       value: 
       objectReference: {fileID: 903147930}
+    - target: {fileID: 11400008, guid: 52520621251bda348a843f251043d56e, type: 2}
+      propertyPath: movespeed
+      value: 40
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 52520621251bda348a843f251043d56e, type: 2}
   m_RootGameObject: {fileID: 1741557054}
@@ -57646,9 +57650,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c3e58b770654683be60014ab8fa238, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollspeed: 30
+  scrollspeed: 20
   accelerationPerFrame: 0
-  maxspeed: 30
+  maxspeed: 20
 --- !u!1 &2051933218
 GameObject:
   m_ObjectHideFlags: 0

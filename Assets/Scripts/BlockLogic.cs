@@ -28,8 +28,10 @@ public class BlockLogic : MonoBehaviour
 			return;
 		}
 		if (otherColor.isCompatible (blockColor)) {
-			ScoreKeeper.Instance.ScorePoint(blockColor.color);
-			SuckUpBlock ();
+			if (!suckedUp) {
+				ScoreKeeper.Instance.ScorePoint(blockColor.color);
+				SuckUpBlock ();
+			}
 		} else {
 			other.gameObject.SetActive(false);
 		}
@@ -46,8 +48,4 @@ public class BlockLogic : MonoBehaviour
 			Destroy (gameObject);
 		}
 	}
-	
-	/*
-	 * 
-	 */
 }

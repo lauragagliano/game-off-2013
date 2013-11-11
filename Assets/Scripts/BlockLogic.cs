@@ -5,6 +5,7 @@ public class BlockLogic : MonoBehaviour
 {
 	bool suckedUp;
 	RGB blockRGB;
+	public GameObject destroyFX;
 	
 	void Awake ()
 	{
@@ -30,12 +31,7 @@ public class BlockLogic : MonoBehaviour
 		if (player.playerRGB.isCompatible (blockRGB)) {
 			SuckUpBlock ();
 		} else {
-			// BLOW UP BIG
-			// TODO Spawn bricks with rigid bodies and DESTROY the block object
-			if (particleEmitter != null) {
-				particleEmitter.Emit ();
-			}
-			renderer.enabled = false;
+			BlowUp ();
 		}
 	}
 	
@@ -59,7 +55,10 @@ public class BlockLogic : MonoBehaviour
 		collider.enabled = false;
 	}
 	public void BlowUp()
-	{	
+	{
+		GameObject fx = (GameObject)Instantiate (destroyFX, transform.position,
+				Quaternion.LookRotation (Vector3.up, Vector3.back));
+		Destroy (fx, 0.8f);
 		Destroy (gameObject);
 	}
 }

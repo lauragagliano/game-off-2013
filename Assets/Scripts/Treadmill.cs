@@ -10,16 +10,21 @@ public class Treadmill : MonoBehaviour {
 	public float maxspeed = 30.0f;
 	public Transform sectionSpawnZone;
 	public List<GameObject> easySections;
+	public List<GameObject> freebieSections;
+	public float chanceOfFreebie;
+	float lastFreebieTime;
+	float delayWeight = 60.0f; // Higher means good things happen less often
 	
-	Transform playerTransform;
+	GameObject player;
 	GameObject mostRecentSection;
 	GameObject staleSection;
 	
 	void Awake ()
 	{
 		scrollspeed = startingSpeed;
-		playerTransform = (Transform) GameObject.Find (ObjectNames.PLAYER).transform;
+		player = GameObject.Find (ObjectNames.PLAYER);
 		SpawnNextSection ();
+		lastFreebieTime = Time.time;
 	}
 	
 	void FixedUpdate ()
@@ -42,7 +47,7 @@ public class Treadmill : MonoBehaviour {
 	 */
 	bool isSectionPastPlayer ()
 	{
-		return mostRecentSection.transform.position.z <= playerTransform.position.z;
+		return mostRecentSection.transform.position.z <= player.transform.position.z;
 	}
 	
 	/*
@@ -56,9 +61,28 @@ public class Treadmill : MonoBehaviour {
 			Destroy (staleSection);
 		}
 		staleSection = mostRecentSection;
-		int sectionIndex = Random.Range (0, easySections.Count);
-		mostRecentSection = (GameObject)Instantiate (easySections[sectionIndex], sectionSpawnZone.position, Quaternion.identity);
+		
+		// Determine which bucket of sections to draw from
+		List<GameObject> sectionBucket;
+		float timeSinceLastFreebie = Time.time - lastFreebieTime;
+		chanceOfFreebie = (timeSinceLastFreebie * timeSinceLastFreebie) / (delayWeight * delayWeight) * 100;
+		if (RBRandom.PercentageChance (chanceOfFreebie)) {
+			sectionBucket = freebieSections;
+			lastFreebieTime = Time.time;
+		} else {
+			sectionBucket = easySections;
+		}
+		int sectionIndex = Random.Range (0, sectionBucket.Count);
+		mostRecentSection = (GameObject)Instantiate (sectionBucket[sectionIndex], sectionSpawnZone.position, Quaternion.identity);
 		// Parent the random new section with the treadmill
 		mostRecentSection.transform.parent = gameObject.transform;
-	}
+		// TODO This could be done more elegantly with objects more aware of the pickups and player
+		// i.e. one that doesn't have to do a lookup every time.
+		// Set the pickups in the scene to match the player's current color
+		GameObject[] pickups = GameObject.FindGameObjectsWithTag (Tags.PICKUP);
+		foreach (GameObject pickup in pickups) {
+			RGB pickupRGB = pickup.GetComponent<RGB> ();
+			pickupRGB.color = player.GetComponent<RGB> ().color;
+			pickupRGB.Refresh ();
+		}}
 }

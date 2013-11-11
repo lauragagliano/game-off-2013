@@ -80,7 +80,6 @@ GameObject:
   - 82: {fileID: 8200006}
   - 82: {fileID: 8200008}
   - 82: {fileID: 8200010}
-  - 114: {fileID: 11400018}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -128,7 +127,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100006}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.0999999, y: .5, z: -28.0933914}
+  m_LocalPosition: {x: -3.0999999, y: .5, z: -28}
   m_LocalScale: {x: 2.69235897, y: 1, z: 1}
   m_Children:
   - {fileID: 400002}
@@ -695,6 +694,7 @@ MonoBehaviour:
   redPower: {fileID: 0}
   greenPower: {fileID: 0}
   playerRGB: {fileID: 0}
+  pickups: []
   pickupSound: {fileID: 8300000, guid: c674d8535fb505a43995a1ad8dbcfe9e, type: 3}
   deathSound: {fileID: 0}
   slowDownSound: {fileID: 8300000, guid: f1e36343f5caf0945aa5191c5bcbfc21, type: 3}
@@ -702,6 +702,7 @@ MonoBehaviour:
   shieldHitSound: {fileID: 8300000, guid: 2f94bb284a54548a8b7a755b3acc468d, type: 3}
   shieldDownSound: {fileID: 8300000, guid: 2f94bb284a54548a8b7a755b3acc468d, type: 3}
   laserSound: {fileID: 8300000, guid: 653b9d604a9a242d9be6e1e4a5f1380a, type: 3}
+  movespeed: 20
 --- !u!114 &11400012
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -741,19 +742,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerReadySound: {fileID: 8300000, guid: 727dd46b669931645927cad8c8b88b7c, type: 3}
   curValue: 0
---- !u!114 &11400018
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100006}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed78926f3c66644778e0ebcdb884f42a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movespeed: 20
-  lanes: []
 --- !u!143 &14300000
 CharacterController:
   m_ObjectHideFlags: 1

@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
 	public RedPower redPower;
 	public GreenPower greenPower;
 	public RGB playerRGB;
+	public GameObject[] pickups;
 
 	const int POWER_UNIT = 1;
 	public AudioClip pickupSound;
@@ -19,18 +20,104 @@ public class Player : MonoBehaviour
 	public AudioClip shieldDownSound;
 	public AudioClip laserSound;
 	
+	float worldZClamp;
+	RGB rgb;
+	public float movespeed = 20.0f;
+	
+	
 	#region #1 Awake and Update
 	void Awake ()
 	{
+		// Set our health and powers
 		curHealth = 1;
 		playerRGB = (RGB) GetComponent<RGB> ();
 		bluePower = (BluePower) GetComponent<BluePower> ();
 		redPower = (RedPower) GetComponent<RedPower> ();
 		greenPower = (GreenPower) GetComponent<GreenPower> ();
+		
+		// Remember their initial Z position and keep them there forever.
+		worldZClamp = transform.position.z;
+		// Initialize the colors according to the level rules
+		rgb = (RGB)GetComponent<RGB> ();
+		// Cycle and render colors
+		RenderCurrentColor ();
+	}
+	
+	void Update ()
+	{
+		TryMove ();
+		TrySwapColor ();
+		ClampToWorldZ (worldZClamp);
+		rgb.Refresh ();
+	}
+	
+	/*
+	 * Refresh the current color on the character
+	 */
+	void RenderCurrentColor ()
+	{
+		rgb.Refresh ();
+	}
+	
+	/*
+	 * Sets the character's position to the specified worldZ, preventing
+	 * him from shifting.
+	 */
+	void ClampToWorldZ (float worldZ)
+	{
+		transform.position = new Vector3 (transform.position.x, transform.position.y, worldZ);
 	}
 	#endregion
 	
-	#region #2 Player and Block interaction
+	#region #2 Input Tries
+	/*
+	 * Polls input and moves the character accordingly
+	 */
+	void TryMove ()
+	{
+		float direction = Input.GetAxis ("Horizontal");
+		Move (new Vector3 (direction, 0.0f, 0.0f), movespeed);
+		if (direction == 0) {
+			transform.Translate (0, 0, 0);
+		}
+	}
+	
+	/*
+	 * Logic for switching colors or using abilities. If player is
+	 * already the color of the button they are pushing, try to use
+	 * that color's special power.
+	 */
+	void TrySwapColor ()
+	{
+		if (Input.GetKeyDown ("j")) {
+			if (rgb.color == ColorWheel.red) {
+				Laser ();
+			} else {
+				ChangeColors (ColorWheel.red);
+			}
+		} else if (Input.GetKeyDown ("k")) {
+			if (rgb.color == ColorWheel.green) {
+				RegenHealth ();
+			} else {
+				ChangeColors (ColorWheel.green);
+			}
+		} else if (Input.GetKeyDown ("l")) {
+			if (rgb.color == ColorWheel.blue) {
+				SlowDown ();
+			} else {
+				ChangeColors (ColorWheel.blue);
+			}
+		}
+	}
+	#endregion
+
+	#region #3 Player and Block interaction
+	/*
+	 * When a player collides with a block, perform the required action based
+	 * on the RGB of the block. If the player is the same color as the block,
+	 * suck it up. If it's not, take damage. If the block is black, hit
+	 * the player's shields.
+	 */
 	public void HandleBlockCollision (RGB blockRGB)
 	{
 		bool goodCollision = playerRGB.isCompatible (blockRGB);
@@ -94,7 +181,32 @@ public class Player : MonoBehaviour
 	}
 	#endregion
 	
-	#region #2 Player Powers
+	#region #4 Player Powers
+	
+	void ChangeColors (ColorWheel color)
+	{
+		rgb.color = color;
+		pickups = GameObject.FindGameObjectsWithTag (Tags.PICKUP);
+		foreach (GameObject pickup in pickups) {
+			RGB pickupRGB = pickup.GetComponent<RGB> ();
+			pickupRGB.color = color;
+			pickupRGB.Refresh ();
+		}
+	}
+	
+	/*
+	 * Move the character in the specified direction with the specfied speed.
+	 */
+	void Move (Vector3 direction, float speed)
+	{
+		Vector3 movement = (direction.normalized * speed);
+		movement *= Time.deltaTime;
+
+		// Apply movement vector
+		CharacterController biped = GetComponent<CharacterController> ();
+		biped.Move (movement);
+	}
+
 	public void Laser ()
 	{
 		if (redPower.IsCharged ()) {

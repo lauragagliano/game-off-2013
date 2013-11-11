@@ -51,4 +51,9 @@ public class BlockLogic : MonoBehaviour
 			Destroy (gameObject);
 		}
 	}
+	
+	public void BlowUp()
+	{	
+		Destroy (gameObject);
+	}
 }

@@ -68,7 +68,8 @@ public class PlayerControllerRGB : MonoBehaviour
 	{
 		if (Input.GetKeyDown ("j")) {
 			if (colorLogic.color == myColors [0]) {
-				player.RegenHealth ();
+				//player.RegenHealth ();
+				player.Laser ();
 			} else {
 				colorLogic.color = myColors [0];
 			}

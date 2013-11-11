@@ -9,9 +9,7 @@ public class Player : MonoBehaviour
 	public RedPower redPower;
 	public Power greenPower;
 	public ColorLogic playerColor;
-	
 	const int POWER_UNIT = 1;
-	
 	public AudioClip pickupSound;
 	public AudioClip damageSound;
 	public AudioClip deathSound;
@@ -22,10 +20,10 @@ public class Player : MonoBehaviour
 	void Awake ()
 	{
 		curHealth = maxHealth;
-		playerColor = (ColorLogic) GetComponent<ColorLogic> ();
-		bluePower = (BluePower) GetComponent<BluePower> ();
-		redPower = (RedPower) GetComponent<RedPower> ();
-		greenPower = (GreenPower) GetComponent<GreenPower> ();
+		playerColor = (ColorLogic)GetComponent<ColorLogic> ();
+		bluePower = (BluePower)GetComponent<BluePower> ();
+		redPower = (RedPower)GetComponent<RedPower> ();
+		greenPower = (GreenPower)GetComponent<GreenPower> ();
 	}
 	#endregion
 	
@@ -40,7 +38,7 @@ public class Player : MonoBehaviour
 		}
 		switch (blockColor.color) {
 		case ColorWheel.blue:
-			if (!goodCollision){
+			if (!goodCollision) {
 				LoseHealth (1);
 			} else if (bluePower.IsCharged ()) {
 				// Logic for spillover could go here....
@@ -51,7 +49,7 @@ public class Player : MonoBehaviour
 		case ColorWheel.red:
 			if (!goodCollision) {
 				LoseHealth (1);
-			}else if (redPower.IsCharged ()) {
+			} else if (redPower.IsCharged ()) {
 				// Logic for spillover could go here....
 			} else {
 				redPower.AddPower (POWER_UNIT);
@@ -74,7 +72,7 @@ public class Player : MonoBehaviour
 	
 	public void LoseHealth (int loss)
 	{
-		if (curHealth > 0+loss) {
+		if (curHealth > 0 + loss) {
 			curHealth -= loss;
 		} else {
 			curHealth = 0;
@@ -89,10 +87,34 @@ public class Player : MonoBehaviour
 	#endregion
 	
 	#region #2 Player Powers
-	public void Magnet ()
+	public void Laser ()
 	{
 		if (redPower.IsCharged ()) {
 			redPower.ExhaustPower ();
+					
+			const float LASER_HALFWIDTH = 2.5f;
+			const float LASER_LENGTH = 60.0f;
+			
+			GameObject[] allBlocks = GameObject.FindGameObjectsWithTag ("Block");
+			foreach (GameObject block in allBlocks) {
+				Vector3 directionToBlock = block.transform.position - transform.position;
+				float distanceToBlockRelativeToMyForward = Vector3.Project (directionToBlock, transform.forward).magnitude;
+				
+				// Note this will not work if the blocks are rotated,and it assumes they are square
+				float blockWidth = block.collider.bounds.extents.x;
+				float blockHeight = blockWidth;
+				// Is the block in range of my laser?
+				if (distanceToBlockRelativeToMyForward <= LASER_LENGTH + blockHeight) {
+					// Compare distance along my X axis
+					float distanceToBlockRelativeToMyRight = Vector3.Project (directionToBlock, transform.right).magnitude;
+					if (distanceToBlockRelativeToMyRight <= (LASER_HALFWIDTH + blockWidth)) {
+						ColorLogic colorLogic = block.GetComponent<ColorLogic> ();
+						if (colorLogic.color == ColorWheel.black) {
+							block.GetComponent<BlockLogic> ().BlowUp ();
+						}
+					}
+				}
+			}
 		}
 	}
 	

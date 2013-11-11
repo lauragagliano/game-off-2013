@@ -63,6 +63,7 @@ public class PlayerController : MonoBehaviour
 		if (Input.GetKeyDown ("j")) {
 			if (rgb.color == ColorWheel.red) {
 				//player.LAZER ();
+				player.Laser ();
 			} else {
 				rgb.color = ColorWheel.red;
 			}

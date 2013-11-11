@@ -49,7 +49,7 @@ public class BlockLogic : MonoBehaviour
 			Destroy (gameObject);
 		}
 	}
-	
+
 	/*
 	 * Set the state of our block to sucked up and prevent further collisions.
 	 */
@@ -57,5 +57,9 @@ public class BlockLogic : MonoBehaviour
 	{
 		suckedUp = true;
 		collider.enabled = false;
+	}
+	public void BlowUp()
+	{	
+		Destroy (gameObject);
 	}
 }

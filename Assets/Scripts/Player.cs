@@ -9,9 +9,8 @@ public class Player : MonoBehaviour
 	public RedPower redPower;
 	public GreenPower greenPower;
 	public RGB playerRGB;
-	
+
 	const int POWER_UNIT = 1;
-	
 	public AudioClip pickupSound;
 	public AudioClip damageSound;
 	public AudioClip deathSound;
@@ -75,7 +74,7 @@ public class Player : MonoBehaviour
 	
 	public void LoseHealth (int loss)
 	{
-		if (curHealth > 0+loss) {
+		if (curHealth > 0 + loss) {
 			curHealth -= loss;
 		} else {
 			curHealth = 0;
@@ -90,10 +89,34 @@ public class Player : MonoBehaviour
 	#endregion
 	
 	#region #2 Player Powers
-	public void Magnet ()
+	public void Laser ()
 	{
 		if (redPower.IsCharged ()) {
 			redPower.ExhaustCharge ();
+					
+			const float LASER_HALFWIDTH = 2.5f;
+			const float LASER_LENGTH = 60.0f;
+			
+			GameObject[] allBlocks = GameObject.FindGameObjectsWithTag ("Block");
+			foreach (GameObject block in allBlocks) {
+				Vector3 directionToBlock = block.transform.position - transform.position;
+				float distanceToBlockRelativeToMyForward = Vector3.Project (directionToBlock, transform.forward).magnitude;
+				
+				// Note this will not work if the blocks are rotated,and it assumes they are square
+				float blockWidth = block.collider.bounds.extents.x;
+				float blockHeight = blockWidth;
+				// Is the block in range of my laser?
+				if (distanceToBlockRelativeToMyForward <= LASER_LENGTH + blockHeight) {
+					// Compare distance along my X axis
+					float distanceToBlockRelativeToMyRight = Vector3.Project (directionToBlock, transform.right).magnitude;
+					if (distanceToBlockRelativeToMyRight <= (LASER_HALFWIDTH + blockWidth)) {
+						RGB blockRGB = block.GetComponent<RGB> ();
+						if (blockRGB.color == ColorWheel.black) {
+							block.GetComponent<BlockLogic> ().BlowUp ();
+						}
+					}
+				}
+			}
 		}
 	}
 	

@@ -12,15 +12,17 @@ public class Player : MonoBehaviour
 
 	const int POWER_UNIT = 1;
 	public AudioClip pickupSound;
-	public AudioClip damageSound;
 	public AudioClip deathSound;
 	public AudioClip slowDownSound;
-	public AudioClip regenHealthSound;
+	public AudioClip shieldUpSound;
+	public AudioClip shieldHitSound;
+	public AudioClip shieldDownSound;
+	public AudioClip laserSound;
 	
 	#region #1 Awake and Update
 	void Awake ()
 	{
-		curHealth = maxHealth;
+		curHealth = 1;
 		playerRGB = (RGB) GetComponent<RGB> ();
 		bluePower = (BluePower) GetComponent<BluePower> ();
 		redPower = (RedPower) GetComponent<RedPower> ();
@@ -34,12 +36,9 @@ public class Player : MonoBehaviour
 		bool goodCollision = playerRGB.isCompatible (blockRGB);
 		if (goodCollision) {
 			audio.PlayOneShot (pickupSound);
-		} else {
-			audio.PlayOneShot (damageSound);
-			LoseHealth (1);
-		}
+		} 
 		if (blockRGB.color == ColorWheel.black) {
-			Die ();
+			LoseHealth (1);
 			return;
 		}
 		Power powerToCharge = GetPowerForColor(blockRGB);
@@ -75,6 +74,13 @@ public class Player : MonoBehaviour
 	public void LoseHealth (int loss)
 	{
 		if (curHealth > 0 + loss) {
+			
+			if(curHealth > 1) {
+				audio.PlayOneShot (shieldHitSound);
+			}
+			else {
+				audio.PlayOneShot(shieldDownSound);
+			}
 			curHealth -= loss;
 		} else {
 			curHealth = 0;
@@ -93,7 +99,9 @@ public class Player : MonoBehaviour
 	{
 		if (redPower.IsCharged ()) {
 			redPower.ExhaustCharge ();
-					
+			
+			audio.PlayOneShot (laserSound);
+			
 			const float LASER_HALFWIDTH = 2.5f;
 			const float LASER_LENGTH = 60.0f;
 			
@@ -123,9 +131,9 @@ public class Player : MonoBehaviour
 	public void RegenHealth ()
 	{
 		if (greenPower.IsCharged ()) {
-			audio.PlayOneShot (regenHealthSound);
-			curHealth = maxHealth;
 			greenPower.ExhaustCharge ();
+			audio.PlayOneShot (shieldUpSound);
+			curHealth = Mathf.Min (curHealth + 1, maxHealth);
 		}
 	}
 	

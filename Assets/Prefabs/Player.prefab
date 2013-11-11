@@ -696,10 +696,12 @@ MonoBehaviour:
   greenPower: {fileID: 0}
   playerRGB: {fileID: 0}
   pickupSound: {fileID: 8300000, guid: c674d8535fb505a43995a1ad8dbcfe9e, type: 3}
-  damageSound: {fileID: 8300000, guid: 7614e691c2f4b7b45908db38836d48b5, type: 3}
   deathSound: {fileID: 0}
   slowDownSound: {fileID: 8300000, guid: f1e36343f5caf0945aa5191c5bcbfc21, type: 3}
-  regenHealthSound: {fileID: 8300000, guid: 0455b23d618f45f40a993433a810b23d, type: 3}
+  shieldUpSound: {fileID: 8300000, guid: f483a3179e3e04a3686f9f0ed545d71c, type: 3}
+  shieldHitSound: {fileID: 8300000, guid: 2f94bb284a54548a8b7a755b3acc468d, type: 3}
+  shieldDownSound: {fileID: 8300000, guid: 2f94bb284a54548a8b7a755b3acc468d, type: 3}
+  laserSound: {fileID: 8300000, guid: 653b9d604a9a242d9be6e1e4a5f1380a, type: 3}
 --- !u!114 &11400012
 MonoBehaviour:
   m_ObjectHideFlags: 1

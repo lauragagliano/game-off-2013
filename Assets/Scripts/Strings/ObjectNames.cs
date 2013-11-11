@@ -5,6 +5,6 @@ public class ObjectNames
 {
 	public static string PLAYER = "Player";
 	public static string GAMEMANAGER = "_GameManager";
-	public static string GROUND = "Ground";
+	public static string TREADMILL = "Treadmill";
 }
 

@@ -134,7 +134,7 @@ public class Player : MonoBehaviour
 		if (bluePower.IsCharged ()) {
 			//TODO This is a case where we could have a protected get component call that null checks.
 			audio.PlayOneShot (slowDownSound);
-			GameObject.Find (ObjectNames.GROUND).GetComponent<Treadmill> ().SlowDown ();
+			GameObject.Find (ObjectNames.TREADMILL).GetComponent<Treadmill> ().SlowDown ();
 			bluePower.ExhaustCharge ();
 		}
 	}

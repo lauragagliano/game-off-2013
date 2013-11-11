@@ -32,20 +32,30 @@ public class RGB : MonoBehaviour
 	 */
 	void SetMaterialToCurrentColor ()
 	{
-		switch (color) {
+		renderer.material = GetMaterialForRGB(this);
+	}
+	
+	/*
+	 * Gets the material that is associated with the specified RGB's color
+	 */
+	static public Material GetMaterialForRGB ( RGB rgb)
+	{
+		Material returnMaterial = null;
+		switch (rgb.color) {
 		case ColorWheel.red:
-			renderer.material = ColorManager.Instance.red;
+			returnMaterial = ColorManager.Instance.red;
 			break;
 		case ColorWheel.green:
-			renderer.material = ColorManager.Instance.green;
+			returnMaterial = ColorManager.Instance.green;
 			break;
 		case ColorWheel.blue:
-			renderer.material = ColorManager.Instance.blue;
+			returnMaterial = ColorManager.Instance.blue;
 			break;
 		case ColorWheel.black:
-			renderer.material = ColorManager.Instance.black;
+			returnMaterial = ColorManager.Instance.black;
 			break;
 		}
+		return returnMaterial;
 	}
 	
 	public void Refresh()

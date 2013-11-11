@@ -80,6 +80,7 @@ GameObject:
   - 82: {fileID: 8200006}
   - 82: {fileID: 8200008}
   - 82: {fileID: 8200010}
+  - 114: {fileID: 11400018}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -674,14 +675,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 100006}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62a73cec14dc4f44c93602f43209f5b3, type: 3}
+  m_Script: {fileID: 11500000, guid: 03e45225a4a82c246bc0a855ebbce642, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movespeed: 40
-  lanes:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  color: 0
 --- !u!114 &11400010
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -742,6 +739,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerReadySound: {fileID: 8300000, guid: 727dd46b669931645927cad8c8b88b7c, type: 3}
   curValue: 0
+--- !u!114 &11400018
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed78926f3c66644778e0ebcdb884f42a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movespeed: 20
+  lanes: []
 --- !u!143 &14300000
 CharacterController:
   m_ObjectHideFlags: 1

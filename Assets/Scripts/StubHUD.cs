@@ -9,11 +9,17 @@ public class StubHUD : MonoBehaviour
 	public GUIText scoreText;
 	public GameObject redMeterGO;
 	GUIMeter redMeter;
+	public GameObject blueMeterGO;
+	GUIMeter blueMeter;
+	public GameObject greenMeterGO;
+	GUIMeter greenMeter;
 	
 	void Awake ()
 	{
 		helpText.text = "A: LEFT\nD: RIGHT\n\nJ: RED\nK: GREEN\nL: BLUE\n\n(Tap Twice for POAWAHH";
 		redMeter = redMeterGO.GetComponent<GUIMeter> ();
+		blueMeter = blueMeterGO.GetComponent<GUIMeter> ();
+		greenMeter = greenMeterGO.GetComponent<GUIMeter> ();
 	}
 	
 	void Update ()
@@ -35,5 +41,7 @@ public class StubHUD : MonoBehaviour
 			player.redPower.curValue, player.bluePower.curValue, player.greenPower.curValue, player.curHealth);
 		
 		redMeter.CurrentFillPercent = ((float) player.redPower.curValue / player.redPower.MaxValue);
+		blueMeter.CurrentFillPercent = ((float) player.bluePower.curValue / player.bluePower.MaxValue);
+		greenMeter.CurrentFillPercent = ((float) player.greenPower.curValue / player.greenPower.MaxValue);
 	}
 }

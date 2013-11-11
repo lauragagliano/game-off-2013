@@ -188,7 +188,7 @@ GameObject:
   - 12: {fileID: 4610059}
   m_Layer: 0
   m_Name: BlueCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -570,7 +570,7 @@ GameObject:
   - 12: {fileID: 11633510}
   m_Layer: 0
   m_Name: RedCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4050,7 +4050,7 @@ GameObject:
   - 12: {fileID: 75907911}
   m_Layer: 0
   m_Name: RedCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5762,14 +5762,14 @@ MeshFilter:
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 100002, guid: 52520621251bda348a843f251043d56e, type: 2}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInternal: {fileID: 1993947631}
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 110923315}
   - 33: {fileID: 110923319}
-  - 65: {fileID: 110923318}
   - 23: {fileID: 110923317}
   - 114: {fileID: 110923316}
+  - 65: {fileID: 110923318}
   m_Layer: 0
   m_Name: LeftBar
   m_TagString: Untagged
@@ -5781,7 +5781,7 @@ GameObject:
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 400002, guid: 52520621251bda348a843f251043d56e, type: 2}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInternal: {fileID: 1993947631}
   m_GameObject: {fileID: 110923314}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -.349643618, y: .306377411, z: -.799999237}
@@ -5793,7 +5793,7 @@ MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 11400002, guid: 52520621251bda348a843f251043d56e,
     type: 2}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInternal: {fileID: 1993947631}
   m_GameObject: {fileID: 110923314}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -5806,7 +5806,7 @@ Renderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 2300002, guid: 52520621251bda348a843f251043d56e,
     type: 2}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInternal: {fileID: 1993947631}
   m_GameObject: {fileID: 110923314}
   m_Enabled: 1
   m_CastShadows: 1
@@ -5825,7 +5825,7 @@ BoxCollider:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 6500002, guid: 52520621251bda348a843f251043d56e,
     type: 2}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInternal: {fileID: 1993947631}
   m_GameObject: {fileID: 110923314}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -5838,7 +5838,7 @@ MeshFilter:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 3300002, guid: 52520621251bda348a843f251043d56e,
     type: 2}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInternal: {fileID: 1993947631}
   m_GameObject: {fileID: 110923314}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &120235219
@@ -6339,7 +6339,7 @@ GameObject:
   - 12: {fileID: 127913711}
   m_Layer: 0
   m_Name: GreenCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7049,7 +7049,7 @@ GameObject:
   - 12: {fileID: 156759078}
   m_Layer: 0
   m_Name: GreenCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8549,7 +8549,7 @@ GameObject:
   - 12: {fileID: 187166944}
   m_Layer: 0
   m_Name: BlueCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9355,7 +9355,7 @@ GameObject:
   - 12: {fileID: 198980539}
   m_Layer: 0
   m_Name: RedCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9692,7 +9692,7 @@ GameObject:
   - 12: {fileID: 203878624}
   m_Layer: 0
   m_Name: BlueCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12266,7 +12266,7 @@ GameObject:
   - 12: {fileID: 245967318}
   m_Layer: 0
   m_Name: BlueCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12648,7 +12648,7 @@ GameObject:
   - 12: {fileID: 258207013}
   m_Layer: 0
   m_Name: RedCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13318,7 +13318,7 @@ GameObject:
   - 12: {fileID: 263584646}
   m_Layer: 0
   m_Name: GreenCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15620,7 +15620,7 @@ GameObject:
   - 12: {fileID: 299858465}
   m_Layer: 0
   m_Name: BlueCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19130,7 +19130,7 @@ GameObject:
   - 12: {fileID: 369522372}
   m_Layer: 0
   m_Name: GreenCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -22498,7 +22498,7 @@ GameObject:
   - 12: {fileID: 432467726}
   m_Layer: 0
   m_Name: BlueCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -22688,7 +22688,7 @@ GameObject:
   - 12: {fileID: 433170116}
   m_Layer: 0
   m_Name: GreenCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -24019,7 +24019,7 @@ GameObject:
   - 12: {fileID: 454562939}
   m_Layer: 0
   m_Name: BlueCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25481,7 +25481,7 @@ GameObject:
   - 12: {fileID: 501512459}
   m_Layer: 0
   m_Name: GreenCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27155,7 +27155,7 @@ GameObject:
   - 12: {fileID: 542416727}
   m_Layer: 0
   m_Name: GreenCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30129,7 +30129,7 @@ GameObject:
   - 12: {fileID: 620569034}
   m_Layer: 0
   m_Name: RedCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31611,7 +31611,7 @@ GameObject:
   - 12: {fileID: 658928942}
   m_Layer: 0
   m_Name: RedCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33721,7 +33721,7 @@ GameObject:
   - 12: {fileID: 702170484}
   m_Layer: 0
   m_Name: RedCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34475,7 +34475,7 @@ GameObject:
   - 12: {fileID: 715621208}
   m_Layer: 0
   m_Name: GreenCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35023,14 +35023,14 @@ Prefab:
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 100000, guid: 52520621251bda348a843f251043d56e, type: 2}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInternal: {fileID: 1993947631}
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 729241885}
   - 33: {fileID: 729241889}
-  - 65: {fileID: 729241888}
   - 23: {fileID: 729241887}
   - 114: {fileID: 729241886}
+  - 65: {fileID: 729241888}
   m_Layer: 0
   m_Name: MiddleBar
   m_TagString: Untagged
@@ -35042,7 +35042,7 @@ GameObject:
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 400000, guid: 52520621251bda348a843f251043d56e, type: 2}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInternal: {fileID: 1993947631}
   m_GameObject: {fileID: 729241884}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: .00449236669, y: .306377411, z: -.799999237}
@@ -35054,7 +35054,7 @@ MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 11400000, guid: 52520621251bda348a843f251043d56e,
     type: 2}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInternal: {fileID: 1993947631}
   m_GameObject: {fileID: 729241884}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -35067,7 +35067,7 @@ Renderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 2300000, guid: 52520621251bda348a843f251043d56e,
     type: 2}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInternal: {fileID: 1993947631}
   m_GameObject: {fileID: 729241884}
   m_Enabled: 1
   m_CastShadows: 1
@@ -35086,7 +35086,7 @@ BoxCollider:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 6500000, guid: 52520621251bda348a843f251043d56e,
     type: 2}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInternal: {fileID: 1993947631}
   m_GameObject: {fileID: 729241884}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -35099,7 +35099,7 @@ MeshFilter:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 3300000, guid: 52520621251bda348a843f251043d56e,
     type: 2}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInternal: {fileID: 1993947631}
   m_GameObject: {fileID: 729241884}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &729870208
@@ -35408,7 +35408,7 @@ GameObject:
   - 12: {fileID: 736733866}
   m_Layer: 0
   m_Name: GreenCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35886,7 +35886,7 @@ GameObject:
   - 12: {fileID: 745494286}
   m_Layer: 0
   m_Name: BlueCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -36526,7 +36526,7 @@ GameObject:
   - 12: {fileID: 768981344}
   m_Layer: 0
   m_Name: RedCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -37468,7 +37468,7 @@ GameObject:
   - 12: {fileID: 785198323}
   m_Layer: 0
   m_Name: RedCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -38994,7 +38994,7 @@ GameObject:
   - 12: {fileID: 810554257}
   m_Layer: 0
   m_Name: BlueCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -39280,7 +39280,7 @@ GameObject:
   - 12: {fileID: 815137427}
   m_Layer: 0
   m_Name: RedCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -40516,7 +40516,7 @@ GameObject:
   - 12: {fileID: 841545477}
   m_Layer: 0
   m_Name: GreenCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -41683,7 +41683,7 @@ GameObject:
   - 12: {fileID: 865732717}
   m_Layer: 0
   m_Name: GreenCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46967,7 +46967,7 @@ GameObject:
   - 12: {fileID: 973944271}
   m_Layer: 0
   m_Name: BlueCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -50187,7 +50187,7 @@ GameObject:
   - 12: {fileID: 1019275604}
   m_Layer: 0
   m_Name: RedCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -51805,7 +51805,7 @@ GameObject:
   - 12: {fileID: 1059311470}
   m_Layer: 0
   m_Name: BlueCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -52283,7 +52283,7 @@ GameObject:
   - 12: {fileID: 1063186198}
   m_Layer: 0
   m_Name: RedCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -53529,7 +53529,7 @@ GameObject:
   - 12: {fileID: 1082925319}
   m_Layer: 0
   m_Name: RedCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -55191,7 +55191,7 @@ GameObject:
   - 12: {fileID: 1119518818}
   m_Layer: 0
   m_Name: GreenCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -55573,7 +55573,7 @@ GameObject:
   - 12: {fileID: 1120562436}
   m_Layer: 0
   m_Name: GreenCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -57995,7 +57995,7 @@ GameObject:
   - 12: {fileID: 1196102553}
   m_Layer: 0
   m_Name: BlueCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -58185,7 +58185,7 @@ GameObject:
   - 12: {fileID: 1200461206}
   m_Layer: 0
   m_Name: BlueCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -62639,7 +62639,7 @@ GameObject:
   - 12: {fileID: 1309179538}
   m_Layer: 0
   m_Name: GreenCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -62829,7 +62829,7 @@ GameObject:
   - 12: {fileID: 1310731488}
   m_Layer: 0
   m_Name: RedCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -64267,7 +64267,7 @@ GameObject:
   - 12: {fileID: 1337165390}
   m_Layer: 0
   m_Name: GreenCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -64497,7 +64497,7 @@ GameObject:
   - 12: {fileID: 1338213502}
   m_Layer: 0
   m_Name: GreenCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -66015,7 +66015,7 @@ GameObject:
   - 12: {fileID: 1365284832}
   m_Layer: 0
   m_Name: GreenCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -67573,7 +67573,7 @@ GameObject:
   - 12: {fileID: 1399492827}
   m_Layer: 0
   m_Name: BlueCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -67749,14 +67749,14 @@ MeshFilter:
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 100004, guid: 52520621251bda348a843f251043d56e, type: 2}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInternal: {fileID: 1993947631}
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1400205702}
   - 33: {fileID: 1400205701}
-  - 65: {fileID: 1400205700}
   - 23: {fileID: 1400205699}
   - 114: {fileID: 1400205698}
+  - 65: {fileID: 1400205700}
   m_Layer: 0
   m_Name: RightBar
   m_TagString: Untagged
@@ -67769,7 +67769,7 @@ MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 11400004, guid: 52520621251bda348a843f251043d56e,
     type: 2}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInternal: {fileID: 1993947631}
   m_GameObject: {fileID: 1400205697}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -67782,7 +67782,7 @@ Renderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 2300004, guid: 52520621251bda348a843f251043d56e,
     type: 2}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInternal: {fileID: 1993947631}
   m_GameObject: {fileID: 1400205697}
   m_Enabled: 1
   m_CastShadows: 1
@@ -67801,7 +67801,7 @@ BoxCollider:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 6500004, guid: 52520621251bda348a843f251043d56e,
     type: 2}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInternal: {fileID: 1993947631}
   m_GameObject: {fileID: 1400205697}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -67814,14 +67814,14 @@ MeshFilter:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 3300004, guid: 52520621251bda348a843f251043d56e,
     type: 2}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInternal: {fileID: 1993947631}
   m_GameObject: {fileID: 1400205697}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!4 &1400205702
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 400004, guid: 52520621251bda348a843f251043d56e, type: 2}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInternal: {fileID: 1993947631}
   m_GameObject: {fileID: 1400205697}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: .349015176, y: .306377411, z: -.799999237}
@@ -69850,7 +69850,7 @@ GameObject:
   - 12: {fileID: 1439971066}
   m_Layer: 0
   m_Name: BlueCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -73919,7 +73919,7 @@ GameObject:
   - 12: {fileID: 1503962845}
   m_Layer: 0
   m_Name: GreenCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -74109,7 +74109,7 @@ GameObject:
   - 12: {fileID: 1504097782}
   m_Layer: 0
   m_Name: GreenCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -75067,7 +75067,7 @@ GameObject:
   - 12: {fileID: 1522518770}
   m_Layer: 0
   m_Name: BlueCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -75737,7 +75737,7 @@ GameObject:
   - 12: {fileID: 1541374605}
   m_Layer: 0
   m_Name: GreenCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -76119,7 +76119,7 @@ GameObject:
   - 12: {fileID: 1545509542}
   m_Layer: 0
   m_Name: GreenCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -76641,7 +76641,7 @@ GameObject:
   - 12: {fileID: 1554507326}
   m_Layer: 0
   m_Name: BlueCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -77119,7 +77119,7 @@ GameObject:
   - 12: {fileID: 1567239098}
   m_Layer: 0
   m_Name: BlueCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -77501,7 +77501,7 @@ GameObject:
   - 12: {fileID: 1591847953}
   m_Layer: 0
   m_Name: GreenCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -80493,7 +80493,7 @@ GameObject:
   - 12: {fileID: 1662618184}
   m_Layer: 0
   m_Name: BlueCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -84193,7 +84193,7 @@ MeshFilter:
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 100006, guid: 52520621251bda348a843f251043d56e, type: 2}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInternal: {fileID: 1993947631}
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1741557055}
@@ -84212,6 +84212,7 @@ GameObject:
   - 82: {fileID: 1741557062}
   - 82: {fileID: 1741557063}
   - 82: {fileID: 1741557065}
+  - 114: {fileID: 1741557071}
   m_Layer: 0
   m_Name: PlayerBarShape
   m_TagString: Player
@@ -84223,7 +84224,7 @@ GameObject:
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 400006, guid: 52520621251bda348a843f251043d56e, type: 2}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInternal: {fileID: 1993947631}
   m_GameObject: {fileID: 1741557054}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: .100000001, y: .86054039, z: -28.0933914}
@@ -84238,7 +84239,7 @@ MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 11400006, guid: 52520621251bda348a843f251043d56e,
     type: 2}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInternal: {fileID: 1993947631}
   m_GameObject: {fileID: 1741557054}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -84251,24 +84252,20 @@ MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 11400008, guid: 52520621251bda348a843f251043d56e,
     type: 2}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInternal: {fileID: 1993947631}
   m_GameObject: {fileID: 1741557054}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62a73cec14dc4f44c93602f43209f5b3, type: 3}
+  m_Script: {fileID: 11500000, guid: 03e45225a4a82c246bc0a855ebbce642, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movespeed: 40
-  lanes:
-  - {fileID: 987136674}
-  - {fileID: 22689417}
-  - {fileID: 903147930}
+  color: 0
 --- !u!143 &1741557058
 CharacterController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 14300000, guid: 52520621251bda348a843f251043d56e,
     type: 2}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInternal: {fileID: 1993947631}
   m_GameObject: {fileID: 1741557054}
   serializedVersion: 2
   m_Height: 2
@@ -84277,13 +84274,13 @@ CharacterController:
   m_StepOffset: .300000012
   m_SkinWidth: .0799999982
   m_MinMoveDistance: 0
-  m_Center: {x: 0, y: 0, z: -.699999988}
+  m_Center: {x: 0, y: 1, z: -.699999988}
 --- !u!23 &1741557059
 Renderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 2300006, guid: 52520621251bda348a843f251043d56e,
     type: 2}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInternal: {fileID: 1993947631}
   m_GameObject: {fileID: 1741557054}
   m_Enabled: 1
   m_CastShadows: 1
@@ -84302,7 +84299,7 @@ MeshFilter:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 3300006, guid: 52520621251bda348a843f251043d56e,
     type: 2}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInternal: {fileID: 1993947631}
   m_GameObject: {fileID: 1741557054}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &1741557061
@@ -84310,7 +84307,7 @@ MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 11400014, guid: 52520621251bda348a843f251043d56e,
     type: 2}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInternal: {fileID: 1993947631}
   m_GameObject: {fileID: 1741557054}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -84324,7 +84321,7 @@ AudioSource:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 8200006, guid: 52520621251bda348a843f251043d56e,
     type: 2}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInternal: {fileID: 1993947631}
   m_GameObject: {fileID: 1741557054}
   m_Enabled: 1
   serializedVersion: 3
@@ -84383,7 +84380,7 @@ AudioSource:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 8200008, guid: 52520621251bda348a843f251043d56e,
     type: 2}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInternal: {fileID: 1993947631}
   m_GameObject: {fileID: 1741557054}
   m_Enabled: 1
   serializedVersion: 3
@@ -84442,7 +84439,7 @@ MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 11400016, guid: 52520621251bda348a843f251043d56e,
     type: 2}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInternal: {fileID: 1993947631}
   m_GameObject: {fileID: 1741557054}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -84456,7 +84453,7 @@ AudioSource:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 8200010, guid: 52520621251bda348a843f251043d56e,
     type: 2}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInternal: {fileID: 1993947631}
   m_GameObject: {fileID: 1741557054}
   m_Enabled: 1
   serializedVersion: 3
@@ -84515,7 +84512,7 @@ AudioSource:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 8200000, guid: 52520621251bda348a843f251043d56e,
     type: 2}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInternal: {fileID: 1993947631}
   m_GameObject: {fileID: 1741557054}
   m_Enabled: 1
   serializedVersion: 3
@@ -84574,7 +84571,7 @@ AudioSource:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 8200002, guid: 52520621251bda348a843f251043d56e,
     type: 2}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInternal: {fileID: 1993947631}
   m_GameObject: {fileID: 1741557054}
   m_Enabled: 1
   serializedVersion: 3
@@ -84633,7 +84630,7 @@ MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 11400012, guid: 52520621251bda348a843f251043d56e,
     type: 2}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInternal: {fileID: 1993947631}
   m_GameObject: {fileID: 1741557054}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -84647,7 +84644,7 @@ MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 11400010, guid: 52520621251bda348a843f251043d56e,
     type: 2}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInternal: {fileID: 1993947631}
   m_GameObject: {fileID: 1741557054}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -84669,7 +84666,7 @@ AudioSource:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 8200004, guid: 52520621251bda348a843f251043d56e,
     type: 2}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInternal: {fileID: 1993947631}
   m_GameObject: {fileID: 1741557054}
   m_Enabled: 1
   serializedVersion: 3
@@ -84723,6 +84720,20 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+--- !u!114 &1741557071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400018, guid: 52520621251bda348a843f251043d56e,
+    type: 2}
+  m_PrefabInternal: {fileID: 1993947631}
+  m_GameObject: {fileID: 1741557054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed78926f3c66644778e0ebcdb884f42a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movespeed: 20
+  lanes: []
 --- !u!1 &1747142804
 GameObject:
   m_ObjectHideFlags: 0
@@ -85265,7 +85276,7 @@ GameObject:
   - 12: {fileID: 1761241535}
   m_Layer: 0
   m_Name: BlueCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -86783,7 +86794,7 @@ GameObject:
   - 12: {fileID: 1794493023}
   m_Layer: 0
   m_Name: RedCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -87549,7 +87560,7 @@ GameObject:
   - 12: {fileID: 1803804755}
   m_Layer: 0
   m_Name: GreenCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -89083,7 +89094,7 @@ GameObject:
   - 12: {fileID: 1831934629}
   m_Layer: 0
   m_Name: BlueCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -91917,7 +91928,7 @@ GameObject:
   - 12: {fileID: 1883571420}
   m_Layer: 0
   m_Name: RedCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -92107,7 +92118,7 @@ GameObject:
   - 12: {fileID: 1886427377}
   m_Layer: 0
   m_Name: RedCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -92772,7 +92783,7 @@ GameObject:
   - 12: {fileID: 1902246994}
   m_Layer: 0
   m_Name: BlueCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -95946,7 +95957,7 @@ GameObject:
   - 12: {fileID: 1962260032}
   m_Layer: 0
   m_Name: BlueCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -97394,6 +97405,50 @@ MeshFilter:
   m_PrefabInternal: {fileID: 1697997571}
   m_GameObject: {fileID: 1993618320}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &1993947631
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 400006, guid: 52520621251bda348a843f251043d56e, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: .100000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 400006, guid: 52520621251bda348a843f251043d56e, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: .86054039
+      objectReference: {fileID: 0}
+    - target: {fileID: 400006, guid: 52520621251bda348a843f251043d56e, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -28.0933914
+      objectReference: {fileID: 0}
+    - target: {fileID: 400006, guid: 52520621251bda348a843f251043d56e, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400006, guid: 52520621251bda348a843f251043d56e, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400006, guid: 52520621251bda348a843f251043d56e, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400006, guid: 52520621251bda348a843f251043d56e, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: 52520621251bda348a843f251043d56e, type: 2}
+      propertyPath: m_Name
+      value: PlayerBarShape
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 52520621251bda348a843f251043d56e, type: 2}
+  m_RootGameObject: {fileID: 1741557054}
+  m_IsPrefabParent: 0
+  m_IsExploded: 1
 --- !u!1 &1997814449
 GameObject:
   m_ObjectHideFlags: 0
@@ -97932,7 +97987,7 @@ GameObject:
   - 12: {fileID: 2006659743}
   m_Layer: 0
   m_Name: RedCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -98602,7 +98657,7 @@ GameObject:
   - 12: {fileID: 2019593078}
   m_Layer: 0
   m_Name: RedCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99272,7 +99327,7 @@ GameObject:
   - 12: {fileID: 2029453365}
   m_Layer: 0
   m_Name: BlueCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -103025,7 +103080,7 @@ GameObject:
   - 12: {fileID: 2085743090}
   m_Layer: 0
   m_Name: RedCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -103735,7 +103790,7 @@ GameObject:
   - 12: {fileID: 2090058731}
   m_Layer: 0
   m_Name: GreenCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -104767,7 +104822,7 @@ GameObject:
   - 12: {fileID: 2108998836}
   m_Layer: 0
   m_Name: GreenCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -105381,7 +105436,7 @@ GameObject:
   - 12: {fileID: 2119533982}
   m_Layer: 0
   m_Name: GreenCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -105571,7 +105626,7 @@ GameObject:
   - 12: {fileID: 2120394612}
   m_Layer: 0
   m_Name: BlueCube
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

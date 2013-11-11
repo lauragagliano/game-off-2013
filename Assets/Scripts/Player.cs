@@ -7,8 +7,8 @@ public class Player : MonoBehaviour
 	int maxHealth = 10;
 	public BluePower bluePower;
 	public RedPower redPower;
-	public Power greenPower;
-	public ColorLogic playerColor;
+	public GreenPower greenPower;
+	public RGB playerRGB;
 	
 	const int POWER_UNIT = 1;
 	
@@ -22,7 +22,7 @@ public class Player : MonoBehaviour
 	void Awake ()
 	{
 		curHealth = maxHealth;
-		playerColor = (ColorLogic) GetComponent<ColorLogic> ();
+		playerRGB = (RGB) GetComponent<RGB> ();
 		bluePower = (BluePower) GetComponent<BluePower> ();
 		redPower = (RedPower) GetComponent<RedPower> ();
 		greenPower = (GreenPower) GetComponent<GreenPower> ();
@@ -30,46 +30,47 @@ public class Player : MonoBehaviour
 	#endregion
 	
 	#region #2 Player and Block interaction
-	public void HandleBlockCollision (ColorLogic blockColor)
+	public void HandleBlockCollision (RGB blockRGB)
 	{
-		bool goodCollision = playerColor.isCompatible (blockColor);
+		bool goodCollision = playerRGB.isCompatible (blockRGB);
 		if (goodCollision) {
 			audio.PlayOneShot (pickupSound);
 		} else {
 			audio.PlayOneShot (damageSound);
+			LoseHealth (1);
 		}
-		switch (blockColor.color) {
+		if (blockRGB.color == ColorWheel.black) {
+			Die ();
+			return;
+		}
+		Power powerToCharge = GetPowerForColor(blockRGB);
+		if(powerToCharge.IsCharged()){
+			// Logic for spillover goes here
+		} else {
+			powerToCharge.AddPower (POWER_UNIT);
+		}
+	}
+	
+	/*
+	 * Map our player's power bars to the color passed in by returning
+	 * the power associated with the provided color.
+	 */
+	Power GetPowerForColor(RGB rgb)
+	{
+		ColorWheel color = rgb.color;
+		Power returnPower = null;
+		switch (color) {
 		case ColorWheel.blue:
-			if (!goodCollision){
-				LoseHealth (1);
-			} else if (bluePower.IsCharged ()) {
-				// Logic for spillover could go here....
-			} else {
-				bluePower.AddPower (POWER_UNIT);
-			}
+			returnPower = bluePower;
 			break;
 		case ColorWheel.red:
-			if (!goodCollision) {
-				LoseHealth (1);
-			}else if (redPower.IsCharged ()) {
-				// Logic for spillover could go here....
-			} else {
-				redPower.AddPower (POWER_UNIT);
-			}
+			returnPower = redPower;
 			break;
 		case ColorWheel.green:
-			if (!goodCollision) {
-				LoseHealth (1);
-			} else if (greenPower.IsCharged ()) {
-				// Logic for spillover could go here....
-			} else {
-				greenPower.AddPower (POWER_UNIT);
-			}
-			break;
-		case ColorWheel.black:
-			Die ();
+			returnPower = greenPower;
 			break;
 		}
+		return returnPower;
 	}
 	
 	public void LoseHealth (int loss)
@@ -92,7 +93,7 @@ public class Player : MonoBehaviour
 	public void Magnet ()
 	{
 		if (redPower.IsCharged ()) {
-			redPower.ExhaustPower ();
+			redPower.ExhaustCharge ();
 		}
 	}
 	
@@ -101,7 +102,7 @@ public class Player : MonoBehaviour
 		if (greenPower.IsCharged ()) {
 			audio.PlayOneShot (regenHealthSound);
 			curHealth = maxHealth;
-			greenPower.ExhaustPower ();
+			greenPower.ExhaustCharge ();
 		}
 	}
 	
@@ -111,7 +112,7 @@ public class Player : MonoBehaviour
 			//TODO This is a case where we could have a protected get component call that null checks.
 			audio.PlayOneShot (slowDownSound);
 			GameObject.Find (ObjectNames.GROUND).GetComponent<Treadmill> ().SlowDown ();
-			bluePower.ExhaustPower ();
+			bluePower.ExhaustCharge ();
 		}
 	}
 	#endregion

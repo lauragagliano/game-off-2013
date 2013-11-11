@@ -40,7 +40,7 @@ public abstract class Power : MonoBehaviour
 		return curValue == maxValue;
 	}
 	
-	public void ExhaustPower ()
+	public void ExhaustCharge ()
 	{
 		curValue = 0;
 	}

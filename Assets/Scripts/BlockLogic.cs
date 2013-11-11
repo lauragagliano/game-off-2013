@@ -3,18 +3,18 @@ using System.Collections;
 
 public class BlockLogic : MonoBehaviour
 {
-	bool usedUp;
-	ColorLogic blockColor;
+	bool suckedUp;
+	RGB blockRGB;
 	
 	void Awake ()
 	{
-		blockColor = GetComponent<ColorLogic> ();
+		blockRGB = GetComponent<RGB> ();
 	}
 	
 	void Update ()
 	{
-		if (usedUp) {
-			SuckUpBlock ();
+		if (suckedUp) {
+			AnimateSuckUp ();
 		}	
 	}
 	
@@ -25,30 +25,37 @@ public class BlockLogic : MonoBehaviour
 			Debug.LogWarning ("Had a block collision with something that's not the player. Exiting method.");
 			return;
 		}
-		if (!usedUp) {
-			Player player = other.GetComponent<Player> ();
-			player.HandleBlockCollision (blockColor);
-			if (player.playerColor.isCompatible (blockColor)) {
-				SuckUpBlock ();
-			} else {
-				// BLOW UP BIG
-				if (particleEmitter != null) {
-					particleEmitter.Emit ();
-				}
-				renderer.enabled = false;
+		Player player = other.GetComponent<Player> ();
+		player.HandleBlockCollision (blockRGB);
+		if (player.playerRGB.isCompatible (blockRGB)) {
+			SuckUpBlock ();
+		} else {
+			// BLOW UP BIG
+			// TODO Spawn bricks with rigid bodies and DESTROY the block object
+			if (particleEmitter != null) {
+				particleEmitter.Emit ();
 			}
+			renderer.enabled = false;
 		}
 	}
 	
 	/*
 	 * Play a transition to scale to nothing and then destroy the block.
 	 */
-	void SuckUpBlock()
+	void AnimateSuckUp ()
 	{
-		usedUp = true;
 		transform.localScale = transform.localScale * 0.9f;
 		if (transform.localScale.magnitude < 0.05f) {
 			Destroy (gameObject);
 		}
+	}
+	
+	/*
+	 * Set the state of our block to sucked up and prevent further collisions.
+	 */
+	void SuckUpBlock()
+	{
+		suckedUp = true;
+		collider.enabled = false;
 	}
 }

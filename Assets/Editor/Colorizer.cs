@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEditor;
 using System.Collections;
 
@@ -25,8 +25,8 @@ public class Colorizer : EditorWindow
 	 */
 	void RefreshColors ()
 	{
-		ColorLogic[] allBlocks = (ColorLogic[])GameObject.FindObjectsOfType(typeof(ColorLogic));
-		foreach (ColorLogic colorLogic in allBlocks) {
+		RGB[] allBlocks = (RGB[])GameObject.FindObjectsOfType(typeof(RGB));
+		foreach (RGB colorLogic in allBlocks) {
 			colorLogic.Refresh();
 		}
 	}

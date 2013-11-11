@@ -9,7 +9,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 400000}
   - 114: {fileID: 11400000}
-  - 114: {fileID: 11400002}
   m_Layer: 0
   m_Name: _GameManager
   m_TagString: Untagged
@@ -40,26 +39,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 2100000, guid: cf78bba95c35d1848bdae4edb4f17228, type: 2}
-  blue: {fileID: 2100000, guid: 45b9c557e9e5ee744a421c2855e33c6f, type: 2}
-  yellow: {fileID: 2100000, guid: ff16c2697b0d48945b5af723878c051f, type: 2}
-  purple: {fileID: 2100000, guid: 60e82001e3f50674b8261b0c7d25c531, type: 2}
   green: {fileID: 2100000, guid: de95a5669d65fa341ba620ec66bb8a84, type: 2}
-  orange: {fileID: 2100000, guid: 78c684e193c9bac45aef808f0e9e422a, type: 2}
+  blue: {fileID: 2100000, guid: 45b9c557e9e5ee744a421c2855e33c6f, type: 2}
   black: {fileID: 2100000, guid: 5545a405383484642bc6073294a996ed, type: 2}
---- !u!114 &11400002
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db0cceabc0fbc3d449bc4a4bb1958a34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  curBluePoints: 0
-  curRedPoints: 0
-  curYellowPoints: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

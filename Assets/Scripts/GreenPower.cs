@@ -5,6 +5,6 @@ public class GreenPower : Power
 {
 	void Awake ()
 	{
-		color = ColorWheel.yellow;
+		color = ColorWheel.green;
 	}
 }

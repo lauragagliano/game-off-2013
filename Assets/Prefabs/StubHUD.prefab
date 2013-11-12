@@ -287,7 +287,7 @@ Transform:
   m_GameObject: {fileID: 100008}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: .0500000007, z: -.100000001}
-  m_LocalScale: {x: .959999979, y: 0, z: .899999976}
+  m_LocalScale: {x: .959999979, y: 0, z: .850000024}
   m_Children: []
   m_Father: {fileID: 400010}
 --- !u!4 &400010
@@ -311,7 +311,7 @@ Transform:
   m_GameObject: {fileID: 100012}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: .100000001, z: -.100000001}
-  m_LocalScale: {x: .959999979, y: 1, z: .899999976}
+  m_LocalScale: {x: .959999979, y: 1, z: .850000024}
   m_Children: []
   m_Father: {fileID: 400010}
 --- !u!4 &400014
@@ -322,7 +322,7 @@ Transform:
   m_GameObject: {fileID: 100014}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: .100000001, z: -.100000001}
-  m_LocalScale: {x: .959999979, y: 1, z: .899999976}
+  m_LocalScale: {x: .959999979, y: 1, z: .850000024}
   m_Children: []
   m_Father: {fileID: 400016}
 --- !u!4 &400016
@@ -346,7 +346,7 @@ Transform:
   m_GameObject: {fileID: 100018}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: .0500000007, z: -.100000001}
-  m_LocalScale: {x: .959999979, y: 0, z: .899999976}
+  m_LocalScale: {x: .959999979, y: 0, z: .850000024}
   m_Children: []
   m_Father: {fileID: 400016}
 --- !u!4 &400020
@@ -357,7 +357,7 @@ Transform:
   m_GameObject: {fileID: 100020}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: .0500000007, z: -.100000001}
-  m_LocalScale: {x: .959999979, y: 0, z: .899999976}
+  m_LocalScale: {x: .959999979, y: 0, z: .850000024}
   m_Children: []
   m_Father: {fileID: 400022}
 --- !u!4 &400022
@@ -381,7 +381,7 @@ Transform:
   m_GameObject: {fileID: 100024}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: .100000001, z: -.100000001}
-  m_LocalScale: {x: .959999979, y: 1, z: .899999976}
+  m_LocalScale: {x: .959999979, y: 1, z: .850000024}
   m_Children: []
   m_Father: {fileID: 400022}
 --- !u!23 &2300000

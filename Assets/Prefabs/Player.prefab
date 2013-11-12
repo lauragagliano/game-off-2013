@@ -94,7 +94,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .00449236669, y: .306377411, z: -.799999237}
+  m_LocalPosition: {x: 0, y: .300000012, z: -.800000012}
   m_LocalScale: {x: .300000012, y: .400000006, z: .400000006}
   m_Children: []
   m_Father: {fileID: 400006}
@@ -105,7 +105,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.349643618, y: .306377411, z: -.799999237}
+  m_LocalPosition: {x: -.349999994, y: .300000012, z: -.800000012}
   m_LocalScale: {x: .300000012, y: .400000006, z: .400000006}
   m_Children: []
   m_Father: {fileID: 400006}
@@ -116,7 +116,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .349015176, y: .306377411, z: -.799999237}
+  m_LocalPosition: {x: .349999994, y: .300000012, z: -.800000012}
   m_LocalScale: {x: .300000012, y: .400000006, z: .400000006}
   m_Children: []
   m_Father: {fileID: 400006}
@@ -128,7 +128,7 @@ Transform:
   m_GameObject: {fileID: 100006}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.0999999, y: .5, z: -28}
-  m_LocalScale: {x: 2.69235897, y: 1, z: 1}
+  m_LocalScale: {x: 2.70000005, y: 1, z: 1}
   m_Children:
   - {fileID: 400002}
   - {fileID: 400004}
@@ -702,6 +702,7 @@ MonoBehaviour:
   shieldHitSound: {fileID: 8300000, guid: 2f94bb284a54548a8b7a755b3acc468d, type: 3}
   shieldDownSound: {fileID: 8300000, guid: 2f94bb284a54548a8b7a755b3acc468d, type: 3}
   laserSound: {fileID: 8300000, guid: 653b9d604a9a242d9be6e1e4a5f1380a, type: 3}
+  laserBeamFX: {fileID: 0}
   movespeed: 20
 --- !u!114 &11400012
 MonoBehaviour:
@@ -716,6 +717,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerReadySound: {fileID: 8300000, guid: 651ad5f1d07e32544a16ac659e51618c, type: 3}
   curValue: 0
+  MaxValue: 5
 --- !u!114 &11400014
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -729,6 +731,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerReadySound: {fileID: 8300000, guid: 7ad350cc1a9100141808d8b7dc533b6e, type: 3}
   curValue: 0
+  MaxValue: 5
 --- !u!114 &11400016
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -742,6 +745,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerReadySound: {fileID: 8300000, guid: 727dd46b669931645927cad8c8b88b7c, type: 3}
   curValue: 0
+  MaxValue: 5
 --- !u!143 &14300000
 CharacterController:
   m_ObjectHideFlags: 1

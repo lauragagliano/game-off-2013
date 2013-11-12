@@ -20,6 +20,8 @@ public class Player : MonoBehaviour
 	public AudioClip shieldDownSound;
 	public AudioClip laserSound;
 	
+	public GameObject laserBeamFX;
+	
 	float worldZClamp;
 	RGB rgb;
 	public float movespeed = 20.0f;
@@ -211,6 +213,12 @@ public class Player : MonoBehaviour
 	{
 		if (redPower.IsCharged ()) {
 			redPower.ExhaustCharge ();
+			
+			GameObject node = GameObject.Find ("node_laser");
+			GameObject fx = (GameObject)Instantiate (laserBeamFX, node.transform.position,
+				Quaternion.LookRotation (Vector3.forward, Vector3.up));
+			fx.transform.parent = node.transform;
+			Destroy (fx, 1.0f);
 			
 			audio.PlayOneShot (laserSound);
 			

@@ -10,7 +10,7 @@ public abstract class Power : MonoBehaviour
 {
 	public AudioClip powerReadySound;
 	protected ColorWheel color;
-	public int curValue;
+	public int curValue = 0;
 	public int MaxValue = 5;
 	
 	public void AddPower (int amount)

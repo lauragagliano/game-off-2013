@@ -3,11 +3,8 @@ using System.Collections;
 
 public class GUIMeter : MonoBehaviour
 {
-
-	Player player;
 	float maxScale;
 	float maxSize;
-	bool glowingUp = false;
 	public float CurrentFillPercent;
 	public GameObject fill;
 	public AnimationClip glowAnimation;
@@ -20,7 +17,6 @@ public class GUIMeter : MonoBehaviour
 		
 		// Cache the size of the fillbar to be used to adjust the anchoring
 		maxSize = transform.renderer.bounds.extents.x;
-		player = (Player)GameObject.FindGameObjectWithTag (Tags.PLAYER).GetComponent<Player> ();
 	}
 	
 	void Update ()

@@ -10,7 +10,6 @@ public class Player : MonoBehaviour
 	public GreenPower greenPower;
 	public RGB playerRGB;
 	public GameObject[] pickups;
-
 	const int POWER_UNIT = 1;
 	public AudioClip pickupSound;
 	public AudioClip deathSound;
@@ -19,11 +18,10 @@ public class Player : MonoBehaviour
 	public AudioClip shieldHitSound;
 	public AudioClip shieldDownSound;
 	public AudioClip laserSound;
-	
 	GameObject playerGeo;
 	GameObject nodeLaser;
+	GameObject shieldObject;
 	public GameObject laserBeamFX;
-	
 	float worldZClamp;
 	public float movespeed = 20.0f;
 	
@@ -31,30 +29,35 @@ public class Player : MonoBehaviour
 	#region #1 Awake and Update
 	void Awake ()
 	{
-		LinkNodeReferences();
+		LinkNodeReferences ();
 		
 		// Set our health and powers
 		curHealth = 1;
-		playerRGB = (RGB) GetComponent<RGB> ();
-		bluePower = (BluePower) GetComponent<BluePower> ();
-		redPower = (RedPower) GetComponent<RedPower> ();
-		greenPower = (GreenPower) GetComponent<GreenPower> ();
+		playerRGB = (RGB)GetComponent<RGB> ();
+		bluePower = (BluePower)GetComponent<BluePower> ();
+		redPower = (RedPower)GetComponent<RedPower> ();
+		greenPower = (GreenPower)GetComponent<GreenPower> ();
 		
 		// Remember their initial Z position and keep them there forever.
 		worldZClamp = transform.position.z;
+		
 		// Initialize the colors according to the level rules
 		playerRGB = (RGB)playerGeo.GetComponent<RGB> ();
 		// Cycle and render colors
 		RenderCurrentColor ();
+		
+		// Disable shield FX
+		shieldObject.SetActive (false);
 	}
 	
 	/*
 	 * Sets references to our "node" empty game objects which are used for position and rotation values of the player.
 	 */
-	void LinkNodeReferences()
+	void LinkNodeReferences ()
 	{
-		playerGeo = transform.FindChild("PlayerGeo").gameObject;
-		nodeLaser = playerGeo.transform.FindChild("node_laser").gameObject;
+		playerGeo = transform.FindChild ("PlayerGeo").gameObject;
+		nodeLaser = playerGeo.transform.FindChild ("node_laser").gameObject;
+		shieldObject = transform.FindChild ("FX_Shield").gameObject;
 	}
 	
 	void Update ()
@@ -142,8 +145,8 @@ public class Player : MonoBehaviour
 			LoseHealth (1);
 			return;
 		}
-		Power powerToCharge = GetPowerForColor(blockRGB);
-		if(powerToCharge.IsCharged()){
+		Power powerToCharge = GetPowerForColor (blockRGB);
+		if (powerToCharge.IsCharged ()) {
 			// Logic for spillover goes here
 		} else {
 			powerToCharge.AddPower (POWER_UNIT);
@@ -154,7 +157,7 @@ public class Player : MonoBehaviour
 	 * Map our player's power bars to the color passed in by returning
 	 * the power associated with the provided color.
 	 */
-	Power GetPowerForColor(RGB rgb)
+	Power GetPowerForColor (RGB rgb)
 	{
 		ColorWheel color = rgb.color;
 		Power returnPower = null;
@@ -174,17 +177,23 @@ public class Player : MonoBehaviour
 	
 	public void LoseHealth (int loss)
 	{
-		if (curHealth > 0 + loss) {
-			
-			if(curHealth > 1) {
+		int newHealth = curHealth - loss;
+		
+		// Handle shield hits
+		if (newHealth >= 1) {
+			if (newHealth > 1) {
 				audio.PlayOneShot (shieldHitSound);
+			} else if (newHealth == 1) {
+				audio.PlayOneShot (shieldDownSound);
+				shieldObject.SetActive (false);
 			}
-			else {
-				audio.PlayOneShot(shieldDownSound);
-			}
-			curHealth -= loss;
-		} else {
-			curHealth = 0;
+		}
+		
+		// Subtract the health
+		curHealth = newHealth;
+		
+		// Handle death
+		if (curHealth <= 0) {
 			Die ();
 		}
 	}
@@ -266,6 +275,7 @@ public class Player : MonoBehaviour
 			greenPower.ExhaustCharge ();
 			audio.PlayOneShot (shieldUpSound);
 			curHealth = Mathf.Min (curHealth + 1, maxHealth);
+			shieldObject.SetActive (true);
 		}
 	}
 	

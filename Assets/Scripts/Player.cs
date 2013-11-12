@@ -53,8 +53,8 @@ public class Player : MonoBehaviour
 	 */
 	void LinkNodeReferences()
 	{
-		nodeLaser = GameObject.Find ("node_laser");
-		playerGeo = GameObject.Find ("PlayerGeo");
+		playerGeo = transform.FindChild("PlayerGeo").gameObject;
+		nodeLaser = playerGeo.transform.FindChild("node_laser").gameObject;
 	}
 	
 	void Update ()

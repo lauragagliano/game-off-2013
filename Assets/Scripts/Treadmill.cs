@@ -22,7 +22,7 @@ public class Treadmill : MonoBehaviour {
 	void Awake ()
 	{
 		scrollspeed = startingSpeed;
-		player = GameObject.Find (ObjectNames.PLAYER);
+		player = GameObject.FindGameObjectWithTag(Tags.PLAYER);
 		SpawnNextSection ();
 		lastFreebieTime = Time.time;
 	}
@@ -82,7 +82,8 @@ public class Treadmill : MonoBehaviour {
 		GameObject[] pickups = GameObject.FindGameObjectsWithTag (Tags.PICKUP);
 		foreach (GameObject pickup in pickups) {
 			RGB pickupRGB = pickup.GetComponent<RGB> ();
-			pickupRGB.color = player.GetComponent<RGB> ().color;
+			Player playerscript = (Player) player.GetComponent<Player> ();
+			pickupRGB.color = playerscript.playerRGB.color;
 			pickupRGB.Refresh ();
 		}}
 }

@@ -27,12 +27,12 @@ public class BlockLogic : MonoBehaviour
 			return;
 		}
 		Player player = other.GetComponent<Player> ();
-		player.HandleBlockCollision (blockRGB);
 		if (player.playerRGB.isCompatible (blockRGB)) {
 			SuckUpBlock ();
 		} else {
-			BlowUp ();
+			BlowUp (player.transform.position);
 		}
+		player.HandleBlockCollision (blockRGB);
 	}
 	
 	/*
@@ -54,11 +54,20 @@ public class BlockLogic : MonoBehaviour
 		suckedUp = true;
 		collider.enabled = false;
 	}
-	public void BlowUp()
+	public void BlowUp(Vector3 position)
 	{
 		GameObject fx = (GameObject)Instantiate (destroyFX, transform.position,
-				Quaternion.LookRotation (Vector3.up, Vector3.back));
-		Destroy (fx, 0.8f);
+				Quaternion.LookRotation (Vector3.forward, Vector3.up));
+		FX_BlockBreak fxScript = (FX_BlockBreak)fx.GetComponent<FX_BlockBreak>();
+		if(fxScript != null) {
+			fxScript.Explode(position, 40);
+			Destroy (fx, 3.0f);
+			// Parent the explosion to the treadmill
+			fx.transform.parent = transform.parent;
+		}
+		else {
+			Destroy (fx, 0.8f);
+		}
 		Destroy (gameObject);
 	}
 }

@@ -261,7 +261,9 @@ public class Player : MonoBehaviour
 					if (distanceToBlockRelativeToMyRight <= (LASER_HALFWIDTH + blockWidth)) {
 						RGB blockRGB = block.GetComponent<RGB> ();
 						if (blockRGB.color == ColorWheel.black) {
-							block.GetComponent<BlockLogic> ().BlowUp ();
+							Vector3 explosionPosition = transform.position +
+								transform.TransformDirection (Vector3.forward * distanceToBlockRelativeToMyForward);
+							block.GetComponent<BlockLogic> ().BlowUp (explosionPosition);
 						}
 					}
 				}

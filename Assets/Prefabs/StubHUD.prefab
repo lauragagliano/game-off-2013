@@ -93,6 +93,7 @@ GameObject:
   - 33: {fileID: 3300002}
   - 23: {fileID: 2300002}
   - 114: {fileID: 11400002}
+  - 111: {fileID: 11100000}
   m_Layer: 8
   m_Name: GUIMeterRed
   m_TagString: Untagged
@@ -147,6 +148,7 @@ GameObject:
   - 33: {fileID: 3300008}
   - 23: {fileID: 2300008}
   - 114: {fileID: 11400004}
+  - 111: {fileID: 11100002}
   m_Layer: 8
   m_Name: GUIMeterGreen
   m_TagString: Untagged
@@ -201,6 +203,7 @@ GameObject:
   - 33: {fileID: 3300014}
   - 23: {fileID: 2300014}
   - 114: {fileID: 11400006}
+  - 111: {fileID: 11100004}
   m_Layer: 8
   m_Name: GUIMeterBlue
   m_TagString: Untagged
@@ -684,6 +687,62 @@ MeshCollider:
   m_SmoothSphereCollisions: 0
   m_Convex: 0
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!111 &11100000
+Animation:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100010}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: ce8f3aca6f71b4250a73b978d5e153bf, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: fe90aa8a2631749c2ac29511b858da0c, type: 2}
+  - {fileID: 7400000, guid: ce8f3aca6f71b4250a73b978d5e153bf, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
+  m_UserAABB:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+--- !u!111 &11100002
+Animation:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100016}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 611bae892d1564949babf8804247aa7a, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: fe90aa8a2631749c2ac29511b858da0c, type: 2}
+  - {fileID: 7400000, guid: 611bae892d1564949babf8804247aa7a, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
+  m_UserAABB:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+--- !u!111 &11100004
+Animation:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100022}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: fe90aa8a2631749c2ac29511b858da0c, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: fe90aa8a2631749c2ac29511b858da0c, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
+  m_UserAABB:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -715,8 +774,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CurrentFillPercent: 0
   fill: {fileID: 100012}
-  fillMaterial: {fileID: 0}
-  fillGlowMaterial: {fileID: 0}
+  glowAnimation: {fileID: 7400000, guid: ce8f3aca6f71b4250a73b978d5e153bf, type: 2}
+  fillMaterial: {fileID: 2100000, guid: cf78bba95c35d1848bdae4edb4f17228, type: 2}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -730,8 +789,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CurrentFillPercent: 0
   fill: {fileID: 100014}
-  fillMaterial: {fileID: 0}
-  fillGlowMaterial: {fileID: 0}
+  glowAnimation: {fileID: 7400000, guid: 611bae892d1564949babf8804247aa7a, type: 2}
+  fillMaterial: {fileID: 2100000, guid: de95a5669d65fa341ba620ec66bb8a84, type: 2}
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -745,8 +804,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CurrentFillPercent: 0
   fill: {fileID: 100024}
-  fillMaterial: {fileID: 0}
-  fillGlowMaterial: {fileID: 0}
+  glowAnimation: {fileID: 7400000, guid: fe90aa8a2631749c2ac29511b858da0c, type: 2}
+  fillMaterial: {fileID: 2100000, guid: 45b9c557e9e5ee744a421c2855e33c6f, type: 2}
 --- !u!132 &13200000
 GUIText:
   m_ObjectHideFlags: 1

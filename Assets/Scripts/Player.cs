@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
 	public AudioClip shieldDownSound;
 	public AudioClip laserSound;
 	
+	GameObject nodeLaser;
 	public GameObject laserBeamFX;
 	
 	float worldZClamp;
@@ -30,6 +31,8 @@ public class Player : MonoBehaviour
 	#region #1 Awake and Update
 	void Awake ()
 	{
+		LinkNodeReferences();
+		
 		// Set our health and powers
 		curHealth = 1;
 		playerRGB = (RGB) GetComponent<RGB> ();
@@ -43,6 +46,14 @@ public class Player : MonoBehaviour
 		rgb = (RGB)GetComponent<RGB> ();
 		// Cycle and render colors
 		RenderCurrentColor ();
+	}
+	
+	/*
+	 * Sets references to our "node" empty game objects which are used for position and rotation values of the player.
+	 */
+	void LinkNodeReferences()
+	{
+		nodeLaser = GameObject.Find ("node_laser");
 	}
 	
 	void Update ()
@@ -214,10 +225,10 @@ public class Player : MonoBehaviour
 		if (redPower.IsCharged ()) {
 			redPower.ExhaustCharge ();
 			
-			GameObject node = GameObject.Find ("node_laser");
-			GameObject fx = (GameObject)Instantiate (laserBeamFX, node.transform.position,
-				Quaternion.LookRotation (Vector3.forward, Vector3.up));
-			fx.transform.parent = node.transform;
+			// Spawn the laser FX
+			GameObject fx = (GameObject)Instantiate (laserBeamFX, nodeLaser.transform.position,
+				nodeLaser.transform.rotation);
+			fx.transform.parent = nodeLaser.transform;
 			Destroy (fx, 1.0f);
 			
 			audio.PlayOneShot (laserSound);

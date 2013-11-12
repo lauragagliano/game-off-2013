@@ -31,7 +31,7 @@ public class Treadmill : MonoBehaviour {
 	{
 		scrollspeed = Mathf.Min((scrollspeed + accelerationPerFrame), maxspeed);
 		transform.Translate (new Vector3(0,0,-scrollspeed * Time.deltaTime));
-		if (isSectionPastPlayer ()) {
+		if (isSectionPastScreen ()) {
 			SpawnNextSection ();
 		}
 	}
@@ -45,9 +45,9 @@ public class Treadmill : MonoBehaviour {
 	 * Check if the most recently generated section has past the player.
 	 * Return true if it has. We can compare z since it's locked for the player.
 	 */
-	bool isSectionPastPlayer ()
+	bool isSectionPastScreen ()
 	{
-		return mostRecentSection.transform.position.z <= player.transform.position.z;
+		return mostRecentSection.transform.position.z <= (player.transform.position.z-10);
 	}
 	
 	/*
@@ -76,6 +76,7 @@ public class Treadmill : MonoBehaviour {
 		mostRecentSection = (GameObject)Instantiate (sectionBucket[sectionIndex], sectionSpawnZone.position, Quaternion.identity);
 		// Parent the random new section with the treadmill
 		mostRecentSection.transform.parent = gameObject.transform;
+		Debug.Log (string.Format ("Section {0} Spawned at {1}", mostRecentSection.name, sectionSpawnZone.position));
 		// TODO This could be done more elegantly with objects more aware of the pickups and player
 		// i.e. one that doesn't have to do a lookup every time.
 		// Set the pickups in the scene to match the player's current color

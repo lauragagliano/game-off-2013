@@ -20,11 +20,11 @@ public class Player : MonoBehaviour
 	public AudioClip shieldDownSound;
 	public AudioClip laserSound;
 	
+	GameObject playerGeo;
 	GameObject nodeLaser;
 	public GameObject laserBeamFX;
 	
 	float worldZClamp;
-	RGB rgb;
 	public float movespeed = 20.0f;
 	
 	
@@ -43,7 +43,7 @@ public class Player : MonoBehaviour
 		// Remember their initial Z position and keep them there forever.
 		worldZClamp = transform.position.z;
 		// Initialize the colors according to the level rules
-		rgb = (RGB)GetComponent<RGB> ();
+		playerRGB = (RGB)playerGeo.GetComponent<RGB> ();
 		// Cycle and render colors
 		RenderCurrentColor ();
 	}
@@ -54,6 +54,7 @@ public class Player : MonoBehaviour
 	void LinkNodeReferences()
 	{
 		nodeLaser = GameObject.Find ("node_laser");
+		playerGeo = GameObject.Find ("PlayerGeo");
 	}
 	
 	void Update ()
@@ -61,7 +62,7 @@ public class Player : MonoBehaviour
 		TryMove ();
 		TrySwapColor ();
 		ClampToWorldZ (worldZClamp);
-		rgb.Refresh ();
+		playerRGB.Refresh ();
 	}
 	
 	/*
@@ -69,7 +70,7 @@ public class Player : MonoBehaviour
 	 */
 	void RenderCurrentColor ()
 	{
-		rgb.Refresh ();
+		playerRGB.Refresh ();
 	}
 	
 	/*
@@ -103,19 +104,19 @@ public class Player : MonoBehaviour
 	void TrySwapColor ()
 	{
 		if (Input.GetKeyDown ("j")) {
-			if (rgb.color == ColorWheel.red) {
+			if (playerRGB.color == ColorWheel.red) {
 				Laser ();
 			} else {
 				ChangeColors (ColorWheel.red);
 			}
 		} else if (Input.GetKeyDown ("k")) {
-			if (rgb.color == ColorWheel.green) {
-				RegenHealth ();
+			if (playerRGB.color == ColorWheel.green) {
+				RaiseShield ();
 			} else {
 				ChangeColors (ColorWheel.green);
 			}
 		} else if (Input.GetKeyDown ("l")) {
-			if (rgb.color == ColorWheel.blue) {
+			if (playerRGB.color == ColorWheel.blue) {
 				SlowDown ();
 			} else {
 				ChangeColors (ColorWheel.blue);
@@ -198,7 +199,7 @@ public class Player : MonoBehaviour
 	
 	void ChangeColors (ColorWheel color)
 	{
-		rgb.color = color;
+		playerRGB.color = color;
 		pickups = GameObject.FindGameObjectsWithTag (Tags.PICKUP);
 		foreach (GameObject pickup in pickups) {
 			RGB pickupRGB = pickup.GetComponent<RGB> ();
@@ -259,7 +260,7 @@ public class Player : MonoBehaviour
 		}
 	}
 	
-	public void RegenHealth ()
+	public void RaiseShield ()
 	{
 		if (greenPower.IsCharged ()) {
 			greenPower.ExhaustCharge ();

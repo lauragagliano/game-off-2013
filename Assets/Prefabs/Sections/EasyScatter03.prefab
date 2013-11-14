@@ -8,9 +8,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400000}
+  - 114: {fileID: 11400028}
   m_Layer: 0
   m_Name: EasyScatter03
-  m_TagString: Untagged
+  m_TagString: Section
   m_Icon: {fileID: -1376725286, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -785,6 +786,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyFX: {fileID: 100000, guid: e70f5caeb8e1244f0afa16fa9b2f0c24, type: 2}
+--- !u!114 &11400028
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5bb9dec04a718c4e95b4d6c7be54e37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numberOfPickups: 0
+  entranceOpenings: 0101000101
+  exitOpenings: 0101010001
+  entranceBitmap: 27
+  exitBitmap: 29
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

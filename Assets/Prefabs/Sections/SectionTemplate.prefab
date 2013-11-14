@@ -724,7 +724,7 @@ GameObject:
   - 4: {fileID: 400072}
   m_Layer: 0
   m_Name: SectionTemplate
-  m_TagString: Untagged
+  m_TagString: Section
   m_Icon: {fileID: -1376725286, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3396,7 +3396,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: cf78bba95c35d1848bdae4edb4f17228, type: 2}
+  - {fileID: 2100000, guid: de95a5669d65fa341ba620ec66bb8a84, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0

@@ -10,5 +10,8 @@ public class ObjectNames
 	public static string SECTION_KILLZONE = "SectionKillzone";
 	public static string BACK_EDGE = "BackEdge";
 	public static string FRONT_EDGE = "FrontEdge";
+	public static string BLOCK_PREFAB = "BlackBlock";
+	public static string PICKUP_PREFAB = "Pickup";
+	public static string EMPTY_SECTION = "EmptySection";
 }
 

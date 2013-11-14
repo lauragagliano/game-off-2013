@@ -4,21 +4,28 @@ using System.Collections.Generic;
 
 public class Treadmill : MonoBehaviour
 {
-	
+	Difficulty difficulty = Difficulty.Easy;
 	public float startingSpeed = 10.0f;
 	public float scrollspeed;
 	public float accelerationPerFrame = 0.0005f;
 	public float maxspeed = 30.0f;
 	public GameObject emptySection;
 	public List<GameObject> easySections;
-	public List<GameObject> freebieSections;
-	public float chanceOfFreebie;
-	float lastFreebieTime;
-	float delayWeight = 60.0f; // Higher means good things happen less often
+	public List<GameObject> mediumSections;
+	public List<GameObject> hardSections;
 	
 	List<GameObject> sectionsInPlay;
 	Transform sectionSpawnZone;
 	Transform sectionKillZone;
+	
+	const int MEDIUM_THRESHOLD = 300; // Number of pickups passed
+	const int HARD_THRESHOLD = 2000;
+	
+	enum Difficulty {
+		Easy,
+		Medium,
+		Hard
+	}
 	
 	void Awake ()
 	{
@@ -27,7 +34,6 @@ public class Treadmill : MonoBehaviour
 		sectionSpawnZone = (Transform)GameObject.Find (ObjectNames.SECTION_SPAWN).transform;
 		sectionKillZone = (Transform)GameObject.Find (ObjectNames.SECTION_KILLZONE).transform;
 		SpawnNextSection ();
-		lastFreebieTime = Time.time;
 	}
 	
 	void FixedUpdate ()
@@ -45,6 +51,7 @@ public class Treadmill : MonoBehaviour
 		if (!GameManager.Instance.IsPlayerAlive ()) {
 			scrollspeed = 0;
 		}
+		UpdateDifficulty ();
 	}
 	
 	public void SlowDown ()
@@ -80,15 +87,15 @@ public class Treadmill : MonoBehaviour
 	void SpawnNextSection ()
 	{
 		// Determine which bucket of sections to draw from
-		List<GameObject> sectionBucket;
-		float timeSinceLastFreebie = Time.time - lastFreebieTime;
-		// TODO Magic spawning formula here. Let's make this more elegant when we have more sections to choose.
-		chanceOfFreebie = (timeSinceLastFreebie * timeSinceLastFreebie) / (delayWeight * delayWeight) * 100;;
-		if (RBRandom.PercentageChance (chanceOfFreebie)) {
-			sectionBucket = freebieSections;
-			lastFreebieTime = Time.time;
-		} else {
-			sectionBucket = easySections;
+		List<GameObject> sectionBucket = easySections;
+		if (difficulty == Difficulty.Medium) {
+			// Only give an X% change of medium tiles when we're in it.
+			bool coinflip = RBRandom.PercentageChance (75f);
+			if (coinflip) {
+				sectionBucket = mediumSections;
+			}
+		} else if (difficulty == Difficulty.Hard){
+			sectionBucket = hardSections;
 		}
 		Vector3 rowSpacing = new Vector3 (0, 0, 1);
 		GameObject newSection = (GameObject)Instantiate (GetRandomSectionFromBucket (sectionBucket),
@@ -102,21 +109,20 @@ public class Treadmill : MonoBehaviour
 	 */
 	GameObject GetRandomSectionFromBucket (List<GameObject> sectionsToPickFrom)
 	{
-		if (GetLastSectionInPlay () == null) {
-			// Just take the first you get (here I'm doing 0 for growing my program purposes).
-			return sectionsToPickFrom[0];
-		}
-		
 		// Set up a bag of indexes to draw from for the provided sectionsToPickFrom
-		Section sectionToCheck;
-		Section lastSection = (Section) GetLastSectionInPlay ().GetComponent<Section> ();
 		List<int> bagOfIndexes = new List<int> (sectionsToPickFrom.Count);
 		for (int i = 0; i < sectionsToPickFrom.Count; i++) {
 			bagOfIndexes.Add (i);
 		}
 		RBRandom.Shuffle<int> (bagOfIndexes);
+		// Just take the first you get if it's the first one drawn
+		if (GetLastSectionInPlay () == null) {
+			return sectionsToPickFrom[bagOfIndexes[0]];
+		}
 		
 		// Iterate through our random bag until we pick a section that is compatible.
+		Section sectionToCheck;
+		Section lastSection = (Section) GetLastSectionInPlay ().GetComponent<Section> ();
 		int compatibleSectionIndex = -1;
 		foreach (int index in bagOfIndexes) {
 			sectionToCheck = sectionsToPickFrom[index].GetComponent<Section> ();
@@ -152,5 +158,18 @@ public class Treadmill : MonoBehaviour
 	{
 		sectionsInPlay.Remove (sectionToKill);
 		Destroy (sectionToKill);
+	}
+	
+	/*
+	 * Check how many pickups we've passed. Once we've passed the threshold for medium
+	 * and hard, update the difficulty respectively.
+	 */
+	void UpdateDifficulty ()
+	{
+		if (GameManager.Instance.numPickupsPassed > MEDIUM_THRESHOLD) {
+			difficulty = Difficulty.Medium;
+		} else if (GameManager.Instance.numPickupsPassed > HARD_THRESHOLD) {
+			difficulty = Difficulty.Hard;
+		}
 	}
 }

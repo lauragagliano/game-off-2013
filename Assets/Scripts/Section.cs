@@ -40,6 +40,7 @@ public class Section : MonoBehaviour
 				}
 			}
 		}
+		GameManager.Instance.numPickupsPassed += numberOfPickups;
 	}
 	
 	void Start ()

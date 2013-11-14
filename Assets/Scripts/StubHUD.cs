@@ -37,8 +37,9 @@ public class StubHUD : MonoBehaviour
 			}
 			GUILayout.EndArea ();
 		}
-		scoreText.text = string.Format ("Power:\nRed: {0}\nBlue: {1}\nGreen: {2}\n\nHealth: {3}",
-			player.redPower.curValue, player.bluePower.curValue, player.greenPower.curValue, player.curHealth);
+		scoreText.text = string.Format ("Power:\nRed: {0}\nBlue: {1}\nGreen: {2}\n\nHealth: {3}\nPassed Pigments: {4}",
+			player.redPower.curValue, player.bluePower.curValue, player.greenPower.curValue, player.curHealth,
+			GameManager.Instance.numPickupsPassed);
 		
 		redMeter.CurrentFillPercent = ((float) player.redPower.curValue / player.redPower.MaxValue);
 		blueMeter.CurrentFillPercent = ((float) player.bluePower.curValue / player.bluePower.MaxValue);

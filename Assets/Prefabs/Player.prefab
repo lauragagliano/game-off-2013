@@ -844,7 +844,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerReadySound: {fileID: 8300000, guid: 651ad5f1d07e32544a16ac659e51618c, type: 3}
   curValue: 0
-  MaxValue: 5
+  MaxValue: 20
 --- !u!114 &11400014
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -858,7 +858,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerReadySound: {fileID: 8300000, guid: 7ad350cc1a9100141808d8b7dc533b6e, type: 3}
   curValue: 0
-  MaxValue: 5
+  MaxValue: 20
 --- !u!114 &11400016
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -872,7 +872,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerReadySound: {fileID: 8300000, guid: 727dd46b669931645927cad8c8b88b7c, type: 3}
   curValue: 0
-  MaxValue: 5
+  MaxValue: 20
 --- !u!143 &14300000
 CharacterController:
   m_ObjectHideFlags: 1

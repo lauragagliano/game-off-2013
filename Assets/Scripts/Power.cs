@@ -11,7 +11,7 @@ public abstract class Power : MonoBehaviour
 	public AudioClip powerReadySound;
 	protected ColorWheel color;
 	public int curValue = 0;
-	public int MaxValue = 5;
+	public int MaxValue = 20;
 	
 	public void AddPower (int amount)
 	{

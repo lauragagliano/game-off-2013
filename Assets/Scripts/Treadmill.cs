@@ -48,7 +48,7 @@ public class Treadmill : MonoBehaviour
 			if (isSectionPastKillZone (sectionsInPlay [0])) {
 				KillSection (sectionsInPlay [0]);
 			}
-			if (!GameManager.Instance.IsPlayerAlive ()) {
+			if (!GameManager.Instance.CheckIfPlayerLiving ()) {
 				Stop ();
 			}
 		}
@@ -115,13 +115,13 @@ public class Treadmill : MonoBehaviour
 	{
 		// Determine which bucket of sections to draw from
 		List<GameObject> sectionBucket = easySections;
-		if (GameManager.Instance.isMedium ()) {
+		if (GameManager.Instance.IsMedium ()) {
 			// Only give an X% change of medium tiles when we're in it.
 			bool coinflip = RBRandom.PercentageChance (75f);
 			if (coinflip) {
 				sectionBucket = mediumSections;
 			}
-		} else if (GameManager.Instance.isHard ()) {
+		} else if (GameManager.Instance.IsHard ()) {
 			sectionBucket = hardSections;
 		}
 		Vector3 rowSpacing = new Vector3 (0, 0, 1);

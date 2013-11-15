@@ -10,7 +10,9 @@ public class GameManager : Singleton<GameManager>
 	public Player player;
 	public RGB playerRGB;
 	
-	public Difficulty difficulty = Difficulty.Easy;
+	Difficulty difficulty = Difficulty.Easy;
+	GameScreen gameScreen = GameScreen.Game;
+	
 	public int numPickupsPassed;
 	public int redPoints;
 	public int greenPoints;
@@ -18,14 +20,23 @@ public class GameManager : Singleton<GameManager>
 	
 	Transform playerSpawn;
 	Treadmill treadmill;
+	Store store;
 	
 	const int MEDIUM_THRESHOLD = 300; // Number of pickups passed
 	const int HARD_THRESHOLD = 2000;
 	
-	public enum Difficulty {
+	enum Difficulty {
 		Easy,
 		Medium,
 		Hard
+	}
+	
+	enum GameScreen {
+		Menu,
+		Game,
+		Dead,
+		Inventory,
+		Store
 	}
 	
 	void Awake ()
@@ -33,7 +44,8 @@ public class GameManager : Singleton<GameManager>
 		player = GameObject.FindGameObjectWithTag (Tags.PLAYER).GetComponent<Player> ();
 		playerRGB = player.GetComponentInChildren<RGB> ();
 		playerSpawn = (Transform)GameObject.Find (ObjectNames.PLAYER_SPAWN).transform;
-		treadmill = (Treadmill)GameObject.Find(ObjectNames.TREADMILL).GetComponent<Treadmill> ();
+		treadmill = (Treadmill)GameObject.Find (ObjectNames.TREADMILL).GetComponent<Treadmill> ();
+		store = (Store)GameObject.Find (ObjectNames.STORE).GetComponent<Store> ();
 	}
 	
 	void Update ()
@@ -45,9 +57,29 @@ public class GameManager : Singleton<GameManager>
 	 * Check whether the player is in play. Returns false if the
 	 * player has been destroyed or deactivated.
 	 */
-	public bool IsPlayerAlive ()
+	public bool CheckIfPlayerLiving ()
 	{
-		return player!= null && player.gameObject != null && player.gameObject.activeSelf;
+		if (player == null || player.gameObject == null || !player.gameObject.activeSelf) {
+			gameScreen = GameScreen.Dead;
+			return false;
+		}
+		return true;
+	}
+	
+	/*
+	 * Return true if the game should be on the Dead screen.
+	 */
+	public bool IsDead ()
+	{
+		return gameScreen == GameScreen.Dead;
+	}
+	
+	/*
+	 * Return true if the game should be on the Store screen.
+	 */
+	public bool IsShopping ()
+	{
+		return gameScreen == GameScreen.Store;
 	}
 	
 		
@@ -67,7 +99,7 @@ public class GameManager : Singleton<GameManager>
 	/*
 	 * Return true if difficulty is set to easy.
 	 */
-	public bool isEasy ()
+	public bool IsEasy ()
 	{
 		return difficulty == Difficulty.Easy;
 	}
@@ -75,7 +107,7 @@ public class GameManager : Singleton<GameManager>
 	/*
 	 * Return true if difficulty is set to medium.
 	 */
-	public bool isMedium ()
+	public bool IsMedium ()
 	{
 		return difficulty == Difficulty.Medium;
 	}
@@ -83,7 +115,7 @@ public class GameManager : Singleton<GameManager>
 	/*
 	 * Return true if difficulty is set to hard.
 	 */
-	public bool isHard ()
+	public bool IsHard ()
 	{
 		return difficulty == Difficulty.Hard;
 	}
@@ -113,9 +145,22 @@ public class GameManager : Singleton<GameManager>
 	public void StartGame ()
 	{
 		numPickupsPassed = 0;
+		gameScreen = GameScreen.Game;
 		difficulty = Difficulty.Easy;
 		player.gameObject.SetActive (true);
 		player.transform.position = playerSpawn.position;
 		treadmill.ResetTreadmill ();
+	}
+	
+	public void EnterStore ()
+	{
+		gameScreen = GameScreen.Store;
+		store.EnterStore ();
+	}
+	
+	public void ExitStore ()
+	{
+		store.ExitStore ();
+		gameScreen = GameScreen.Menu;
 	}
 }

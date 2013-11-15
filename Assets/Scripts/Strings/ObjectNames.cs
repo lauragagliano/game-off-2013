@@ -5,6 +5,7 @@ public class ObjectNames
 {
 	public static string PLAYER = "Player";
 	public static string GAMEMANAGER = "_GameManager";
+	public static string MAIN_CAMERA = "OrthoCam";
 	public static string TREADMILL = "Treadmill";
 	public static string SECTION_SPAWN = "SectionSpawn";
 	public static string SECTION_KILLZONE = "SectionKillzone";
@@ -14,5 +15,7 @@ public class ObjectNames
 	public static string PICKUP_PREFAB = "Pickup";
 	public static string EMPTY_SECTION = "EmptySection";
 	public static string PLAYER_SPAWN = "PlayerSpawn";
+	public static string STORE = "Store";
+	public static string STORE_CAMERA = "StoreCam";
 }
 

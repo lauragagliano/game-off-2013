@@ -3166,9 +3166,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numberOfPickups: 0
   entranceOpenings: 0001010000
-  exitOpenings: 0101010000
+  exitOpenings: 0000000101
   entranceBitmap: 12
-  exitBitmap: 28
+  exitBitmap: 3
 --- !u!114 &11400114
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -18,9 +18,17 @@ public class Section : MonoBehaviour
 		// Start by moving the new Section onto the Treadmill (as a child of the object)
 		Transform treadmill = GameObject.Find(ObjectNames.TREADMILL).transform;
 		transform.parent = treadmill;
+
+	}
+	
+	void Start ()
+	{
 		// Create an empty object to parent prefabs to (for some reason, the children prefabs can't
 		// be attached to this section itself.
 		tempPrefabHolder = new GameObject("Prefabs");
+		// Move our prefabs now that they've been created
+		tempPrefabHolder.transform.parent = transform;
+
 		foreach (Transform child in transform) {
 			// Replace placeholders with BlackBlock prefab
 			if (child.CompareTag (Tags.BLOCK)) {
@@ -41,12 +49,6 @@ public class Section : MonoBehaviour
 			}
 		}
 		GameManager.Instance.numPickupsPassed += numberOfPickups;
-	}
-	
-	void Start ()
-	{
-		// Move our prefabs now that they've been created
-		tempPrefabHolder.transform.parent = transform;
 	}
 	
 	/*

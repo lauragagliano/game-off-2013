@@ -6099,10 +6099,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numberOfPickups: 24
-  entranceOpenings: 0001010100
-  exitOpenings: 0001010100
-  entranceBitmap: 14
-  exitBitmap: 14
+  entranceOpenings: 0001010000
+  exitOpenings: 0000010100
+  entranceBitmap: 12
+  exitBitmap: 6
 --- !u!114 &11400078
 MonoBehaviour:
   m_ObjectHideFlags: 1

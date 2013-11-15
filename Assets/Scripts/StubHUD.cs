@@ -29,16 +29,18 @@ public class StubHUD : MonoBehaviour
 	
 	void OnGUI ()
 	{
-		if (GameObject.FindGameObjectWithTag (Tags.PLAYER) == null) {
+		if (!GameManager.Instance.IsPlayerAlive ()) {
 			startEndText.text = "Game Over!";
 			GUILayout.BeginArea (new Rect (Screen.width / 2 - 50.0f, Screen.height / 2, 200.0f, 70.0f));
 			if (GUILayout.Button ("Click to Retry")) {
-				Application.LoadLevel (Application.loadedLevel);
+				//Application.LoadLevel (Application.loadedLevel);
+				GameManager.Instance.StartGame ();
 			}
 			GUILayout.EndArea ();
 		}
-		scoreText.text = string.Format ("Power:\nRed: {0}\nBlue: {1}\nGreen: {2}\n\nHealth: {3}\nPassed Pigments: {4}",
-			player.redPower.curValue, player.bluePower.curValue, player.greenPower.curValue, player.curHealth,
+		scoreText.text = string.Format ("Power:\nRed: {0}\nGreen: {1}\nBlue: {2}\n\nHealth: {3}\nPassed Pigments: {4}",
+			GameManager.Instance.redPoints, GameManager.Instance.greenPoints, 
+			GameManager.Instance.bluePoints, player.curHealth,
 			GameManager.Instance.numPickupsPassed);
 		
 		redMeter.CurrentFillPercent = ((float) player.redPower.curValue / player.redPower.MaxValue);

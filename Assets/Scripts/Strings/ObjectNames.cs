@@ -13,5 +13,6 @@ public class ObjectNames
 	public static string BLOCK_PREFAB = "BlackBlock";
 	public static string PICKUP_PREFAB = "Pickup";
 	public static string EMPTY_SECTION = "EmptySection";
+	public static string PLAYER_SPAWN = "PlayerSpawn";
 }
 

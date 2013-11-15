@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 public class Treadmill : MonoBehaviour
 {
-	Difficulty difficulty = Difficulty.Easy;
 	public float startingSpeed = 10.0f;
 	public float scrollspeed;
 	public float accelerationPerFrame = 0.0005f;
@@ -18,13 +17,11 @@ public class Treadmill : MonoBehaviour
 	Transform sectionSpawnZone;
 	Transform sectionKillZone;
 	
-	const int MEDIUM_THRESHOLD = 300; // Number of pickups passed
-	const int HARD_THRESHOLD = 2000;
+	Status status;
 	
-	enum Difficulty {
-		Easy,
-		Medium,
-		Hard
+	enum Status {
+		Stopped,
+		Started
 	}
 	
 	void Awake ()
@@ -33,25 +30,41 @@ public class Treadmill : MonoBehaviour
 		scrollspeed = startingSpeed;
 		sectionSpawnZone = (Transform)GameObject.Find (ObjectNames.SECTION_SPAWN).transform;
 		sectionKillZone = (Transform)GameObject.Find (ObjectNames.SECTION_KILLZONE).transform;
-		SpawnNextSection ();
+		Start ();
 	}
 	
 	void FixedUpdate ()
 	{
-		scrollspeed = Mathf.Min ((scrollspeed + accelerationPerFrame), maxspeed);
-		transform.Translate (new Vector3 (0, 0, -scrollspeed * Time.deltaTime));
-		// Check if our last section is on screen. If so, spawn another.
-		if (isSectionOnScreen (GetLastSectionInPlay ())) {
-			SpawnNextSection ();
+		if (status == Status.Started) {
+			scrollspeed = Mathf.Min ((scrollspeed + accelerationPerFrame), maxspeed);
+			transform.Translate (new Vector3 (0, 0, -scrollspeed * Time.deltaTime));
+			// Check if our last section is on screen. If so, spawn another.
+			if (GetLastSectionInPlay () == null) {
+				SpawnNextSection ();
+			} else if (isSectionOnScreen (GetLastSectionInPlay ())) {
+				SpawnNextSection ();
+			}
+			// Check if the first section is past the kill line. If so, kill it!
+			if (isSectionPastKillZone (sectionsInPlay [0])) {
+				KillSection (sectionsInPlay [0]);
+			}
+			if (!GameManager.Instance.IsPlayerAlive ()) {
+				Stop ();
+			}
 		}
-		// Check if the first section is past the kill line. If so, kill it!
-		if (isSectionPastKillZone (sectionsInPlay [0])) {
-			KillSection (sectionsInPlay [0]);
-		}
-		if (!GameManager.Instance.IsPlayerAlive ()) {
-			scrollspeed = 0;
-		}
-		UpdateDifficulty ();
+	}
+	
+	#region #1 Treadmill Manipulation (Start/Stop/Reset/Slowdown)
+	public void Start ()
+	{
+		scrollspeed = startingSpeed;
+		status = Status.Started;
+	}
+	
+	public void Stop ()
+	{
+		scrollspeed = 0;
+		status = Status.Stopped;
 	}
 	
 	public void SlowDown ()
@@ -59,6 +72,20 @@ public class Treadmill : MonoBehaviour
 		scrollspeed = (scrollspeed + startingSpeed) / 2;
 	}
 	
+	/*
+	 * Reset treadmill to prepare for a new game. Values should be restored to default
+	 * and any sections in play should be destroyed.
+	 */
+	public void ResetTreadmill ()
+	{
+		for (int i = sectionsInPlay.Count-1; i >= 0; i--) {
+			KillSection (sectionsInPlay[i]);
+		}
+		Start ();
+	}
+	#endregion
+	
+	#region #2 Section Logic
 	/*
 	 * Check if the provided (but should be the most recently generated) section has past the spawn zone.
 	 * If it has past, return true.
@@ -88,13 +115,13 @@ public class Treadmill : MonoBehaviour
 	{
 		// Determine which bucket of sections to draw from
 		List<GameObject> sectionBucket = easySections;
-		if (difficulty == Difficulty.Medium) {
+		if (GameManager.Instance.isMedium ()) {
 			// Only give an X% change of medium tiles when we're in it.
 			bool coinflip = RBRandom.PercentageChance (75f);
 			if (coinflip) {
 				sectionBucket = mediumSections;
 			}
-		} else if (difficulty == Difficulty.Hard){
+		} else if (GameManager.Instance.isHard ()) {
 			sectionBucket = hardSections;
 		}
 		Vector3 rowSpacing = new Vector3 (0, 0, 1);
@@ -159,17 +186,5 @@ public class Treadmill : MonoBehaviour
 		sectionsInPlay.Remove (sectionToKill);
 		Destroy (sectionToKill);
 	}
-	
-	/*
-	 * Check how many pickups we've passed. Once we've passed the threshold for medium
-	 * and hard, update the difficulty respectively.
-	 */
-	void UpdateDifficulty ()
-	{
-		if (GameManager.Instance.numPickupsPassed > MEDIUM_THRESHOLD) {
-			difficulty = Difficulty.Medium;
-		} else if (GameManager.Instance.numPickupsPassed > HARD_THRESHOLD) {
-			difficulty = Difficulty.Hard;
-		}
-	}
+	#endregion
 }

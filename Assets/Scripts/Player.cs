@@ -151,6 +151,9 @@ public class Player : MonoBehaviour
 		} else {
 			powerToCharge.AddPower (POWER_UNIT);
 		}
+		// Add up our points
+		GameManager.Instance.AddPoint (blockRGB.color);
+		
 	}
 	
 	/*

@@ -5,6 +5,7 @@ public class ObjectNames
 {
 	public static string PLAYER = "Player";
 	public static string GAMEMANAGER = "_GameManager";
+	public static string ITEM_DATABASE = "ItemDatabase";
 	public static string MAIN_CAMERA = "OrthoCam";
 	public static string TREADMILL = "Treadmill";
 	public static string SECTION_SPAWN = "SectionSpawn";

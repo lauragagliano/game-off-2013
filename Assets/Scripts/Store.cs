@@ -3,7 +3,18 @@ using System.Collections;
 
 public class Store : MonoBehaviour
 {	
+	public ItemCollection inventory;
 	
+	void Awake ()
+	{
+		inventory = (ItemCollection)GetComponent<ItemCollection> ();
+		// For each item in the database, add it here.
+		foreach (Item item in ItemDatabase.Instance.GetAllItems ()) {
+			Debug.Log (item.itemName);
+			inventory.AddItem (item.itemName, int.MaxValue);
+		}
+		Debug.Log (inventory.GetContentsAsJSON ());
+	}
 	
 	public void EnterStore ()
 	{

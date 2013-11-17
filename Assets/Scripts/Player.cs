@@ -18,17 +18,22 @@ public class Player : MonoBehaviour
 	public AudioClip shieldHitSound;
 	public AudioClip shieldDownSound;
 	public AudioClip laserSound;
+	
+	Treadmill treadmill;
+	
 	GameObject playerGeo;
 	GameObject nodeLaser;
 	GameObject shieldObject;
+	
 	public GameObject laserBeamFX;
 	float worldZClamp;
-	public float movespeed = 20.0f;
+	public float movespeed;
 	
 	
 	#region #1 Awake and Update
 	void Awake ()
 	{
+		LinkSceneReferences();
 		LinkNodeReferences ();
 		
 		// Set our health and powers
@@ -60,12 +65,33 @@ public class Player : MonoBehaviour
 		shieldObject = transform.FindChild ("FX_Shield").gameObject;
 	}
 	
+	/*
+	 * Finds and sets references to objects in the scene.
+	 */
+	void LinkSceneReferences()
+	{
+		GameObject treadmillGO = GameObject.FindGameObjectWithTag(Tags.TREADMILL);
+		treadmill = treadmillGO.GetComponent<Treadmill> ();
+	}
+	
 	void Update ()
 	{
+		MatchSpeedToTreadmill();
+		
 		TryMove ();
 		TrySwapColor ();
+		
 		ClampToWorldZ (worldZClamp);
 		playerRGB.Refresh ();
+	}
+	
+	/*
+	 * Adjusts the player's movespeed left and right to keep up with the treadmill. This allows us to
+	 * make challenges that stay consistently possible for the player as the board speeds up.
+	 */
+	void MatchSpeedToTreadmill()
+	{
+		movespeed = treadmill.scrollspeed;
 	}
 	
 	/*
@@ -94,6 +120,7 @@ public class Player : MonoBehaviour
 	{
 		float direction = Input.GetAxis ("Horizontal");
 		Move (new Vector3 (direction, 0.0f, 0.0f), movespeed);
+		// Translate in place helps hit trigger colliders
 		if (direction == 0) {
 			transform.Translate (0, 0, 0);
 		}

@@ -6,8 +6,8 @@ public class Treadmill : MonoBehaviour
 {
 	public float startingSpeed = 10.0f;
 	public float scrollspeed;
-	public float accelerationPerFrame = 0.0005f;
-	public float maxspeed = 30.0f;
+	public float accelerationPerFrame = 0.0003f;
+	public float maxspeed = 50.0f;
 	public GameObject emptySection;
 	public List<GameObject> easySections;
 	public List<GameObject> mediumSections;
@@ -33,7 +33,7 @@ public class Treadmill : MonoBehaviour
 		Start ();
 	}
 	
-	void FixedUpdate ()
+	void Update ()
 	{
 		if (status == Status.Started) {
 			scrollspeed = Mathf.Min ((scrollspeed + accelerationPerFrame), maxspeed);

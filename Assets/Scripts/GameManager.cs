@@ -8,14 +8,12 @@ using System.Collections;
 public class GameManager : Singleton<GameManager>
 {
 	public Player player;
-	public RGB playerRGB;
 	
 	public int numPickupsPassed;
 	
 	void Awake ()
 	{
 		player = GameObject.FindGameObjectWithTag (Tags.PLAYER).GetComponent<Player> ();
-		playerRGB = player.GetComponentInChildren<RGB> ();
 	}
 	
 	/*

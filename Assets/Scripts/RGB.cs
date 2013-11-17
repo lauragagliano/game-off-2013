@@ -8,9 +8,12 @@ using System.Collections;
 public class RGB : MonoBehaviour
 {
 	public ColorWheel color;
+	public bool autoSetMaterial = true;
 	
 	void Awake () {
-		SetMaterialToCurrentColor ();
+		if(autoSetMaterial){
+			SetMaterialToCurrentColor ();
+		}
 	}
 	
 	/*

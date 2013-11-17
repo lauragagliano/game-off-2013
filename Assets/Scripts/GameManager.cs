@@ -148,6 +148,7 @@ public class GameManager : Singleton<GameManager>
 		gameScreen = GameScreen.Game;
 		difficulty = Difficulty.Easy;
 		player.gameObject.SetActive (true);
+		player.InitializeStats ();
 		player.transform.position = playerSpawn.position;
 		treadmill.ResetTreadmill ();
 	}

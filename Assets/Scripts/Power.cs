@@ -11,13 +11,19 @@ public abstract class Power : MonoBehaviour
 	public AudioClip powerReadySound;
 	protected ColorWheel color;
 	public int curValue = 0;
-	public int MaxValue = 20;
+	int maxValue = 20;
+	const int UPGRADED_MAX = 15;
+
+	public float GetFillPercentage ()
+	{
+		return ((float) curValue / maxValue);
+	}
 	
 	public void AddPower (int amount)
 	{
-		if (curValue < MaxValue) {
+		if (curValue < maxValue) {
 			curValue += amount;
-			if (curValue == MaxValue) {
+			if (curValue == maxValue) {
 				audio.PlayOneShot (powerReadySound);
 			}
 		}
@@ -32,16 +38,24 @@ public abstract class Power : MonoBehaviour
 	
 	public void Charge ()
 	{
-		curValue = MaxValue;
+		curValue = maxValue;
 	}
 	
 	public bool IsCharged ()
 	{
-		return curValue == MaxValue;
+		return curValue == maxValue;
 	}
 	
 	public void ExhaustCharge ()
 	{
 		curValue = 0;
+	}
+	
+	/*
+	 * Set our maximum charge value to the upgraded value.
+	 */
+	public void UpgradeMaximumCharge ()
+	{
+		maxValue = UPGRADED_MAX;
 	}
 }

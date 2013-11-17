@@ -9,6 +9,8 @@ public class Player : MonoBehaviour
 	public RedPower redPower;
 	public GreenPower greenPower;
 	public RGB playerRGB;
+	Inventory inventory;
+	
 	public GameObject[] pickups;
 	const int POWER_UNIT = 1;
 	public AudioClip pickupSound;
@@ -35,9 +37,9 @@ public class Player : MonoBehaviour
 	{
 		LinkSceneReferences();
 		LinkNodeReferences ();
-		
 		// Set our health and powers
 		curHealth = 1;
+		inventory = (Inventory)GetComponent<Inventory> ();
 		playerRGB = (RGB)GetComponent<RGB> ();
 		bluePower = (BluePower)GetComponent<BluePower> ();
 		redPower = (RedPower)GetComponent<RedPower> ();
@@ -320,5 +322,29 @@ public class Player : MonoBehaviour
 			bluePower.ExhaustCharge ();
 		}
 	}
+	#endregion
+	
+	#region #5 Player Upgrades
+	
+	/*
+	 * Call this to make sure new powers or necessary resets occur.
+	 */
+	public void InitializeStats ()
+	{
+		redPower.curValue = 0;
+		greenPower.curValue = 0;
+		bluePower.curValue = 0;
+		
+		if (inventory.HasItem (ItemNames.BLUE_METER_UPGRADE)) {
+			bluePower.UpgradeMaximumCharge ();
+		}
+		if (inventory.HasItem (ItemNames.RED_METER_UPGRADE)) {
+			redPower.UpgradeMaximumCharge ();
+		}
+		if (inventory.HasItem (ItemNames.GREEN_METER_UPGRADE)) {
+			greenPower.UpgradeMaximumCharge ();
+		}
+	}
+	
 	#endregion
 }

@@ -69,6 +69,7 @@ public class Store : MonoBehaviour
 	 */
 	public void EnterStore ()
 	{
+		// TODO We could improve performance by turning off objects as well as cameras
 		Camera storeCamera = GameObject.Find (ObjectNames.STORE_CAMERA).camera;
 		Camera mainCamera = GameObject.Find (ObjectNames.MAIN_CAMERA).camera;
 		storeCamera.enabled = true;
@@ -80,6 +81,7 @@ public class Store : MonoBehaviour
 	 */
 	public void ExitStore ()
 	{
+		// TODO We could improve performance by turning off objects as well as cameras
 		Camera storeCamera = GameObject.Find (ObjectNames.STORE_CAMERA).camera;
 		Camera mainCamera = GameObject.Find (ObjectNames.MAIN_CAMERA).camera;
 		storeCamera.enabled = false;
@@ -96,6 +98,9 @@ public class Store : MonoBehaviour
 		return !playerInventory.HasItem (itemToBuy.itemName);
 	}
 	
+	/*
+	 * Add the currently selected item to the player's inventory.
+	 */
 	public void BuyItem ()
 	{
 		//TODO Growing my program, no validation

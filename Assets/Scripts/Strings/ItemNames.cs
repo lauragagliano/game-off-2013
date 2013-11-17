@@ -8,7 +8,7 @@ using System.Collections;
  */
 public class ItemNames
 {
-	public static string ITEM1 = "ItemA";
-	public static string ITEM2 = "ItemB";
-	public static string ITEM3 = "ItemC";
+	public static string RED_METER_UPGRADE = "RedMeterUpgrade";
+	public static string GREEN_METER_UPGRADE = "GreenMeterUpgrade";
+	public static string BLUE_METER_UPGRADE = "BlueMeterUpgrade";
 }

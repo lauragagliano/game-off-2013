@@ -41,9 +41,9 @@ public class StubHUD : MonoBehaviour
 			GameManager.Instance.bluePoints, player.curHealth,
 			GameManager.Instance.numPickupsPassed);
 		
-		redMeter.CurrentFillPercent = ((float) player.redPower.curValue / player.redPower.MaxValue);
-		blueMeter.CurrentFillPercent = ((float) player.bluePower.curValue / player.bluePower.MaxValue);
-		greenMeter.CurrentFillPercent = ((float) player.greenPower.curValue / player.greenPower.MaxValue);
+		redMeter.CurrentFillPercent = player.redPower.GetFillPercentage ();
+		greenMeter.CurrentFillPercent = player.greenPower.GetFillPercentage ();
+		blueMeter.CurrentFillPercent = player.bluePower.GetFillPercentage ();
 	}
 	
 	/*

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Item : ScriptableObject
+public class Item : MonoBehaviour
 {
 	public Type type;
 	public string itemName;

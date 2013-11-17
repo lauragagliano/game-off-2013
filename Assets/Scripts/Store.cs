@@ -3,19 +3,69 @@ using System.Collections;
 
 public class Store : MonoBehaviour
 {	
-	public ItemCollection inventory;
+	//public ItemCollection inventory;
+	public GameObject[] allItems;
+	
+	public int selectedItem = 0;
+	
+	Transform scroller;
 	
 	void Awake ()
 	{
-		inventory = (ItemCollection)GetComponent<ItemCollection> ();
-		// For each item in the database, add it here.
-		foreach (Item item in ItemDatabase.Instance.GetAllItems ()) {
-			Debug.Log (item.itemName);
-			inventory.AddItem (item.itemName, int.MaxValue);
-		}
-		Debug.Log (inventory.GetContentsAsJSON ());
+		scroller = (Transform) GameObject.Find (ObjectNames.STORE_SCROLLER).transform;
 	}
 	
+	void Update () 
+	{
+		//TODO Get some real inputs in here. Also, don't do this when the
+		// player isn't at the store.
+		if (Input.GetKeyDown ("a")) {
+			ScrollToPrevious ();
+		} else if (Input.GetKeyDown ("d")) {
+			ScrollToNext ();
+		}
+		ScrollToItem (selectedItem);
+	}
+	
+	/*
+	 * Adjust our selected item index to the previous one in the array.
+	 * Prevent going out of bounds.
+	 */
+	void ScrollToPrevious ()
+	{
+		selectedItem--;
+		if (selectedItem < 0) {
+			selectedItem = 0;
+		}
+	}
+	
+	/*
+	 * Adjust our selected item index to the next one in the array. Cap
+	 * it out at the end of the array.
+	 */
+	void ScrollToNext ()
+	{
+		selectedItem++;
+		if (selectedItem >= allItems.Length) {
+			selectedItem = allItems.Length -1;
+		}
+	}
+	
+	/*
+	 * (Slowly) Scroll to a provided index in the item list.
+	 */
+	void ScrollToItem (int index)
+	{
+		int adjustment = index * 8;
+		float speed = 8.0f;
+		// New position relative to shop
+		Vector3 newLocation = transform.position - new Vector3(adjustment, 0, 0);
+		scroller.position = Vector3.Lerp (scroller.position, newLocation, speed * Time.deltaTime);
+	}
+	
+	/*
+	 * Turn on the store cam and turn off the main camera.
+	 */
 	public void EnterStore ()
 	{
 		Camera storeCamera = GameObject.Find (ObjectNames.STORE_CAMERA).camera;
@@ -24,11 +74,22 @@ public class Store : MonoBehaviour
 		mainCamera.enabled = false;
 	}
 	
+	/*
+	 * Turn off the store cam and turn on the main camera.
+	 */
 	public void ExitStore ()
 	{
 		Camera storeCamera = GameObject.Find (ObjectNames.STORE_CAMERA).camera;
 		Camera mainCamera = GameObject.Find (ObjectNames.MAIN_CAMERA).camera;
 		storeCamera.enabled = false;
 		mainCamera.enabled = true;
+	}
+	
+	public void BuyItem ()
+	{
+		//TODO Growing my program, no validation
+		Inventory playerInventory = GameManager.Instance.player.GetComponent<Inventory> ();
+		Item itemToBuy = allItems[selectedItem].GetComponent<Item> ();
+		playerInventory.AddItem (itemToBuy.itemName, 1);
 	}
 }

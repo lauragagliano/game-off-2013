@@ -71,9 +71,10 @@ public class StubHUD : MonoBehaviour
 	void DisplayStoreMenu ()
 	{
 		startEndText.text = string.Empty;
+		Store store = (Store) GameObject.Find (ObjectNames.STORE).GetComponent<Store> ();
 		GUILayout.BeginArea (new Rect (Screen.width - 220.0f, Screen.height - 70.0f, 200.0f, 70.0f));
 		if (GUILayout.Button ("Buy")) {
-			
+			store.BuyItem ();
 		}
 		if (GUILayout.Button ("Start Game")) {
 			GameManager.Instance.ExitStore ();

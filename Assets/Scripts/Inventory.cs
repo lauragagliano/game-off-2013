@@ -4,55 +4,40 @@ using System.Collections.Generic;
 
 public class Inventory : MonoBehaviour
 {
-	Hashtable inventory = new Hashtable ();
-	const int NOT_FOUND = -1;
+	List<string> inventory = new List<string> ();
 	
 	/*
-	 * Return the count of any item, using item name as
-	 * the identifier.
+	 * Return whether a given item is in the inventory.
 	 */
-	public int GetItemCount (string itemName)
+	public bool HasItem (string itemName)
 	{
-		if (!inventory.ContainsKey (itemName)) {
-			return NOT_FOUND;
-		}
-		return (int)inventory [itemName];
+		return inventory.Contains (itemName);
 	}
 	
 	/*
-	 * Add a quantity of any item, using the itemName to identity
-	 * which item.
+	 * Add an item to the inventory. Log a warning if the item
+	 * already exists.
 	 */
-	public void AddItem (string itemName, int amountToAdd)
+	public void AddItem (string itemName)
 	{
-		if (inventory.ContainsKey (itemName)) {
-			int curCount = (int)inventory[itemName];
-			inventory[itemName] = curCount + amountToAdd;
+		if (inventory.Contains (itemName)) {
+			Debug.LogWarning ("Tried to add an item already in inventory [" + itemName + "].");
 		} else {
-			inventory.Add (itemName, amountToAdd);
+			inventory.Add (itemName);
 		}
 	}
 	
 	/*
-	 * Remove a given quantity of any item. Logs warnings if quantity
-	 * to remove exceeds the quantity in the inventory. The caller of
-	 * this method should perform a GetItemCount to check that removal
-	 * can be made.
+	 * Remove an item from the inventory. Log a warning if item
+	 * doesn't exist.
 	 */
-	public void RemoveItem (string itemName, int amountToRemove)
+	public void RemoveItem (string itemName)
 	{
-		if (inventory.ContainsKey (itemName)) {
-			int curCount = (int)inventory[itemName];
-			if (curCount - amountToRemove >= 0) {
-				inventory[itemName] = curCount - amountToRemove;
-			} else {
-				Debug.LogWarning (string.Format ("Attempted to remove more " +
-					"of an item than was available. Item: {0}, Available Count: {1}, Remove: {2}",
-					itemName, curCount, amountToRemove));
-			}
+		if (inventory.Contains (itemName)) {
+			inventory.Remove (itemName);
 		} else {
 			Debug.LogWarning (string.Format ("Attempted to remove an item ({0}) " +
-				"that did not exist in collection ({1}).", itemName, name));
+				"that did not exist in inventory.", itemName));
 		}
 	}
 	
@@ -63,13 +48,13 @@ public class Inventory : MonoBehaviour
 	 */
 	public string GetContentsAsJSON ()
 	{
-		string str = "{";
-		foreach (string itemKey in inventory.Keys) {
-			str += string.Format("\"{0}\":{1}, ", itemKey, inventory[itemKey]);
+		string str = "{[";
+		foreach (string itemName in inventory) {
+			str += string.Format("\"{0}\", ", itemName);
 		}
 		// Clean up trailing comma and space
 		str = str.TrimEnd (',', ' ');
-		str += "}";
+		str += "]}";
 		return str;
 	}
 }

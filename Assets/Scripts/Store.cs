@@ -5,14 +5,15 @@ public class Store : MonoBehaviour
 {	
 	//public ItemCollection inventory;
 	public GameObject[] allItems;
-	
 	public int selectedItem = 0;
+	Inventory playerInventory;
 	
 	Transform scroller;
 	
-	void Awake ()
+	void Start ()
 	{
 		scroller = (Transform) GameObject.Find (ObjectNames.STORE_SCROLLER).transform;
+		playerInventory = GameManager.Instance.player.GetComponent<Inventory> ();
 	}
 	
 	void Update () 
@@ -68,6 +69,7 @@ public class Store : MonoBehaviour
 	 */
 	public void EnterStore ()
 	{
+		// TODO We could improve performance by turning off objects as well as cameras
 		Camera storeCamera = GameObject.Find (ObjectNames.STORE_CAMERA).camera;
 		Camera mainCamera = GameObject.Find (ObjectNames.MAIN_CAMERA).camera;
 		storeCamera.enabled = true;
@@ -79,17 +81,31 @@ public class Store : MonoBehaviour
 	 */
 	public void ExitStore ()
 	{
+		// TODO We could improve performance by turning off objects as well as cameras
 		Camera storeCamera = GameObject.Find (ObjectNames.STORE_CAMERA).camera;
 		Camera mainCamera = GameObject.Find (ObjectNames.MAIN_CAMERA).camera;
 		storeCamera.enabled = false;
 		mainCamera.enabled = true;
 	}
 	
+	/*
+	 * Check if the player can purchase the item. If so, return true. This checks
+	 * whether the player has the item already or not.
+	 */
+	public bool DisplayBuyForSelectedItem ()
+	{
+		Item itemToBuy = allItems[selectedItem].GetComponent<Item> ();
+		return !playerInventory.HasItem (itemToBuy.itemName);
+	}
+	
+	/*
+	 * Add the currently selected item to the player's inventory.
+	 */
 	public void BuyItem ()
 	{
 		//TODO Growing my program, no validation
-		Inventory playerInventory = GameManager.Instance.player.GetComponent<Inventory> ();
 		Item itemToBuy = allItems[selectedItem].GetComponent<Item> ();
-		playerInventory.AddItem (itemToBuy.itemName, 1);
+		playerInventory.AddItem (itemToBuy.itemName);
+		Debug.Log (playerInventory.GetContentsAsJSON ());
 	}
 }

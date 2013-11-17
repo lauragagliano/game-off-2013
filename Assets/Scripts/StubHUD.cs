@@ -41,9 +41,9 @@ public class StubHUD : MonoBehaviour
 			GameManager.Instance.bluePoints, player.curHealth,
 			GameManager.Instance.numPickupsPassed);
 		
-		redMeter.CurrentFillPercent = ((float) player.redPower.curValue / player.redPower.MaxValue);
-		blueMeter.CurrentFillPercent = ((float) player.bluePower.curValue / player.bluePower.MaxValue);
-		greenMeter.CurrentFillPercent = ((float) player.greenPower.curValue / player.greenPower.MaxValue);
+		redMeter.CurrentFillPercent = player.redPower.GetFillPercentage ();
+		greenMeter.CurrentFillPercent = player.greenPower.GetFillPercentage ();
+		blueMeter.CurrentFillPercent = player.bluePower.GetFillPercentage ();
 	}
 	
 	/*
@@ -72,8 +72,14 @@ public class StubHUD : MonoBehaviour
 	{
 		startEndText.text = string.Empty;
 		Store store = (Store) GameObject.Find (ObjectNames.STORE).GetComponent<Store> ();
+		string buyOrPurchased = "Already Owned";
+		if (store.DisplayBuyForSelectedItem ()) {
+			buyOrPurchased = "Buy";
+		}
+		
+		// TODO Let's at least make the Buy/AlreadyOwned a 3d button on the item mesh
 		GUILayout.BeginArea (new Rect (Screen.width - 220.0f, Screen.height - 70.0f, 200.0f, 70.0f));
-		if (GUILayout.Button ("Buy")) {
+		if (GUILayout.Button (buyOrPurchased) && buyOrPurchased == "Buy") {
 			store.BuyItem ();
 		}
 		if (GUILayout.Button ("Start Game")) {

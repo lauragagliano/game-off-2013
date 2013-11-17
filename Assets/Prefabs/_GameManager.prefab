@@ -56,6 +56,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   playerRGB: {fileID: 0}
+  numPickupsPassed: 0
+  redPoints: 0
+  greenPoints: 0
+  bluePoints: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

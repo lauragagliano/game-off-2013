@@ -1,9 +1,9 @@
-#Git Hub Game Off 2013
-##The Game
+[#Git Hub Game Off 2013
+## The Game
 
 You play as a pigment that's lost its color and must absorb the power from colors in the world in order to be restored to true vibrant form. You race through a forever-scrolling obstacle course of colors, and you change between colors in order to pass safely. For example, if you are blue you can pass through blue, but you collide with all other colors. Traverse as much of the world as possible, while absorbing as much color as you can. Use absorbed colors to purchase upgrades in order to restore Pigment back to his full form.
 
-##Tools
+## Tools
 
 We try to use open source software whenever possible. These are the tools we used to make this game.
 
@@ -35,3 +35,7 @@ The following music is or was at one point in our source code and may
 be used in the final cut.
 
 [Rising](http://freesound.org/people/noirenex/sounds/159401/) by [noirenex](http://freesound.org/people/noirenex/)
+
+### Fonts
+
+[Press Start 2P](http://www.google.com/fonts#QuickUsePlace:quickUse/Family:Press+Start+2P)

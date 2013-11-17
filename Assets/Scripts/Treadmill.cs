@@ -7,8 +7,8 @@ public class Treadmill : MonoBehaviour
 	Difficulty difficulty = Difficulty.Easy;
 	public float startingSpeed = 10.0f;
 	public float scrollspeed;
-	public float accelerationPerFrame = 0.0005f;
-	public float maxspeed = 30.0f;
+	public float accelerationPerFrame = 0.0003f;
+	public float maxspeed = 50.0f;
 	public GameObject emptySection;
 	public List<GameObject> easySections;
 	public List<GameObject> mediumSections;
@@ -36,9 +36,14 @@ public class Treadmill : MonoBehaviour
 		SpawnNextSection ();
 	}
 	
-	void FixedUpdate ()
+	void Update ()
 	{
-		scrollspeed = Mathf.Min ((scrollspeed + accelerationPerFrame), maxspeed);
+		if (GameManager.Instance.IsPlayerAlive ()) {
+			scrollspeed = Mathf.Min ((scrollspeed + accelerationPerFrame), maxspeed);
+		}
+		else {
+			scrollspeed = 0;
+		}
 		transform.Translate (new Vector3 (0, 0, -scrollspeed * Time.deltaTime));
 		// Check if our last section is on screen. If so, spawn another.
 		if (isSectionOnScreen (GetLastSectionInPlay ())) {
@@ -47,9 +52,6 @@ public class Treadmill : MonoBehaviour
 		// Check if the first section is past the kill line. If so, kill it!
 		if (isSectionPastKillZone (sectionsInPlay [0])) {
 			KillSection (sectionsInPlay [0]);
-		}
-		if (!GameManager.Instance.IsPlayerAlive ()) {
-			scrollspeed = 0;
 		}
 		UpdateDifficulty ();
 	}

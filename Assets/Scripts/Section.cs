@@ -41,7 +41,7 @@ public class Section : MonoBehaviour
 				RGB pickupRGB = pickup.GetComponent<RGB> ();
 				if (pickupRGB != null) {
 					// TODO Code review this. I like that it reduces all the getcomponent calls on player.
-					pickupRGB.color = GameManager.Instance.playerRGB.color;
+					pickupRGB.color = GameManager.Instance.player.playerRGB.color;
 					pickupRGB.Refresh ();
 				} else {
 					Debug.LogWarning (string.Format ("Instanced prefab {0} had no RGB attached.", pickup.name));

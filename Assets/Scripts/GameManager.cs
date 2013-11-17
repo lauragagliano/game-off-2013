@@ -8,7 +8,6 @@ using System.Collections;
 public class GameManager : Singleton<GameManager>
 {
 	public Player player;
-	public RGB playerRGB;
 	
 	Difficulty difficulty = Difficulty.Easy;
 	GameScreen gameScreen = GameScreen.Game;
@@ -42,7 +41,6 @@ public class GameManager : Singleton<GameManager>
 	void Awake ()
 	{
 		player = GameObject.FindGameObjectWithTag (Tags.PLAYER).GetComponent<Player> ();
-		playerRGB = player.GetComponentInChildren<RGB> ();
 		playerSpawn = (Transform)GameObject.Find (ObjectNames.PLAYER_SPAWN).transform;
 		treadmill = (Treadmill)GameObject.Find (ObjectNames.TREADMILL).GetComponent<Treadmill> ();
 		store = (Store)GameObject.Find (ObjectNames.STORE).GetComponent<Store> ();

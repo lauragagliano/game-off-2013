@@ -27,6 +27,7 @@ public class Player : MonoBehaviour
 	
 	public GameObject laserBeamFX;
 	float worldZClamp;
+	float worldYClamp;
 	public float movespeed;
 	
 	
@@ -35,20 +36,16 @@ public class Player : MonoBehaviour
 	{
 		LinkSceneReferences();
 		LinkNodeReferences ();
+		LinkComponents ();
 		
 		// Set our health and powers
 		curHealth = 1;
-		playerRGB = (RGB)GetComponent<RGB> ();
-		bluePower = (BluePower)GetComponent<BluePower> ();
-		redPower = (RedPower)GetComponent<RedPower> ();
-		greenPower = (GreenPower)GetComponent<GreenPower> ();
 		
-		// Remember their initial Z position and keep them there forever.
+		// Remember their initial Y and Z position and keep them there forever.
 		worldZClamp = transform.position.z;
+		worldYClamp = transform.position.y;
 		
-		// Initialize the colors according to the level rules
-		playerRGB = (RGB)playerGeo.GetComponent<RGB> ();
-		// Cycle and render colors
+		// Render initial color
 		RenderCurrentColor ();
 		
 		// Disable shield FX
@@ -61,8 +58,21 @@ public class Player : MonoBehaviour
 	void LinkNodeReferences ()
 	{
 		playerGeo = transform.FindChild ("PlayerGeo").gameObject;
+		
 		nodeLaser = playerGeo.transform.FindChild ("node_laser").gameObject;
 		shieldObject = transform.FindChild ("FX_Shield").gameObject;
+	}
+	
+	/*
+	 * Sets references to components on this Player game object or one of its children
+	 */
+	void LinkComponents ()
+	{
+		bluePower = (BluePower)GetComponent<BluePower> ();
+		redPower = (RedPower)GetComponent<RedPower> ();
+		greenPower = (GreenPower)GetComponent<GreenPower> ();
+		
+		playerRGB = (RGB)playerGeo.GetComponent<RGB> ();
 	}
 	
 	/*
@@ -81,8 +91,8 @@ public class Player : MonoBehaviour
 		TryMove ();
 		TrySwapColor ();
 		
-		ClampToWorldZ (worldZClamp);
-		playerRGB.Refresh ();
+		ClampToWorldYZ (worldYClamp, worldZClamp);
+		RenderCurrentColor();
 	}
 	
 	/*
@@ -92,6 +102,10 @@ public class Player : MonoBehaviour
 	void MatchSpeedToTreadmill()
 	{
 		movespeed = treadmill.scrollspeed;
+		
+		// Set animation playback speed on animation to match new movespeed
+		float ANIM_NORMAL_RUNSPEED = 30.0f;
+		playerGeo.animation["pigment_run"].speed = movespeed / ANIM_NORMAL_RUNSPEED;
 	}
 	
 	/*
@@ -99,16 +113,17 @@ public class Player : MonoBehaviour
 	 */
 	void RenderCurrentColor ()
 	{
-		playerRGB.Refresh ();
+		MaterialSet matSet = (MaterialSet) playerGeo.GetComponent<MaterialSet> ();
+		matSet.SetColor(playerRGB.color);
 	}
 	
 	/*
-	 * Sets the character's position to the specified worldZ, preventing
+	 * Sets the character's position to the specified world Y and worldZ, preventing
 	 * him from shifting.
 	 */
-	void ClampToWorldZ (float worldZ)
+	void ClampToWorldYZ (float worldY, float worldZ)
 	{
-		transform.position = new Vector3 (transform.position.x, transform.position.y, worldZ);
+		transform.position = new Vector3 (transform.position.x, worldY, worldZ);
 	}
 	#endregion
 	

@@ -11,4 +11,7 @@ public class ItemNames
 	public static string RED_METER_UPGRADE = "RedMeterUpgrade";
 	public static string GREEN_METER_UPGRADE = "GreenMeterUpgrade";
 	public static string BLUE_METER_UPGRADE = "BlueMeterUpgrade";
+	public static string RED_MAGNET = "RedMagnet";
+	public static string GREEN_MAGNET = "GreenMagnet";
+	public static string BLUE_MAGNET = "BlueMagnet";
 }

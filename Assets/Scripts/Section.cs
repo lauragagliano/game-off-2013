@@ -38,14 +38,6 @@ public class Section : MonoBehaviour
 			//TODO Serious FPS slowdown when pickups are involved.
 			else if (child.CompareTag (Tags.PICKUP)) {
 				GameObject pickup = InstantiatePrefabAtPlaceholder (ObjectNames.PICKUP_PREFAB, child, tempPrefabHolder.transform);
-				RGB pickupRGB = pickup.GetComponent<RGB> ();
-				if (pickupRGB != null) {
-					// TODO Code review this. I like that it reduces all the getcomponent calls on player.
-					pickupRGB.color = GameManager.Instance.player.playerRGB.color;
-					pickupRGB.Refresh ();
-				} else {
-					Debug.LogWarning (string.Format ("Instanced prefab {0} had no RGB attached.", pickup.name));
-				}
 			}
 		}
 		GameManager.Instance.numPickupsPassed += numberOfPickups;
@@ -59,10 +51,7 @@ public class Section : MonoBehaviour
 	{
 		GameObject prefab = (GameObject)Instantiate(Resources.Load(resourceName, typeof(GameObject)), 
 			placeholder.position, Quaternion.identity);
-		// TODO Trying this for efficiency's sake, may be uneccessary.
-		prefab.collider.enabled = false;
 		prefab.transform.parent = prefabParent;
-		prefab.collider.enabled = true;
 		Destroy (placeholder.gameObject);
 		return prefab;
 	}

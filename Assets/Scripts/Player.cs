@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Player : MonoBehaviour
 {
@@ -10,9 +11,10 @@ public class Player : MonoBehaviour
 	public RedPower redPower;
 	public GreenPower greenPower;
 	public RGB playerRGB;
+	public float MAGNET_DIST = 10.0f;
 	Inventory inventory;
 	
-	public GameObject[] pickups;
+	public List<GameObject> pickups;
 	const int POWER_UNIT = 1;
 	public AudioClip pickupSound;
 	public AudioClip deathSound;
@@ -96,6 +98,7 @@ public class Player : MonoBehaviour
 		
 		ClampToWorldYZ (worldYClamp, worldZClamp);
 		RenderCurrentColor();
+		PullNearbyPickups ();
 	}
 	
 	/*
@@ -175,30 +178,65 @@ public class Player : MonoBehaviour
 
 	#region #3 Player and Block interaction
 	/*
-	 * When a player collides with a block, perform the required action based
-	 * on the RGB of the block. If the player is the same color as the block,
-	 * suck it up. If it's not, take damage. If the block is black, hit
-	 * the player's shields.
+	 * Store a reference to all pickups the player could encounter.
 	 */
-	public void HandleBlockCollision (RGB blockRGB)
+	public void RememberPickup (GameObject pickup)
 	{
-		bool goodCollision = playerRGB.isCompatible (blockRGB);
-		if (goodCollision) {
-			audio.PlayOneShot (pickupSound);
-		} 
-		if (blockRGB.color == ColorWheel.black) {
-			LoseHealth (1);
-			return;
+		pickups.Add (pickup);
+	}
+	
+	/*
+	 * Remove the reference to a pickup in play.
+	 */
+	public void ForgetPickup (GameObject pickup)
+	{
+		pickups.Remove (pickup);
+	}
+	
+	/*
+	 * Pull in the pickups that are near the player. Adjust the distance if
+	 * the player has a magnet.
+	 */
+	public void PullNearbyPickups ()
+	{
+		float pullDistance = transform.lossyScale.x * 2;
+		foreach (GameObject pickup in pickups) {
+			if (HasMagnetForColor (pickup.GetComponent<RGB> ().color)) {
+				pullDistance = MAGNET_DIST;
+			}
+			if (Vector3.SqrMagnitude (pickup.transform.position - transform.position) <= Mathf.Pow(pullDistance, 2)) {
+				pickup.GetComponent<BlockLogic> ().SuckUpBlock (gameObject);
+			}
 		}
-		Power powerToCharge = GetPowerForColor (blockRGB);
+	}
+	
+	/*
+	 * When a pickup is gathered, increment stats for the player and game. Play
+	 * the sounds needed and charge the player's meters.
+	 */
+	public void CollectPickup (GameObject pickup)
+	{
+		RGB pickupRGB = pickup.GetComponent<RGB> ();
+		audio.PlayOneShot (pickupSound);
+		Power powerToCharge = GetPowerForColor (pickupRGB);
 		if (powerToCharge.IsCharged ()) {
 			// Logic for spillover goes here
 		} else {
 			powerToCharge.AddPower (POWER_UNIT);
 		}
-		GameManager.Instance.AddPoint (blockRGB.color);
+		GameManager.Instance.AddPoint (pickupRGB.color);
 		// Add up our money
 		AddMoney (1);
+		
+		ForgetPickup (pickup);
+	}
+	
+	/*
+	 * When a player collides with a black block, take damage.
+	 */
+	public void CollideWithBlock ()
+	{
+		LoseHealth (1);
 	}
 	
 	/*
@@ -280,7 +318,6 @@ public class Player : MonoBehaviour
 	void ChangeColors (ColorWheel color)
 	{
 		playerRGB.color = color;
-		pickups = GameObject.FindGameObjectsWithTag (Tags.PICKUP);
 		foreach (GameObject pickup in pickups) {
 			RGB pickupRGB = pickup.GetComponent<RGB> ();
 			pickupRGB.color = color;
@@ -370,6 +407,7 @@ public class Player : MonoBehaviour
 	 */
 	public void InitializeStats ()
 	{
+		pickups = new List<GameObject> ();
 		redPower.curValue = 0;
 		greenPower.curValue = 0;
 		bluePower.curValue = 0;
@@ -386,5 +424,30 @@ public class Player : MonoBehaviour
 		}
 	}
 	
+	/*
+	 * Return if the player has the magnet powerup for the
+	 * provided color.
+	 */
+	public bool HasMagnetForColor (ColorWheel color)
+	{
+		switch (color) {
+		case ColorWheel.red:
+			if (inventory.HasItem (ItemNames.RED_MAGNET)) {
+				return true;
+			}
+			break;
+		case ColorWheel.green:
+			if (inventory.HasItem (ItemNames.GREEN_MAGNET)) {
+				return true;
+			}
+			break;
+		case ColorWheel.blue:
+			if (inventory.HasItem (ItemNames.BLUE_MAGNET)) {
+				return true;
+			}
+			break;
+		}
+		return false;
+	}
 	#endregion
 }

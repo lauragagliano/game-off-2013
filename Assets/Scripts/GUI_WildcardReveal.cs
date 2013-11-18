@@ -8,10 +8,12 @@ public class GUI_WildcardReveal : MonoBehaviour
 	public float padding = 2f;
 	public int numCardsPerRow = 30;
 	float timeBetweenShows = 0.2f;
-	float idleTime = 1.0f;
+	float idleTimeHidden = 1.0f;
+	float idleTimeRevealed = 3.0f;
 	int nextCardToAnimate = 0;
 	float timeStateEntered;
 	RevealState state;
+	bool areAllCardsRevealed;
 	
 	enum RevealState
 	{
@@ -19,7 +21,8 @@ public class GUI_WildcardReveal : MonoBehaviour
 		Showing,
 		Idle,
 		Revealing,
-		Hiding
+		Hiding,
+		Finish
 	}
 	
 	void Awake ()
@@ -34,22 +37,42 @@ public class GUI_WildcardReveal : MonoBehaviour
 				ShowCard (nextCardToAnimate);
 				nextCardToAnimate ++;
 				if (nextCardToAnimate >= transform.childCount) {
-					StartIdling ();
+					GoToIdle ();
 				}
 			}
 		} else if (state == RevealState.Idle) {
-			if (Time.time > timeStateEntered + idleTime) {
-				StartRevealing ();
+			if (areAllCardsRevealed) {
+				if (Time.time > timeStateEntered + idleTimeRevealed) {
+					GoToHiding ();
+				}
+			} else {
+				if (Time.time > timeStateEntered + idleTimeHidden) {
+					GoToRevealing ();
+				}
 			}
 		} else if (state == RevealState.Revealing) {
 			if (Time.time > timeStateEntered + (timeBetweenShows * nextCardToAnimate)) {
 				RevealCard (nextCardToAnimate);
 				nextCardToAnimate ++;
 				if (nextCardToAnimate >= transform.childCount) {
-					StartHiding ();
+					areAllCardsRevealed = true;
+					GoToIdle ();
 				}
 			}
+		} else if (state == RevealState.Hiding) {
+			float hideTime = 1.0f;
+			if (Time.time > timeStateEntered + hideTime) {
+				End ();
+			}
 		}
+	}
+	
+	/*
+	 * Tells the WildcardRevealer to begin the showing process.
+	 */
+	public void StartShowing (int numWildcards)
+	{
+		GoToShowing (numWildcards);
 	}
 	
 	/*
@@ -70,10 +93,18 @@ public class GUI_WildcardReveal : MonoBehaviour
 		child.gameObject.GetComponent<GUI_Wildcard> ().Reveal ();
 	}
 	
+	/*
+	 * Plays the specified card's hide animation
+	 */
+	void HideCard (int index)
+	{
+		Transform child = transform.GetChild (index);
+		child.gameObject.GetComponent<GUI_Wildcard> ().Hide ();
+	}
 	
 	/* Shows the number of specified cards in a simple row / column box pattern
 	 */
-	public void StartShowing (int numWildcards)
+	void GoToShowing (int numWildcards)
 	{
 		int numCardsToDeal = numWildcards;
 		int rowCount = 0;
@@ -94,7 +125,8 @@ public class GUI_WildcardReveal : MonoBehaviour
 			}
 			rowCount++;
 		}
-		
+					
+		areAllCardsRevealed = false;
 		state = RevealState.Showing;
 		nextCardToAnimate = 0;
 		timeStateEntered = Time.time;
@@ -103,7 +135,7 @@ public class GUI_WildcardReveal : MonoBehaviour
 	/*
 	 * Puts the Revealer into the state where it reveals cards one by one.
 	 */
-	void StartRevealing ()
+	void GoToRevealing ()
 	{
 		state = RevealState.Revealing;
 		nextCardToAnimate = 0;
@@ -113,7 +145,7 @@ public class GUI_WildcardReveal : MonoBehaviour
 	/*
 	 * Puts the Revealer into the state where it shows the card backs
 	 */
-	void StartIdling ()
+	void GoToIdle ()
 	{
 		state = RevealState.Idle;
 		nextCardToAnimate = 0;
@@ -123,11 +155,26 @@ public class GUI_WildcardReveal : MonoBehaviour
 	/*
 	 * Puts the Revealer into the state where it hides cards one by one.
 	 */
-	void StartHiding ()
+	void GoToHiding ()
 	{
 		state = RevealState.Hiding;
 		nextCardToAnimate = 0;
 		timeStateEntered = Time.time;
+		
+		// Hide all the cards at once
+		while (nextCardToAnimate < transform.childCount) {
+			HideCard (nextCardToAnimate);
+			nextCardToAnimate++;
+		}
+	}
+	
+	/*
+	 * Ends the Reveal
+	 */
+	void End ()
+	{
+		state = RevealState.Finish;
+		Destroy (gameObject);
 	}
 	
 	void SpawnWildcard (float xOffset, float zOffset)

@@ -373,6 +373,7 @@ public class Player : MonoBehaviour
 		redPower.curValue = 0;
 		greenPower.curValue = 0;
 		bluePower.curValue = 0;
+		curHealth = 1;
 		
 		if (inventory.HasItem (ItemNames.BLUE_METER_UPGRADE)) {
 			bluePower.UpgradeMaximumCharge ();

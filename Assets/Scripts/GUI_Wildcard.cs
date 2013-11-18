@@ -7,7 +7,13 @@ public class GUI_Wildcard : MonoBehaviour {
 	public AnimationClip revealAnim;
 	public AnimationClip hideAnim;
 	
+	void Awake()
+	{
+		gameObject.SetActive(false);
+	}
+	
 	public void Show () {
+		gameObject.SetActive(true);
 		animation.Play(onAnim.name);
 	}
 	

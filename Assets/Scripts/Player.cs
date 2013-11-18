@@ -10,8 +10,8 @@ public class Player : MonoBehaviour
 	public GreenPower greenPower;
 	public RGB playerRGB;
 	Inventory inventory;
+	public int WildcardCount {get; private set;}
 	
-	public GameObject[] pickups;
 	const int POWER_UNIT = 1;
 	public AudioClip pickupSound;
 	public AudioClip deathSound;
@@ -197,7 +197,14 @@ public class Player : MonoBehaviour
 		}
 		// Add up our points
 		GameManager.Instance.AddPoint (blockRGB.color);
-		
+	}
+	
+	/*
+	 * Increments the number of wildcards the player has collected.
+	 */
+	public void AwardWildcard ()
+	{
+		WildcardCount++;
 	}
 	
 	/*
@@ -256,7 +263,7 @@ public class Player : MonoBehaviour
 	void ChangeColors (ColorWheel color)
 	{
 		playerRGB.color = color;
-		pickups = GameObject.FindGameObjectsWithTag (Tags.PICKUP);
+		GameObject[] pickups = GameObject.FindGameObjectsWithTag (Tags.PICKUP);
 		foreach (GameObject pickup in pickups) {
 			RGB pickupRGB = pickup.GetComponent<RGB> ();
 			pickupRGB.color = color;
@@ -359,6 +366,9 @@ public class Player : MonoBehaviour
 		if (inventory.HasItem (ItemNames.GREEN_METER_UPGRADE)) {
 			greenPower.UpgradeMaximumCharge ();
 		}
+		
+		// Reset the number of wildcards that have been collected.
+		WildcardCount = 0;
 	}
 	
 	#endregion

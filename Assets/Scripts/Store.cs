@@ -89,13 +89,21 @@ public class Store : MonoBehaviour
 	}
 	
 	/*
-	 * Check if the player can purchase the item. If so, return true. This checks
-	 * whether the player has the item already or not.
+	 * Check if the player has already purcahsed the item. If so, return true.
 	 */
-	public bool DisplayBuyForSelectedItem ()
+	public bool IsAlreadyPurchased ()
 	{
 		Item itemToBuy = allItems[selectedItem].GetComponent<Item> ();
-		return !playerInventory.HasItem (itemToBuy.itemName);
+		return playerInventory.HasItem (itemToBuy.itemName);
+	}
+	
+	/*
+	 * Check if the player has enough money
+	 */
+	public bool HasEnoughMoney ()
+	{
+		Item itemToBuy = allItems[selectedItem].GetComponent<Item> ();
+		return GameManager.Instance.player.money >= itemToBuy.cost;
 	}
 	
 	/*
@@ -106,6 +114,7 @@ public class Store : MonoBehaviour
 		//TODO Growing my program, no validation
 		Item itemToBuy = allItems[selectedItem].GetComponent<Item> ();
 		playerInventory.AddItem (itemToBuy.itemName);
+		GameManager.Instance.player.RemoveMoney (itemToBuy.cost);
 		Debug.Log (playerInventory.GetContentsAsJSON ());
 	}
 }

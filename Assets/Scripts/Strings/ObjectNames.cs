@@ -18,5 +18,7 @@ public class ObjectNames
 	public static string STORE = "Store";
 	public static string STORE_SCROLLER = "Scroller";
 	public static string STORE_CAMERA = "StoreCam";
+	public static string STORE_ITEM_COST = "ItemCost";
+	public static string STORE_ITEM_NAME = "ItemName";
 }
 

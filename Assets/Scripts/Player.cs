@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Player : MonoBehaviour
 {
+	public int money;
 	public int curHealth;
 	int maxHealth = 10;
 	public BluePower bluePower;
@@ -195,9 +196,9 @@ public class Player : MonoBehaviour
 		} else {
 			powerToCharge.AddPower (POWER_UNIT);
 		}
-		// Add up our points
 		GameManager.Instance.AddPoint (blockRGB.color);
-		
+		// Add up our money
+		AddMoney (1);
 	}
 	
 	/*
@@ -249,6 +250,29 @@ public class Player : MonoBehaviour
 	{
 		gameObject.SetActive (false);
 	}
+	
+		
+	/*
+	 * Add specified amount of money to the player currency.
+	 */
+	public void AddMoney (int amount)
+	{
+		money += amount;
+	}
+	
+	/*
+	 * Remove specified amount of money from player. Log warning
+	 * if not enough money.
+	 */
+	public void RemoveMoney (int amount)
+	{
+		if (money - amount < 0) {
+			Debug.LogWarning (string.Format ("Tried to remove more " +
+				"money ({0}) than player owns ({1}).", amount, money));
+		}
+		money -= amount;
+	}
+	
 	#endregion
 	
 	#region #4 Player Powers

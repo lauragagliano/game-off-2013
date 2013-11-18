@@ -13,13 +13,14 @@ public class StubHUD : MonoBehaviour
 	GUIMeter blueMeter;
 	public GameObject greenMeterGO;
 	GUIMeter greenMeter;
-	
+
 	void Awake ()
 	{
 		helpText.text = "A: LEFT\nD: RIGHT\n\nJ: RED\nK: GREEN\nL: BLUE\n\n(Tap Twice for POAWAHH";
 		redMeter = redMeterGO.GetComponent<GUIMeter> ();
 		blueMeter = blueMeterGO.GetComponent<GUIMeter> ();
 		greenMeter = greenMeterGO.GetComponent<GUIMeter> ();
+		SetItemTexts ();
 	}
 	
 	void Update ()
@@ -31,15 +32,16 @@ public class StubHUD : MonoBehaviour
 	{
 		if (GameManager.Instance.IsDead ()) {
 			DisplayDeadMenu ();
-		} else if (GameManager.Instance.IsShopping ()){
+		} else if (GameManager.Instance.IsShopping ()) {
 			DisplayStoreMenu ();
 		} else {
 			startEndText.text = string.Empty;
 		}
-		scoreText.text = string.Format ("Power:\nRed: {0}\nGreen: {1}\nBlue: {2}\n\nHealth: {3}\nPassed Pigments: {4}",
+		scoreText.text = string.Format ("Power:\nRed: {0}\nGreen: {1}\nBlue: " +
+			"{2}\n\nHealth: {3}\nPassed Pigments: {4}\n\nMoney: {5}",
 			GameManager.Instance.redPoints, GameManager.Instance.greenPoints, 
 			GameManager.Instance.bluePoints, player.curHealth,
-			GameManager.Instance.numPickupsPassed);
+			GameManager.Instance.numPickupsPassed, player.money);
 		
 		redMeter.CurrentFillPercent = player.redPower.GetFillPercentage ();
 		greenMeter.CurrentFillPercent = player.greenPower.GetFillPercentage ();
@@ -71,21 +73,34 @@ public class StubHUD : MonoBehaviour
 	void DisplayStoreMenu ()
 	{
 		startEndText.text = string.Empty;
-		Store store = (Store) GameObject.Find (ObjectNames.STORE).GetComponent<Store> ();
-		string buyOrPurchased = "Already Owned";
-		if (store.DisplayBuyForSelectedItem ()) {
-			buyOrPurchased = "Buy";
-		}
+		Store store = (Store)GameObject.Find (ObjectNames.STORE).GetComponent<Store> ();
 		
 		// TODO Let's at least make the Buy/AlreadyOwned a 3d button on the item mesh
 		GUILayout.BeginArea (new Rect (Screen.width - 220.0f, Screen.height - 70.0f, 200.0f, 70.0f));
-		if (GUILayout.Button (buyOrPurchased) && buyOrPurchased == "Buy") {
-			store.BuyItem ();
+		if (store.IsAlreadyPurchased ()) {
+			GUILayout.Button ("Already Owned");
+		}
+		else if (!store.HasEnoughMoney ()) {
+			GUILayout.Button ("Not Enough Money");
+		} else {
+			if (GUILayout.Button ("Buy")) {
+				store.BuyItem ();
+			}
 		}
 		if (GUILayout.Button ("Start Game")) {
 			GameManager.Instance.ExitStore ();
 			GameManager.Instance.StartGame ();
 		}
 		GUILayout.EndArea ();
+	}
+	
+	void SetItemTexts ()
+	{
+		GameObject[] itemObjs = GameObject.FindGameObjectsWithTag (Tags.ITEM);
+		foreach (GameObject obj in itemObjs) {
+			Item item = obj.GetComponent<Item> ();
+			TextMesh itemText = obj.GetComponentInChildren<TextMesh> ();
+			itemText.text = string.Format ("{0}\n\nCost: {1}", item.itemName, item.cost);
+		}
 	}
 }

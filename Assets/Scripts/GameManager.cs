@@ -8,42 +8,74 @@ using System.Collections;
 public class GameManager : Singleton<GameManager>
 {
 	public Player player;
-	
 	Difficulty difficulty = Difficulty.Easy;
-	GameScreen gameScreen = GameScreen.Game;
-	
+	GameState gameState = GameState.Running;
 	public int numPickupsPassed;
 	public int redPoints;
 	public int greenPoints;
 	public int bluePoints;
-	
 	Transform playerSpawn;
 	Treadmill treadmill;
 	Store store;
-	
+	public GUI_WildcardReveal wildcardGUI;
+	public GameObject WildcardRevealGO;
 	const int MEDIUM_THRESHOLD = 300; // Number of pickups passed
 	const int HARD_THRESHOLD = 2000;
 	
-	enum Difficulty {
+	enum Difficulty
+	{
 		Easy,
 		Medium,
 		Hard
 	}
 	
-	enum GameScreen {
+	enum GameState
+	{
 		Menu,
-		Game,
+		Running,
 		Dead,
-		Inventory,
+		WildcardReveal,
 		Store
 	}
 	
 	void Awake ()
 	{
+		LinkSceneObjects();
+	}
+	
+	/* Search for and assign references to scene objects the GameManager needs to know about.
+	 */
+	void LinkSceneObjects()
+	{
 		player = GameObject.FindGameObjectWithTag (Tags.PLAYER).GetComponent<Player> ();
-		playerSpawn = (Transform)GameObject.Find (ObjectNames.PLAYER_SPAWN).transform;
-		treadmill = (Treadmill)GameObject.Find (ObjectNames.TREADMILL).GetComponent<Treadmill> ();
-		store = (Store)GameObject.Find (ObjectNames.STORE).GetComponent<Store> ();
+		
+		// Link Player Spawn
+		GameObject foundObject = GameObject.Find (ObjectNames.PLAYER_SPAWN);
+		if (foundObject != null) {
+			playerSpawn = (Transform)foundObject.transform;
+		}
+		
+		// Link Treadmill
+		foundObject = GameObject.Find (ObjectNames.TREADMILL);
+		if(foundObject == null)
+		{
+			Debug.LogError("Cannot find treadmill. This map will not work without a Treadmill object.");
+			return;
+		}
+		treadmill = (Treadmill)foundObject.GetComponent<Treadmill> ();
+		
+		// Link Store
+		foundObject = GameObject.Find (ObjectNames.STORE);
+		if(foundObject != null )
+		{
+			store = (Store)foundObject.GetComponent<Store> ();
+		}
+		
+		// Link Wildcard Reveal UI
+		foundObject = GameObject.Find (ObjectNames.GUI_WILDCARD_REVEAL);
+		if(foundObject != null ) {
+			wildcardGUI = (GUI_WildcardReveal)foundObject.GetComponent<GUI_WildcardReveal> ();
+		}
 	}
 	
 	void Update ()
@@ -58,7 +90,7 @@ public class GameManager : Singleton<GameManager>
 	public bool CheckIfPlayerLiving ()
 	{
 		if (player == null || player.gameObject == null || !player.gameObject.activeSelf) {
-			gameScreen = GameScreen.Dead;
+			gameState = GameState.Dead;
 			return false;
 		}
 		return true;
@@ -69,7 +101,15 @@ public class GameManager : Singleton<GameManager>
 	 */
 	public bool IsDead ()
 	{
-		return gameScreen == GameScreen.Dead;
+		return gameState == GameState.Dead;
+	}
+	
+	/*
+	 * Return true if the game is running.
+	 */
+	public bool IsRunning ()
+	{
+		return gameState == GameState.Running;
 	}
 	
 	/*
@@ -77,7 +117,7 @@ public class GameManager : Singleton<GameManager>
 	 */
 	public bool IsShopping ()
 	{
-		return gameScreen == GameScreen.Store;
+		return gameState == GameState.Store;
 	}
 	
 		
@@ -143,7 +183,7 @@ public class GameManager : Singleton<GameManager>
 	public void StartGame ()
 	{
 		numPickupsPassed = 0;
-		gameScreen = GameScreen.Game;
+		gameState = GameState.Running;
 		difficulty = Difficulty.Easy;
 		player.gameObject.SetActive (true);
 		player.InitializeStats ();
@@ -151,15 +191,33 @@ public class GameManager : Singleton<GameManager>
 		treadmill.ResetTreadmill ();
 	}
 	
+	/*
+	 * Ends the current run for the player.
+	 */
+	public void EndRun ()
+	{
+		if (player.WildcardCount > 0) {
+			GoToWildCardState ();
+		} else {
+			gameState = GameState.Dead;
+		}
+	}
+	
+	void GoToWildCardState ()
+	{
+		gameState = GameState.WildcardReveal;
+		wildcardGUI.ShowCards (player.WildcardCount);
+	}
+	
 	public void EnterStore ()
 	{
-		gameScreen = GameScreen.Store;
+		gameState = GameState.Store;
 		store.EnterStore ();
 	}
 	
 	public void ExitStore ()
 	{
 		store.ExitStore ();
-		gameScreen = GameScreen.Menu;
+		gameState = GameState.Menu;
 	}
 }

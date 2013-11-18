@@ -254,6 +254,7 @@ public class Player : MonoBehaviour
 	
 	public void Die ()
 	{
+		GameManager.Instance.EndRun();
 		gameObject.SetActive (false);
 	}
 	#endregion

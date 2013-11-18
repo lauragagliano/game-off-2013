@@ -18,5 +18,6 @@ public class ObjectNames
 	public static string STORE = "Store";
 	public static string STORE_SCROLLER = "Scroller";
 	public static string STORE_CAMERA = "StoreCam";
+	public static string GUI_WILDCARD_REVEAL = "GUI_WildcardReveal";
 }
 

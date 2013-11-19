@@ -20,5 +20,6 @@ public class ObjectNames
 	public static string STORE_CAMERA = "StoreCam";
 	public static string STORE_ITEM_COST = "ItemCost";
 	public static string STORE_ITEM_NAME = "ItemName";
+	public static string GUI_WILDCARD_REVEAL = "GUI_WildcardReveal";
 }
 

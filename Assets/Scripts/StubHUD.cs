@@ -30,18 +30,15 @@ public class StubHUD : MonoBehaviour
 	
 	void OnGUI ()
 	{
-		if (GameManager.Instance.IsDead ()) {
+		if (GameManager.Instance.IsGameOver ()) {
 			DisplayDeadMenu ();
 		} else if (GameManager.Instance.IsShopping ()) {
 			DisplayStoreMenu ();
 		} else {
 			startEndText.text = string.Empty;
 		}
-		scoreText.text = string.Format ("Power:\nRed: {0}\nGreen: {1}\nBlue: " +
-			"{2}\n\nHealth: {3}\nPassed Pigments: {4}\n\nMoney: {5}",
-			GameManager.Instance.redPoints, GameManager.Instance.greenPoints, 
-			GameManager.Instance.bluePoints, player.curHealth,
-			GameManager.Instance.numPickupsPassed, player.money);
+		scoreText.text = string.Format ("Passed Pigments: {0}\nHealth: {1}\nWildcards: {2}\nMoney: {3}",
+			GameManager.Instance.numPickupsPassed, player.curHealth, player.WildcardCount, player.money);
 		
 		redMeter.CurrentFillPercent = player.redPower.GetFillPercentage ();
 		greenMeter.CurrentFillPercent = player.greenPower.GetFillPercentage ();

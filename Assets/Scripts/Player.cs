@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
 	public RGB playerRGB;
 	public float MAGNET_DIST = 10.0f;
 	Inventory inventory;
+	public int WildcardCount {get; private set;}
 	
 	public List<GameObject> pickups;
 	const int POWER_UNIT = 1;
@@ -240,6 +241,14 @@ public class Player : MonoBehaviour
 	}
 	
 	/*
+	 * Increments the number of wildcards the player has collected.
+	 */
+	public void AwardWildcard ()
+	{
+		WildcardCount++;
+	}
+	
+	/*
 	 * Map our player's power bars to the color passed in by returning
 	 * the power associated with the provided color.
 	 */
@@ -286,6 +295,7 @@ public class Player : MonoBehaviour
 	
 	public void Die ()
 	{
+		GameManager.Instance.EndRun ();
 		gameObject.SetActive (false);
 	}
 	
@@ -422,6 +432,9 @@ public class Player : MonoBehaviour
 		if (inventory.HasItem (ItemNames.GREEN_METER_UPGRADE)) {
 			greenPower.UpgradeMaximumCharge ();
 		}
+		
+		// Reset the number of wildcards that have been collected.
+		WildcardCount = 0;
 	}
 	
 	/*

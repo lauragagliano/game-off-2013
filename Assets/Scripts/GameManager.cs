@@ -21,6 +21,8 @@ public class GameManager : Singleton<GameManager>
 	public GameObject WildcardRevealGO;
 	const int MEDIUM_THRESHOLD = 300; // Number of pickups passed
 	const int HARD_THRESHOLD = 2000;
+	float timeDeathDelayStarted;
+	float deathDelayTime = 1.0f;
 	
 	enum Difficulty
 	{
@@ -41,12 +43,12 @@ public class GameManager : Singleton<GameManager>
 	
 	void Awake ()
 	{
-		LinkSceneObjects();
+		LinkSceneObjects ();
 	}
 	
 	/* Search for and assign references to scene objects the GameManager needs to know about.
 	 */
-	void LinkSceneObjects()
+	void LinkSceneObjects ()
 	{
 		player = GameObject.FindGameObjectWithTag (Tags.PLAYER).GetComponent<Player> ();
 		
@@ -58,51 +60,50 @@ public class GameManager : Singleton<GameManager>
 		
 		// Link Treadmill
 		foundObject = GameObject.Find (ObjectNames.TREADMILL);
-		if(foundObject == null)
-		{
-			Debug.LogError("Cannot find treadmill. This map will not work without a Treadmill object.");
+		if (foundObject == null) {
+			Debug.LogError ("Cannot find treadmill. This map will not work without a Treadmill object.");
 			return;
 		}
 		treadmill = (Treadmill)foundObject.GetComponent<Treadmill> ();
 		
 		// Link Store
 		foundObject = GameObject.Find (ObjectNames.STORE);
-		if(foundObject != null )
-		{
+		if (foundObject != null) {
 			store = (Store)foundObject.GetComponent<Store> ();
 		}
 		
 		// Link Wildcard Reveal UI
 		foundObject = GameObject.Find (ObjectNames.GUI_WILDCARD_REVEAL);
-		if(foundObject != null ) {
+		if (foundObject != null) {
 			wildcardGUI = (GUI_WildcardReveal)foundObject.GetComponent<GUI_WildcardReveal> ();
 		}
 	}
 	
 	void Update ()
 	{
-		UpdateDifficulty ();
-	}
-	
-	/*
-	 * Check whether the player is in play. Returns false if the
-	 * player has been destroyed or deactivated.
-	 */
-	public bool CheckIfPlayerLiving ()
-	{
-		if (player == null || player.gameObject == null || !player.gameObject.activeSelf) {
-			gameState = GameState.DeathDelay;
-			return false;
+		if(gameState == GameState.Running){
+			UpdateDifficulty ();
 		}
-		return true;
+		else if (gameState == GameState.DeathDelay)
+		{
+			if (Time.time > timeDeathDelayStarted + deathDelayTime)
+			{
+				if (player.WildcardCount > 0) {
+					GoToWildCardState ();
+				} else {
+					GoToGameOver ();
+				}
+			}
+		}
+			
 	}
 	
 	/*
-	 * Return true if the game should be on the Dead screen.
+	 * Return true if the game and all subsequent states are over and we are ready to retry to go to main.
 	 */
-	public bool IsDead ()
+	public bool IsGameOver ()
 	{
-		return gameState == GameState.DeathDelay;
+		return gameState == GameState.GameOver;
 	}
 	
 	/*
@@ -197,31 +198,47 @@ public class GameManager : Singleton<GameManager>
 	 */
 	public void EndRun ()
 	{
-		if (player.WildcardCount > 0 || true) {
-			GoToWildCardState ();
-		} else {
-			gameState = GameState.DeathDelay;
-		}
+		GoToDeathDelay ();
 	}
 	
-	public void GoToGameOver()
+	/*
+	 * Puts the game manager into the state where it waits for the player's death animation.
+	 */
+	void GoToDeathDelay()
+	{
+		gameState = GameState.DeathDelay;
+		timeDeathDelayStarted = Time.time;
+	}
+	
+	/*
+	 * Puts the game manager in the state where it awaits player's retry or main menu command.
+	 */
+	public void GoToGameOver ()
 	{
 		gameState = GameState.GameOver;
 	}
 	
+	/*
+	 * Puts the game manager in the state where it reveals the wildcards.
+	 */
 	void GoToWildCardState ()
 	{
 		gameState = GameState.WildcardReveal;
-		//wildcardGUI.ShowCards (player.WildcardCount);
-		wildcardGUI.StartShowing (4);
+		wildcardGUI.StartShowing (player.WildcardCount);
 	}
 	
+	/*
+	 * Go to the store section of our scene.
+	 */
 	public void EnterStore ()
 	{
 		gameState = GameState.Store;
 		store.EnterStore ();
 	}
 	
+	/*
+	 * Return to the main menu.
+	 */
 	public void ExitStore ()
 	{
 		store.ExitStore ();

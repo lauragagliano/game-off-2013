@@ -64,7 +64,7 @@ public class GUI_WildcardReveal : MonoBehaviour
 				}
 			}
 		} else if (state == RevealState.Hiding) {
-			float hideTime = 1.0f;
+			float hideTime = 0.5f;
 			if (Time.time > timeStateEntered + hideTime) {
 				End ();
 			}

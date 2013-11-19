@@ -29,7 +29,7 @@ public class StubHUD : MonoBehaviour
 	
 	void OnGUI ()
 	{
-		if (GameManager.Instance.IsDead ()) {
+		if (GameManager.Instance.IsGameOver ()) {
 			DisplayDeadMenu ();
 		} else if (GameManager.Instance.IsShopping ()){
 			DisplayStoreMenu ();

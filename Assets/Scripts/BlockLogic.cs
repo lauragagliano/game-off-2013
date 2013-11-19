@@ -56,7 +56,7 @@ public class BlockLogic : MonoBehaviour
 		transform.position = Vector3.MoveTowards(transform.position, sucker.transform.position, maxDistance);
 		
 		transform.localScale = transform.localScale * 0.90f;
-		if (Mathf.Abs (transform.position.x - sucker.transform.position.x) < 0.25f) {
+		if (Vector3.SqrMagnitude (transform.position - sucker.transform.position) <= 0.25f) {
 			Destroy (gameObject);
 		}
 	}

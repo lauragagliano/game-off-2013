@@ -13,7 +13,11 @@ public class GUI_WildcardReveal : MonoBehaviour
 	int nextCardToAnimate = 0;
 	float timeStateEntered;
 	RevealState state;
-	bool areAllCardsRevealed;
+	bool allCardAreRevealed;
+	public Item headstart;
+	public Item money;
+	public Item revive;
+	public Item bigMoney;
 	
 	enum RevealState
 	{
@@ -41,7 +45,7 @@ public class GUI_WildcardReveal : MonoBehaviour
 				}
 			}
 		} else if (state == RevealState.Idle) {
-			if (areAllCardsRevealed) {
+			if (allCardAreRevealed) {
 				if (Time.time > timeStateEntered + idleTimeRevealed) {
 					GoToHiding ();
 				}
@@ -55,7 +59,7 @@ public class GUI_WildcardReveal : MonoBehaviour
 				RevealCard (nextCardToAnimate);
 				nextCardToAnimate ++;
 				if (nextCardToAnimate >= transform.childCount) {
-					areAllCardsRevealed = true;
+					allCardAreRevealed = true;
 					GoToIdle ();
 				}
 			}
@@ -125,11 +129,13 @@ public class GUI_WildcardReveal : MonoBehaviour
 			}
 			rowCount++;
 		}
-					
-		areAllCardsRevealed = false;
+		
 		state = RevealState.Showing;
+		allCardAreRevealed = false;
 		nextCardToAnimate = 0;
 		timeStateEntered = Time.time;
+		
+		AssignItems ();
 	}
 	
 	/*
@@ -173,6 +179,7 @@ public class GUI_WildcardReveal : MonoBehaviour
 	 */
 	void End ()
 	{
+		GameManager.Instance.GoToGameOver ();
 		state = RevealState.Finish;
 		Destroy (gameObject);
 	}
@@ -181,9 +188,40 @@ public class GUI_WildcardReveal : MonoBehaviour
 	{
 		Vector3 position = transform.position + new Vector3 (xOffset, 0, zOffset);
 		GameObject wildcard = (GameObject)Instantiate (wildcardPrefab, position,
-				Quaternion.LookRotation (Vector3.forward, Vector3.up));
+				Quaternion.LookRotation (Vector3.back, Vector3.up));
 		
 		// Parent the card to the revealer
 		wildcard.transform.parent = transform;
+	}
+	
+	/*
+	 * Assigns items to all of the wildcards based on the drop tables.
+	 */
+	void AssignItems ()
+	{
+		Item chosenItem;
+		int i = 0;
+		foreach (Transform child in transform) {
+			switch (i) {
+			case 0 :
+				chosenItem = money;
+				break;
+			case 1 :
+				chosenItem = headstart;
+				break;
+			case 2 :
+				chosenItem = bigMoney;
+				break;
+			case 3 :
+				chosenItem = revive;
+				break;
+			default :
+				chosenItem = headstart;
+				break;
+			}
+			
+			child.gameObject.GetComponent<GUI_Wildcard> ().SetItem (chosenItem);
+			i++;
+		}
 	}
 }

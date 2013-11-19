@@ -33,8 +33,9 @@ public class GameManager : Singleton<GameManager>
 	{
 		Menu,
 		Running,
-		Dead,
+		DeathDelay,
 		WildcardReveal,
+		GameOver,
 		Store
 	}
 	
@@ -90,7 +91,7 @@ public class GameManager : Singleton<GameManager>
 	public bool CheckIfPlayerLiving ()
 	{
 		if (player == null || player.gameObject == null || !player.gameObject.activeSelf) {
-			gameState = GameState.Dead;
+			gameState = GameState.DeathDelay;
 			return false;
 		}
 		return true;
@@ -101,7 +102,7 @@ public class GameManager : Singleton<GameManager>
 	 */
 	public bool IsDead ()
 	{
-		return gameState == GameState.Dead;
+		return gameState == GameState.DeathDelay;
 	}
 	
 	/*
@@ -196,17 +197,23 @@ public class GameManager : Singleton<GameManager>
 	 */
 	public void EndRun ()
 	{
-		if (player.WildcardCount > 0) {
+		if (player.WildcardCount > 0 || true) {
 			GoToWildCardState ();
 		} else {
-			gameState = GameState.Dead;
+			gameState = GameState.DeathDelay;
 		}
+	}
+	
+	public void GoToGameOver()
+	{
+		gameState = GameState.GameOver;
 	}
 	
 	void GoToWildCardState ()
 	{
 		gameState = GameState.WildcardReveal;
-		wildcardGUI.ShowCards (player.WildcardCount);
+		//wildcardGUI.ShowCards (player.WildcardCount);
+		wildcardGUI.StartShowing (4);
 	}
 	
 	public void EnterStore ()

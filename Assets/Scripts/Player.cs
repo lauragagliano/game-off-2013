@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
 	public BluePower bluePower;
 	public RedPower redPower;
 	public GreenPower greenPower;
+	RBTimer laserTimer = new RBTimer ();
 	public RGB playerRGB;
 	public float MAGNET_DIST = 10.0f;
 	Inventory inventory;
@@ -219,7 +220,7 @@ public class Player : MonoBehaviour
 		RGB pickupRGB = pickup.GetComponent<RGB> ();
 		audio.PlayOneShot (pickupSound);
 		Power powerToCharge = GetPowerForColor (pickupRGB);
-		if (powerToCharge.IsCharged ()) {
+		if (powerToCharge.IsChargedAndReady ()) {
 			// Logic for spillover goes here
 		} else {
 			powerToCharge.AddPower (POWER_UNIT);
@@ -340,8 +341,8 @@ public class Player : MonoBehaviour
 
 	public void Laser ()
 	{
-		if (redPower.IsCharged ()) {
-			redPower.ExhaustCharge ();
+		if (redPower.IsChargedAndReady ()) {
+			redPower.UsePower ();
 			
 			// Spawn the laser FX
 			GameObject fx = (GameObject)Instantiate (laserBeamFX, nodeLaser.transform.position,
@@ -381,8 +382,8 @@ public class Player : MonoBehaviour
 	
 	public void RaiseShield ()
 	{
-		if (greenPower.IsCharged ()) {
-			greenPower.ExhaustCharge ();
+		if (greenPower.IsChargedAndReady ()) {
+			greenPower.UsePower ();
 			audio.PlayOneShot (shieldUpSound);
 			curHealth = Mathf.Min (curHealth + 1, maxHealth);
 			shieldObject.SetActive (true);
@@ -391,11 +392,11 @@ public class Player : MonoBehaviour
 	
 	public void SlowDown ()
 	{
-		if (bluePower.IsCharged ()) {
+		if (bluePower.IsChargedAndReady ()) {
 			//TODO This is a case where we could have a protected get component call that null checks.
 			audio.PlayOneShot (slowDownSound);
 			GameObject.Find (ObjectNames.TREADMILL).GetComponent<Treadmill> ().SlowDown ();
-			bluePower.ExhaustCharge ();
+			bluePower.UsePower ();
 		}
 	}
 	#endregion

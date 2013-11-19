@@ -51,7 +51,7 @@ public class BlockLogic : MonoBehaviour
 	 */
 	void AnimateSuckUp ()
 	{
-		distanceScaleup *= 1.1f;
+		distanceScaleup *= 1.22f;
 		float maxDistance = distanceScaleup * originalDistance;
 		transform.position = Vector3.MoveTowards(transform.position, sucker.transform.position, maxDistance);
 		

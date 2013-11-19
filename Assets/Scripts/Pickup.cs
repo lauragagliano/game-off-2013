@@ -4,12 +4,18 @@ using System.Collections;
 public class Pickup : MonoBehaviour
 {
 	bool collecting;
+	GameObject collector;
+	float originalDistance;
+	float distanceScaleup = 0.1f;
+	bool applicationIsQuitting;
 	
-	void Awake ()
+	protected virtual void Start ()
 	{
+		// Put the pickups into a list of pickups. This is so that we can do distance checks instead of collisions.
+		GameManager.Instance.player.RememberPickup (gameObject);
 	}
 	
-	void Update ()
+	void LateUpdate ()
 	{
 		if (collecting) {
 			AnimateCollect ();
@@ -18,7 +24,6 @@ public class Pickup : MonoBehaviour
 		}
 	}
 	
-	// Update is called once per frame
 	void OnTriggerEnter (Collider other)
 	{
 		if (!other.CompareTag (Tags.PLAYER)) {
@@ -26,24 +31,52 @@ public class Pickup : MonoBehaviour
 			return;
 		}
 		
-		Player player = other.GetComponent<Player> ();
-		player.AwardWildcard ();
-		
-		StartCollecting ();
+		StartCollecting (other.gameObject);
 	}
 	
-	void AnimateIdle ()
+	
+	/*
+	 * Verify we award the pickup when destroyed, if we had a valid sucker.
+	 */
+	void OnDestroy ()
 	{
-		transform.Rotate (new Vector3 (-30, -60, -45) * Time.deltaTime);
+		// Don't need to collect the pickup for the player when destroyed through application quitting.
+		if(applicationIsQuitting){
+			return;
+		}
+		Player player = GameManager.Instance.player;
+		if (player != null) {
+			player.ForgetPickup (gameObject);
+			if (collecting && collector != null) {
+				player.CollectPickup (gameObject);
+			}
+		}
 	}
 	
 	/*
+	 * Called when the game is exited
+	 */
+	public void OnApplicationQuit()
+	{
+		applicationIsQuitting = true;
+	}
+		
+	
+	protected virtual void AnimateIdle ()
+	{
+		transform.Rotate (new Vector3 (-30, -60, -45) * Time.deltaTime);
+	}
+	/*
 	 * Play a transition to scale to nothing and then destroy the pickup.
 	 */
-	void AnimateCollect ()
+	protected virtual void AnimateCollect ()
 	{
-		transform.localScale = transform.localScale * 0.9f;
-		if (transform.localScale.magnitude < 0.05f) {
+		distanceScaleup *= 1.22f;
+		float maxDistance = distanceScaleup * originalDistance;
+		transform.position = Vector3.MoveTowards (transform.position, collector.transform.position, maxDistance);
+		
+		transform.localScale = transform.localScale * 0.90f;
+		if (Vector3.SqrMagnitude (transform.position - collector.transform.position) <= 0.25f) {
 			Destroy (gameObject);
 		}
 	}
@@ -51,9 +84,15 @@ public class Pickup : MonoBehaviour
 	/*
 	 * Begin the collection animation and disable the collider
 	 */
-	void StartCollecting ()
+	public virtual void StartCollecting (GameObject pickingUpGameObject)
 	{
+		collector = pickingUpGameObject;
 		collecting = true;
-		collider.enabled = false;
+		originalDistance = Vector3.Distance (collector.transform.position, transform.position);
+		
+		// Turn off the collider if we have one
+		if (collider != null) {
+			collider.enabled = false;
+		}
 	}
 }

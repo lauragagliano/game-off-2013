@@ -37,7 +37,7 @@ public class Section : MonoBehaviour
 			// Replace pickups with Pickup prefab.
 			//TODO Serious FPS slowdown when pickups are involved.
 			else if (child.CompareTag (Tags.PICKUP)) {
-				GameObject pickup = InstantiatePrefabAtPlaceholder (ObjectNames.PICKUP_PREFAB, child, tempPrefabHolder.transform);
+				InstantiatePrefabAtPlaceholder (ObjectNames.PICKUP_PREFAB, child, tempPrefabHolder.transform);
 			}
 		}
 		GameManager.Instance.numPickupsPassed += numberOfPickups;

@@ -199,29 +199,45 @@ public class GUI_WildcardReveal : MonoBehaviour
 	 */
 	void AssignItems ()
 	{
-		Item chosenItem;
-		int i = 0;
+		int numItems = transform.childCount;
+		Item[] itemsToGiveOut = new Item[numItems];
+		
+		// The first item has a high chance of being a headstart or revive
+		float rand = Random.Range (0, 100.0f);
+		if (rand > 66.6) {
+			itemsToGiveOut [0] = headstart;
+		} else if (rand > 33.3) {
+			itemsToGiveOut [0] = revive;
+		} else {
+			itemsToGiveOut [0] = GetRandomUnlimitedItem ();
+		}
+		
+		int i = 1;
+		while (i < itemsToGiveOut.Length) {
+			itemsToGiveOut [i] = GetRandomUnlimitedItem ();
+			i++;
+		}
+		
+		i = 0;
 		foreach (Transform child in transform) {
-			switch (i) {
-			case 0 :
-				chosenItem = money;
-				break;
-			case 1 :
-				chosenItem = headstart;
-				break;
-			case 2 :
-				chosenItem = bigMoney;
-				break;
-			case 3 :
-				chosenItem = revive;
-				break;
-			default :
-				chosenItem = headstart;
-				break;
-			}
-			
-			child.gameObject.GetComponent<GUI_Wildcard> ().SetItem (chosenItem);
+			child.gameObject.GetComponent<GUI_Wildcard> ().SetItem (itemsToGiveOut [i]);
 			i++;
 		}
 	}
+	
+	/*
+	 * Returns an item from the items that can drop unlimited number of times in proportion to their droprates
+	 */
+	Item GetRandomUnlimitedItem ()
+	{
+		Item randomItem;
+		float rand = Random.Range (0, 100.0f);
+		if (rand > 66.6) {
+			randomItem = bigMoney;
+		} else {
+			randomItem = money;
+		}
+		return randomItem;
+	}
+	
 }

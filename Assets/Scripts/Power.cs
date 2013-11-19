@@ -10,15 +10,39 @@ public abstract class Power : MonoBehaviour
 {
 	public AudioClip powerReadySound;
 	protected ColorWheel color;
-	public int curValue = 0;
-	int maxValue = 20;
-	const int UPGRADED_MAX = 15;
-
+	
+	// Power behavior
+	public float curValue = 0;
+	float maxValue = 20;
+	const float UPGRADED_MAX = 15;
+	float duration = 5;
+	const float UPGRADED_DURATION = 20;
+	
+	RBTimer powerTimer = new RBTimer();
+	bool isReady = true;
+	
+	void Update ()
+	{
+		// Unset our timer when power's done being used
+		if (powerTimer.IsRunning ()) {
+			if (powerTimer.IsTimeUp ()) {
+				isReady = true;
+				powerTimer.StopTimer ();
+			}
+		}
+	}
+	
+	/*
+	 * Get how full the power is (used for GUI display).
+	 */
 	public float GetFillPercentage ()
 	{
 		return ((float) curValue / maxValue);
 	}
 	
+	/*
+	 * Add a provided amount of power.
+	 */
 	public void AddPower (int amount)
 	{
 		if (curValue < maxValue) {
@@ -29,6 +53,9 @@ public abstract class Power : MonoBehaviour
 		}
 	}
 	
+	/*
+	 * Remove a provided amount of power.
+	 */
 	public void RemovePower (int amount)
 	{
 		if (curValue > 0) {
@@ -36,18 +63,30 @@ public abstract class Power : MonoBehaviour
 		}
 	}
 	
+	/*
+	 * Fully charge power.
+	 */
 	public void Charge ()
 	{
 		curValue = maxValue;
 	}
 	
-	public bool IsCharged ()
+	/*
+	 * Check if a power is ready to use (off cooldown and enough energy).
+	 */
+	public bool IsChargedAndReady ()
 	{
-		return curValue == maxValue;
+		return curValue == maxValue && isReady;
 	}
 	
-	public void ExhaustCharge ()
+	/*
+	 * Call this to use all energy and activate the power for its
+	 * duration.
+	 */
+	public void UsePower ()
 	{
+		powerTimer.StartTimer (duration);
+		isReady = false;
 		curValue = 0;
 	}
 	

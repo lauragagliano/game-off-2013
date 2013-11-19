@@ -9,4 +9,5 @@ public class Tags
 	public static string SECTION = "Section";
 	public static string TREADMILL = "Treadmill";
 	public static string ITEM = "Item";
+	public static string WILDCARD = "Wildcard";
 }

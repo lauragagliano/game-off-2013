@@ -39,6 +39,9 @@ public class Section : MonoBehaviour
 			else if (child.CompareTag (Tags.PICKUP)) {
 				GameObject pickup = InstantiatePrefabAtPlaceholder (ObjectNames.PICKUP_PREFAB, child, tempPrefabHolder.transform);
 			}
+			else if (child.CompareTag (Tags.WILDCARD)) {
+				GameObject pickup = InstantiatePrefabAtPlaceholder (ObjectNames.WILDCARD_PREFAB, child, tempPrefabHolder.transform);
+			}
 		}
 		GameManager.Instance.numPickupsPassed += numberOfPickups;
 	}

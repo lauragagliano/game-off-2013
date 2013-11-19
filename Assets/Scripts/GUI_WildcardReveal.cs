@@ -12,7 +12,7 @@ public class GUI_WildcardReveal : MonoBehaviour
 	float idleTimeRevealed = 3.0f;
 	int nextCardToAnimate = 0;
 	float timeStateEntered;
-	RevealState state;
+	RevealState state = RevealState.Hidden;
 	bool allCardAreRevealed;
 	public Item headstart;
 	public Item money;
@@ -27,11 +27,6 @@ public class GUI_WildcardReveal : MonoBehaviour
 		Revealing,
 		Hiding,
 		Finish
-	}
-	
-	void Awake ()
-	{
-		state = RevealState.Hidden;
 	}
 	
 	void Update ()

@@ -17,7 +17,9 @@ public class GameManager : Singleton<GameManager>
 	Transform playerSpawn;
 	Treadmill treadmill;
 	Store store;
-	public GUI_WildcardReveal wildcardGUI;
+	GameObject wildcardRevealerPrefab;
+	GUI_WildcardReveal wildcardRevealer;
+	
 	public GameObject WildcardRevealGO;
 	const int MEDIUM_THRESHOLD = 300; // Number of pickups passed
 	const int HARD_THRESHOLD = 2000;
@@ -43,7 +45,16 @@ public class GameManager : Singleton<GameManager>
 	
 	void Awake ()
 	{
+		LoadReferencedObjects ();
 		LinkSceneObjects ();
+	}
+	
+	/*
+	 * Loads any prefabs that need to be referenced by the GameManager.
+	 */
+	void LoadReferencedObjects ()
+	{
+		wildcardRevealerPrefab = (GameObject)Resources.Load(ObjectNames.GUI_WILDCARD_REVEAL, typeof(GameObject));
 	}
 	
 	/* Search for and assign references to scene objects the GameManager needs to know about.
@@ -70,12 +81,6 @@ public class GameManager : Singleton<GameManager>
 		foundObject = GameObject.Find (ObjectNames.STORE);
 		if (foundObject != null) {
 			store = (Store)foundObject.GetComponent<Store> ();
-		}
-		
-		// Link Wildcard Reveal UI
-		foundObject = GameObject.Find (ObjectNames.GUI_WILDCARD_REVEAL);
-		if (foundObject != null) {
-			wildcardGUI = (GUI_WildcardReveal)foundObject.GetComponent<GUI_WildcardReveal> ();
 		}
 	}
 	
@@ -224,7 +229,12 @@ public class GameManager : Singleton<GameManager>
 	void GoToWildCardState ()
 	{
 		gameState = GameState.WildcardReveal;
-		wildcardGUI.StartShowing (player.WildcardCount);
+		
+		// Spawn wildcard revealer
+		GameObject spawnedObject = (GameObject)Instantiate (wildcardRevealerPrefab, wildcardRevealerPrefab.transform.position,
+				Quaternion.LookRotation (Vector3.forward, Vector3.up));
+		wildcardRevealer = spawnedObject.GetComponent<GUI_WildcardReveal> ();
+		wildcardRevealer.StartShowing (player.WildcardCount);
 	}
 	
 	/*

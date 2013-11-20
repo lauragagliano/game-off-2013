@@ -14,7 +14,8 @@ public class Player : MonoBehaviour
 	public RGB playerRGB;
 	public float MAGNET_DIST = 10.0f;
 	Inventory inventory;
-	public int WildcardCount {get; private set;}
+
+	public int WildcardCount { get; private set; }
 	
 	public List<GameObject> pickups;
 	const int POWER_UNIT = 1;
@@ -25,13 +26,10 @@ public class Player : MonoBehaviour
 	public AudioClip shieldHitSound;
 	public AudioClip shieldDownSound;
 	public AudioClip laserSound;
-	
 	Treadmill treadmill;
-	
 	GameObject playerGeo;
 	GameObject nodeLaser;
 	GameObject shieldObject;
-	
 	public GameObject laserBeamFX;
 	float worldZClamp;
 	float worldYClamp;
@@ -41,7 +39,7 @@ public class Player : MonoBehaviour
 	#region #1 Awake and Update
 	void Awake ()
 	{
-		LinkSceneReferences();
+		LinkSceneReferences ();
 		LinkNodeReferences ();
 		LinkComponents ();
 		
@@ -85,21 +83,21 @@ public class Player : MonoBehaviour
 	/*
 	 * Finds and sets references to objects in the scene.
 	 */
-	void LinkSceneReferences()
+	void LinkSceneReferences ()
 	{
-		GameObject treadmillGO = GameObject.FindGameObjectWithTag(Tags.TREADMILL);
+		GameObject treadmillGO = GameObject.FindGameObjectWithTag (Tags.TREADMILL);
 		treadmill = treadmillGO.GetComponent<Treadmill> ();
 	}
 	
 	void Update ()
 	{
-		MatchSpeedToTreadmill();
+		MatchSpeedToTreadmill ();
 		
 		TryMove ();
 		TrySwapColor ();
 		
 		ClampToWorldYZ (worldYClamp, worldZClamp);
-		RenderCurrentColor();
+		RenderCurrentColor ();
 		PullNearbyPickups ();
 	}
 	
@@ -107,13 +105,13 @@ public class Player : MonoBehaviour
 	 * Adjusts the player's movespeed left and right to keep up with the treadmill. This allows us to
 	 * make challenges that stay consistently possible for the player as the board speeds up.
 	 */
-	void MatchSpeedToTreadmill()
+	void MatchSpeedToTreadmill ()
 	{
 		movespeed = treadmill.scrollspeed;
 		
 		// Set animation playback speed on animation to match new movespeed
 		float ANIM_NORMAL_RUNSPEED = 30.0f;
-		playerGeo.animation["pigment_run"].speed = movespeed / ANIM_NORMAL_RUNSPEED;
+		playerGeo.animation ["pigment_run"].speed = movespeed / ANIM_NORMAL_RUNSPEED;
 	}
 	
 	/*
@@ -121,8 +119,8 @@ public class Player : MonoBehaviour
 	 */
 	void RenderCurrentColor ()
 	{
-		MaterialSet matSet = (MaterialSet) playerGeo.GetComponent<MaterialSet> ();
-		matSet.SetColor(playerRGB.color);
+		MaterialSet matSet = (MaterialSet)playerGeo.GetComponent<MaterialSet> ();
+		matSet.SetColor (playerRGB.color);
 	}
 	
 	/*
@@ -203,11 +201,13 @@ public class Player : MonoBehaviour
 	{
 		float pullDistance = transform.lossyScale.x * 2;
 		foreach (GameObject pickup in pickups) {
-			if (HasMagnetForColor (pickup.GetComponent<RGB> ().color)) {
-				pullDistance = MAGNET_DIST;
+			if (pickup.CompareTag (Tags.PICKUP)) {
+				if (HasMagnetForColor (pickup.GetComponent<RGB> ().color)) {
+					pullDistance = MAGNET_DIST;
+				}
 			}
-			if (Vector3.SqrMagnitude (pickup.transform.position - transform.position) <= Mathf.Pow(pullDistance, 2)) {
-				pickup.GetComponent<BlockLogic> ().SuckUpBlock (gameObject);
+			if (Vector3.SqrMagnitude (pickup.transform.position - transform.position) <= Mathf.Pow (pullDistance, 2)) {
+				pickup.GetComponent<Pickup> ().StartCollecting (gameObject);
 			}
 		}
 	}
@@ -218,19 +218,25 @@ public class Player : MonoBehaviour
 	 */
 	public void CollectPickup (GameObject pickup)
 	{
-		RGB pickupRGB = pickup.GetComponent<RGB> ();
-		audio.PlayOneShot (pickupSound);
-		Power powerToCharge = GetPowerForColor (pickupRGB);
-		if (powerToCharge.IsChargedAndReady ()) {
-			// Logic for spillover goes here
+		if (pickup.CompareTag (Tags.PICKUP)) {
+			RGB pickupRGB = pickup.GetComponent<RGB> ();
+			audio.PlayOneShot (pickupSound);
+			Power powerToCharge = GetPowerForColor (pickupRGB);
+			if (powerToCharge.IsChargedAndReady ()) {
+				// Logic for spillover goes here
+			} else {
+				powerToCharge.AddPower (POWER_UNIT);
+			}
+			GameManager.Instance.AddPoint (pickupRGB.color);
+			// Add up our money
+			AddMoney (1);
+			
+			ForgetPickup (pickup);
+		} else if (pickup.CompareTag (Tags.WILDCARD)) {
+			AwardWildcard ();
 		} else {
-			powerToCharge.AddPower (POWER_UNIT);
+			Debug.Log ("Player encountered unknown Pickup! Handle this with a new tag on the pickup.");
 		}
-		GameManager.Instance.AddPoint (pickupRGB.color);
-		// Add up our money
-		AddMoney (1);
-		
-		ForgetPickup (pickup);
 	}
 	
 	/*
@@ -330,9 +336,11 @@ public class Player : MonoBehaviour
 	{
 		playerRGB.color = color;
 		foreach (GameObject pickup in pickups) {
-			RGB pickupRGB = pickup.GetComponent<RGB> ();
-			pickupRGB.color = color;
-			pickupRGB.Refresh ();
+			if (pickup.CompareTag (Tags.PICKUP)) {
+				RGB pickupRGB = pickup.GetComponent<RGB> ();
+				pickupRGB.color = color;
+				pickupRGB.Refresh ();
+			}
 		}
 	}
 	

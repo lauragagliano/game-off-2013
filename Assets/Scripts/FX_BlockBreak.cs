@@ -21,7 +21,6 @@ public class FX_BlockBreak : MonoBehaviour {
 		while (i < transform.childCount)
 		{
 			Transform child = transform.GetChild (i).transform;
-			Vector3 directionToChild = child.position - position;
 			child.rigidbody.AddExplosionForce(force, position, 8.0f, 0.25f, ForceMode.Impulse);
 			i++;
 		}	

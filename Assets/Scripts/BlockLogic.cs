@@ -14,20 +14,7 @@ public class BlockLogic : MonoBehaviour
 	
 	void Start ()
 	{
-		// TODO Refactor when pickups is its own class
 		blockRGB = GetComponent<RGB> ();
-		if (CompareTag (Tags.PICKUP)) {
-			blockRGB.color = GameManager.Instance.player.playerRGB.color;
-			blockRGB.Refresh ();
-			GameManager.Instance.player.RememberPickup (gameObject);
-		}
-	}
-	
-	void LateUpdate ()
-	{
-		if (suckedUp) {
-			AnimateSuckUp ();
-		}	
 	}
 	
 	/*
@@ -44,46 +31,6 @@ public class BlockLogic : MonoBehaviour
 		Player player = other.GetComponent<Player> ();
 		BlowUp (other.transform.position);
 		player.CollideWithBlock ();
-	}
-
-	/*
-	 * Play a transition to scale to nothing and then destroy the block.
-	 */
-	void AnimateSuckUp ()
-	{
-		distanceScaleup *= 1.22f;
-		float maxDistance = distanceScaleup * originalDistance;
-		transform.position = Vector3.MoveTowards(transform.position, sucker.transform.position, maxDistance);
-		
-		transform.localScale = transform.localScale * 0.90f;
-		if (Vector3.SqrMagnitude (transform.position - sucker.transform.position) <= 0.25f) {
-			Destroy (gameObject);
-		}
-	}
-	
-	/*
-	 * Verify we award the pickup when destroyed, if we had a valid sucker.
-	 */
-	void OnDestroy()
-	{
-		if(suckedUp && sucker != null) {
-			GameManager.Instance.player.CollectPickup (gameObject);
-		}
-		GameObject playerObj =  GameObject.FindGameObjectWithTag (Tags.PLAYER);
-		if (playerObj != null) {
-			playerObj.GetComponent<Player> ().ForgetPickup (gameObject);
-		}
-	}
-
-	/*
-	 * Set the state of our block to sucked up and prevent further collisions.
-	 */
-	public void SuckUpBlock(GameObject suckerObject)
-	{
-		sucker = suckerObject;
-		originalDistance = Vector3.Distance (sucker.transform.position, transform.position);
-		suckedUp = true;
-		transform.parent = null;
 	}
 
 	public void BlowUp(Vector3 position)

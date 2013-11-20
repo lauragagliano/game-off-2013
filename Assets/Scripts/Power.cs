@@ -21,9 +21,8 @@ public abstract class Power : MonoBehaviour
 
 	// Ability behavior
 	RBTimer abilityCooldownTimer = new RBTimer ();
-	float abilityCooldown = 4;
-	//TODO Implement cooldown upgrade like this
-	//const float UPGRADED_COOLDOWN = 2;
+	float abilityCooldown = 3;
+	const float UPGRADED_COOLDOWN = 1;
 		
 	/*
 	 * Reset all timers. Set current value to default (0). Useful when starting
@@ -148,9 +147,10 @@ public abstract class Power : MonoBehaviour
 	}
 	
 	/*
-	 * TODO Implement cooldown upgrades here
+	 * Set our cooldown duration to the upgraded value.
+	 */
 	public void UpgradeCooldown ()
 	{
 		abilityCooldown = UPGRADED_COOLDOWN;
-	}*/
+	}
 }

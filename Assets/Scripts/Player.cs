@@ -372,6 +372,22 @@ public class Player : MonoBehaviour
 
 	void ChangeColors (ColorWheel color)
 	{
+		//TODO Refactor this dumb switch
+		switch (color)
+		{
+		case ColorWheel.blue:
+			Camera.main.backgroundColor = ColorManager.Instance.blue.color;
+			break;
+		case ColorWheel.red:
+			Camera.main.backgroundColor = ColorManager.Instance.red.color;
+			break;
+		case ColorWheel.green:
+			Camera.main.backgroundColor = ColorManager.Instance.green.color;
+			break;
+		case ColorWheel.neutral:
+			Camera.main.backgroundColor = ColorManager.Instance.black.color;
+			break;
+		}
 		playerRGB.color = color;/*
 		foreach (GameObject pickup in pickups) {
 			if (pickup.CompareTag (Tags.PICKUP)) {
@@ -528,10 +544,9 @@ public class Player : MonoBehaviour
 		if (inventory.HasItem (ItemNames.GREEN_METER_UPGRADE)) {
 			greenPower.UpgradeMaximumCharge ();
 		}
-		// TODO Implement laser upgrade like this
-		//if (inventory.HasItem (ItemNames.LASER_COOLDOWN_UPGRADE)) {
-		//	redPower.UpgradeCooldown ();
-		//}
+		if (inventory.HasItem (ItemNames.LASER_COOLDOWN_UPGRADE)) {
+			redPower.UpgradeCooldown ();
+		}
 		
 		// Reset the number of wildcards that have been collected.
 		WildcardCount = 0;

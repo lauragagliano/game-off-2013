@@ -19,5 +19,5 @@ public class ItemNames
 	public static string BLUE_MAGNET = "BlueMagnet";
 	
 	// Ability Upgrades
-	//public static string LASER_COOLDOWN_UPGRADE = "FasterLaser";
+	public static string LASER_COOLDOWN_UPGRADE = "FasterLaser";
 }

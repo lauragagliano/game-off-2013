@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
 	public RedPower redPower;
 	
 	public GreenPower greenPower;
-	public int shieldStrength = 3;
+	int shieldStrength = 3;
 	// TODO If we add shield strength upgrade, do it in this class
 	//const int UPGRADED_SHIELD_STRENGTH = 2;
 	

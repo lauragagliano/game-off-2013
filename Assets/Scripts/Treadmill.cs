@@ -4,9 +4,11 @@ using System.Collections.Generic;
 
 public class Treadmill : MonoBehaviour
 {
-	public float startingSpeed = 10.0f;
+	const float STARTING_SPEED = 20.0f;
 	public float scrollspeed;
-	public float accelerationPerFrame = 0.0003f;
+	float prevScrollspeed;
+	float accelerationPerFrame = 0.005f;
+	float prevAccelerationPerFrame;
 	public float maxspeed = 50.0f;
 	public GameObject emptySection;
 	public List<GameObject> easySections;
@@ -17,6 +19,10 @@ public class Treadmill : MonoBehaviour
 	Transform sectionSpawnZone;
 	Transform sectionKillZone;
 	
+	float lerpToSpeed;
+	public bool lerping;
+	const int lerpSpeed = 5;
+
 	Status status;
 	
 	enum Status {
@@ -27,7 +33,7 @@ public class Treadmill : MonoBehaviour
 	void Awake ()
 	{
 		sectionsInPlay = new List<GameObject> ();
-		scrollspeed = startingSpeed;
+		scrollspeed = STARTING_SPEED;
 		sectionSpawnZone = (Transform)GameObject.Find (ObjectNames.SECTION_SPAWN).transform;
 		sectionKillZone = (Transform)GameObject.Find (ObjectNames.SECTION_KILLZONE).transform;
 		Start ();
@@ -36,7 +42,11 @@ public class Treadmill : MonoBehaviour
 	void Update ()
 	{
 		if (status == Status.Started) {
-			scrollspeed = Mathf.Min ((scrollspeed + accelerationPerFrame), maxspeed);
+			if (lerping) {
+				UpdateLerping ();
+			} else {
+				scrollspeed = Mathf.Min ((scrollspeed + accelerationPerFrame), maxspeed);
+			}
 			transform.Translate (new Vector3 (0, 0, -scrollspeed * Time.deltaTime));
 			// Check if our last section is on screen. If so, spawn another.
 			if (GetLastSectionInPlay () == null) {
@@ -57,7 +67,7 @@ public class Treadmill : MonoBehaviour
 	#region #1 Treadmill Manipulation (Start/Stop/Reset/Slowdown)
 	public void Start ()
 	{
-		scrollspeed = startingSpeed;
+		scrollspeed = STARTING_SPEED;
 		status = Status.Started;
 	}
 	
@@ -67,9 +77,44 @@ public class Treadmill : MonoBehaviour
 		status = Status.Stopped;
 	}
 	
-	public void SlowDown ()
+	/*
+	 * Temporarily turn off acceleration of treadmill. Make sure to call
+	 * ResumeAcceleration when done!
+	 */
+	public void PauseAcceleration ()
 	{
-		scrollspeed = (scrollspeed + startingSpeed) / 2;
+		if (accelerationPerFrame == 0) {
+			Debug.LogWarning ("Tried to pause acceleration when it was already at 0!");
+		}
+		prevAccelerationPerFrame = accelerationPerFrame;
+		accelerationPerFrame = 0;
+	}
+	
+	/*
+	 * Restore the acceleration back to previous value.
+	 */
+	public void ResumeAcceleration ()
+	{
+		accelerationPerFrame = prevAccelerationPerFrame;
+	}
+	
+	/*
+	 * Cause the treadmill to slow down to a set speed.
+	 */
+	public void TemporarySlowDown (float amount)
+	{
+		prevScrollspeed = scrollspeed;
+		PauseAcceleration ();
+		LerpToSpeed (Mathf.Max (STARTING_SPEED, scrollspeed - amount));
+	}
+	
+	/*
+	 * Bring the treadmill back up to it's previous speed and acceleration.
+	 */
+	public void ResumeTreadmill ()
+	{
+		LerpToSpeed (prevScrollspeed);
+		ResumeAcceleration ();
 	}
 	
 	/*
@@ -81,7 +126,30 @@ public class Treadmill : MonoBehaviour
 		for (int i = sectionsInPlay.Count-1; i >= 0; i--) {
 			KillSection (sectionsInPlay[i]);
 		}
+		lerping = false;
+		lerpToSpeed = STARTING_SPEED;
 		Start ();
+	}
+	
+	/*
+	 * Handle the lerping process and turn off lerping when done.
+	 */
+	void UpdateLerping () {
+		scrollspeed = Mathf.Lerp (scrollspeed, lerpToSpeed, lerpSpeed * Time.deltaTime);
+		if (Mathf.RoundToInt(scrollspeed) == Mathf.RoundToInt (lerpToSpeed)) {
+			lerping = false;
+		}
+	}
+	
+	/*
+	 * Use this to change the speed of the treadmill with an acceleration or deceleration.
+	 */
+	void LerpToSpeed (float newSpeed)
+	{
+		if (!lerping) {
+			lerpToSpeed = newSpeed;
+			lerping = true;
+		}
 	}
 	#endregion
 	

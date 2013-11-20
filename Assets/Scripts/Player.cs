@@ -9,8 +9,16 @@ public class Player : MonoBehaviour
 	const int BASE_HEALTH = 1;
 	public int curShields;
 
+	
+	// Abilities
 	public BluePower bluePower;
+	bool isUsingSlowdown;
+	float slowDownStrength = 20f;
+	// TODO If we add improved slowdown upgrade
+	//const int UPGRADED_SLOWDOWN_STRENGTH = 25f;
+
 	public RedPower redPower;
+	
 	public GreenPower greenPower;
 	public int shieldStrength = 1;
 	// TODO If we add shield strength upgrade, do it in this class
@@ -27,6 +35,7 @@ public class Player : MonoBehaviour
 	public AudioClip pickupSound;
 	public AudioClip deathSound;
 	public AudioClip slowDownSound;
+	public AudioClip speedUpSound;
 	public AudioClip shieldUpSound;
 	public AudioClip shieldHitSound;
 	public AudioClip shieldDownSound;
@@ -101,6 +110,7 @@ public class Player : MonoBehaviour
 		TryMove ();
 		TryActivateAbilities ();
 		CheckShieldTimeout ();
+		CheckSlowDownTimeout ();
 		
 		ClampToWorldYZ (worldYClamp, worldZClamp);
 		RenderCurrentColor ();
@@ -175,9 +185,9 @@ public class Player : MonoBehaviour
 				RaiseShield ();
 			}
 		} else if (Input.GetKeyDown ("l")) {
-			if (playerRGB.color == ColorWheel.blue) {
+			if (bluePower.IsChargedAndReady ()) {
+				SetActivePower (bluePower, redPower, greenPower);
 				SlowDown ();
-			} else {
 				ChangeColors (ColorWheel.blue);
 			}
 		}
@@ -468,14 +478,22 @@ public class Player : MonoBehaviour
 		}
 	}
 	
+	void CheckSlowDownTimeout ()
+	{
+		if (isUsingSlowdown && !bluePower.IsPowerActive ()) {
+			GameObject.Find (ObjectNames.TREADMILL).GetComponent<Treadmill> ().ResumeTreadmill ();
+			isUsingSlowdown = false;
+			audio.PlayOneShot (speedUpSound);
+		}
+	}
+	
 	public void SlowDown ()
 	{
-		if (bluePower.IsChargedAndReady ()) {
-			//TODO This is a case where we could have a protected get component call that null checks.
-			audio.PlayOneShot (slowDownSound);
-			GameObject.Find (ObjectNames.TREADMILL).GetComponent<Treadmill> ().SlowDown ();
-			bluePower.ActivatePower ();
-		}
+		isUsingSlowdown = true;
+		//TODO This is a case where we could have a protected get component call that null checks.
+		audio.PlayOneShot (slowDownSound);
+		GameObject.Find (ObjectNames.TREADMILL).GetComponent<Treadmill> ().TemporarySlowDown (slowDownStrength);
+		bluePower.ActivatePower ();
 	}
 	#endregion
 	
@@ -491,6 +509,7 @@ public class Player : MonoBehaviour
 		greenPower.ResetPower ();
 		greenPower.curValue = 0;
 		bluePower.curValue = 0;
+		isUsingSlowdown = false;
 		curHealth = 1;
 		
 		// Give player their upgrades

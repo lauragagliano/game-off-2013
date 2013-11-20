@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
 	public BluePower bluePower;
 	public RedPower redPower;
 	public GreenPower greenPower;
-	RBTimer laserTimer = new RBTimer ();
+	
 	public RGB playerRGB;
 	public float MAGNET_DIST = 10.0f;
 	Inventory inventory;
@@ -92,9 +92,9 @@ public class Player : MonoBehaviour
 	void Update ()
 	{
 		MatchSpeedToTreadmill ();
-		
+
 		TryMove ();
-		TrySwapColor ();
+		TryActivateAbilities ();
 		
 		ClampToWorldYZ (worldYClamp, worldZClamp);
 		RenderCurrentColor ();
@@ -148,17 +148,19 @@ public class Player : MonoBehaviour
 	}
 	
 	/*
-	 * Logic for switching colors or using abilities. If player is
-	 * already the color of the button they are pushing, try to use
-	 * that color's special power.
+	 * Logic for using abilities. First try to activate the power that
+	 * the player has pushed the key for. Then try and use the ability
+	 * if it is off of cooldown.
 	 */
-	void TrySwapColor ()
+	void TryActivateAbilities ()
 	{
 		if (Input.GetKeyDown ("j")) {
-			if (playerRGB.color == ColorWheel.red) {
-				Laser ();
-			} else {
+			if (redPower.IsChargedAndReady ()) {
+				redPower.ActivatePower ();
 				ChangeColors (ColorWheel.red);
+			}
+			if (redPower.IsPowerActive () && !redPower.AbilityOnCooldown ()) {
+				Laser ();
 			}
 		} else if (Input.GetKeyDown ("k")) {
 			if (playerRGB.color == ColorWheel.green) {
@@ -174,6 +176,7 @@ public class Player : MonoBehaviour
 			}
 		}
 	}
+
 	#endregion
 
 	#region #3 Player and Block interaction
@@ -330,8 +333,8 @@ public class Player : MonoBehaviour
 	
 	#endregion
 	
-	#region #4 Player Powers
-	
+	#region #4 Player Powers and Abilities
+
 	void ChangeColors (ColorWheel color)
 	{
 		playerRGB.color = color;
@@ -357,41 +360,41 @@ public class Player : MonoBehaviour
 		biped.Move (movement);
 	}
 
-	public void Laser ()
+	/*
+	 * Cast our laser ability if cooldown is ready.
+	 */
+	void Laser ()
 	{
-		if (redPower.IsChargedAndReady ()) {
-			redPower.UsePower ();
+		redPower.UseAbility ();
+		// Spawn the laser FX
+		GameObject fx = (GameObject)Instantiate (laserBeamFX, nodeLaser.transform.position,
+			nodeLaser.transform.rotation);
+		fx.transform.parent = nodeLaser.transform;
+		Destroy (fx, 1.0f);
+		
+		audio.PlayOneShot (laserSound);
+		
+		const float LASER_HALFWIDTH = 2.5f;
+		const float LASER_LENGTH = 60.0f;
+		
+		GameObject[] allBlocks = GameObject.FindGameObjectsWithTag ("Block");
+		foreach (GameObject block in allBlocks) {
+			Vector3 directionToBlock = block.transform.position - transform.position;
+			float distanceToBlockRelativeToMyForward = Vector3.Project (directionToBlock, transform.forward).magnitude;
 			
-			// Spawn the laser FX
-			GameObject fx = (GameObject)Instantiate (laserBeamFX, nodeLaser.transform.position,
-				nodeLaser.transform.rotation);
-			fx.transform.parent = nodeLaser.transform;
-			Destroy (fx, 1.0f);
-			
-			audio.PlayOneShot (laserSound);
-			
-			const float LASER_HALFWIDTH = 2.5f;
-			const float LASER_LENGTH = 60.0f;
-			
-			GameObject[] allBlocks = GameObject.FindGameObjectsWithTag ("Block");
-			foreach (GameObject block in allBlocks) {
-				Vector3 directionToBlock = block.transform.position - transform.position;
-				float distanceToBlockRelativeToMyForward = Vector3.Project (directionToBlock, transform.forward).magnitude;
-				
-				// Note this will not work if the blocks are rotated,and it assumes they are square
-				float blockWidth = block.collider.bounds.extents.x;
-				float blockHeight = blockWidth;
-				// Is the block in range of my laser?
-				if (distanceToBlockRelativeToMyForward <= LASER_LENGTH + blockHeight) {
-					// Compare distance along my X axis
-					float distanceToBlockRelativeToMyRight = Vector3.Project (directionToBlock, transform.right).magnitude;
-					if (distanceToBlockRelativeToMyRight <= (LASER_HALFWIDTH + blockWidth)) {
-						RGB blockRGB = block.GetComponent<RGB> ();
-						if (blockRGB.color == ColorWheel.black) {
-							Vector3 explosionPosition = transform.position +
-								transform.TransformDirection (Vector3.forward * distanceToBlockRelativeToMyForward);
-							block.GetComponent<BlockLogic> ().BlowUp (explosionPosition);
-						}
+			// Note this will not work if the blocks are rotated,and it assumes they are square
+			float blockWidth = block.collider.bounds.extents.x;
+			float blockHeight = blockWidth;
+			// Is the block in range of my laser?
+			if (distanceToBlockRelativeToMyForward <= LASER_LENGTH + blockHeight) {
+				// Compare distance along my X axis
+				float distanceToBlockRelativeToMyRight = Vector3.Project (directionToBlock, transform.right).magnitude;
+				if (distanceToBlockRelativeToMyRight <= (LASER_HALFWIDTH + blockWidth)) {
+					RGB blockRGB = block.GetComponent<RGB> ();
+					if (blockRGB.color == ColorWheel.black) {
+						Vector3 explosionPosition = transform.position +
+							transform.TransformDirection (Vector3.forward * distanceToBlockRelativeToMyForward);
+						block.GetComponent<BlockLogic> ().BlowUp (explosionPosition);
 					}
 				}
 			}
@@ -401,7 +404,7 @@ public class Player : MonoBehaviour
 	public void RaiseShield ()
 	{
 		if (greenPower.IsChargedAndReady ()) {
-			greenPower.UsePower ();
+			greenPower.ActivatePower ();
 			audio.PlayOneShot (shieldUpSound);
 			curHealth = Mathf.Min (curHealth + 1, maxHealth);
 			shieldObject.SetActive (true);
@@ -414,9 +417,10 @@ public class Player : MonoBehaviour
 			//TODO This is a case where we could have a protected get component call that null checks.
 			audio.PlayOneShot (slowDownSound);
 			GameObject.Find (ObjectNames.TREADMILL).GetComponent<Treadmill> ().SlowDown ();
-			bluePower.UsePower ();
+			bluePower.ActivatePower ();
 		}
 	}
+
 	#endregion
 	
 	#region #5 Player Upgrades
@@ -427,11 +431,12 @@ public class Player : MonoBehaviour
 	public void InitializeStats ()
 	{
 		pickups = new List<GameObject> ();
-		redPower.curValue = 0;
+		redPower.ResetPower ();
 		greenPower.curValue = 0;
 		bluePower.curValue = 0;
 		curHealth = 1;
 		
+		// Give player their upgrades
 		if (inventory.HasItem (ItemNames.BLUE_METER_UPGRADE)) {
 			bluePower.UpgradeMaximumCharge ();
 		}
@@ -441,6 +446,10 @@ public class Player : MonoBehaviour
 		if (inventory.HasItem (ItemNames.GREEN_METER_UPGRADE)) {
 			greenPower.UpgradeMaximumCharge ();
 		}
+		// TODO Implement laser upgrade like this
+		//if (inventory.HasItem (ItemNames.LASER_COOLDOWN_UPGRADE)) {
+		//	redPower.UpgradeCooldown ();
+		//}
 		
 		// Reset the number of wildcards that have been collected.
 		WildcardCount = 0;

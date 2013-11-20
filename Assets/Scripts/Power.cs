@@ -15,19 +15,38 @@ public abstract class Power : MonoBehaviour
 	public float curValue = 0;
 	float maxValue = 20;
 	const float UPGRADED_MAX = 15;
-	float duration = 5;
+	float powerDuration = 5;
 	const float UPGRADED_DURATION = 20;
-	
-	RBTimer powerTimer = new RBTimer();
-	bool isReady = true;
+	RBTimer powerTimer = new RBTimer ();
+
+	// Ability behavior
+	RBTimer abilityCooldownTimer = new RBTimer ();
+	float abilityCooldown = 4;
+	//TODO Implement cooldown upgrade like this
+	//const float UPGRADED_COOLDOWN = 2;
+		
+	/*
+	 * Reset all timers. Set current value to default (0). Useful when starting
+	 * a game.
+	 */
+	public void ResetPower ()
+	{
+		powerTimer.StopTimer ();
+		abilityCooldownTimer.StopTimer ();
+		curValue = 0;
+	}
 	
 	void Update ()
 	{
-		// Unset our timer when power's done being used
-		if (powerTimer.IsRunning ()) {
+		// Stop our timers when power and abilities are done being used
+		if (IsPowerActive ()) {
+			curValue = Mathf.Max (curValue - ((maxValue /powerDuration) * Time.deltaTime), 0);
+			if (abilityCooldownTimer.IsTimeUp ()) {
+				abilityCooldownTimer.StopTimer ();
+			}
 			if (powerTimer.IsTimeUp ()) {
-				isReady = true;
 				powerTimer.StopTimer ();
+				abilityCooldownTimer.StopTimer ();
 			}
 		}
 	}
@@ -37,7 +56,7 @@ public abstract class Power : MonoBehaviour
 	 */
 	public float GetFillPercentage ()
 	{
-		return ((float) curValue / maxValue);
+		return ((float)curValue / maxValue);
 	}
 	
 	/*
@@ -45,6 +64,10 @@ public abstract class Power : MonoBehaviour
 	 */
 	public void AddPower (int amount)
 	{
+		if (IsPowerActive ()) {
+			// Don't add power if it's being used
+			return;
+		}
 		if (curValue < maxValue) {
 			curValue += amount;
 			if (curValue == maxValue) {
@@ -76,18 +99,44 @@ public abstract class Power : MonoBehaviour
 	 */
 	public bool IsChargedAndReady ()
 	{
-		return curValue == maxValue && isReady;
+		return curValue == maxValue && !IsPowerActive ();
+	}
+	
+	/*
+	 * Return whether the power is active. Abilities tied to powers shouldn't
+	 * be usable unless the power is active.
+	 */
+	public bool IsPowerActive ()
+	{
+		return powerTimer.IsRunning ();
 	}
 	
 	/*
 	 * Call this to use all energy and activate the power for its
 	 * duration.
 	 */
-	public void UsePower ()
+	public void ActivatePower ()
 	{
-		powerTimer.StartTimer (duration);
-		isReady = false;
-		curValue = 0;
+		powerTimer.StartTimer (powerDuration);
+	}
+	
+	/*
+	 * Use the ability associated with this power. This sets the cooldown timer
+	 * and the ability behavior itself is controlled by the player.
+	 */
+	public void UseAbility ()
+	{
+		if (IsPowerActive () && !abilityCooldownTimer.IsRunning ()) {
+			abilityCooldownTimer.StartTimer (abilityCooldown);
+		}
+	}
+	
+	/*
+	 * Return true if the ability is on cooldown (unusable).
+	 */
+	public bool AbilityOnCooldown ()
+	{
+		return abilityCooldownTimer.IsRunning ();
 	}
 	
 	/*
@@ -97,4 +146,11 @@ public abstract class Power : MonoBehaviour
 	{
 		maxValue = UPGRADED_MAX;
 	}
+	
+	/*
+	 * TODO Implement cooldown upgrades here
+	public void UpgradeCooldown ()
+	{
+		abilityCooldown = UPGRADED_COOLDOWN;
+	}*/
 }

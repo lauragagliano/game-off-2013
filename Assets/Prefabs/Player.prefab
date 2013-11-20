@@ -943,7 +943,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03e45225a4a82c246bc0a855ebbce642, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: 0
+  color: 2
   autoSetMaterial: 0
 --- !u!114 &11400008
 MonoBehaviour:
@@ -969,15 +969,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   money: 0
   curHealth: 0
+  curShields: 0
   bluePower: {fileID: 0}
   redPower: {fileID: 0}
   greenPower: {fileID: 0}
+  shieldStrength: 1
   playerRGB: {fileID: 0}
   MAGNET_DIST: 10
   pickups: []
   pickupSound: {fileID: 8300000, guid: c674d8535fb505a43995a1ad8dbcfe9e, type: 3}
   deathSound: {fileID: 0}
   slowDownSound: {fileID: 8300000, guid: f1e36343f5caf0945aa5191c5bcbfc21, type: 3}
+  speedUpSound: {fileID: 8300000, guid: 4f04b2664d9be694d9f1159937bca911, type: 3}
   shieldUpSound: {fileID: 8300000, guid: f483a3179e3e04a3686f9f0ed545d71c, type: 3}
   shieldHitSound: {fileID: 8300000, guid: 2f94bb284a54548a8b7a755b3acc468d, type: 3}
   shieldDownSound: {fileID: 8300000, guid: 2f94bb284a54548a8b7a755b3acc468d, type: 3}

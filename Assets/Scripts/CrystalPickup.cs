@@ -10,8 +10,6 @@ public class CrystalPickup : Pickup
 		base.Start ();
 		// Get the appropriate color for the crystal
 		crystalRGB = GetComponent<RGB> ();
-		crystalRGB.color = GameManager.Instance.player.playerRGB.color;
-		crystalRGB.Refresh ();
 	}
 	
 	protected override void AnimateIdle ()

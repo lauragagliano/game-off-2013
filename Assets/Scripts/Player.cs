@@ -240,7 +240,7 @@ public class Player : MonoBehaviour
 	{
 		float pullDistance = transform.lossyScale.x * 2;
 		foreach (GameObject pickup in pickups) {
-			if (pickup.CompareTag (Tags.PICKUP)) {
+			if (pickup.GetComponent<RGB> () != null) {
 				if (HasMagnetForColor (pickup.GetComponent<RGB> ().color)) {
 					pullDistance = MAGNET_DIST;
 				}
@@ -257,7 +257,7 @@ public class Player : MonoBehaviour
 	 */
 	public void CollectPickup (GameObject pickup)
 	{
-		if (pickup.CompareTag (Tags.PICKUP)) {
+		if (pickup.GetComponent<CrystalPickup> () != null) {
 			RGB pickupRGB = pickup.GetComponent<RGB> ();
 			audio.PlayOneShot (pickupSound);
 			Power powerToCharge = GetPowerForColor (pickupRGB);
@@ -365,14 +365,14 @@ public class Player : MonoBehaviour
 
 	void ChangeColors (ColorWheel color)
 	{
-		playerRGB.color = color;
+		playerRGB.color = color;/*
 		foreach (GameObject pickup in pickups) {
 			if (pickup.CompareTag (Tags.PICKUP)) {
 				RGB pickupRGB = pickup.GetComponent<RGB> ();
 				pickupRGB.color = color;
 				pickupRGB.Refresh ();
 			}
-		}
+		}*/
 	}
 	
 	/*

@@ -8,7 +8,7 @@ public class Pickup : MonoBehaviour
 	float originalDistance;
 	float distanceScaleup = 0.1f;
 	bool applicationIsQuitting;
-	
+
 	protected virtual void Start ()
 	{
 		// Put the pickups into a list of pickups. This is so that we can do distance checks instead of collisions.

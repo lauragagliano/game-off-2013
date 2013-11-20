@@ -28,7 +28,29 @@ public class Section : MonoBehaviour
 		tempPrefabHolder = new GameObject("Prefabs");
 		// Move our prefabs now that they've been created
 		tempPrefabHolder.transform.parent = transform;
-
+		
+		//TODO Refactor this to be more clear and reusable (and not so INCORRECT!)
+		ColorWheel randomColorforPickupA = ColorWheel.green;
+		ColorWheel randomColorforPickupB = ColorWheel.red;
+		ColorWheel randomColorforPickupC = ColorWheel.green;
+		int colorId = Random.Range (0,3);
+		if (colorId == 0) {
+			randomColorforPickupA = ColorWheel.red;
+			randomColorforPickupB = ColorWheel.green;
+			randomColorforPickupC = ColorWheel.blue;
+		} else if (colorId == 1) {
+			randomColorforPickupA = ColorWheel.blue;
+			randomColorforPickupB = ColorWheel.red;
+			randomColorforPickupC = ColorWheel.green;
+		} else if (colorId == 2) {
+			randomColorforPickupA = ColorWheel.green;
+			randomColorforPickupB = ColorWheel.red;
+			randomColorforPickupC = ColorWheel.blue;
+		} else if (colorId == 3) {
+			randomColorforPickupA = ColorWheel.blue;
+			randomColorforPickupB = ColorWheel.red;
+			randomColorforPickupC = ColorWheel.green;
+		}
 		foreach (Transform child in transform) {
 			// Replace placeholders with BlackBlock prefab
 			if (child.CompareTag (Tags.BLOCK)) {
@@ -36,8 +58,14 @@ public class Section : MonoBehaviour
 			}
 			// Replace pickups with Pickup prefab.
 			//TODO Serious FPS slowdown when pickups are involved.
-			else if (child.CompareTag (Tags.PICKUP)) {
-				InstantiatePrefabAtPlaceholder (ObjectNames.PICKUP_PREFAB, child, tempPrefabHolder.transform);
+			else if (child.CompareTag (Tags.PICKUP_GROUP_A)) {
+				GameObject pickup = InstantiatePrefabAtPlaceholder (ObjectNames.CRYSTAL_PREFAB, child, tempPrefabHolder.transform);
+				pickup.GetComponent<RGB> ().color = randomColorforPickupA;
+				pickup.GetComponent<RGB> ().Refresh ();
+			} else if (child.CompareTag (Tags.PICKUP_GROUP_B)) {
+				GameObject pickup = InstantiatePrefabAtPlaceholder (ObjectNames.CRYSTAL_PREFAB, child, tempPrefabHolder.transform);
+				pickup.GetComponent<RGB> ().color = randomColorforPickupB;
+				pickup.GetComponent<RGB> ().Refresh ();
 			}
 			else if (child.CompareTag (Tags.WILDCARD)) {
 				GameObject pickup = InstantiatePrefabAtPlaceholder (ObjectNames.WILDCARD_PREFAB, child, tempPrefabHolder.transform);
@@ -67,7 +95,7 @@ public class Section : MonoBehaviour
 	{
 		numberOfPickups = 0;
 		foreach (Transform child in transform) {
-			if (child.CompareTag (Tags.PICKUP)) {
+			if (child.CompareTag (Tags.PICKUP_GROUP_A)) {
 				numberOfPickups++;
 			}
 		}

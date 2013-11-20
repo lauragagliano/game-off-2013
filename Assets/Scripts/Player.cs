@@ -162,7 +162,7 @@ public class Player : MonoBehaviour
 	{
 		if (Input.GetKeyDown ("j")) {
 			if (redPower.IsChargedAndReady ()) {
-				redPower.ActivatePower ();
+				SetActivePower (redPower, greenPower, bluePower);
 				ChangeColors (ColorWheel.red);
 			}
 			if (redPower.IsPowerActive () && !redPower.AbilityOnCooldown ()) {
@@ -170,7 +170,7 @@ public class Player : MonoBehaviour
 			}
 		} else if (Input.GetKeyDown ("k")) {
 			if (greenPower.IsChargedAndReady ()) {
-				greenPower.ActivatePower ();
+				SetActivePower (greenPower, redPower, bluePower);
 				ChangeColors (ColorWheel.green);
 				RaiseShield ();
 			}
@@ -182,7 +182,27 @@ public class Player : MonoBehaviour
 			}
 		}
 	}
-
+	
+	/*
+	 * Helper method to set the active power and turn off others if in use.
+	 */
+	void SetActivePower (Power activePower, Power inactivePower1, Power inactivePower2)
+	{
+		activePower.ActivatePower ();
+		DeactivatePowerIfActive (inactivePower1);
+		DeactivatePowerIfActive (inactivePower2);
+	}
+	
+	/*
+	 * Helper method to deactivate power only if it's in use.
+	 */
+	void DeactivatePowerIfActive (Power power)
+	{
+		if (power.IsPowerActive ()) {
+			power.ResetPower ();
+		}
+	}
+	
 	#endregion
 
 	#region #3 Player and Block interaction

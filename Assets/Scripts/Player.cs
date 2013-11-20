@@ -6,10 +6,15 @@ public class Player : MonoBehaviour
 {
 	public int money;
 	public int curHealth;
-	int maxHealth = 10;
+	const int BASE_HEALTH = 1;
+	public int curShields;
+
 	public BluePower bluePower;
 	public RedPower redPower;
 	public GreenPower greenPower;
+	public int shieldStrength = 1;
+	// TODO If we add shield strength upgrade, do it in this class
+	//const int UPGRADED_SHIELD_STRENGTH = 2;
 	
 	public RGB playerRGB;
 	public float MAGNET_DIST = 10.0f;
@@ -44,7 +49,7 @@ public class Player : MonoBehaviour
 		LinkComponents ();
 		
 		// Set our health and powers
-		curHealth = 1;
+		curHealth = BASE_HEALTH;
 
 		// Remember their initial Y and Z position and keep them there forever.
 		worldZClamp = transform.position.z;
@@ -95,6 +100,7 @@ public class Player : MonoBehaviour
 
 		TryMove ();
 		TryActivateAbilities ();
+		CheckShieldTimeout ();
 		
 		ClampToWorldYZ (worldYClamp, worldZClamp);
 		RenderCurrentColor ();
@@ -163,10 +169,10 @@ public class Player : MonoBehaviour
 				Laser ();
 			}
 		} else if (Input.GetKeyDown ("k")) {
-			if (playerRGB.color == ColorWheel.green) {
-				RaiseShield ();
-			} else {
+			if (greenPower.IsChargedAndReady ()) {
+				greenPower.ActivatePower ();
 				ChangeColors (ColorWheel.green);
+				RaiseShield ();
 			}
 		} else if (Input.GetKeyDown ("l")) {
 			if (playerRGB.color == ColorWheel.blue) {
@@ -282,20 +288,12 @@ public class Player : MonoBehaviour
 	
 	public void LoseHealth (int loss)
 	{
-		int newHealth = curHealth - loss;
-		
-		// Handle shield hits
-		if (newHealth >= 1) {
-			if (newHealth > 1) {
-				audio.PlayOneShot (shieldHitSound);
-			} else if (newHealth == 1) {
-				audio.PlayOneShot (shieldDownSound);
-				shieldObject.SetActive (false);
-			}
+		if (curShields > 0) {
+			TakeShieldHit (loss);
+		} else {
+			// Subtract the health
+			curHealth = curHealth - loss;
 		}
-		
-		// Subtract the health
-		curHealth = newHealth;
 		
 		// Handle death
 		if (curHealth <= 0) {
@@ -401,13 +399,52 @@ public class Player : MonoBehaviour
 		}
 	}
 	
+	/*
+	 * Put up shields for the player. Set our shield value, play sound,
+	 * and show shield.
+	 */
 	public void RaiseShield ()
 	{
-		if (greenPower.IsChargedAndReady ()) {
-			greenPower.ActivatePower ();
-			audio.PlayOneShot (shieldUpSound);
-			curHealth = Mathf.Min (curHealth + 1, maxHealth);
-			shieldObject.SetActive (true);
+		audio.PlayOneShot (shieldUpSound);
+		curShields = shieldStrength;
+		shieldObject.SetActive (true);
+	}
+	
+	/*
+	 * Turn off shields. Should be called when green power times out or player
+	 * is out of shield hits.
+	 */
+	public void LowerShields ()
+	{
+		audio.PlayOneShot (shieldDownSound);
+		curShields = 0;
+		shieldObject.SetActive (false);
+		greenPower.ResetPower ();
+		//TODO Set player color to neutral
+	}
+	
+	/*
+	 * Calculate a hit to the shields (as opposed to health). Play the right sound
+	 * depending on a shield being hit or going down.
+	 */
+	public void TakeShieldHit (int loss)
+	{
+		int newShields = curShields - loss;
+		if (newShields > 0) {
+			audio.PlayOneShot (shieldHitSound);
+		} else if (newShields == 0) {
+			LowerShields ();
+		}
+		curShields = newShields;
+	}
+	
+	/*
+	 * If shields are up but green power is all out, turn off shields.
+	 */
+	void CheckShieldTimeout ()
+	{
+		if (curShields > 0 && !greenPower.IsPowerActive ()) {
+			LowerShields ();
 		}
 	}
 	
@@ -420,7 +457,6 @@ public class Player : MonoBehaviour
 			bluePower.ActivatePower ();
 		}
 	}
-
 	#endregion
 	
 	#region #5 Player Upgrades
@@ -432,6 +468,7 @@ public class Player : MonoBehaviour
 	{
 		pickups = new List<GameObject> ();
 		redPower.ResetPower ();
+		greenPower.ResetPower ();
 		greenPower.curValue = 0;
 		bluePower.curValue = 0;
 		curHealth = 1;

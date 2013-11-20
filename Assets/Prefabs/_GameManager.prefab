@@ -43,6 +43,7 @@ MonoBehaviour:
   green: {fileID: 2100000, guid: de95a5669d65fa341ba620ec66bb8a84, type: 2}
   blue: {fileID: 2100000, guid: 45b9c557e9e5ee744a421c2855e33c6f, type: 2}
   black: {fileID: 2100000, guid: 5545a405383484642bc6073294a996ed, type: 2}
+  neutral: {fileID: 2100000, guid: 78c684e193c9bac45aef808f0e9e422a, type: 2}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -55,11 +56,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  playerRGB: {fileID: 0}
   numPickupsPassed: 0
   redPoints: 0
   greenPoints: 0
   bluePoints: 0
+  WildcardRevealGO: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

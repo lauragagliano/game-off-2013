@@ -17,8 +17,8 @@ GameObject:
   - 26: {fileID: 2600000}
   - 12: {fileID: 1200000}
   m_Layer: 0
-  m_Name: RedPickup
-  m_TagString: Pickup
+  m_Name: PickupA
+  m_TagString: PickupGroupA
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -40,8 +40,8 @@ GameObject:
   - 26: {fileID: 2600002}
   - 12: {fileID: 1200002}
   m_Layer: 0
-  m_Name: RedPickup
-  m_TagString: Pickup
+  m_Name: PickupA
+  m_TagString: PickupGroupA
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -63,8 +63,8 @@ GameObject:
   - 26: {fileID: 2600004}
   - 12: {fileID: 1200004}
   m_Layer: 0
-  m_Name: RedPickup
-  m_TagString: Pickup
+  m_Name: PickupA
+  m_TagString: PickupGroupA
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -86,8 +86,8 @@ GameObject:
   - 26: {fileID: 2600006}
   - 12: {fileID: 1200006}
   m_Layer: 0
-  m_Name: RedPickup
-  m_TagString: Pickup
+  m_Name: PickupA
+  m_TagString: PickupGroupA
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -109,8 +109,8 @@ GameObject:
   - 26: {fileID: 2600008}
   - 12: {fileID: 1200008}
   m_Layer: 0
-  m_Name: RedPickup
-  m_TagString: Pickup
+  m_Name: PickupA
+  m_TagString: PickupGroupA
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -132,8 +132,8 @@ GameObject:
   - 26: {fileID: 2600010}
   - 12: {fileID: 1200010}
   m_Layer: 0
-  m_Name: RedPickup
-  m_TagString: Pickup
+  m_Name: PickupA
+  m_TagString: PickupGroupA
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -155,8 +155,8 @@ GameObject:
   - 26: {fileID: 2600012}
   - 12: {fileID: 1200012}
   m_Layer: 0
-  m_Name: RedPickup
-  m_TagString: Pickup
+  m_Name: PickupA
+  m_TagString: PickupGroupA
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -178,8 +178,8 @@ GameObject:
   - 26: {fileID: 2600014}
   - 12: {fileID: 1200014}
   m_Layer: 0
-  m_Name: RedPickup
-  m_TagString: Pickup
+  m_Name: PickupA
+  m_TagString: PickupGroupA
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -201,8 +201,8 @@ GameObject:
   - 26: {fileID: 2600016}
   - 12: {fileID: 1200016}
   m_Layer: 0
-  m_Name: RedPickup
-  m_TagString: Pickup
+  m_Name: PickupA
+  m_TagString: PickupGroupA
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -224,8 +224,8 @@ GameObject:
   - 26: {fileID: 2600018}
   - 12: {fileID: 1200018}
   m_Layer: 0
-  m_Name: RedPickup
-  m_TagString: Pickup
+  m_Name: PickupA
+  m_TagString: PickupGroupA
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -247,8 +247,8 @@ GameObject:
   - 26: {fileID: 2600020}
   - 12: {fileID: 1200020}
   m_Layer: 0
-  m_Name: RedPickup
-  m_TagString: Pickup
+  m_Name: PickupA
+  m_TagString: PickupGroupA
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -270,8 +270,8 @@ GameObject:
   - 26: {fileID: 2600022}
   - 12: {fileID: 1200022}
   m_Layer: 0
-  m_Name: RedPickup
-  m_TagString: Pickup
+  m_Name: PickupA
+  m_TagString: PickupGroupA
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -293,8 +293,8 @@ GameObject:
   - 26: {fileID: 2600024}
   - 12: {fileID: 1200024}
   m_Layer: 0
-  m_Name: RedPickup
-  m_TagString: Pickup
+  m_Name: PickupA
+  m_TagString: PickupGroupA
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -316,8 +316,8 @@ GameObject:
   - 26: {fileID: 2600026}
   - 12: {fileID: 1200026}
   m_Layer: 0
-  m_Name: RedPickup
-  m_TagString: Pickup
+  m_Name: PickupA
+  m_TagString: PickupGroupA
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -339,8 +339,8 @@ GameObject:
   - 26: {fileID: 2600028}
   - 12: {fileID: 1200028}
   m_Layer: 0
-  m_Name: RedPickup
-  m_TagString: Pickup
+  m_Name: PickupA
+  m_TagString: PickupGroupA
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -362,8 +362,8 @@ GameObject:
   - 26: {fileID: 2600030}
   - 12: {fileID: 1200030}
   m_Layer: 0
-  m_Name: RedPickup
-  m_TagString: Pickup
+  m_Name: PickupA
+  m_TagString: PickupGroupA
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -385,8 +385,8 @@ GameObject:
   - 26: {fileID: 2600032}
   - 12: {fileID: 1200032}
   m_Layer: 0
-  m_Name: RedPickup
-  m_TagString: Pickup
+  m_Name: PickupA
+  m_TagString: PickupGroupA
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -408,8 +408,8 @@ GameObject:
   - 26: {fileID: 2600034}
   - 12: {fileID: 1200034}
   m_Layer: 0
-  m_Name: RedPickup
-  m_TagString: Pickup
+  m_Name: PickupA
+  m_TagString: PickupGroupA
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -431,8 +431,8 @@ GameObject:
   - 26: {fileID: 2600036}
   - 12: {fileID: 1200036}
   m_Layer: 0
-  m_Name: RedPickup
-  m_TagString: Pickup
+  m_Name: PickupA
+  m_TagString: PickupGroupA
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -454,8 +454,8 @@ GameObject:
   - 26: {fileID: 2600038}
   - 12: {fileID: 1200038}
   m_Layer: 0
-  m_Name: RedPickup
-  m_TagString: Pickup
+  m_Name: PickupA
+  m_TagString: PickupGroupA
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -477,8 +477,8 @@ GameObject:
   - 26: {fileID: 2600040}
   - 12: {fileID: 1200040}
   m_Layer: 0
-  m_Name: RedPickup
-  m_TagString: Pickup
+  m_Name: PickupA
+  m_TagString: PickupGroupA
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -517,8 +517,8 @@ GameObject:
   - 26: {fileID: 2600042}
   - 12: {fileID: 1200042}
   m_Layer: 0
-  m_Name: RedPickup
-  m_TagString: Pickup
+  m_Name: PickupA
+  m_TagString: PickupGroupA
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -540,8 +540,8 @@ GameObject:
   - 26: {fileID: 2600044}
   - 12: {fileID: 1200044}
   m_Layer: 0
-  m_Name: RedPickup
-  m_TagString: Pickup
+  m_Name: PickupA
+  m_TagString: PickupGroupA
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -579,8 +579,8 @@ GameObject:
   - 26: {fileID: 2600046}
   - 12: {fileID: 1200046}
   m_Layer: 0
-  m_Name: RedPickup
-  m_TagString: Pickup
+  m_Name: PickupA
+  m_TagString: PickupGroupA
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -602,8 +602,8 @@ GameObject:
   - 26: {fileID: 2600048}
   - 12: {fileID: 1200048}
   m_Layer: 0
-  m_Name: RedPickup
-  m_TagString: Pickup
+  m_Name: PickupA
+  m_TagString: PickupGroupA
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -625,8 +625,8 @@ GameObject:
   - 26: {fileID: 2600050}
   - 12: {fileID: 1200050}
   m_Layer: 0
-  m_Name: RedPickup
-  m_TagString: Pickup
+  m_Name: PickupA
+  m_TagString: PickupGroupA
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -648,8 +648,8 @@ GameObject:
   - 26: {fileID: 2600052}
   - 12: {fileID: 1200052}
   m_Layer: 0
-  m_Name: RedPickup
-  m_TagString: Pickup
+  m_Name: PickupA
+  m_TagString: PickupGroupA
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -688,8 +688,8 @@ GameObject:
   - 26: {fileID: 2600054}
   - 12: {fileID: 1200054}
   m_Layer: 0
-  m_Name: RedPickup
-  m_TagString: Pickup
+  m_Name: PickupA
+  m_TagString: PickupGroupA
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -711,8 +711,8 @@ GameObject:
   - 26: {fileID: 2600056}
   - 12: {fileID: 1200056}
   m_Layer: 0
-  m_Name: RedPickup
-  m_TagString: Pickup
+  m_Name: PickupA
+  m_TagString: PickupGroupA
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -734,8 +734,8 @@ GameObject:
   - 26: {fileID: 2600058}
   - 12: {fileID: 1200058}
   m_Layer: 0
-  m_Name: RedPickup
-  m_TagString: Pickup
+  m_Name: PickupA
+  m_TagString: PickupGroupA
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4947,6 +4947,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: 0
+  autoSetMaterial: 1
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4971,6 +4972,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: 0
+  autoSetMaterial: 1
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4995,6 +4997,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: 0
+  autoSetMaterial: 1
 --- !u!114 &11400010
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5019,6 +5022,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: 0
+  autoSetMaterial: 1
 --- !u!114 &11400014
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5043,6 +5047,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: 0
+  autoSetMaterial: 1
 --- !u!114 &11400018
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5067,6 +5072,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: 0
+  autoSetMaterial: 1
 --- !u!114 &11400022
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5091,6 +5097,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: 0
+  autoSetMaterial: 1
 --- !u!114 &11400026
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5115,6 +5122,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: 0
+  autoSetMaterial: 1
 --- !u!114 &11400030
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5139,6 +5147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: 0
+  autoSetMaterial: 1
 --- !u!114 &11400034
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5163,6 +5172,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: 0
+  autoSetMaterial: 1
 --- !u!114 &11400038
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5187,6 +5197,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: 0
+  autoSetMaterial: 1
 --- !u!114 &11400042
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5211,6 +5222,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: 0
+  autoSetMaterial: 1
 --- !u!114 &11400046
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5235,6 +5247,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: 0
+  autoSetMaterial: 1
 --- !u!114 &11400050
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5259,6 +5272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: 0
+  autoSetMaterial: 1
 --- !u!114 &11400054
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5283,6 +5297,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: 0
+  autoSetMaterial: 1
 --- !u!114 &11400058
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5307,6 +5322,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: 0
+  autoSetMaterial: 1
 --- !u!114 &11400062
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5331,6 +5347,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: 0
+  autoSetMaterial: 1
 --- !u!114 &11400066
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5355,6 +5372,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: 0
+  autoSetMaterial: 1
 --- !u!114 &11400070
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5379,6 +5397,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: 0
+  autoSetMaterial: 1
 --- !u!114 &11400074
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5403,6 +5422,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: 0
+  autoSetMaterial: 1
 --- !u!114 &11400078
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5427,6 +5447,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: 0
+  autoSetMaterial: 1
 --- !u!114 &11400082
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5451,6 +5472,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: 0
+  autoSetMaterial: 1
 --- !u!114 &11400086
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5475,6 +5497,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: 0
+  autoSetMaterial: 1
 --- !u!114 &11400090
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5515,6 +5538,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: 0
+  autoSetMaterial: 1
 --- !u!114 &11400096
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5539,6 +5563,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: 0
+  autoSetMaterial: 1
 --- !u!114 &11400100
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5563,6 +5588,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: 0
+  autoSetMaterial: 1
 --- !u!114 &11400104
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5587,6 +5613,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: 0
+  autoSetMaterial: 1
 --- !u!114 &11400108
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5611,6 +5638,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: 0
+  autoSetMaterial: 1
 --- !u!114 &11400112
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5647,6 +5675,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: 0
+  autoSetMaterial: 1
 --- !u!114 &11400118
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5671,6 +5700,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: 0
+  autoSetMaterial: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

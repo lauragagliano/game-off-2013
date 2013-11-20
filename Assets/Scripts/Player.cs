@@ -109,10 +109,15 @@ public class Player : MonoBehaviour
 
 		TryMove ();
 		TryActivateAbilities ();
+
 		CheckShieldTimeout ();
 		CheckSlowDownTimeout ();
 		
 		ClampToWorldYZ (worldYClamp, worldZClamp);
+		// If no colors are active, go neutral
+		if (!bluePower.IsPowerActive () && !redPower.IsPowerActive () && !greenPower.IsPowerActive()){
+			ChangeColors (ColorWheel.neutral);
+		}
 		RenderCurrentColor ();
 		PullNearbyPickups ();
 	}
@@ -135,6 +140,7 @@ public class Player : MonoBehaviour
 	 */
 	void RenderCurrentColor ()
 	{
+		// TODO Why on Update???
 		MaterialSet matSet = (MaterialSet)playerGeo.GetComponent<MaterialSet> ();
 		matSet.SetColor (playerRGB.color);
 	}
@@ -199,8 +205,9 @@ public class Player : MonoBehaviour
 	void SetActivePower (Power activePower, Power inactivePower1, Power inactivePower2)
 	{
 		activePower.ActivatePower ();
-		DeactivatePowerIfActive (inactivePower1);
-		DeactivatePowerIfActive (inactivePower2);
+		// Add this back if we want powers to stomp eachother
+//		DeactivatePowerIfActive (inactivePower1);
+//		DeactivatePowerIfActive (inactivePower2);
 	}
 	
 	/*
@@ -450,7 +457,6 @@ public class Player : MonoBehaviour
 		curShields = 0;
 		shieldObject.SetActive (false);
 		greenPower.ResetPower ();
-		//TODO Set player color to neutral
 	}
 	
 	/*

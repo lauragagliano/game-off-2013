@@ -4,11 +4,16 @@
 TagManager:
   tags:
   - Block
-  - Pickup
+  - 
   - Section
   - Treadmill
   - Item
   - Wildcard
+  - PickupGroupA
+  - PickupGroupB
+  - PickupGroupC
+  - 
+  - Pickup
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

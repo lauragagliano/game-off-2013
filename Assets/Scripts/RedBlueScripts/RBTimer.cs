@@ -29,7 +29,6 @@ public class RBTimer
 	 */
 	public void StartTimer (float desiredDuration)
 	{
-		Debug.Log ("Timer Started. (" + desiredDuration + ")");
 		duration = desiredDuration;
 		timeStarted = Time.time;
 		isRunning = true;

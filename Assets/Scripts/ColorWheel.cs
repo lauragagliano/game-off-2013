@@ -6,5 +6,6 @@ public enum ColorWheel
 	red,
 	green,
 	blue,
-	black
+	black,
+	neutral
 }

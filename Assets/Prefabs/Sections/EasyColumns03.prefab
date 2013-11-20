@@ -18,7 +18,7 @@ GameObject:
   - 12: {fileID: 1200000}
   m_Layer: 0
   m_Name: RedPickup
-  m_TagString: Pickup
+  m_TagString: PickupGroupA
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -41,7 +41,7 @@ GameObject:
   - 12: {fileID: 1200002}
   m_Layer: 0
   m_Name: RedPickup
-  m_TagString: Pickup
+  m_TagString: PickupGroupA
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -64,7 +64,7 @@ GameObject:
   - 12: {fileID: 1200004}
   m_Layer: 0
   m_Name: RedPickup
-  m_TagString: Pickup
+  m_TagString: PickupGroupA
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -87,7 +87,7 @@ GameObject:
   - 12: {fileID: 1200006}
   m_Layer: 0
   m_Name: RedPickup
-  m_TagString: Pickup
+  m_TagString: PickupGroupA
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -110,7 +110,7 @@ GameObject:
   - 12: {fileID: 1200008}
   m_Layer: 0
   m_Name: RedPickup
-  m_TagString: Pickup
+  m_TagString: PickupGroupA
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -133,7 +133,7 @@ GameObject:
   - 12: {fileID: 1200010}
   m_Layer: 0
   m_Name: RedPickup
-  m_TagString: Pickup
+  m_TagString: PickupGroupA
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -156,7 +156,7 @@ GameObject:
   - 12: {fileID: 1200012}
   m_Layer: 0
   m_Name: RedPickup
-  m_TagString: Pickup
+  m_TagString: PickupGroupA
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -179,7 +179,7 @@ GameObject:
   - 12: {fileID: 1200014}
   m_Layer: 0
   m_Name: RedPickup
-  m_TagString: Pickup
+  m_TagString: PickupGroupA
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -202,7 +202,7 @@ GameObject:
   - 12: {fileID: 1200016}
   m_Layer: 0
   m_Name: RedPickup
-  m_TagString: Pickup
+  m_TagString: PickupGroupA
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -225,7 +225,7 @@ GameObject:
   - 12: {fileID: 1200018}
   m_Layer: 0
   m_Name: RedPickup
-  m_TagString: Pickup
+  m_TagString: PickupGroupA
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -248,7 +248,7 @@ GameObject:
   - 12: {fileID: 1200020}
   m_Layer: 0
   m_Name: RedPickup
-  m_TagString: Pickup
+  m_TagString: PickupGroupA
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -271,7 +271,7 @@ GameObject:
   - 12: {fileID: 1200022}
   m_Layer: 0
   m_Name: RedPickup
-  m_TagString: Pickup
+  m_TagString: PickupGroupA
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -294,7 +294,7 @@ GameObject:
   - 12: {fileID: 1200024}
   m_Layer: 0
   m_Name: RedPickup
-  m_TagString: Pickup
+  m_TagString: PickupGroupA
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -317,7 +317,7 @@ GameObject:
   - 12: {fileID: 1200026}
   m_Layer: 0
   m_Name: RedPickup
-  m_TagString: Pickup
+  m_TagString: PickupGroupA
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -340,7 +340,7 @@ GameObject:
   - 12: {fileID: 1200028}
   m_Layer: 0
   m_Name: RedPickup
-  m_TagString: Pickup
+  m_TagString: PickupGroupA
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -363,7 +363,7 @@ GameObject:
   - 12: {fileID: 1200030}
   m_Layer: 0
   m_Name: RedPickup
-  m_TagString: Pickup
+  m_TagString: PickupGroupA
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -386,7 +386,7 @@ GameObject:
   - 12: {fileID: 1200032}
   m_Layer: 0
   m_Name: RedPickup
-  m_TagString: Pickup
+  m_TagString: PickupGroupA
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -409,7 +409,7 @@ GameObject:
   - 12: {fileID: 1200034}
   m_Layer: 0
   m_Name: RedPickup
-  m_TagString: Pickup
+  m_TagString: PickupGroupA
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -432,7 +432,7 @@ GameObject:
   - 12: {fileID: 1200036}
   m_Layer: 0
   m_Name: RedPickup
-  m_TagString: Pickup
+  m_TagString: PickupGroupA
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -455,7 +455,7 @@ GameObject:
   - 12: {fileID: 1200038}
   m_Layer: 0
   m_Name: RedPickup
-  m_TagString: Pickup
+  m_TagString: PickupGroupA
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -478,7 +478,7 @@ GameObject:
   - 12: {fileID: 1200040}
   m_Layer: 0
   m_Name: RedPickup
-  m_TagString: Pickup
+  m_TagString: PickupGroupA
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -501,7 +501,7 @@ GameObject:
   - 12: {fileID: 1200042}
   m_Layer: 0
   m_Name: RedPickup
-  m_TagString: Pickup
+  m_TagString: PickupGroupA
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

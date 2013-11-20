@@ -9,7 +9,7 @@ public class MaterialSet : MonoBehaviour {
 	public GameObject legR;
 	public GameObject body;
 	
-	public Material[] bodyMaterials = new Material[3];
+	public Material[] bodyMaterials = new Material[4];
 	
 	public void SetColor(ColorWheel color)
 	{
@@ -28,6 +28,10 @@ public class MaterialSet : MonoBehaviour {
 		{
 			armLegMat = ColorManager.Instance.blue;
 			body.renderer.material = bodyMaterials[2];
+		} else if(color == ColorWheel.neutral)
+		{
+			armLegMat = ColorManager.Instance.neutral;
+			body.renderer.material = bodyMaterials[3];
 		}
 		ColorArmsAndLegs(armLegMat);
 	}

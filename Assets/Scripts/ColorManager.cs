@@ -7,4 +7,5 @@ public class ColorManager : Singleton<ColorManager>
 	public Material green;
 	public Material blue;
 	public Material black;
+	public Material neutral;
 }

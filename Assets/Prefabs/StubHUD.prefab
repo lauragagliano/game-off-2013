@@ -63,7 +63,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &100008
 GameObject:
   m_ObjectHideFlags: 1
@@ -772,7 +772,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01a657c9f2c02427b945d6205032bc9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentFillPercent: 0
+  power: {fileID: 0}
   fill: {fileID: 100012}
   glowAnimation: {fileID: 7400000, guid: ce8f3aca6f71b4250a73b978d5e153bf, type: 2}
   fillMaterial: {fileID: 2100000, guid: cf78bba95c35d1848bdae4edb4f17228, type: 2}
@@ -787,7 +787,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01a657c9f2c02427b945d6205032bc9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentFillPercent: 0
+  power: {fileID: 0}
   fill: {fileID: 100014}
   glowAnimation: {fileID: 7400000, guid: 611bae892d1564949babf8804247aa7a, type: 2}
   fillMaterial: {fileID: 2100000, guid: de95a5669d65fa341ba620ec66bb8a84, type: 2}
@@ -802,7 +802,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01a657c9f2c02427b945d6205032bc9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentFillPercent: 0
+  power: {fileID: 0}
   fill: {fileID: 100024}
   glowAnimation: {fileID: 7400000, guid: fe90aa8a2631749c2ac29511b858da0c, type: 2}
   fillMaterial: {fileID: 2100000, guid: 45b9c557e9e5ee744a421c2855e33c6f, type: 2}

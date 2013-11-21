@@ -15,6 +15,7 @@ public abstract class Power : MonoBehaviour
 	public float curValue = 0;
 	float maxValue = 20;
 	const float UPGRADED_MAX = 15;
+	bool isPowerActive;
 	float powerDuration = 5;
 	const float UPGRADED_DURATION = 20;
 	RBTimer powerTimer = new RBTimer ();
@@ -30,7 +31,7 @@ public abstract class Power : MonoBehaviour
 	 */
 	public void ResetPower ()
 	{
-		powerTimer.StopTimer ();
+		isPowerActive = false;
 		abilityCooldownTimer.StopTimer ();
 		curValue = 0;
 	}
@@ -43,8 +44,8 @@ public abstract class Power : MonoBehaviour
 			if (abilityCooldownTimer.IsTimeUp ()) {
 				abilityCooldownTimer.StopTimer ();
 			}
-			if (powerTimer.IsTimeUp ()) {
-				powerTimer.StopTimer ();
+			if (curValue <= 0) {
+				isPowerActive = false;
 				abilityCooldownTimer.StopTimer ();
 			}
 		}
@@ -63,15 +64,14 @@ public abstract class Power : MonoBehaviour
 	 */
 	public void AddPower (int amount)
 	{
-		if (IsPowerActive ()) {
-			// Don't add power if it's being used
-			return;
+		float newVal = curValue + amount;
+		if (newVal < maxValue) {
+			curValue = newVal;
+		} else if (newVal >= maxValue) {
+			curValue = maxValue;
 		}
-		if (curValue < maxValue) {
-			curValue += amount;
-			if (curValue == maxValue) {
-				audio.PlayOneShot (powerReadySound);
-			}
+		if (curValue == maxValue && !IsPowerActive ()) {
+			audio.PlayOneShot (powerReadySound);
 		}
 	}
 	
@@ -107,7 +107,7 @@ public abstract class Power : MonoBehaviour
 	 */
 	public bool IsPowerActive ()
 	{
-		return powerTimer.IsRunning ();
+		return isPowerActive;
 	}
 	
 	/*
@@ -116,7 +116,7 @@ public abstract class Power : MonoBehaviour
 	 */
 	public void ActivatePower ()
 	{
-		powerTimer.StartTimer (powerDuration);
+		isPowerActive = true;
 	}
 	
 	/*

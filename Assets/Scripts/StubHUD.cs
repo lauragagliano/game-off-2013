@@ -41,10 +41,6 @@ public class StubHUD : MonoBehaviour
 		}
 		scoreText.text = string.Format ("Passed Pigments: {0}\nHealth: {1}\nWildcards: {2}\nMoney: {3}",
 			GameManager.Instance.numPickupsPassed, player.curHealth, player.WildcardCount, player.money);
-		
-		redMeter.CurrentFillPercent = player.redPower.GetFillPercentage ();
-		greenMeter.CurrentFillPercent = player.greenPower.GetFillPercentage ();
-		blueMeter.CurrentFillPercent = player.bluePower.GetFillPercentage ();
 	}
 	
 	/*

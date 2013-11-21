@@ -5,13 +5,16 @@ public class GUIMeter : MonoBehaviour
 {
 	float maxScale;
 	float maxSize;
-	public float CurrentFillPercent;
+	public Power power;
 	public GameObject fill;
 	public AnimationClip glowAnimation;
 	public Material fillMaterial;
 	
 	void Start ()
 	{
+		if (power == null) {
+			Debug.LogError ("Meter [" + name + "] not tied to a power.");
+		}
 		// Cache the scale of the fill meter.
 		maxScale = fill.transform.localScale.x;
 		
@@ -21,17 +24,18 @@ public class GUIMeter : MonoBehaviour
 	
 	void Update ()
 	{
+		float currentFillPercentage = power.GetFillPercentage ();
 		// Set scale to the current fill percentage
-		fill.transform.localScale = new Vector3 (CurrentFillPercent * maxScale, fill.transform.localScale.y, 
+		fill.transform.localScale = new Vector3 (currentFillPercentage * maxScale, fill.transform.localScale.y, 
 			fill.transform.localScale.z);
 		
 		// Adjust "anchoring" of the fill to always be to the left of the parent object
-		float missingX = maxSize * (1 - CurrentFillPercent) * maxScale;
+		float missingX = maxSize * (1 - currentFillPercentage) * maxScale;
 		fill.transform.localPosition = new Vector3 (-missingX, fill.transform.localPosition.y,
 			fill.transform.localPosition.z);
 		
-		// Glow the full meter
-		if (CurrentFillPercent >= 1.0f) {
+		// Glow an active meter
+		if (power.IsPowerActive ()) {
 			Animation animation = GetComponent<Animation>();
 			animation.Play (glowAnimation.name);
 		} else {

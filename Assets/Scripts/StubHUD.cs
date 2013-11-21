@@ -30,7 +30,9 @@ public class StubHUD : MonoBehaviour
 	
 	void OnGUI ()
 	{
-		if (GameManager.Instance.IsGameOver ()) {
+		if (GameManager.Instance.IsOnMenu ()) {
+			DisplayMainMenu ();
+		} else if (GameManager.Instance.IsGameOver ()) {
 			DisplayDeadMenu ();
 		} else if (GameManager.Instance.IsShopping ()) {
 			DisplayStoreMenu ();
@@ -58,7 +60,7 @@ public class StubHUD : MonoBehaviour
 			GameManager.Instance.StartGame ();
 		}
 		if (GUILayout.Button ("Go to Store")) {
-			GameManager.Instance.EnterStore ();
+			GameManager.Instance.GoToStore ();
 		}
 		GUILayout.EndArea ();
 	}
@@ -85,7 +87,7 @@ public class StubHUD : MonoBehaviour
 			}
 		}
 		if (GUILayout.Button ("Start Game")) {
-			GameManager.Instance.ExitStore ();
+			GameManager.Instance.GoToGame ();
 			GameManager.Instance.StartGame ();
 		}
 		GUILayout.EndArea ();
@@ -99,5 +101,22 @@ public class StubHUD : MonoBehaviour
 			TextMesh itemText = obj.GetComponentInChildren<TextMesh> ();
 			itemText.text = string.Format ("{0}\n\nCost: {1}", item.itemName, item.cost);
 		}
+	}
+	
+	/*
+	 * Show the buttons for the main menu and include logic when buttons
+	 * are pressed.
+	 */
+	void DisplayMainMenu ()
+	{
+		GUILayout.BeginArea (new Rect (Screen.width - 220.0f, Screen.height - 70.0f, 200.0f, 70.0f));
+		if (GUILayout.Button ("Start Game [ENTER]")) {
+			GameManager.Instance.GoToGame ();
+			GameManager.Instance.StartGame ();
+		}
+		if (GUILayout.Button ("Shop")) {
+			GameManager.Instance.GoToStore ();
+		}
+		GUILayout.EndArea ();
 	}
 }

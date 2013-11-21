@@ -45,6 +45,7 @@ public class GameManager : Singleton<GameManager>
 	
 	void Awake ()
 	{
+		GoToMainMenu ();
 		LoadReferencedObjects ();
 		LinkSceneObjects ();
 	}
@@ -104,6 +105,14 @@ public class GameManager : Singleton<GameManager>
 	}
 	
 	/*
+	 * Return true if game is in Menu state.
+	 */
+	public bool IsOnMenu ()
+	{
+		return gameState == GameState.Menu;
+	}
+	
+	/*
 	 * Return true if the game and all subsequent states are over and we are ready to retry to go to main.
 	 */
 	public bool IsGameOver ()
@@ -114,7 +123,7 @@ public class GameManager : Singleton<GameManager>
 	/*
 	 * Return true if the game is running.
 	 */
-	public bool IsRunning ()
+	public bool IsPlaying ()
 	{
 		return gameState == GameState.Running;
 	}
@@ -189,8 +198,8 @@ public class GameManager : Singleton<GameManager>
 	 */
 	public void StartGame ()
 	{
-		numPickupsPassed = 0;
 		gameState = GameState.Running;
+		numPickupsPassed = 0;
 		difficulty = Difficulty.Easy;
 		player.gameObject.SetActive (true);
 		player.InitializeStats ();
@@ -240,18 +249,45 @@ public class GameManager : Singleton<GameManager>
 	/*
 	 * Go to the store section of our scene.
 	 */
-	public void EnterStore ()
+	public void GoToStore ()
 	{
 		gameState = GameState.Store;
-		store.EnterStore ();
+		// TODO We could improve performance by turning off objects as well as cameras
+		Camera menuCamera = GameObject.Find (ObjectNames.MENU_CAMERA).camera;
+		Camera gameCamera = GameObject.Find (ObjectNames.GAME_CAMERA).camera;
+		Camera storeCamera = GameObject.Find (ObjectNames.STORE_CAMERA).camera;
+		menuCamera.enabled = false;
+		gameCamera.enabled = false;
+		storeCamera.enabled = true;
+	}
+	
+	/*
+	 * Go to the game.
+	 */
+	public void GoToGame ()
+	{
+		gameState = GameState.Menu;
+		// TODO We could improve performance by turning off objects as well as cameras
+		Camera menuCamera = GameObject.Find (ObjectNames.MENU_CAMERA).camera;
+		Camera gameCamera = GameObject.Find (ObjectNames.GAME_CAMERA).camera;
+		Camera storeCamera = GameObject.Find (ObjectNames.STORE_CAMERA).camera;
+		menuCamera.enabled = false;
+		gameCamera.enabled = true;
+		storeCamera.enabled = false;
 	}
 	
 	/*
 	 * Return to the main menu.
 	 */
-	public void ExitStore ()
+	public void GoToMainMenu ()
 	{
-		store.ExitStore ();
+		// TODO This is a good place to deactivate assets as well
 		gameState = GameState.Menu;
+		Camera menuCamera = GameObject.Find (ObjectNames.MENU_CAMERA).camera;
+		Camera gameCamera = GameObject.Find (ObjectNames.GAME_CAMERA).camera;
+		Camera storeCamera = GameObject.Find (ObjectNames.STORE_CAMERA).camera;
+		menuCamera.enabled = true;
+		storeCamera.enabled = false;
+		gameCamera.enabled = false;
 	}
 }

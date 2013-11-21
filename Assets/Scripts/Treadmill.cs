@@ -58,7 +58,7 @@ public class Treadmill : MonoBehaviour
 			if (isSectionPastKillZone (sectionsInPlay [0])) {
 				KillSection (sectionsInPlay [0]);
 			}
-			if (!GameManager.Instance.IsRunning()) {
+			if (!GameManager.Instance.IsPlaying()) {
 				Stop ();
 			}
 		}

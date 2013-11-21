@@ -65,30 +65,6 @@ public class Store : MonoBehaviour
 	}
 	
 	/*
-	 * Turn on the store cam and turn off the main camera.
-	 */
-	public void EnterStore ()
-	{
-		// TODO We could improve performance by turning off objects as well as cameras
-		Camera storeCamera = GameObject.Find (ObjectNames.STORE_CAMERA).camera;
-		Camera mainCamera = GameObject.Find (ObjectNames.MAIN_CAMERA).camera;
-		storeCamera.enabled = true;
-		mainCamera.enabled = false;
-	}
-	
-	/*
-	 * Turn off the store cam and turn on the main camera.
-	 */
-	public void ExitStore ()
-	{
-		// TODO We could improve performance by turning off objects as well as cameras
-		Camera storeCamera = GameObject.Find (ObjectNames.STORE_CAMERA).camera;
-		Camera mainCamera = GameObject.Find (ObjectNames.MAIN_CAMERA).camera;
-		storeCamera.enabled = false;
-		mainCamera.enabled = true;
-	}
-	
-	/*
 	 * Check if the player has already purcahsed the item. If so, return true.
 	 */
 	public bool IsAlreadyPurchased ()

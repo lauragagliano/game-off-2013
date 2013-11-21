@@ -13,6 +13,10 @@ We try to use open source software whenever possible. These are the tools we use
 
 ## Attributions
 
+### Libraries
+
+[UnityLock](http://unityassetreview.com/assets/6865) by [Nick Gravelyn](http://unityassetreview.com/publishers/113)
+
 ### Sounds
 
 The following sounds are or were at one point in our source code and may

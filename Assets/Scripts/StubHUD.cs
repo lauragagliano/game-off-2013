@@ -7,19 +7,10 @@ public class StubHUD : MonoBehaviour
 	public GUIText startEndText;
 	public GUIText helpText;
 	public GUIText scoreText;
-	public GameObject redMeterGO;
-	GUIMeter redMeter;
-	public GameObject blueMeterGO;
-	GUIMeter blueMeter;
-	public GameObject greenMeterGO;
-	GUIMeter greenMeter;
 
 	void Awake ()
 	{
 		helpText.text = "A: LEFT\nD: RIGHT\n\nJ: RED\nK: GREEN\nL: BLUE\n\n(Tap Twice for POAWAHH";
-		redMeter = redMeterGO.GetComponent<GUIMeter> ();
-		blueMeter = blueMeterGO.GetComponent<GUIMeter> ();
-		greenMeter = greenMeterGO.GetComponent<GUIMeter> ();
 		SetItemTexts ();
 	}
 	

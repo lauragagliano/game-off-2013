@@ -292,7 +292,17 @@ public class Player : MonoBehaviour
 	 */
 	public void CollideWithBlock ()
 	{
-		LoseHealth (1);
+		if (curShields > 0) {
+			TakeShieldHit (1);
+		} else {
+			// Subtract the health
+			curHealth = curHealth - 1;
+		}
+		
+		// Handle death
+		if (curHealth <= 0) {
+			Die ();
+		}
 	}
 	
 	/*
@@ -323,21 +333,6 @@ public class Player : MonoBehaviour
 			break;
 		}
 		return returnPower;
-	}
-	
-	public void LoseHealth (int loss)
-	{
-		if (curShields > 0) {
-			TakeShieldHit (loss);
-		} else {
-			// Subtract the health
-			curHealth = curHealth - loss;
-		}
-		
-		// Handle death
-		if (curHealth <= 0) {
-			Die ();
-		}
 	}
 	
 	public void Die ()

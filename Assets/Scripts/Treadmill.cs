@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class Treadmill : MonoBehaviour
 {
 	const float STARTING_SPEED = 20.0f;
+	const float STARTING_ACCEL = 0.005f;
 	public float scrollspeed;
 	float prevScrollspeed;
 	float accelerationPerFrame = 0.005f;
@@ -139,6 +140,7 @@ public class Treadmill : MonoBehaviour
 		for (int i = sectionsInPlay.Count-1; i >= 0; i--) {
 			KillSection (sectionsInPlay[i]);
 		}
+		accelerationPerFrame = STARTING_ACCEL;
 		lerping = false;
 		lerpToSpeed = STARTING_SPEED;
 	}

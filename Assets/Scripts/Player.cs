@@ -245,8 +245,10 @@ public class Player : MonoBehaviour
 	 */
 	public void PullNearbyPickups ()
 	{
-		float pullDistance = transform.lossyScale.x * 2;
+		float noMagnetDist = transform.lossyScale.x * 2;
+		float pullDistance;
 		foreach (GameObject pickup in pickups) {
+			pullDistance  = noMagnetDist;
 			if (pickup.GetComponent<RGB> () != null) {
 				if (HasMagnetForColor (pickup.GetComponent<RGB> ().color)) {
 					pullDistance = MAGNET_DIST;

@@ -27,6 +27,7 @@ public class Treadmill : MonoBehaviour
 	Status status;
 	
 	enum Status {
+		Tutorial,
 		Stopped,
 		Started
 	}
@@ -37,11 +38,15 @@ public class Treadmill : MonoBehaviour
 		scrollspeed = STARTING_SPEED;
 		sectionSpawnZone = (Transform)GameObject.Find (ObjectNames.SECTION_SPAWN).transform;
 		sectionKillZone = (Transform)GameObject.Find (ObjectNames.SECTION_KILLZONE).transform;
-		Start ();
 	}
 	
 	void Update ()
 	{
+		if (status == Status.Tutorial) {
+			if (Input.anyKeyDown) {
+				Start ();
+			}
+		}
 		if (status == Status.Started) {
 			if (lerping) {
 				UpdateLerping ();
@@ -66,6 +71,13 @@ public class Treadmill : MonoBehaviour
 	}
 	
 	#region #1 Treadmill Manipulation (Start/Stop/Reset/Slowdown)
+	public void ShowTutorial ()
+	{
+		Debug.Log ("Showing tutorial");
+		scrollspeed = 0;
+		status = Status.Tutorial;
+	}
+	
 	public void Start ()
 	{
 		scrollspeed = STARTING_SPEED;
@@ -77,7 +89,7 @@ public class Treadmill : MonoBehaviour
 		scrollspeed = 0;
 		status = Status.Stopped;
 	}
-	
+
 	/*
 	 * Temporarily turn off acceleration of treadmill. Make sure to call
 	 * ResumeAcceleration when done!
@@ -129,7 +141,6 @@ public class Treadmill : MonoBehaviour
 		}
 		lerping = false;
 		lerpToSpeed = STARTING_SPEED;
-		Start ();
 	}
 	
 	/*
@@ -174,7 +185,7 @@ public class Treadmill : MonoBehaviour
 		Transform backEdge = (Transform)frontSection.transform.FindChild (ObjectNames.BACK_EDGE);
 		return backEdge.position.z <= sectionKillZone.position.z;
 	}
-	
+
 	/*
 	 * Using our level generation algorithm, select and spawn a new section. Destory the
 	 * stale section (the section past the player) and assign the section on top of the player

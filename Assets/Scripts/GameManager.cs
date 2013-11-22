@@ -8,7 +8,8 @@ using System.Collections;
 public class GameManager : Singleton<GameManager>
 {
 	public Player player;
-	Difficulty difficulty = Difficulty.Easy;
+	// TODO make this private when we don't need to show difficulty on screen
+	public Difficulty difficulty = Difficulty.Easy;
 	GameState gameState = GameState.Running;
 	public int numPickupsPassed;
 	public int redPoints;
@@ -26,7 +27,8 @@ public class GameManager : Singleton<GameManager>
 	float timeDeathDelayStarted;
 	float deathDelayTime = 1.0f;
 	
-	enum Difficulty
+	// TODO make this private when we don't need to show difficulty on screen
+	public enum Difficulty
 	{
 		Easy,
 		Medium,
@@ -195,8 +197,9 @@ public class GameManager : Singleton<GameManager>
 	
 	/*
 	 * Restart necessary data, respawn player, and restart the treadmill.
+	 * Accepts a parameter to show the tutorial on play.
 	 */
-	public void StartGame ()
+	public void StartGame (bool showTutorial)
 	{
 		gameState = GameState.Running;
 		numPickupsPassed = 0;
@@ -204,7 +207,13 @@ public class GameManager : Singleton<GameManager>
 		player.gameObject.SetActive (true);
 		player.InitializeStats ();
 		player.transform.position = playerSpawn.position;
+
 		treadmill.ResetTreadmill ();
+		if (showTutorial) {
+			treadmill.ShowTutorial ();
+		} else {
+			treadmill.Start ();
+		}
 	}
 	
 	/*

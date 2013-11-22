@@ -39,8 +39,9 @@ public class StubHUD : MonoBehaviour
 		} else {
 			startEndText.text = string.Empty;
 		}
-		scoreText.text = string.Format ("Passed Pigments: {0}\nHealth: {1}\nWildcards: {2}\nMoney: {3}",
-			GameManager.Instance.numPickupsPassed, player.curHealth, player.WildcardCount, player.money);
+		scoreText.text = string.Format ("Passed Pigments: {0}\nHealth: {1}\nWildcards: {2}\nMoney: {3}\nDifficulty: {4}",
+			GameManager.Instance.numPickupsPassed, player.curHealth, player.WildcardCount, player.money,
+			GameManager.Instance.difficulty);
 	}
 	
 	/*
@@ -53,7 +54,7 @@ public class StubHUD : MonoBehaviour
 		GUILayout.BeginArea (new Rect (Screen.width / 2 - 50.0f, Screen.height / 2, 200.0f, 70.0f));
 		if (GUILayout.Button ("Click to Retry")) {
 			//Application.LoadLevel (Application.loadedLevel);
-			GameManager.Instance.StartGame ();
+			GameManager.Instance.StartGame (false);
 		}
 		if (GUILayout.Button ("Go to Store")) {
 			GameManager.Instance.GoToStore ();
@@ -84,7 +85,7 @@ public class StubHUD : MonoBehaviour
 		}
 		if (GUILayout.Button ("Start Game")) {
 			GameManager.Instance.GoToGame ();
-			GameManager.Instance.StartGame ();
+			GameManager.Instance.StartGame (false);
 		}
 		GUILayout.EndArea ();
 	}
@@ -108,7 +109,7 @@ public class StubHUD : MonoBehaviour
 		GUILayout.BeginArea (new Rect (Screen.width - 220.0f, Screen.height - 70.0f, 200.0f, 70.0f));
 		if (GUILayout.Button ("Start Game [ENTER]")) {
 			GameManager.Instance.GoToGame ();
-			GameManager.Instance.StartGame ();
+			GameManager.Instance.StartGame (true);
 		}
 		if (GUILayout.Button ("Shop")) {
 			GameManager.Instance.GoToStore ();

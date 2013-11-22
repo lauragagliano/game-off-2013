@@ -219,7 +219,7 @@ public class Player : MonoBehaviour
 			power.ResetPower ();
 		}
 	}
-	
+
 	#endregion
 
 	#region #3 Player and Block interaction

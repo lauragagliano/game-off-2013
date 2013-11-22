@@ -14,6 +14,7 @@ public class Treadmill : MonoBehaviour
 	public List<GameObject> easySections;
 	public List<GameObject> mediumSections;
 	public List<GameObject> hardSections;
+	public List<GameObject> freebieSections;
 	
 	List<GameObject> sectionsInPlay;
 	Transform sectionSpawnZone;
@@ -183,7 +184,12 @@ public class Treadmill : MonoBehaviour
 	{
 		// Determine which bucket of sections to draw from
 		List<GameObject> sectionBucket = easySections;
-		if (GameManager.Instance.IsMedium ()) {
+		if (GameManager.Instance.IsEasy ()) {
+			bool coinflip = RBRandom.PercentageChance (10.0f);
+			if (coinflip) {
+				sectionBucket = freebieSections;
+			}
+		} else if (GameManager.Instance.IsMedium ()) {
 			// Only give an X% change of medium tiles when we're in it.
 			bool coinflip = RBRandom.PercentageChance (75f);
 			if (coinflip) {

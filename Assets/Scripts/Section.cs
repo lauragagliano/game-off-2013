@@ -66,6 +66,10 @@ public class Section : MonoBehaviour
 				GameObject pickup = InstantiatePrefabAtPlaceholder (ObjectNames.CRYSTAL_PREFAB, child, tempPrefabHolder.transform);
 				pickup.GetComponent<RGB> ().color = randomColorforPickupB;
 				pickup.GetComponent<RGB> ().Refresh ();
+			} else if (child.CompareTag (Tags.PICKUP_GROUP_C)) {
+				GameObject pickup = InstantiatePrefabAtPlaceholder (ObjectNames.CRYSTAL_PREFAB, child, tempPrefabHolder.transform);
+				pickup.GetComponent<RGB> ().color = randomColorforPickupC;
+				pickup.GetComponent<RGB> ().Refresh ();
 			}
 			else if (child.CompareTag (Tags.WILDCARD)) {
 				GameObject pickup = InstantiatePrefabAtPlaceholder (ObjectNames.WILDCARD_PREFAB, child, tempPrefabHolder.transform);
@@ -95,7 +99,9 @@ public class Section : MonoBehaviour
 	{
 		numberOfPickups = 0;
 		foreach (Transform child in transform) {
-			if (child.CompareTag (Tags.PICKUP_GROUP_A)) {
+			if (child.CompareTag (Tags.PICKUP_GROUP_A) ||
+				child.CompareTag (Tags.PICKUP_GROUP_B) ||
+				child.CompareTag (Tags.PICKUP_GROUP_C)) {
 				numberOfPickups++;
 			}
 		}

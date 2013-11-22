@@ -7,6 +7,7 @@ public class Tags
 	public static string BLOCK = "Block";
 	public static string PICKUP_GROUP_A = "PickupGroupA";
 	public static string PICKUP_GROUP_B = "PickupGroupB";
+	public static string PICKUP_GROUP_C = "PickupGroupC";
 	public static string SECTION = "Section";
 	public static string TREADMILL = "Treadmill";
 	public static string ITEM = "Item";

@@ -45,7 +45,8 @@ public class RedBlueTools : EditorWindow
 		foreach (Section section in allSections) {
 			section.SetEntranceAndExitBitmaps ();
 			Debug.Log (string.Format ("Set {0} entrance to {1} and exit to {2}.", section.name, 
-				section.entranceBitmap, section.exitBitmap));section.SetPickupCount ();
+				section.entranceBitmap, section.exitBitmap));
+			section.SetPickupCount ();
 			Debug.Log (string.Format ("Set {0} pickup count to {1}", section.name, 
 				section.numberOfPickups));
 		}

@@ -5521,7 +5521,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5bb9dec04a718c4e95b4d6c7be54e37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfPickups: 28
+  numberOfPickups: 30
   entranceOpenings: 0101010101
   exitOpenings: 0101010101
   entranceBitmap: 31

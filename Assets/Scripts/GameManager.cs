@@ -266,7 +266,7 @@ public class GameManager : Singleton<GameManager>
 	 */
 	public void GoToGame ()
 	{
-		gameState = GameState.Menu;
+		gameState = GameState.Running;
 		// TODO We could improve performance by turning off objects as well as cameras
 		Camera menuCamera = GameObject.Find (ObjectNames.MENU_CAMERA).camera;
 		Camera gameCamera = GameObject.Find (ObjectNames.GAME_CAMERA).camera;

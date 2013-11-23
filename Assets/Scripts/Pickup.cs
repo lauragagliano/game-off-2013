@@ -8,11 +8,25 @@ public class Pickup : MonoBehaviour
 	float originalDistance;
 	float distanceScaleup = 0.1f;
 	bool applicationIsQuitting;
+	public float size;
 
 	protected virtual void Start ()
 	{
 		// Put the pickups into a list of pickups. This is so that we can do distance checks instead of collisions.
 		GameManager.Instance.player.RememberPickup (gameObject);
+		InitializeSize ();
+	}
+	
+	/*
+	 * Cache the size of this pickup, used to detect collisions.
+	 */
+	protected virtual void InitializeSize ()
+	{
+		if (collider == null) {
+			size = 2.0f;
+		} else {
+			size = collider.bounds.extents.x;
+		}
 	}
 	
 	void LateUpdate ()
@@ -41,7 +55,7 @@ public class Pickup : MonoBehaviour
 	void OnDestroy ()
 	{
 		// Don't need to collect the pickup for the player when destroyed through application quitting.
-		if(applicationIsQuitting){
+		if (applicationIsQuitting) {
 			return;
 		}
 		Player player = GameManager.Instance.player;
@@ -56,11 +70,10 @@ public class Pickup : MonoBehaviour
 	/*
 	 * Called when the game is exited
 	 */
-	public void OnApplicationQuit()
+	public void OnApplicationQuit ()
 	{
 		applicationIsQuitting = true;
 	}
-		
 	
 	protected virtual void AnimateIdle ()
 	{

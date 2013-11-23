@@ -245,17 +245,19 @@ public class Player : MonoBehaviour
 	 */
 	public void PullNearbyPickups ()
 	{
-		float noMagnetDist = transform.lossyScale.x * 2;
+		float noMagnetDist = transform.collider.bounds.extents.x;
 		float pullDistance;
 		foreach (GameObject pickup in pickups) {
 			pullDistance  = noMagnetDist;
+			Pickup pickupScript = pickup.GetComponent<Pickup> ();
 			if (pickup.GetComponent<RGB> () != null) {
 				if (HasMagnetForColor (pickup.GetComponent<RGB> ().color)) {
 					pullDistance = MAGNET_DIST;
 				}
 			}
-			if (Vector3.SqrMagnitude (pickup.transform.position - transform.position) <= Mathf.Pow (pullDistance, 2)) {
-				pickup.GetComponent<Pickup> ().StartCollecting (gameObject);
+			if (Vector3.SqrMagnitude (pickup.transform.position - transform.position) <= (Mathf.Pow (pullDistance, 2) + 
+				pickupScript.size)) {
+				pickupScript.StartCollecting (gameObject);
 			}
 		}
 	}

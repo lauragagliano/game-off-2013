@@ -3,6 +3,7 @@ using System.Collections;
 
 public class PigmentBody : MonoBehaviour
 {
+	ColorWheel currentColor;
 	public GameObject armL;
 	public GameObject armR;
 	public GameObject legL;
@@ -20,31 +21,48 @@ public class PigmentBody : MonoBehaviour
 	public GameObject fxBodyPrefab;
 	public Material[] bodyMaterials = new Material[4];
 	
-	public void SetColor (ColorWheel color)
+	public void SetColor (ColorWheel color, bool colorFX)
 	{
+		GameObject bodyToColor = colorFX ? fxBody : body;
 		Material armLegMat = ColorManager.Instance.red;
 		if (color == ColorWheel.red) {
 			armLegMat = ColorManager.Instance.red;
-			body.renderer.material = bodyMaterials [0];
+			bodyToColor.renderer.material = bodyMaterials [0];
 		} else if (color == ColorWheel.green) {
 			armLegMat = ColorManager.Instance.green;
-			body.renderer.material = bodyMaterials [1];
+			bodyToColor.renderer.material = bodyMaterials [1];
 		} else if (color == ColorWheel.blue) {
 			armLegMat = ColorManager.Instance.blue;
-			body.renderer.material = bodyMaterials [2];
+			bodyToColor.renderer.material = bodyMaterials [2];
 		} else if (color == ColorWheel.neutral) {
 			armLegMat = ColorManager.Instance.neutral;
-			body.renderer.material = bodyMaterials [3];
+			bodyToColor.renderer.material = bodyMaterials [3];
 		}
-		ColorArmsAndLegs (armLegMat);
+		ColorArmsAndLegs (armLegMat, colorFX);
+		
+		currentColor = color;
 	}
 	
-	void ColorArmsAndLegs (Material mat)
+	public void SetColor (ColorWheel color)
 	{
-		armL.renderer.material = mat;
-		armR.renderer.material = mat;
-		legL.renderer.material = mat;
-		legR.renderer.material = mat;
+		SetColor (color, false);
+	}
+	
+	void ColorArmsAndLegs (Material mat, bool colorFX)
+	{
+		if(colorFX)
+		{
+			fxArmL.renderer.material = mat;
+			fxArmR.renderer.material = mat;
+			fxLegL.renderer.material = mat;
+			fxLegR.renderer.material = mat;
+		}
+		else {
+			armL.renderer.material = mat;
+			armR.renderer.material = mat;
+			legL.renderer.material = mat;
+			legR.renderer.material = mat;
+		}
 	}
 	
 	/*
@@ -60,6 +78,8 @@ public class PigmentBody : MonoBehaviour
 		fxArmR = ReplaceLimb (armR, fxArmRPrefab, force);
 		fxLegL = ReplaceLimb (legL, fxLegLPrefab, force);
 		fxLegR = ReplaceLimb (legR, fxLegRPrefab, force);
+		
+		SetColor(currentColor, true);
 	}
 	
 	public void RestoreFromRagdoll ()

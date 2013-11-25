@@ -16,4 +16,6 @@ desktop.ini
 *.sln
 *.pidb
 *.userprefs
-
+# Sublime Text 
+*.sublime-project
+*.sublime-workspace

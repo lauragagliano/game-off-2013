@@ -48,6 +48,7 @@ public class Player : MonoBehaviour
 	float worldZClamp;
 	float worldYClamp;
 	public float movespeed;
+	public Vector3 perceivedVelocity;
 	
 	
 	#region #1 Awake and Update
@@ -141,8 +142,8 @@ public class Player : MonoBehaviour
 	void RenderCurrentColor ()
 	{
 		// TODO Why on Update???
-		MaterialSet matSet = (MaterialSet)playerGeo.GetComponent<MaterialSet> ();
-		matSet.SetColor (playerRGB.color);
+		PigmentBody body = (PigmentBody)playerGeo.GetComponent<PigmentBody> ();
+		body.SetColor (playerRGB.color);
 	}
 	
 	/*
@@ -341,6 +342,22 @@ public class Player : MonoBehaviour
 	{
 		GameManager.Instance.EndRun ();
 		gameObject.SetActive (false);
+		playerGeo.animation.Stop ();
+		
+		PigmentBody body = (PigmentBody)playerGeo.GetComponent<PigmentBody> ();
+		body.ReplaceWIthRagdoll();
+		collider.enabled = false;
+	}
+	
+	/*
+	 * Resets the player character from being dead
+	 */
+	public void Respawn()
+	{
+		gameObject.SetActive (true);
+		collider.enabled = true;
+		PigmentBody body = (PigmentBody)playerGeo.GetComponent<PigmentBody> ();
+		body.RestoreFromRagdoll();
 	}
 	
 		
@@ -403,9 +420,12 @@ public class Player : MonoBehaviour
 	void Move (Vector3 direction, float speed)
 	{
 		Vector3 movement = (direction.normalized * speed);
-		movement *= Time.deltaTime;
 
+		// Update perceived velocity vector
+		perceivedVelocity = movement + new Vector3(0.0f, 0.0f, (treadmill.scrollspeed));
+		
 		// Apply movement vector
+		movement *= Time.deltaTime;
 		CharacterController biped = GetComponent<CharacterController> ();
 		biped.Move (movement);
 	}

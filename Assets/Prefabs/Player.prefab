@@ -928,6 +928,11 @@ MonoBehaviour:
   legL: {fileID: 100014}
   legR: {fileID: 100010}
   body: {fileID: 100002}
+  fxArmLPrefab: {fileID: 100000, guid: bc77184e1ef7648cda394577d36917dc, type: 2}
+  fxArmRPrefab: {fileID: 100000, guid: 18f45017eab0b4ccaa1cc554a384df27, type: 2}
+  fxLegLPrefab: {fileID: 100000, guid: d8aff6dd4452b46818900862104d12c9, type: 2}
+  fxLegRPrefab: {fileID: 100000, guid: 6380e308cf45d425790fc75690ccfbf3, type: 2}
+  fxBodyPrefab: {fileID: 100002, guid: 6e1d5fe5ecec44036b45ecca6ef58c7d, type: 2}
   bodyMaterials:
   - {fileID: 2100000, guid: d5519661152c74226b5c9643ce08c76e, type: 2}
   - {fileID: 2100000, guid: 149bf4f920320454faa682b8f666b8cd, type: 2}
@@ -987,6 +992,7 @@ MonoBehaviour:
   laserSound: {fileID: 8300000, guid: 653b9d604a9a242d9be6e1e4a5f1380a, type: 3}
   laserBeamFX: {fileID: 100000, guid: 7480f0444bc4b4c3394ed8917da1619a, type: 2}
   movespeed: 20
+  perceivedVelocity: {x: 0, y: 0, z: 0}
 --- !u!114 &11400012
 MonoBehaviour:
   m_ObjectHideFlags: 1

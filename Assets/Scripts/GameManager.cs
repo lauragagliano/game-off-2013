@@ -18,7 +18,6 @@ public class GameManager : Singleton<GameManager>
 	Store store;
 	GameObject wildcardRevealerPrefab;
 	GUI_WildcardReveal wildcardRevealer;
-	
 	public GameObject WildcardRevealGO;
 	const int MEDIUM_THRESHOLD = 300; // Number of pickups passed
 	const int HARD_THRESHOLD = 2000;
@@ -36,6 +35,7 @@ public class GameManager : Singleton<GameManager>
 	enum GameState
 	{
 		Menu,
+		Tutorial,
 		Running,
 		DeathDelay,
 		WildcardReveal,
@@ -45,9 +45,10 @@ public class GameManager : Singleton<GameManager>
 	
 	void Awake ()
 	{
-		GoToMainMenu ();
 		LoadReferencedObjects ();
 		LinkSceneObjects ();
+		
+		GoToMainMenu ();
 	}
 	
 	/*
@@ -55,7 +56,7 @@ public class GameManager : Singleton<GameManager>
 	 */
 	void LoadReferencedObjects ()
 	{
-		wildcardRevealerPrefab = (GameObject)Resources.Load(ObjectNames.GUI_WILDCARD_REVEAL, typeof(GameObject));
+		wildcardRevealerPrefab = (GameObject)Resources.Load (ObjectNames.GUI_WILDCARD_REVEAL, typeof(GameObject));
 	}
 	
 	/* Search for and assign references to scene objects the GameManager needs to know about.
@@ -87,13 +88,14 @@ public class GameManager : Singleton<GameManager>
 	
 	void Update ()
 	{
-		if(gameState == GameState.Running){
+		if (gameState == GameState.Tutorial) {
+			if (Input.anyKeyDown) {
+				GoToRunning();
+			}
+		} else if (gameState == GameState.Running) {
 			UpdateDifficulty ();
-		}
-		else if (gameState == GameState.DeathDelay)
-		{
-			if (Time.time > timeDeathDelayStarted + deathDelayTime)
-			{
+		} else if (gameState == GameState.DeathDelay) {
+			if (Time.time > timeDeathDelayStarted + deathDelayTime) {
 				if (player.WildcardCount > 0) {
 					GoToWildCardState ();
 				} else {
@@ -183,24 +185,60 @@ public class GameManager : Singleton<GameManager>
 	}
 	
 	/*
-	 * Restart necessary data, respawn player, and restart the treadmill.
-	 * Accepts a parameter to show the tutorial on play.
+	 * Starts the infinite running game. Begins with a tutorial if requested.
 	 */
 	public void StartGame (bool showTutorial)
 	{
-		gameState = GameState.Running;
+		InitializeGame ();
+		
+		if (showTutorial) {
+			GoToTutorial ();
+		} else {
+			GoToRunning ();
+		}
+	}
+	
+	/*
+	 * Does all required data reseting to begin a game.
+	 */
+	private void InitializeGame ()
+	{
+		// TODO We could improve performance by turning off objects as well as cameras
+		Camera menuCamera = GameObject.Find (ObjectNames.MENU_CAMERA).camera;
+		Camera gameCamera = GameObject.Find (ObjectNames.GAME_CAMERA).camera;
+		Camera storeCamera = GameObject.Find (ObjectNames.STORE_CAMERA).camera;
+		menuCamera.enabled = false;
+		gameCamera.enabled = true;
+		storeCamera.enabled = false;
+		
 		numPickupsPassed = 0;
 		numPointsThisRound  = 0;
 		difficulty = Difficulty.Easy;
-		player.Respawn();
-		player.transform.position = playerSpawn.position;
-
+		
+		SpawnPlayer ();
+		
 		treadmill.ResetTreadmill ();
-		if (showTutorial) {
-			treadmill.ShowTutorial ();
-		} else {
-			treadmill.Start ();
+	}
+	
+	/*
+	 * Revives the game in the last configuration.
+	 */
+	public void ReviveGame ()
+	{
+		gameState = GameState.Running;
+		SpawnPlayer ();
+	}
+	
+	/*
+	 * Spawn the player entity or respawn him if he's dead.
+	 */
+	private void SpawnPlayer ()
+	{
+		if (player.IsDead) {
+			player.Respawn ();
 		}
+		player.InitializeStats ();
+		player.transform.position = playerSpawn.position;
 	}
 	
 	/*
@@ -214,10 +252,11 @@ public class GameManager : Singleton<GameManager>
 	/*
 	 * Puts the game manager into the state where it waits for the player's death animation.
 	 */
-	void GoToDeathDelay()
+	void GoToDeathDelay ()
 	{
 		gameState = GameState.DeathDelay;
 		timeDeathDelayStarted = Time.time;
+		treadmill.StopScrolling ();
 	}
 	
 	/*
@@ -258,18 +297,12 @@ public class GameManager : Singleton<GameManager>
 	}
 	
 	/*
-	 * Go to the game.
+	 * Go to the running state.
 	 */
-	public void GoToGame ()
+	private void GoToRunning ()
 	{
 		gameState = GameState.Running;
-		// TODO We could improve performance by turning off objects as well as cameras
-		Camera menuCamera = GameObject.Find (ObjectNames.MENU_CAMERA).camera;
-		Camera gameCamera = GameObject.Find (ObjectNames.GAME_CAMERA).camera;
-		Camera storeCamera = GameObject.Find (ObjectNames.STORE_CAMERA).camera;
-		menuCamera.enabled = false;
-		gameCamera.enabled = true;
-		storeCamera.enabled = false;
+		treadmill.StartScrolling ();
 	}
 	
 	/*
@@ -285,5 +318,17 @@ public class GameManager : Singleton<GameManager>
 		menuCamera.enabled = true;
 		storeCamera.enabled = false;
 		gameCamera.enabled = false;
+		
+		treadmill.StopScrolling ();
+	}
+	
+	/*
+	 * Put the game in the tutorial state
+	 */
+	void GoToTutorial ()
+	{
+		gameState = GameState.Tutorial;
+		
+		treadmill.ShowTutorial ();
 	}
 }

@@ -8,7 +8,7 @@ public class Treadmill : MonoBehaviour
 	const float STARTING_ACCEL = 0.005f;
 	public float distanceTraveled;
 	public float scrollspeed;
-	float prevScrollspeed;
+	float previousScrollspeed;
 	float accelerationPerFrame = 0.005f;
 	float prevAccelerationPerFrame;
 	public float maxspeed = 50.0f;
@@ -37,18 +37,12 @@ public class Treadmill : MonoBehaviour
 	void Awake ()
 	{
 		sectionsInPlay = new List<GameObject> ();
-		scrollspeed = STARTING_SPEED;
 		sectionSpawnZone = (Transform)GameObject.Find (ObjectNames.SECTION_SPAWN).transform;
 		sectionKillZone = (Transform)GameObject.Find (ObjectNames.SECTION_KILLZONE).transform;
 	}
 	
 	void Update ()
 	{
-		if (status == Status.Tutorial) {
-			if (Input.anyKeyDown) {
-				Start ();
-			}
-		}
 		if (status == Status.Started) {
 			if (lerping) {
 				UpdateLerping ();
@@ -69,28 +63,25 @@ public class Treadmill : MonoBehaviour
 			if (isSectionPastKillZone (sectionsInPlay [0])) {
 				KillSection (sectionsInPlay [0]);
 			}
-			if (!GameManager.Instance.IsPlaying()) {
-				Stop ();
-			}
 		}
 	}
 	
 	#region #1 Treadmill Manipulation (Start/Stop/Reset/Slowdown)
 	public void ShowTutorial ()
 	{
-		Debug.Log ("Showing tutorial");
 		scrollspeed = 0;
 		status = Status.Tutorial;
 	}
 	
-	public void Start ()
+	public void StartScrolling ()
 	{
 		scrollspeed = STARTING_SPEED;
 		status = Status.Started;
 	}
 	
-	public void Stop ()
+	public void StopScrolling ()
 	{
+		previousScrollspeed = scrollspeed;
 		scrollspeed = 0;
 		status = Status.Stopped;
 	}
@@ -117,11 +108,11 @@ public class Treadmill : MonoBehaviour
 	}
 	
 	/*
-	 * Cause the treadmill to slow down to a set speed.
+	 * Cause the treadmill to stop until further notice
 	 */
 	public void TemporarySlowDown (float amount)
 	{
-		prevScrollspeed = scrollspeed;
+		previousScrollspeed = scrollspeed;
 		PauseAcceleration ();
 		LerpToSpeed (Mathf.Max (STARTING_SPEED, scrollspeed - amount));
 	}
@@ -131,7 +122,7 @@ public class Treadmill : MonoBehaviour
 	 */
 	public void ResumeTreadmill ()
 	{
-		LerpToSpeed (prevScrollspeed);
+		LerpToSpeed (previousScrollspeed);
 		ResumeAcceleration ();
 	}
 	

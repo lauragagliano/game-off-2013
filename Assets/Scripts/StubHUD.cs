@@ -109,7 +109,6 @@ public class StubHUD : MonoBehaviour
 			}
 		}
 		if (GUILayout.Button ("Start Game")) {
-			GameManager.Instance.GoToGame ();
 			GameManager.Instance.StartGame (false);
 		}
 		GUILayout.EndArea ();
@@ -135,7 +134,6 @@ public class StubHUD : MonoBehaviour
 		EnableInGameText (false);
 		EnableGameOverText (false);
 		if (GUILayout.Button ("Start Game [ENTER]")) {
-			GameManager.Instance.GoToGame ();
 			GameManager.Instance.StartGame (true);
 		}
 		if (GUILayout.Button ("Shop")) {

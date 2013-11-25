@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
 	public int curHealth;
 	const int BASE_HEALTH = 1;
 	public int curShields;
+	public bool IsDead {get; private set;}
 
 	
 	// Abilities
@@ -340,6 +341,8 @@ public class Player : MonoBehaviour
 	
 	public void Die ()
 	{
+		IsDead = true;
+		
 		GameManager.Instance.EndRun ();
 		gameObject.SetActive (false);
 		playerGeo.animation.Stop ();
@@ -354,6 +357,8 @@ public class Player : MonoBehaviour
 	 */
 	public void Respawn()
 	{
+		IsDead = false;
+		
 		InitializeStats ();
 		
 		gameObject.SetActive (true);
@@ -545,7 +550,7 @@ public class Player : MonoBehaviour
 	/*
 	 * Call this to make sure new powers or necessary resets occur.
 	 */
-	private void InitializeStats ()
+	public void InitializeStats ()
 	{
 		pickups = new List<GameObject> ();
 		redPower.ResetPower ();

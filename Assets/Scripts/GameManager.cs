@@ -16,7 +16,7 @@ public class GameManager : Singleton<GameManager>
 	public int greenPoints;
 	public int bluePoints;
 	Transform playerSpawn;
-	Treadmill treadmill;
+	public Treadmill treadmill;
 	Store store;
 	GameObject wildcardRevealerPrefab;
 	GUI_WildcardReveal wildcardRevealer;
@@ -204,7 +204,8 @@ public class GameManager : Singleton<GameManager>
 		gameState = GameState.Running;
 		numPickupsPassed = 0;
 		difficulty = Difficulty.Easy;
-		player.gameObject.SetActive (true);
+		player.Respawn();
+		//player.gameObject.SetActive (true);
 		player.InitializeStats ();
 		player.transform.position = playerSpawn.position;
 

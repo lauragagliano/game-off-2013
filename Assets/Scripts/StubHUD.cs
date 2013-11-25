@@ -6,12 +6,17 @@ public class StubHUD : MonoBehaviour
 	public Player player;
 	public GUIText startEndText;
 	public GUIText helpText;
-	public GUIText scoreText;
+	public GUIText moneyText;
+	public GUIText distanceText;
+	public GUIText debugText;
+	
+	Treadmill treadmill;
 
 	void Awake ()
 	{
 		helpText.text = "A: LEFT\nD: RIGHT\n\nJ: RED\nK: GREEN\nL: BLUE\n\n(Tap Twice for POAWAHH";
 		SetItemTexts ();
+		treadmill = GameObject.Find (ObjectNames.TREADMILL).GetComponent<Treadmill> ();
 	}
 	
 	void Update ()
@@ -28,10 +33,20 @@ public class StubHUD : MonoBehaviour
 		} else if (GameManager.Instance.IsShopping ()) {
 			DisplayStoreMenu ();
 		} else {
-			startEndText.text = string.Empty;
+			DisplayInGameText ();
 		}
-		scoreText.text = string.Format ("Passed Pigments: {0}\nHealth: {1}\nWildcards: {2}\nMoney: {3}\nDifficulty: {4}",
-			GameManager.Instance.numPickupsPassed, player.curHealth, player.WildcardCount, player.money,
+	}
+	
+	/*
+	 * Display the distance and any other in game text we need to show the player.
+	 */
+	void DisplayInGameText ()
+	{
+		startEndText.text = string.Empty;
+		distanceText.text = "Distance: " + Mathf.RoundToInt (treadmill.distanceTraveled);
+		moneyText.text = "Money: " + player.money;
+		debugText.text = string.Format ("Passed Pigments: {0}\nHealth: {1}\nWildcards: {2}\nDifficulty: {3}",
+			GameManager.Instance.numPickupsPassed, player.curHealth, player.WildcardCount,
 			GameManager.Instance.difficulty);
 	}
 	

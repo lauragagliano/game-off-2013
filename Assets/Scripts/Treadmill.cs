@@ -6,6 +6,7 @@ public class Treadmill : MonoBehaviour
 {
 	const float STARTING_SPEED = 20.0f;
 	const float STARTING_ACCEL = 0.005f;
+	public float distanceTraveled;
 	public float scrollspeed;
 	float prevScrollspeed;
 	float accelerationPerFrame = 0.005f;
@@ -54,7 +55,10 @@ public class Treadmill : MonoBehaviour
 			} else {
 				scrollspeed = Mathf.Min ((scrollspeed + accelerationPerFrame), maxspeed);
 			}
-			transform.Translate (new Vector3 (0, 0, -scrollspeed * Time.deltaTime));
+			// Move our treadmill and add up the distance
+			float distance = scrollspeed * Time.deltaTime;
+			transform.Translate (new Vector3 (0, 0, -distance));
+			distanceTraveled += distance;
 			// Check if our last section is on screen. If so, spawn another.
 			if (GetLastSectionInPlay () == null) {
 				SpawnNextSection ();
@@ -143,6 +147,7 @@ public class Treadmill : MonoBehaviour
 		accelerationPerFrame = STARTING_ACCEL;
 		lerping = false;
 		lerpToSpeed = STARTING_SPEED;
+		distanceTraveled = 0.0f;
 	}
 	
 	/*

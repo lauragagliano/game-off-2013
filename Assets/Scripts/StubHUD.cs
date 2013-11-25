@@ -4,8 +4,10 @@ using System.Collections;
 public class StubHUD : MonoBehaviour
 {
 	public Player player;
-	public GUIText startEndText;
-	public GUIText helpText;
+	public GUIText finalDistanceLabelText;
+	public GUIText finalDistanceText;
+	public GUIText crystalsCollectedLabelText;
+	public GUIText crystalsCollectedText;
 	public GUIText moneyText;
 	public GUIText distanceText;
 	public GUIText debugText;
@@ -14,7 +16,6 @@ public class StubHUD : MonoBehaviour
 
 	void Awake ()
 	{
-		helpText.text = "A: LEFT\nD: RIGHT\n\nJ: RED\nK: GREEN\nL: BLUE\n\n(Tap Twice for POAWAHH";
 		SetItemTexts ();
 		treadmill = GameObject.Find (ObjectNames.TREADMILL).GetComponent<Treadmill> ();
 	}
@@ -42,9 +43,10 @@ public class StubHUD : MonoBehaviour
 	 */
 	void DisplayInGameText ()
 	{
-		startEndText.text = string.Empty;
+		EnableInGameText (true);
+		EnableGameOverText (false);
 		distanceText.text = "Distance: " + Mathf.RoundToInt (treadmill.distanceTraveled);
-		moneyText.text = "Money: " + player.money;
+		PrintMoneyToScreen ();
 		debugText.text = string.Format ("Passed Pigments: {0}\nHealth: {1}\nWildcards: {2}\nDifficulty: {3}",
 			GameManager.Instance.numPickupsPassed, player.curHealth, player.WildcardCount,
 			GameManager.Instance.difficulty);
@@ -56,11 +58,17 @@ public class StubHUD : MonoBehaviour
 	 */
 	void DisplayDeadMenu ()
 	{
-		startEndText.text = "Game Over!";
-		GUILayout.BeginArea (new Rect (Screen.width / 2 - 50.0f, Screen.height / 2, 200.0f, 70.0f));
+		EnableInGameText (false);
+		EnableGameOverText (true);
+		finalDistanceLabelText.text = ("You had\n a colorful run of");
+		finalDistanceText.text = Mathf.RoundToInt (treadmill.distanceTraveled) + "m";
+		crystalsCollectedLabelText.text = "Crystals Collected";
+		crystalsCollectedText.text = GameManager.Instance.numPointsThisRound.ToString ();
+		GUILayout.BeginArea (new Rect (Screen.width / 2 - 50.0f, Screen.height - 70.0f, 200.0f, 70.0f));
 		if (GUILayout.Button ("Click to Retry")) {
 			//Application.LoadLevel (Application.loadedLevel);
 			GameManager.Instance.StartGame (false);
+			EnableInGameText (true);
 		}
 		if (GUILayout.Button ("Go to Store")) {
 			GameManager.Instance.GoToStore ();
@@ -69,12 +77,23 @@ public class StubHUD : MonoBehaviour
 	}
 	
 	/*
+	 * Helper method to display money on GUIText object.
+	 */
+	void PrintMoneyToScreen ()
+	{
+		moneyText.enabled = true;
+		moneyText.text = "Money: " + player.money;
+	}
+	
+	/*
 	 * Display the menu for when the player is at the store. Receive inputs and call
 	 * the appropriate GameManager implemented methods.
 	 */
 	void DisplayStoreMenu ()
 	{
-		startEndText.text = string.Empty;
+		EnableGameOverText (false);
+		EnableInGameText (false);
+		PrintMoneyToScreen ();
 		Store store = (Store)GameObject.Find (ObjectNames.STORE).GetComponent<Store> ();
 		
 		// TODO Let's at least make the Buy/AlreadyOwned a 3d button on the item mesh
@@ -113,6 +132,8 @@ public class StubHUD : MonoBehaviour
 	void DisplayMainMenu ()
 	{
 		GUILayout.BeginArea (new Rect (Screen.width - 220.0f, Screen.height - 70.0f, 200.0f, 70.0f));
+		EnableInGameText (false);
+		EnableGameOverText (false);
 		if (GUILayout.Button ("Start Game [ENTER]")) {
 			GameManager.Instance.GoToGame ();
 			GameManager.Instance.StartGame (true);
@@ -121,5 +142,26 @@ public class StubHUD : MonoBehaviour
 			GameManager.Instance.GoToStore ();
 		}
 		GUILayout.EndArea ();
+	}
+	
+	/*
+	 * Helper method to enable or disable in game text.
+	 */
+	void EnableInGameText (bool enable)
+	{
+		moneyText.enabled = enable;
+		distanceText.enabled = enable;
+		debugText.enabled = enable;
+	}
+	
+	/*
+	 * Helper method to enable or disable game over text elements.
+	 */
+	void EnableGameOverText (bool enable)
+	{
+		finalDistanceLabelText.enabled = enable;
+		finalDistanceText.enabled = enable;
+		crystalsCollectedText.enabled = enable;
+		crystalsCollectedLabelText.enabled = enable;
 	}
 }

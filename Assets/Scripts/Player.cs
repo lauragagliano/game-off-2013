@@ -277,7 +277,7 @@ public class Player : MonoBehaviour
 			} else {
 				powerToCharge.AddPower (POWER_UNIT);
 			}
-			GameManager.Instance.AddPoint (pickupRGB.color);
+			GameManager.Instance.AddPoint ();
 			// Add up our money
 			AddMoney (1);
 			

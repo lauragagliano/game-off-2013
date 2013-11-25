@@ -61,9 +61,9 @@ GameObject:
   - 4: {fileID: 400006}
   - 143: {fileID: 14300000}
   - 114: {fileID: 11400010}
+  - 114: {fileID: 11400012}
   - 114: {fileID: 11400014}
   - 114: {fileID: 11400016}
-  - 114: {fileID: 11400012}
   - 82: {fileID: 8200004}
   - 82: {fileID: 8200002}
   - 82: {fileID: 8200000}
@@ -455,7 +455,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: cf78bba95c35d1848bdae4edb4f17228, type: 2}
+  - {fileID: 2100000, guid: 78c684e193c9bac45aef808f0e9e422a, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -473,7 +473,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: cf78bba95c35d1848bdae4edb4f17228, type: 2}
+  - {fileID: 2100000, guid: 78c684e193c9bac45aef808f0e9e422a, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0

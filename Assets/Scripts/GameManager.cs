@@ -12,9 +12,7 @@ public class GameManager : Singleton<GameManager>
 	public Difficulty difficulty = Difficulty.Easy;
 	GameState gameState = GameState.Running;
 	public int numPickupsPassed;
-	public int redPoints;
-	public int greenPoints;
-	public int bluePoints;
+	public int numPointsThisRound;
 	Transform playerSpawn;
 	public Treadmill treadmill;
 	Store store;
@@ -177,22 +175,11 @@ public class GameManager : Singleton<GameManager>
 	}
 	
 	/*
-	 * Add a point to the respective color currency. Accepts a ColorWheel color, which
-	 * should be Red, Green, or Blue and adds to that color's points.
+	 * Add a point to our score, to be displayed at the end of each round.
 	 */
-	public void AddPoint (ColorWheel colorToAddTo)
+	public void AddPoint ()
 	{
-		switch (colorToAddTo) {
-		case ColorWheel.red:
-			redPoints++;
-			break;
-		case ColorWheel.green:
-			greenPoints++;
-			break;
-		case ColorWheel.blue:
-			bluePoints++;
-			break;
-		}
+		numPointsThisRound++;
 	}
 	
 	/*
@@ -203,6 +190,7 @@ public class GameManager : Singleton<GameManager>
 	{
 		gameState = GameState.Running;
 		numPickupsPassed = 0;
+		numPointsThisRound  = 0;
 		difficulty = Difficulty.Easy;
 		player.Respawn();
 		//player.gameObject.SetActive (true);

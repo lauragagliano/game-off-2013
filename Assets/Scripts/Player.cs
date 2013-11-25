@@ -354,6 +354,8 @@ public class Player : MonoBehaviour
 	 */
 	public void Respawn()
 	{
+		InitializeStats ();
+		
 		gameObject.SetActive (true);
 		collider.enabled = true;
 		PigmentBody body = (PigmentBody)playerGeo.GetComponent<PigmentBody> ();
@@ -543,7 +545,7 @@ public class Player : MonoBehaviour
 	/*
 	 * Call this to make sure new powers or necessary resets occur.
 	 */
-	public void InitializeStats ()
+	private void InitializeStats ()
 	{
 		pickups = new List<GameObject> ();
 		redPower.ResetPower ();

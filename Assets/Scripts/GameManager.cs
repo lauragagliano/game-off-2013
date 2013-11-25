@@ -193,8 +193,6 @@ public class GameManager : Singleton<GameManager>
 		numPointsThisRound  = 0;
 		difficulty = Difficulty.Easy;
 		player.Respawn();
-		//player.gameObject.SetActive (true);
-		player.InitializeStats ();
 		player.transform.position = playerSpawn.position;
 
 		treadmill.ResetTreadmill ();

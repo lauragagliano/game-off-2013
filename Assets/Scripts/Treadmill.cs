@@ -4,6 +4,11 @@ using System.Collections.Generic;
 
 public class Treadmill : MonoBehaviour
 {
+	// Section Algorithm Configurations
+	const int MIN_WILDCARD_DISTANCE = 200;
+	const int MAX_WILDCARD_DISTANCE = 1000;
+	public const int HARD_THRESHOLD = 200;
+	
 	const float STARTING_SPEED = 20.0f;
 	const float STARTING_ACCEL = 0.005f;
 	public float distanceTraveled;
@@ -14,8 +19,7 @@ public class Treadmill : MonoBehaviour
 	public float maxspeed = 50.0f;
 	public GameObject emptySection;
 	public List<GameObject> easySections;
-	public List<GameObject> mediumSections;
-	public List<GameObject> hardSections;
+	public List<GameObject> challengeSections;
 	public List<GameObject> freebieSections;
 	
 	List<GameObject> sectionsInPlay;
@@ -186,6 +190,14 @@ public class Treadmill : MonoBehaviour
 			lerping = true;
 		}
 	}
+	
+	/*
+	 * Return true if the treadmill has passed the distance for hard mode.
+	 */
+	public bool IsPastHardThreshold ()
+	{
+		return distanceTraveled > HARD_THRESHOLD;
+	}
 	#endregion
 	
 	#region #2 Section Logic
@@ -223,14 +235,14 @@ public class Treadmill : MonoBehaviour
 			if (coinflip) {
 				sectionBucket = freebieSections;
 			}
-		} else if (GameManager.Instance.IsMedium ()) {
+		} /*else if (GameManager.Instance.IsMedium ()) {
 			// Only give an X% change of medium tiles when we're in it.
 			bool coinflip = RBRandom.PercentageChance (75f);
 			if (coinflip) {
-				sectionBucket = mediumSections;
+				sectionBucket = challengeSections;
 			}
-		} else if (GameManager.Instance.IsHard ()) {
-			sectionBucket = hardSections;
+		}*/ else if (GameManager.Instance.IsHard ()) {
+			sectionBucket = challengeSections;
 		}
 		Vector3 rowSpacing = new Vector3 (0, 0, 1);
 		GameObject newSection = (GameObject)Instantiate (GetRandomSectionFromBucket (sectionBucket),

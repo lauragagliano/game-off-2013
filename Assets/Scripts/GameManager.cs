@@ -28,7 +28,6 @@ public class GameManager : Singleton<GameManager>
 	public enum Difficulty
 	{
 		Easy,
-		Medium,
 		Hard
 	}
 	
@@ -93,7 +92,7 @@ public class GameManager : Singleton<GameManager>
 			if (Input.GetKeyDown (KeyCode.Space)) {
 				GoToRunning(false);
 			}
-		} else if (gameState == GameState.Running) {
+		} else if (gameState == GameState.Running && !IsHard ()) {
 			UpdateDifficulty ();
 		} else if (gameState == GameState.DeathDelay) {
 			if (Time.time > timeDeathDelayStarted + deathDelayTime) {
@@ -141,14 +140,12 @@ public class GameManager : Singleton<GameManager>
 	
 		
 	/*
-	 * Check how many pickups we've passed. Once we've passed the threshold for medium
-	 * and hard, update the difficulty respectively.
+	 * Check how far we've traveled. Once we've passed the threshold for hard,
+	 * update the difficulty respectively.
 	 */
 	void UpdateDifficulty ()
 	{
-		if (numPickupsPassed > MEDIUM_THRESHOLD) {
-			difficulty = Difficulty.Medium;
-		} else if (numPickupsPassed > HARD_THRESHOLD) {
+		if (treadmill.IsPastHardThreshold ()) {
 			difficulty = Difficulty.Hard;
 		}
 	}
@@ -160,15 +157,7 @@ public class GameManager : Singleton<GameManager>
 	{
 		return difficulty == Difficulty.Easy;
 	}
-	
-	/*
-	 * Return true if difficulty is set to medium.
-	 */
-	public bool IsMedium ()
-	{
-		return difficulty == Difficulty.Medium;
-	}
-	
+
 	/*
 	 * Return true if difficulty is set to hard.
 	 */

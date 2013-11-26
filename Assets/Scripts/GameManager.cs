@@ -272,7 +272,10 @@ public class GameManager : Singleton<GameManager>
 		gameState = GameState.Reviving;
 	}
 	
-	public void ReviveDone()
+	/*
+	 * Called by the Player when he's done reviving.
+	 */
+	public void OnReviveDone()
 	{
 		GoToRunning(true);
 	}

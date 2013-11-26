@@ -6,8 +6,6 @@ public class PigmentBody : MonoBehaviour
 {
 	ColorWheel currentColor;
 	public Material[] bodyMaterials = new Material[4];
-	bool isReviving;
-	
 	public GameObject[] limbs = new GameObject[Enum.GetNames(typeof(Limb)).Length];
 	public GameObject[] fxLimbs = new GameObject[Enum.GetNames(typeof(Limb)).Length];
 	public GameObject[] fxLimbPrefabs = new GameObject[Enum.GetNames(typeof(Limb)).Length];
@@ -21,6 +19,11 @@ public class PigmentBody : MonoBehaviour
 		LegR
 	}
 	
+	bool isReviving;
+	
+	/*
+	 * Called when a limb is done lerping back to its original game object.
+	 */
 	public void OnLimbDoneLerping()
 	{
 		foreach(GameObject limb in fxLimbs)
@@ -32,7 +35,7 @@ public class PigmentBody : MonoBehaviour
 		
 		isReviving = false;
 			
-		GameManager.Instance.player.RagdollRestored();
+		GameManager.Instance.player.OnRagdollRestored();
 		
 		foreach(GameObject limb in fxLimbs)
 		{
@@ -97,6 +100,9 @@ public class PigmentBody : MonoBehaviour
 		
 	}
 	
+	/*
+	 * Revive the character from ragdoll by lerping all the limbs back to the body.
+	 */
 	public void RestoreFromRagdoll ()
 	{
 		isReviving = true;

@@ -372,7 +372,10 @@ public class Player : MonoBehaviour
 		IsDead = false;
 	}
 	
-	public void RagdollRestored()
+	/*
+	 * Called when the ragdoll is done bringing the body parts back together.
+	 */
+	public void OnRagdollRestored()
 	{
 		gameObject.SetActive (true);
 		
@@ -386,7 +389,7 @@ public class Player : MonoBehaviour
 			}
 		}
 		
-		GameManager.Instance.ReviveDone();
+		GameManager.Instance.OnReviveDone();
 	}
 	
 		

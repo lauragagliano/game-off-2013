@@ -39,6 +39,7 @@ public class GameManager : Singleton<GameManager>
 		Running,
 		DeathDelay,
 		WildcardReveal,
+		Reviving,
 		GameOver,
 		Store
 	}
@@ -90,7 +91,7 @@ public class GameManager : Singleton<GameManager>
 	{
 		if (gameState == GameState.Tutorial) {
 			if (Input.anyKeyDown) {
-				GoToRunning();
+				GoToRunning(false);
 			}
 		} else if (gameState == GameState.Running) {
 			UpdateDifficulty ();
@@ -194,7 +195,7 @@ public class GameManager : Singleton<GameManager>
 		if (showTutorial) {
 			GoToTutorial ();
 		} else {
-			GoToRunning ();
+			GoToRunning (false);
 		}
 	}
 	
@@ -223,10 +224,10 @@ public class GameManager : Singleton<GameManager>
 	/*
 	 * Revives the game in the last configuration.
 	 */
-	public void ReviveGame ()
+	public void RevivePlayer ()
 	{
-		gameState = GameState.Running;
 		SpawnPlayer ();
+		GoToReviving();
 	}
 	
 	/*
@@ -234,11 +235,7 @@ public class GameManager : Singleton<GameManager>
 	 */
 	private void SpawnPlayer ()
 	{
-		if (player.IsDead) {
-			player.Respawn ();
-		}
-		player.InitializeStats ();
-		player.transform.position = playerSpawn.position;
+		player.Spawn (playerSpawn.position);
 	}
 	
 	/*
@@ -256,7 +253,7 @@ public class GameManager : Singleton<GameManager>
 	{
 		gameState = GameState.DeathDelay;
 		timeDeathDelayStarted = Time.time;
-		treadmill.StopScrolling ();
+		treadmill.PauseScrolling ();
 	}
 	
 	/*
@@ -265,6 +262,19 @@ public class GameManager : Singleton<GameManager>
 	public void GoToGameOver ()
 	{
 		gameState = GameState.GameOver;
+	}
+	
+	/*
+	 * Puts the game manager in the state where it awaits player's retry or main menu command.
+	 */
+	public void GoToReviving ()
+	{
+		gameState = GameState.Reviving;
+	}
+	
+	public void ReviveDone()
+	{
+		GoToRunning(true);
 	}
 	
 	/*
@@ -299,10 +309,14 @@ public class GameManager : Singleton<GameManager>
 	/*
 	 * Go to the running state.
 	 */
-	private void GoToRunning ()
+	private void GoToRunning (bool isResuming)
 	{
 		gameState = GameState.Running;
-		treadmill.StartScrolling ();
+		if(isResuming) {
+			treadmill.ResumeTreadmill();
+		} else {
+			treadmill.StartScrolling ();
+		}
 	}
 	
 	/*
@@ -319,7 +333,7 @@ public class GameManager : Singleton<GameManager>
 		storeCamera.enabled = false;
 		gameCamera.enabled = false;
 		
-		treadmill.StopScrolling ();
+		treadmill.PauseScrolling ();
 	}
 	
 	/*

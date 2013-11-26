@@ -79,11 +79,24 @@ public class Treadmill : MonoBehaviour
 		status = Status.Started;
 	}
 	
-	public void StopScrolling ()
+	public void PauseScrolling ()
 	{
+		PauseSpeed();
+		PauseAcceleration();
+		status = Status.Stopped;
+	}
+	
+	/*
+	 * Temporarily turn off speed of the treadmill. Call ResumeTreadmill to restore its speed.
+	 */
+	void PauseSpeed ()
+	{
+		if (scrollspeed == 0) {
+			Debug.LogWarning ("Tried to pause speed when it was already at 0!");
+			return;
+		}
 		previousScrollspeed = scrollspeed;
 		scrollspeed = 0;
-		status = Status.Stopped;
 	}
 
 	/*
@@ -94,6 +107,7 @@ public class Treadmill : MonoBehaviour
 	{
 		if (accelerationPerFrame == 0) {
 			Debug.LogWarning ("Tried to pause acceleration when it was already at 0!");
+			return;
 		}
 		prevAccelerationPerFrame = accelerationPerFrame;
 		accelerationPerFrame = 0;
@@ -124,6 +138,7 @@ public class Treadmill : MonoBehaviour
 	{
 		LerpToSpeed (previousScrollspeed);
 		ResumeAcceleration ();
+		status = Status.Started;
 	}
 	
 	/*

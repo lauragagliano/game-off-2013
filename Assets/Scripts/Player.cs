@@ -8,7 +8,8 @@ public class Player : MonoBehaviour
 	public int curHealth;
 	const int BASE_HEALTH = 1;
 	public int curShields;
-	public bool IsDead {get; private set;}
+
+	public bool IsDead { get; private set; }
 
 	
 	// Abilities
@@ -19,7 +20,6 @@ public class Player : MonoBehaviour
 	//const int UPGRADED_SLOWDOWN_STRENGTH = 25f;
 
 	public RedPower redPower;
-	
 	public GreenPower greenPower;
 	int shieldStrength = 3;
 	// TODO If we add shield strength upgrade, do it in this class
@@ -117,7 +117,7 @@ public class Player : MonoBehaviour
 		
 		ClampToWorldYZ (worldYClamp, worldZClamp);
 		// If no colors are active, go neutral
-		if (!bluePower.IsPowerActive () && !redPower.IsPowerActive () && !greenPower.IsPowerActive()){
+		if (!bluePower.IsPowerActive () && !redPower.IsPowerActive () && !greenPower.IsPowerActive ()) {
 			ChangeColors (ColorWheel.neutral);
 		}
 		RenderCurrentColor ();
@@ -250,7 +250,7 @@ public class Player : MonoBehaviour
 		float noMagnetDist = transform.collider.bounds.extents.x;
 		float pullDistance;
 		foreach (GameObject pickup in pickups) {
-			pullDistance  = noMagnetDist;
+			pullDistance = noMagnetDist;
 			Pickup pickupScript = pickup.GetComponent<Pickup> ();
 			if (pickup.GetComponent<RGB> () != null) {
 				if (HasMagnetForColor (pickup.GetComponent<RGB> ().color)) {
@@ -348,23 +348,45 @@ public class Player : MonoBehaviour
 		playerGeo.animation.Stop ();
 		
 		PigmentBody body = (PigmentBody)playerGeo.GetComponent<PigmentBody> ();
-		body.ReplaceWIthRagdoll();
-		collider.enabled = false;
+		body.ReplaceWIthRagdoll ();
 	}
 	
 	/*
-	 * Resets the player character from being dead
+	 * Spawns the player at the specified position
 	 */
-	public void Respawn()
+	public void Spawn (Vector3 spawnPosition)
 	{
+		if (!IsDead) {
+			InitializeStatsOnSpawn ();
+		} else {
+			InitializeStatsOnRevive ();
+			
+			// Restore ragdolled limbs
+			PigmentBody body = (PigmentBody)playerGeo.GetComponent<PigmentBody> ();
+			body.RestoreFromRagdoll ();
+		}
+		
+		// Snap to spawn position
+		transform.position = spawnPosition;
+		
 		IsDead = false;
-		
-		InitializeStats ();
-		
+	}
+	
+	public void RagdollRestored()
+	{
 		gameObject.SetActive (true);
-		collider.enabled = true;
-		PigmentBody body = (PigmentBody)playerGeo.GetComponent<PigmentBody> ();
-		body.RestoreFromRagdoll();
+		
+		float explosionRadius = 25;
+		GameObject[] blackblocks = GameObject.FindGameObjectsWithTag(Tags.BLOCK);
+		foreach(GameObject block in blackblocks)
+		{
+			if(Vector3.SqrMagnitude(block.transform.position - transform.position) <= Mathf.Pow(explosionRadius, 2.0f))
+			{
+				block.GetComponent<BlockLogic>().BlowUp (transform.position, 200, explosionRadius);
+			}
+		}
+		
+		GameManager.Instance.ReviveDone();
 	}
 	
 		
@@ -396,8 +418,7 @@ public class Player : MonoBehaviour
 	void ChangeColors (ColorWheel color)
 	{
 		//TODO Refactor this dumb switch
-		switch (color)
-		{
+		switch (color) {
 		case ColorWheel.blue:
 			Camera.main.backgroundColor = ColorManager.Instance.blue.color;
 			break;
@@ -429,7 +450,7 @@ public class Player : MonoBehaviour
 		Vector3 movement = (direction.normalized * speed);
 
 		// Update perceived velocity vector
-		perceivedVelocity = movement + new Vector3(0.0f, 0.0f, (treadmill.scrollspeed));
+		perceivedVelocity = movement + new Vector3 (0.0f, 0.0f, (treadmill.scrollspeed));
 		
 		// Apply movement vector
 		movement *= Time.deltaTime;
@@ -550,15 +571,10 @@ public class Player : MonoBehaviour
 	/*
 	 * Call this to make sure new powers or necessary resets occur.
 	 */
-	public void InitializeStats ()
+	void InitializeStatsOnSpawn ()
 	{
 		pickups = new List<GameObject> ();
-		redPower.ResetPower ();
-		greenPower.ResetPower ();
-		greenPower.curValue = 0;
-		bluePower.curValue = 0;
-		isUsingSlowdown = false;
-		curHealth = 1;
+		
 		
 		// Give player their upgrades
 		if (inventory.HasItem (ItemNames.BLUE_METER_UPGRADE)) {
@@ -574,8 +590,24 @@ public class Player : MonoBehaviour
 			redPower.UpgradeCooldown ();
 		}
 		
+		// Also reset the same stats that should be reset on revive
+		InitializeStatsOnRevive();
+	}
+	
+	/*
+	 * This should be called to reset stats when the player comes back to life or first time spawn.
+	 */
+	void InitializeStatsOnRevive ()
+	{
+		redPower.ResetPower ();
+		greenPower.ResetPower ();
+		greenPower.curValue = 0;
+		bluePower.curValue = 0;
+		isUsingSlowdown = false;
+		curHealth = 1;
+		
 		// Reset the number of wildcards that have been collected.
-		WildcardCount = 0;
+		WildcardCount = 1;
 	}
 	
 	/*

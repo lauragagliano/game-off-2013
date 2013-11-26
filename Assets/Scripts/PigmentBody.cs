@@ -20,6 +20,35 @@ public class PigmentBody : MonoBehaviour
 	public GameObject fxLegRPrefab;
 	public GameObject fxBodyPrefab;
 	public Material[] bodyMaterials = new Material[4];
+	bool isReviving;
+	
+	public void LimbIsDoneLerping()
+	{
+		if (fxArmL.GetComponent<FX_PigmentLimb> ().IsLerping) {
+			return;
+		}
+		if (fxArmR.GetComponent<FX_PigmentLimb> ().IsLerping) {
+			return;
+		}
+		if (fxLegL.GetComponent<FX_PigmentLimb> ().IsLerping) {
+			return;
+		}
+		if (fxLegR.GetComponent<FX_PigmentLimb> ().IsLerping) {
+			return;
+		}
+		if (fxBody.GetComponent<FX_PigmentLimb> ().IsLerping) {
+			return;
+		}
+		isReviving = false;
+			
+		GameManager.Instance.player.RagdollRestored();
+		
+		Destroy (fxArmL);
+		Destroy (fxArmR);
+		Destroy (fxLegL);
+		Destroy (fxLegR);
+		Destroy (fxBody);
+	}
 	
 	public void SetColor (ColorWheel color, bool colorFX)
 	{
@@ -50,14 +79,12 @@ public class PigmentBody : MonoBehaviour
 	
 	void ColorArmsAndLegs (Material mat, bool colorFX)
 	{
-		if(colorFX)
-		{
+		if (colorFX) {
 			fxArmL.renderer.material = mat;
 			fxArmR.renderer.material = mat;
 			fxLegL.renderer.material = mat;
 			fxLegR.renderer.material = mat;
-		}
-		else {
+		} else {
 			armL.renderer.material = mat;
 			armR.renderer.material = mat;
 			legL.renderer.material = mat;
@@ -79,27 +106,18 @@ public class PigmentBody : MonoBehaviour
 		fxLegL = ReplaceLimb (legL, fxLegLPrefab, force);
 		fxLegR = ReplaceLimb (legR, fxLegRPrefab, force);
 		
-		SetColor(currentColor, true);
+		SetColor (currentColor, true);
 	}
 	
 	public void RestoreFromRagdoll ()
 	{
-		if (fxArmL != null) {
-			Destroy (fxArmL);
-		}
-		if (fxArmR != null) {
-			Destroy (fxArmR);
-		}
-		if (fxLegL != null) {
-			Destroy (fxLegL);
-		}
-		if (fxLegR != null) {
-			Destroy (fxLegR);
-		}
-		if (fxBody != null) {
-			Destroy (fxBody);
-		}
+		isReviving = true;
 		
+		fxArmL.GetComponent<FX_PigmentLimb> ().SetLerping (true);
+		fxArmR.GetComponent<FX_PigmentLimb> ().SetLerping (true);
+		fxLegL.GetComponent<FX_PigmentLimb> ().SetLerping (true);
+		fxLegR.GetComponent<FX_PigmentLimb> ().SetLerping (true);
+		fxBody.GetComponent<FX_PigmentLimb> ().SetLerping (true);
 	}
 	
 	/*
@@ -110,6 +128,7 @@ public class PigmentBody : MonoBehaviour
 		GameObject fx = (GameObject)Instantiate (limbFX, limb.transform.position,
 			limb.transform.rotation);
 		fx.rigidbody.AddForce (force, ForceMode.Impulse);
+		fx.GetComponent<FX_PigmentLimb> ().SetOriginalLimb (limb, transform.gameObject);
 		return fx;
 	}
 }

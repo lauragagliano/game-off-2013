@@ -61,7 +61,7 @@ public class GUI_WildcardReveal : MonoBehaviour
 		} else if (state == RevealState.Hiding) {
 			float hideTime = 0.5f;
 			if (Time.time > timeStateEntered + hideTime) {
-				End ();
+				GoToFinish ();
 			}
 		}
 	}
@@ -105,6 +105,7 @@ public class GUI_WildcardReveal : MonoBehaviour
 	 */
 	void GoToShowing (int numWildcards)
 	{
+		// Spawn all the wildcards
 		int numCardsToDeal = numWildcards;
 		int rowCount = 0;
 		float numRows = Mathf.Ceil ((float)numWildcards / numCardsPerRow);
@@ -172,9 +173,13 @@ public class GUI_WildcardReveal : MonoBehaviour
 	/*
 	 * Ends the Reveal
 	 */
-	void End ()
+	void GoToFinish ()
 	{
-		GameManager.Instance.GoToGameOver ();
+		if (transform.GetChild (0).GetComponent<GUI_Wildcard> ().myItem == revive) {
+			GameManager.Instance.RevivePlayer ();
+		} else {
+			GameManager.Instance.GoToGameOver ();
+		}
 		state = RevealState.Finish;
 		Destroy (gameObject);
 	}
@@ -199,9 +204,9 @@ public class GUI_WildcardReveal : MonoBehaviour
 		
 		// The first item has a high chance of being a headstart or revive
 		float rand = Random.Range (0, 100.0f);
-		if (rand > 66.6) {
+		if (rand > 66.6 && false) {
 			itemsToGiveOut [0] = headstart;
-		} else if (rand > 33.3) {
+		} else if (rand > 33.3 || true) {
 			itemsToGiveOut [0] = revive;
 		} else {
 			itemsToGiveOut [0] = GetRandomUnlimitedItem ();

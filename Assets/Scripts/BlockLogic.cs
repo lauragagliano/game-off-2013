@@ -32,14 +32,27 @@ public class BlockLogic : MonoBehaviour
 		BlowUp (other.transform.position);
 		player.CollideWithBlock ();
 	}
-
+	
+	/*
+	 * Blow up the block with default explosion parameters
+	 */
 	public void BlowUp(Vector3 position)
+	{
+		float defaultExplosionForce = 40.0f;
+		float defaultRadius = 8.0f;
+		BlowUp (position, defaultExplosionForce, defaultRadius);
+	}
+	
+	/*
+	 * Blow up the block with special force and explosion radius
+	 */
+	public void BlowUp(Vector3 position, float forceMagnitude, float explosionRadius)
 	{
 		GameObject fx = (GameObject)Instantiate (destroyFX, transform.position,
 				Quaternion.LookRotation (Vector3.forward, Vector3.up));
 		FX_BlockBreak fxScript = (FX_BlockBreak)fx.GetComponent<FX_BlockBreak>();
 		if(fxScript != null) {
-			fxScript.Explode(position, 40);
+			fxScript.Explode(position, forceMagnitude, explosionRadius);
 			Destroy (fx, 3.0f);
 			// Parent the explosion to the treadmill
 			fx.transform.parent = transform.parent;

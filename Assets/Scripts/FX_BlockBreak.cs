@@ -13,15 +13,16 @@ public class FX_BlockBreak : MonoBehaviour {
 	}
 	
 	/*
-	 * Apply an explosive force to all the bits in this block
+	 * Apply an explosive force to all the bits in this block with a specific radius
 	 */
-	public void Explode(Vector3 position, float force)
+	public void Explode(Vector3 position, float force, float radius)
 	{
+		float defaultUpModifier = 0.25f;
 		int i = 0;
 		while (i < transform.childCount)
 		{
 			Transform child = transform.GetChild (i).transform;
-			child.rigidbody.AddExplosionForce(force, position, 8.0f, 0.25f, ForceMode.Impulse);
+			child.rigidbody.AddExplosionForce(force, position, radius, defaultUpModifier, ForceMode.Impulse);
 			i++;
 		}	
 	}

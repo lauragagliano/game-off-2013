@@ -18,8 +18,10 @@ public class FX_PigmentLimb : MonoBehaviour
 	
 	void UpdateLerpToOriginalLimb ()
 	{
-		transform.position = Vector3.MoveTowards (transform.position, originalLimb.transform.position, 0.25f);
-		transform.rotation = Quaternion.RotateTowards (transform.rotation, originalLimb.transform.rotation, 10.0f);
+		float maxDistanceStep = 0.25f;
+		float maxRotationDelta = 5.0f;
+		transform.position = Vector3.MoveTowards (transform.position, originalLimb.transform.position, maxDistanceStep);
+		transform.rotation = Quaternion.RotateTowards (transform.rotation, originalLimb.transform.rotation, maxRotationDelta);
 		
 		// When limb gets close enough to its original limb, stop lerping.
 		float lerpCompleteDistanceSquared = 0.1f;
@@ -34,7 +36,7 @@ public class FX_PigmentLimb : MonoBehaviour
 		transform.position = originalLimb.transform.position;
 		transform.rotation = originalLimb.transform.rotation;
 		
-		sourceBody.GetComponent<PigmentBody> ().LimbIsDoneLerping();
+		sourceBody.GetComponent<PigmentBody> ().OnLimbDoneLerping();
 		
 	}
 	

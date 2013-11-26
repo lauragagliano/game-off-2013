@@ -348,7 +348,7 @@ public class Player : MonoBehaviour
 		playerGeo.animation.Stop ();
 		
 		PigmentBody body = (PigmentBody)playerGeo.GetComponent<PigmentBody> ();
-		body.ReplaceWIthRagdoll ();
+		body.ReplaceWithRagdoll ();
 	}
 	
 	/*

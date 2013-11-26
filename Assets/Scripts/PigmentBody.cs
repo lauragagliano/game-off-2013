@@ -1,74 +1,68 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class PigmentBody : MonoBehaviour
 {
 	ColorWheel currentColor;
-	public GameObject armL;
-	public GameObject armR;
-	public GameObject legL;
-	public GameObject legR;
-	public GameObject body;
-	GameObject fxArmL;
-	GameObject fxArmR;
-	GameObject fxLegL;
-	GameObject fxLegR;
-	GameObject fxBody;
-	public GameObject fxArmLPrefab;
-	public GameObject fxArmRPrefab;
-	public GameObject fxLegLPrefab;
-	public GameObject fxLegRPrefab;
-	public GameObject fxBodyPrefab;
 	public Material[] bodyMaterials = new Material[4];
 	bool isReviving;
 	
-	public void LimbIsDoneLerping()
+	public GameObject[] limbs = new GameObject[Enum.GetNames(typeof(Limb)).Length];
+	public GameObject[] fxLimbs = new GameObject[Enum.GetNames(typeof(Limb)).Length];
+	public GameObject[] fxLimbPrefabs = new GameObject[Enum.GetNames(typeof(Limb)).Length];
+	
+	enum Limb
 	{
-		if (fxArmL.GetComponent<FX_PigmentLimb> ().IsLerping) {
-			return;
+		Body,
+		ArmL,
+		ArmR,
+		LegL,
+		LegR
+	}
+	
+	public void OnLimbDoneLerping()
+	{
+		foreach(GameObject limb in fxLimbs)
+		{
+			if(limb.GetComponent<FX_PigmentLimb> ().IsLerping) {
+				return;
+			}
 		}
-		if (fxArmR.GetComponent<FX_PigmentLimb> ().IsLerping) {
-			return;
-		}
-		if (fxLegL.GetComponent<FX_PigmentLimb> ().IsLerping) {
-			return;
-		}
-		if (fxLegR.GetComponent<FX_PigmentLimb> ().IsLerping) {
-			return;
-		}
-		if (fxBody.GetComponent<FX_PigmentLimb> ().IsLerping) {
-			return;
-		}
+		
 		isReviving = false;
 			
 		GameManager.Instance.player.RagdollRestored();
 		
-		Destroy (fxArmL);
-		Destroy (fxArmR);
-		Destroy (fxLegL);
-		Destroy (fxLegR);
-		Destroy (fxBody);
+		foreach(GameObject limb in fxLimbs)
+		{
+			Destroy (limb);
+		}
 	}
 	
 	public void SetColor (ColorWheel color, bool colorFX)
 	{
-		GameObject bodyToColor = colorFX ? fxBody : body;
+		GameObject bodyToColor = colorFX ? fxLimbs[(int)Limb.Body] : limbs[(int)Limb.Body];
+		
+		// Get materials to color limbs with
 		Material armLegMat = ColorManager.Instance.red;
+		Material bodyMat = ColorManager.Instance.red;
 		if (color == ColorWheel.red) {
 			armLegMat = ColorManager.Instance.red;
-			bodyToColor.renderer.material = bodyMaterials [0];
+			bodyMat = bodyMaterials [0];
 		} else if (color == ColorWheel.green) {
 			armLegMat = ColorManager.Instance.green;
-			bodyToColor.renderer.material = bodyMaterials [1];
+			bodyMat = bodyMaterials [1];
 		} else if (color == ColorWheel.blue) {
 			armLegMat = ColorManager.Instance.blue;
-			bodyToColor.renderer.material = bodyMaterials [2];
+			bodyMat = bodyMaterials [2];
 		} else if (color == ColorWheel.neutral) {
 			armLegMat = ColorManager.Instance.neutral;
-			bodyToColor.renderer.material = bodyMaterials [3];
+			bodyMat = bodyMaterials [3];
 		}
-		ColorArmsAndLegs (armLegMat, colorFX);
 		
+		ColorLimbs (armLegMat, colorFX);
+		bodyToColor.renderer.material = bodyMat;
 		currentColor = color;
 	}
 	
@@ -77,18 +71,12 @@ public class PigmentBody : MonoBehaviour
 		SetColor (color, false);
 	}
 	
-	void ColorArmsAndLegs (Material mat, bool colorFX)
+	void ColorLimbs (Material mat, bool colorFX)
 	{
-		if (colorFX) {
-			fxArmL.renderer.material = mat;
-			fxArmR.renderer.material = mat;
-			fxLegL.renderer.material = mat;
-			fxLegR.renderer.material = mat;
-		} else {
-			armL.renderer.material = mat;
-			armR.renderer.material = mat;
-			legL.renderer.material = mat;
-			legR.renderer.material = mat;
+		GameObject[] limbsToColor = colorFX ? fxLimbs : limbs;
+		foreach(GameObject limb in limbsToColor)
+		{
+			limb.renderer.material = mat;
 		}
 	}
 	
@@ -96,28 +84,27 @@ public class PigmentBody : MonoBehaviour
 	 * Replaces the character with ragdoll pieces and gives them impulse to match
 	 * the character's velocity.
 	 */
-	public void ReplaceWIthRagdoll ()
+	public void ReplaceWithRagdoll ()
 	{
 		float blockImpediment = 0.25f;
 		Vector3 force = GameManager.Instance.player.perceivedVelocity * blockImpediment;
-		fxBody = ReplaceLimb (body, fxBodyPrefab, force);
-		fxArmL = ReplaceLimb (armL, fxArmLPrefab, force);
-		fxArmR = ReplaceLimb (armR, fxArmRPrefab, force);
-		fxLegL = ReplaceLimb (legL, fxLegLPrefab, force);
-		fxLegR = ReplaceLimb (legR, fxLegRPrefab, force);
+		for (int i = 0; i < Enum.GetNames(typeof(Limb)).Length; i++)
+		{
+			fxLimbs[i] = ReplaceLimb (limbs[i], fxLimbPrefabs[i], force);
+		}
 		
 		SetColor (currentColor, true);
+		
 	}
 	
 	public void RestoreFromRagdoll ()
 	{
 		isReviving = true;
 		
-		fxArmL.GetComponent<FX_PigmentLimb> ().SetLerping (true);
-		fxArmR.GetComponent<FX_PigmentLimb> ().SetLerping (true);
-		fxLegL.GetComponent<FX_PigmentLimb> ().SetLerping (true);
-		fxLegR.GetComponent<FX_PigmentLimb> ().SetLerping (true);
-		fxBody.GetComponent<FX_PigmentLimb> ().SetLerping (true);
+		foreach (GameObject limb in fxLimbs)
+		{
+			limb.GetComponent<FX_PigmentLimb> ().SetLerping (true);
+		}
 	}
 	
 	/*

@@ -12,6 +12,9 @@ public class StubHUD : MonoBehaviour
 	public GUIText distanceText;
 	public GUIText debugText;
 	
+	public Texture leftArrowTexture;
+	public Texture rightArrowTexture;
+	
 	public GUIStyle areaStyle;
 	public GUIStyle redButtonStyle;
 	public GUIStyle blueButtonStyle;
@@ -113,6 +116,20 @@ public class StubHUD : MonoBehaviour
 		EnableInGameText (false);
 		PrintMoneyToScreen ();
 		Store store = (Store)GameObject.Find (ObjectNames.STORE).GetComponent<Store> ();
+
+		// Add our left and right arrows
+		GUILayout.BeginArea (new Rect (0, 0, Screen.width, Screen.height));
+		GUILayout.BeginVertical ();
+		// Push our arrows to center
+		GUILayout.FlexibleSpace ();
+		GUILayout.BeginHorizontal ();
+		GUILayout.Button (leftArrowTexture, GUIStyle.none);
+		GUILayout.FlexibleSpace ();
+		GUILayout.Button (rightArrowTexture, GUIStyle.none);
+		GUILayout.EndHorizontal ();
+		GUILayout.FlexibleSpace ();
+		GUILayout.EndVertical ();
+		GUILayout.EndArea ();
 		
 		// TODO Let's at least make the Buy/AlreadyOwned a 3d button on the item mesh
 		GUILayout.BeginArea (new Rect (Screen.width - AREA_WIDTH, (Screen.height - AREA_HEIGHT), AREA_WIDTH, AREA_HEIGHT), areaStyle);

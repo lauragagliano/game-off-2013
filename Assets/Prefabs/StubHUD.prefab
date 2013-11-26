@@ -875,6 +875,8 @@ MonoBehaviour:
   moneyText: {fileID: 13200000}
   distanceText: {fileID: 13200002}
   debugText: {fileID: 13200008}
+  leftArrowTexture: {fileID: 2800000, guid: eeb07e8e2094747108eed303a2bab99d, type: 3}
+  rightArrowTexture: {fileID: 2800000, guid: 8d3c6079d62ad4efdb2fb2e381a0dc28, type: 3}
   areaStyle:
     m_Name: 
     m_Normal:
@@ -912,9 +914,9 @@ MonoBehaviour:
       m_Top: 0
       m_Bottom: 0
     m_Padding:
-      m_Left: 0
-      m_Right: 0
-      m_Top: 0
+      m_Left: 5
+      m_Right: 5
+      m_Top: 5
       m_Bottom: 25
     m_Overflow:
       m_Left: 0
@@ -969,7 +971,7 @@ MonoBehaviour:
       m_Left: 5
       m_Right: 5
       m_Top: 5
-      m_Bottom: 50
+      m_Bottom: 5
     m_Padding:
       m_Left: 20
       m_Right: 20

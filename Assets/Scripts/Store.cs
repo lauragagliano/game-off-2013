@@ -18,14 +18,14 @@ public class Store : MonoBehaviour
 	
 	void Update () 
 	{
-		//TODO Get some real inputs in here. Also, don't do this when the
-		// player isn't at the store.
-		if (Input.GetKeyDown ("a")) {
-			ScrollToPrevious ();
-		} else if (Input.GetKeyDown ("d")) {
-			ScrollToNext ();
+		if (GameManager.Instance.IsShopping ()) {
+			if (Input.GetKeyDown ("a")) {
+				ScrollToPrevious ();
+			} else if (Input.GetKeyDown ("d")) {
+				ScrollToNext ();
+			}
+			ScrollToItem (selectedItem);
 		}
-		ScrollToItem (selectedItem);
 	}
 	
 	/*

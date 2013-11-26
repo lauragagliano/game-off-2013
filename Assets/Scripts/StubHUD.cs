@@ -138,7 +138,7 @@ public class StubHUD : MonoBehaviour
 		GUILayout.FlexibleSpace ();
 		if (GUILayout.Button ("Play", blueButtonStyle)) {
 			GameManager.Instance.GoToGame ();
-			GameManager.Instance.StartGame (false);
+			GameManager.Instance.StartGame (true);
 		}
 		GUILayout.EndHorizontal ();
 		GUILayout.EndVertical ();

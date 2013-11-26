@@ -204,9 +204,9 @@ public class GUI_WildcardReveal : MonoBehaviour
 		
 		// The first item has a high chance of being a headstart or revive
 		float rand = Random.Range (0, 100.0f);
-		if (rand > 66.6 && false) {
+		if (rand > 66.6) {
 			itemsToGiveOut [0] = headstart;
-		} else if (rand > 33.3 || true) {
+		} else if (rand > 33.3) {
 			itemsToGiveOut [0] = revive;
 		} else {
 			itemsToGiveOut [0] = GetRandomUnlimitedItem ();

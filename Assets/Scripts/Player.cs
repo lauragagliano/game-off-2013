@@ -610,7 +610,7 @@ public class Player : MonoBehaviour
 		curHealth = 1;
 		
 		// Reset the number of wildcards that have been collected.
-		WildcardCount = 1;
+		WildcardCount = 0;
 	}
 	
 	/*

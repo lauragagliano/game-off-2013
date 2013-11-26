@@ -923,21 +923,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4761ac7ecb05e4b7a83f80e1ce858e2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  armL: {fileID: 100008}
-  armR: {fileID: 100004}
-  legL: {fileID: 100014}
-  legR: {fileID: 100010}
-  body: {fileID: 100002}
-  fxArmLPrefab: {fileID: 100000, guid: bc77184e1ef7648cda394577d36917dc, type: 2}
-  fxArmRPrefab: {fileID: 100000, guid: 18f45017eab0b4ccaa1cc554a384df27, type: 2}
-  fxLegLPrefab: {fileID: 100000, guid: d8aff6dd4452b46818900862104d12c9, type: 2}
-  fxLegRPrefab: {fileID: 100000, guid: 6380e308cf45d425790fc75690ccfbf3, type: 2}
-  fxBodyPrefab: {fileID: 100002, guid: 6e1d5fe5ecec44036b45ecca6ef58c7d, type: 2}
   bodyMaterials:
   - {fileID: 2100000, guid: d5519661152c74226b5c9643ce08c76e, type: 2}
   - {fileID: 2100000, guid: 149bf4f920320454faa682b8f666b8cd, type: 2}
   - {fileID: 2100000, guid: bde06d6856b724e6db4ffea655ce5ac1, type: 2}
   - {fileID: 2100000, guid: 2b476da2e6933794dbfdf579fffff3bf, type: 2}
+  limbs:
+  - {fileID: 100002}
+  - {fileID: 100008}
+  - {fileID: 100004}
+  - {fileID: 100014}
+  - {fileID: 100010}
+  fxLimbs:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  fxLimbPrefabs:
+  - {fileID: 100002, guid: 6e1d5fe5ecec44036b45ecca6ef58c7d, type: 2}
+  - {fileID: 100000, guid: bc77184e1ef7648cda394577d36917dc, type: 2}
+  - {fileID: 100000, guid: 18f45017eab0b4ccaa1cc554a384df27, type: 2}
+  - {fileID: 100000, guid: d8aff6dd4452b46818900862104d12c9, type: 2}
+  - {fileID: 100000, guid: 6380e308cf45d425790fc75690ccfbf3, type: 2}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1

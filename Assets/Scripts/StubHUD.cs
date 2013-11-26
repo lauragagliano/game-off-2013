@@ -11,6 +11,8 @@ public class StubHUD : MonoBehaviour
 	public GUIText moneyText;
 	public GUIText distanceText;
 	public GUIText debugText;
+	public GUIText pressSpaceText;
+	public GUIText pressSpaceTextShadow;
 	
 	public Texture leftArrowTexture;
 	public Texture rightArrowTexture;
@@ -25,7 +27,7 @@ public class StubHUD : MonoBehaviour
 	const float AREA_HEIGHT = 350.0f;
 	
 	Treadmill treadmill;
-
+	
 	void Awake ()
 	{
 		SetItemTexts ();
@@ -56,6 +58,18 @@ public class StubHUD : MonoBehaviour
 	void DisplayInGameText ()
 	{
 		EnableInGameText (true);
+		// Display the tutorial text
+		if (!treadmill.IsShowingTutorial ()) {
+			pressSpaceText.text = string.Empty;
+			pressSpaceTextShadow.text = string.Empty;
+			pressSpaceText.enabled = false;
+			pressSpaceTextShadow.enabled = false;
+		} else {
+			pressSpaceText.text = "Press [Space] to Start";
+			pressSpaceTextShadow.text = "Press [Space] to Start";
+			pressSpaceText.enabled = true;
+			pressSpaceTextShadow.enabled = true;
+		}
 		EnableGameOverText (false);
 		distanceText.text = "Distance: " + Mathf.RoundToInt (treadmill.distanceTraveled);
 		PrintMoneyToScreen ();
@@ -88,13 +102,18 @@ public class StubHUD : MonoBehaviour
 		}
 		if (GUILayout.Button ("Retry [Enter]", blueButtonStyle)) {
 			//Application.LoadLevel (Application.loadedLevel);
-			GameManager.Instance.StartGame (false);
+			GameManager.Instance.StartGame (true);
 			EnableInGameText (true);
 		}
 		GUILayout.FlexibleSpace ();
 		GUILayout.EndHorizontal ();
 		GUILayout.EndVertical ();
 		GUILayout.EndArea ();
+		
+		if (Input.GetKeyDown (KeyCode.KeypadEnter) || Input.GetKeyDown (KeyCode.Return)) {
+			GameManager.Instance.StartGame (true);
+			EnableInGameText (true);
+		}
 	}
 	
 	/*
@@ -197,6 +216,10 @@ public class StubHUD : MonoBehaviour
 		GUILayout.EndHorizontal ();
 		GUILayout.EndVertical ();
 		GUILayout.EndArea ();
+		
+		if (Input.GetKeyDown (KeyCode.KeypadEnter) || Input.GetKeyDown (KeyCode.Return)) {
+			GameManager.Instance.StartGame (true);
+		}
 	}
 	
 	/*
@@ -204,6 +227,8 @@ public class StubHUD : MonoBehaviour
 	 */
 	void EnableInGameText (bool enable)
 	{
+		pressSpaceText.enabled = enable;
+		pressSpaceTextShadow.enabled = enable;
 		moneyText.enabled = enable;
 		distanceText.enabled = enable;
 		debugText.enabled = enable;

@@ -23,5 +23,6 @@ public class ObjectNames
 	public static string STORE_ITEM_NAME = "ItemName";
 	public static string GUI_WILDCARD_REVEAL = "GUI_WildcardReveal";
 	public static string WILDCARD_PREFAB = "WildcardPickup";
+	public static string TUTORIAL_IMAGE = "TutorialImage";
 }
 

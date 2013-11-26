@@ -66,9 +66,19 @@ public class Treadmill : MonoBehaviour
 		}
 	}
 	
+	/*
+	 * Return true if tutorial is being shown.
+	 */
+	public bool IsShowingTutorial ()
+	{
+		return status == Status.Tutorial;
+	}
+	
 	#region #1 Treadmill Manipulation (Start/Stop/Reset/Slowdown)
 	public void ShowTutorial ()
 	{
+		// Reset the tutorial image
+		GameObject.Find (ObjectNames.TUTORIAL_IMAGE).transform.position = new Vector3 (0, 0.1f, 9.0f);
 		scrollspeed = 0;
 		status = Status.Tutorial;
 	}

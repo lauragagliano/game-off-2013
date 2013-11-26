@@ -90,7 +90,7 @@ public class GameManager : Singleton<GameManager>
 	void Update ()
 	{
 		if (gameState == GameState.Tutorial) {
-			if (Input.anyKeyDown) {
+			if (Input.GetKeyDown (KeyCode.Space)) {
 				GoToRunning(false);
 			}
 		} else if (gameState == GameState.Running) {
@@ -191,7 +191,6 @@ public class GameManager : Singleton<GameManager>
 	public void StartGame (bool showTutorial)
 	{
 		InitializeGame ();
-		
 		if (showTutorial) {
 			GoToTutorial ();
 		} else {
@@ -217,7 +216,6 @@ public class GameManager : Singleton<GameManager>
 		difficulty = Difficulty.Easy;
 		
 		SpawnPlayer ();
-		
 		treadmill.ResetTreadmill ();
 	}
 	
@@ -277,7 +275,10 @@ public class GameManager : Singleton<GameManager>
 	 */
 	public void OnReviveDone()
 	{
-		GoToRunning(true);
+		// This can be called on Retry
+		if (gameState != GameState.Tutorial) {
+			GoToRunning(true);
+		}
 	}
 	
 	/*
@@ -345,7 +346,6 @@ public class GameManager : Singleton<GameManager>
 	void GoToTutorial ()
 	{
 		gameState = GameState.Tutorial;
-		
 		treadmill.ShowTutorial ();
 	}
 }

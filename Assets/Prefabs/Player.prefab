@@ -44,6 +44,7 @@ GameObject:
   - 4: {fileID: 400004}
   - 33: {fileID: 3300004}
   - 23: {fileID: 2300004}
+  - 114: {fileID: 11400018}
   m_Layer: 10
   m_Name: Pigment_ArmR
   m_TagString: Untagged
@@ -88,6 +89,7 @@ GameObject:
   - 4: {fileID: 400008}
   - 33: {fileID: 3300006}
   - 23: {fileID: 2300006}
+  - 114: {fileID: 11400020}
   m_Layer: 10
   m_Name: Pigment_ArmL
   m_TagString: Untagged
@@ -105,6 +107,7 @@ GameObject:
   - 4: {fileID: 400010}
   - 33: {fileID: 3300010}
   - 23: {fileID: 2300010}
+  - 114: {fileID: 11400006}
   m_Layer: 10
   m_Name: Pigment_LegR
   m_TagString: Untagged
@@ -140,6 +143,7 @@ GameObject:
   - 4: {fileID: 400014}
   - 33: {fileID: 3300012}
   - 23: {fileID: 2300012}
+  - 114: {fileID: 11400004}
   m_Layer: 10
   m_Name: Pigment_LegL
   m_TagString: Untagged
@@ -929,9 +933,9 @@ MonoBehaviour:
   - {fileID: 2100000, guid: bde06d6856b724e6db4ffea655ce5ac1, type: 2}
   - {fileID: 2100000, guid: 2b476da2e6933794dbfdf579fffff3bf, type: 2}
   limbs:
-  - {fileID: 100002}
   - {fileID: 100008}
   - {fileID: 100004}
+  - {fileID: 100002}
   - {fileID: 100014}
   - {fileID: 100010}
   fxLimbs:
@@ -939,10 +943,11 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
   fxLimbPrefabs:
-  - {fileID: 100002, guid: 6e1d5fe5ecec44036b45ecca6ef58c7d, type: 2}
   - {fileID: 100000, guid: bc77184e1ef7648cda394577d36917dc, type: 2}
   - {fileID: 100000, guid: 18f45017eab0b4ccaa1cc554a384df27, type: 2}
+  - {fileID: 100002, guid: 6e1d5fe5ecec44036b45ecca6ef58c7d, type: 2}
   - {fileID: 100000, guid: d8aff6dd4452b46818900862104d12c9, type: 2}
   - {fileID: 100000, guid: 6380e308cf45d425790fc75690ccfbf3, type: 2}
 --- !u!114 &11400002
@@ -958,6 +963,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   color: 4
   autoSetMaterial: 0
+--- !u!114 &11400004
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71a71f2a6e20542099dbe0a38cc8cee9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11400006
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71a71f2a6e20542099dbe0a38cc8cee9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1039,6 +1066,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerReadySound: {fileID: 8300000, guid: 727dd46b669931645927cad8c8b88b7c, type: 3}
   curValue: 0
+--- !u!114 &11400018
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71a71f2a6e20542099dbe0a38cc8cee9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11400020
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71a71f2a6e20542099dbe0a38cc8cee9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!143 &14300000
 CharacterController:
   m_ObjectHideFlags: 1

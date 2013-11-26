@@ -93,4 +93,12 @@ public class Store : MonoBehaviour
 		GameManager.Instance.player.RemoveMoney (itemToBuy.cost);
 		Debug.Log (playerInventory.GetContentsAsJSON ());
 	}
+	
+	/*
+	 * Get the item object that is currently selected in the shop.
+	 */
+	public Item GetSelectedItem ()
+	{
+		return allItems[selectedItem].GetComponent<Item> ();
+	}
 }

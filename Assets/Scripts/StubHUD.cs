@@ -12,6 +12,15 @@ public class StubHUD : MonoBehaviour
 	public GUIText distanceText;
 	public GUIText debugText;
 	
+	public GUIStyle areaStyle;
+	public GUIStyle redButtonStyle;
+	public GUIStyle blueButtonStyle;
+	public GUIStyle greenButtonStyle;
+	public GUIStyle greyButtonStyle;
+	
+	const float AREA_WIDTH = 400.0f;
+	const float AREA_HEIGHT = 350.0f;
+	
 	Treadmill treadmill;
 
 	void Awake ()
@@ -64,15 +73,24 @@ public class StubHUD : MonoBehaviour
 		finalDistanceText.text = Mathf.RoundToInt (treadmill.distanceTraveled) + "m";
 		crystalsCollectedLabelText.text = "Crystals Collected";
 		crystalsCollectedText.text = GameManager.Instance.numPointsThisRound.ToString ();
-		GUILayout.BeginArea (new Rect (Screen.width / 2 - 50.0f, Screen.height - 70.0f, 200.0f, 70.0f));
-		if (GUILayout.Button ("Click to Retry")) {
+		GUILayout.BeginArea (new Rect ((Screen.width - AREA_WIDTH)/2, (Screen.height - AREA_HEIGHT), AREA_WIDTH, AREA_HEIGHT), areaStyle);
+		// Push our buttons down to bottom of screen
+		GUILayout.BeginVertical ();
+		GUILayout.FlexibleSpace ();
+		// Center our buttons with space on both sides
+		GUILayout.BeginHorizontal ();
+		GUILayout.FlexibleSpace ();
+		if (GUILayout.Button ("Go to Store", greenButtonStyle)) {
+			GameManager.Instance.GoToStore ();
+		}
+		if (GUILayout.Button ("Retry [Enter]", blueButtonStyle)) {
 			//Application.LoadLevel (Application.loadedLevel);
 			GameManager.Instance.StartGame (false);
 			EnableInGameText (true);
 		}
-		if (GUILayout.Button ("Go to Store")) {
-			GameManager.Instance.GoToStore ();
-		}
+		GUILayout.FlexibleSpace ();
+		GUILayout.EndHorizontal ();
+		GUILayout.EndVertical ();
 		GUILayout.EndArea ();
 	}
 	
@@ -97,20 +115,32 @@ public class StubHUD : MonoBehaviour
 		Store store = (Store)GameObject.Find (ObjectNames.STORE).GetComponent<Store> ();
 		
 		// TODO Let's at least make the Buy/AlreadyOwned a 3d button on the item mesh
-		GUILayout.BeginArea (new Rect (Screen.width - 220.0f, Screen.height - 70.0f, 200.0f, 70.0f));
+		GUILayout.BeginArea (new Rect (Screen.width - AREA_WIDTH, (Screen.height - AREA_HEIGHT), AREA_WIDTH, AREA_HEIGHT), areaStyle);
+		// Push our buttons to bottom of screen
+		GUILayout.BeginVertical ();
+		GUILayout.FlexibleSpace ();
+		// Push our buttons to right of screen.
+		GUILayout.BeginHorizontal ();
+		GUILayout.FlexibleSpace ();
 		if (store.IsAlreadyPurchased ()) {
-			GUILayout.Button ("Already Owned");
+			GUILayout.Button ("Already Owned", greyButtonStyle);
 		}
 		else if (!store.HasEnoughMoney ()) {
-			GUILayout.Button ("Not Enough Money");
+			GUILayout.Button ("Not Enough Money", redButtonStyle);
 		} else {
-			if (GUILayout.Button ("Buy")) {
+			if (GUILayout.Button ("Buy (" + store.GetSelectedItem ().cost + ")", greenButtonStyle)) {
 				store.BuyItem ();
 			}
 		}
-		if (GUILayout.Button ("Start Game")) {
-			GameManager.Instance.StartGame (false);
+		GUILayout.EndHorizontal ();
+		// Push more buttons to the right of the screen
+		GUILayout.BeginHorizontal ();
+		GUILayout.FlexibleSpace ();
+		if (GUILayout.Button ("Play", blueButtonStyle)) {
+			GameManager.Instance.StartGame (true);
 		}
+		GUILayout.EndHorizontal ();
+		GUILayout.EndVertical ();
 		GUILayout.EndArea ();
 	}
 	
@@ -130,15 +160,25 @@ public class StubHUD : MonoBehaviour
 	 */
 	void DisplayMainMenu ()
 	{
-		GUILayout.BeginArea (new Rect (Screen.width - 220.0f, Screen.height - 70.0f, 200.0f, 70.0f));
 		EnableInGameText (false);
 		EnableGameOverText (false);
-		if (GUILayout.Button ("Start Game [ENTER]")) {
-			GameManager.Instance.StartGame (true);
-		}
-		if (GUILayout.Button ("Shop")) {
+		GUILayout.BeginArea (new Rect ((Screen.width - AREA_WIDTH)/2, (Screen.height - AREA_HEIGHT), AREA_WIDTH, AREA_HEIGHT), areaStyle);
+		// Push buttons to the bottom of the screen
+		GUILayout.BeginVertical ();
+		GUILayout.FlexibleSpace ();
+		GUILayout.BeginHorizontal ();
+		// Push buttons to the center of the screen
+		GUILayout.FlexibleSpace ();
+		if (GUILayout.Button ("Go to Store", greenButtonStyle)) {
 			GameManager.Instance.GoToStore ();
 		}
+		if (GUILayout.Button ("Start Game [ENTER]", blueButtonStyle)) {
+			GameManager.Instance.StartGame (true);
+		}
+		// Push more buttons to the center of the screen
+		GUILayout.FlexibleSpace ();
+		GUILayout.EndHorizontal ();
+		GUILayout.EndVertical ();
 		GUILayout.EndArea ();
 	}
 	
@@ -162,4 +202,5 @@ public class StubHUD : MonoBehaviour
 		crystalsCollectedText.enabled = enable;
 		crystalsCollectedLabelText.enabled = enable;
 	}
+
 }

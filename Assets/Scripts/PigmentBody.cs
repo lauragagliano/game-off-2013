@@ -18,9 +18,7 @@ public class PigmentBody : MonoBehaviour
 		LegL,
 		LegR
 	}
-	
-	bool isReviving;
-	
+
 	public void SetColor (ColorWheel color, bool colorFX)
 	{
 		GameObject bodyToColor = colorFX ? fxLimbs [(int)Limb.Body] : limbs [(int)Limb.Body];
@@ -85,8 +83,6 @@ public class PigmentBody : MonoBehaviour
 	 */
 	public void StartReviving ()
 	{
-		isReviving = true;
-		
 		foreach (GameObject limb in fxLimbs) {
 			limb.GetComponent<FX_PigmentLimb> ().SetLerping (true);
 		}
@@ -120,7 +116,6 @@ public class PigmentBody : MonoBehaviour
 	 */
 	void FinishRevive ()
 	{
-		isReviving = false;
 		GameManager.Instance.player.OnBodyRevived ();
 	}
 	

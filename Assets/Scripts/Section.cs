@@ -73,7 +73,7 @@ public class Section : MonoBehaviour
 			}
 			else if (child.CompareTag (Tags.WILDCARD)) {
 				if (treadmill.NeedsWildcard ()) {
-					GameObject pickup = InstantiatePrefabAtPlaceholder (ObjectNames.WILDCARD_PREFAB, child, tempPrefabHolder.transform);
+					InstantiatePrefabAtPlaceholder (ObjectNames.WILDCARD_PREFAB, child, tempPrefabHolder.transform);
 					treadmill.OnWildcardSpawn ();
 				} else {
 					Destroy (child.gameObject);

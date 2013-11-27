@@ -15,7 +15,6 @@ public class GameManager : Singleton<GameManager>
 	public int numPointsThisRound;
 	Transform playerSpawn;
 	public Treadmill treadmill;
-	Store store;
 	GameObject wildcardRevealerPrefab;
 	GUI_WildcardReveal wildcardRevealer;
 	public GameObject WildcardRevealGO;
@@ -78,12 +77,6 @@ public class GameManager : Singleton<GameManager>
 			return;
 		}
 		treadmill = (Treadmill)foundObject.GetComponent<Treadmill> ();
-		
-		// Link Store
-		foundObject = GameObject.Find (ObjectNames.STORE);
-		if (foundObject != null) {
-			store = (Store)foundObject.GetComponent<Store> ();
-		}
 	}
 	
 	void Update ()

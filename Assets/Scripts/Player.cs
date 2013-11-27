@@ -10,7 +10,8 @@ public class Player : MonoBehaviour
 	public int curShields;
 
 	public bool IsDead { get; private set; }
-
+	bool isReviving;
+	RBTimer reviveTimeout;
 	
 	// Abilities
 	public BluePower bluePower;
@@ -50,7 +51,6 @@ public class Player : MonoBehaviour
 	float worldYClamp;
 	public float movespeed;
 	public Vector3 perceivedVelocity;
-	
 	
 	#region #1 Awake and Update
 	void Awake ()
@@ -107,21 +107,29 @@ public class Player : MonoBehaviour
 	
 	void Update ()
 	{
-		MatchSpeedToTreadmill ();
-
-		TryMove ();
-		TryActivateAbilities ();
-
-		CheckShieldTimeout ();
-		CheckSlowDownTimeout ();
-		
-		ClampToWorldYZ (worldYClamp, worldZClamp);
-		// If no colors are active, go neutral
-		if (!bluePower.IsPowerActive () && !redPower.IsPowerActive () && !greenPower.IsPowerActive ()) {
-			ChangeColors (ColorWheel.neutral);
+		if(!IsDead) {
+			MatchSpeedToTreadmill ();
+	
+			TryMove ();
+			TryActivateAbilities ();
+	
+			CheckShieldTimeout ();
+			CheckSlowDownTimeout ();
+			
+			ClampToWorldYZ (worldYClamp, worldZClamp);
+			// If no colors are active, go neutral
+			if (!bluePower.IsPowerActive () && !redPower.IsPowerActive () && !greenPower.IsPowerActive ()) {
+				ChangeColors (ColorWheel.neutral);
+			}
+			RenderCurrentColor ();
+			PullNearbyPickups ();
 		}
-		RenderCurrentColor ();
-		PullNearbyPickups ();
+		else if (isReviving) {
+			// Check if we need to force restore from ragdoll due to timeout
+			if (reviveTimeout.IsTimeUp()) {
+				OnBodyRevived();
+			}
+		}
 	}
 	
 	/*
@@ -343,10 +351,9 @@ public class Player : MonoBehaviour
 	public void Die ()
 	{
 		IsDead = true;
+		collider.enabled = false;
 		
 		GameManager.Instance.EndRun ();
-		gameObject.SetActive (false);
-		playerGeo.animation.Stop ();
 		
 		PigmentBody body = (PigmentBody)playerGeo.GetComponent<PigmentBody> ();
 		body.ReplaceWithRagdoll ();
@@ -357,42 +364,59 @@ public class Player : MonoBehaviour
 	 */
 	public void Spawn (Vector3 spawnPosition)
 	{
-		if (!IsDead) {
-			InitializeStatsOnSpawn ();
-		} else {
-			InitializeStatsOnRevive ();
-			
-			// Restore ragdolled limbs
-			PigmentBody body = (PigmentBody)playerGeo.GetComponent<PigmentBody> ();
-			body.RestoreFromRagdoll ();
-		}
+		IsDead = false;
+		collider.enabled = true;
+		
+		PigmentBody body = (PigmentBody)playerGeo.GetComponent<PigmentBody> ();
+		body.RestoreBody ();
+		
+		InitializeStatsOnSpawn ();
 		
 		// Snap to spawn position
 		transform.position = spawnPosition;
+	}
+	
+	public void Revive (Vector3 revivePosition)
+	{
+		InitializeStatsOnRevive ();
 		
-		IsDead = false;
+		// Restore ragdolled limbs
+		PigmentBody body = (PigmentBody)playerGeo.GetComponent<PigmentBody> ();
+		body.StartReviving ();
+		
+		// Snap to revive position
+		transform.position = revivePosition;
+		
+		isReviving = true;
+		
+		reviveTimeout = new RBTimer();
+		reviveTimeout.StartTimer(2.0f);
 	}
 	
 	/*
 	 * Called when the ragdoll is done bringing the body parts back together.
 	 */
-	public void OnRagdollRestored()
+	public void OnBodyRevived ()
 	{
-		gameObject.SetActive (true);
+		reviveTimeout.StopTimer();
+		isReviving = false;
+		IsDead = false;
+		collider.enabled = true;
 		
+		PigmentBody body = (PigmentBody)playerGeo.GetComponent<PigmentBody> ();
+		body.RestoreBody();
+		
+		// Do an explosion to clear blocks out of the way
 		float explosionRadius = 25;
-		GameObject[] blackblocks = GameObject.FindGameObjectsWithTag(Tags.BLOCK);
-		foreach(GameObject block in blackblocks)
-		{
-			if(Vector3.SqrMagnitude(block.transform.position - transform.position) <= Mathf.Pow(explosionRadius, 2.0f))
-			{
-				block.GetComponent<BlockLogic>().BlowUp (transform.position, 200, explosionRadius);
+		GameObject[] blackblocks = GameObject.FindGameObjectsWithTag (Tags.BLOCK);
+		foreach (GameObject block in blackblocks) {
+			if (Vector3.SqrMagnitude (block.transform.position - transform.position) <= Mathf.Pow (explosionRadius, 2.0f)) {
+				block.GetComponent<BlockLogic> ().BlowUp (transform.position, 200, explosionRadius);
 			}
 		}
 		
-		GameManager.Instance.OnReviveDone();
+		GameManager.Instance.OnReviveDone ();
 	}
-	
 		
 	/*
 	 * Add specified amount of money to the player currency.
@@ -595,7 +619,7 @@ public class Player : MonoBehaviour
 		}
 		
 		// Also reset the same stats that should be reset on revive
-		InitializeStatsOnRevive();
+		InitializeStatsOnRevive ();
 	}
 	
 	/*

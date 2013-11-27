@@ -6,9 +6,9 @@ public class PigmentBody : MonoBehaviour
 {
 	ColorWheel currentColor;
 	public Material[] bodyMaterials = new Material[4];
-	public GameObject[] limbs = new GameObject[Enum.GetNames(typeof(Limb)).Length];
-	public GameObject[] fxLimbs = new GameObject[Enum.GetNames(typeof(Limb)).Length];
-	public GameObject[] fxLimbPrefabs = new GameObject[Enum.GetNames(typeof(Limb)).Length];
+	public GameObject[] limbs = new GameObject[Enum.GetNames (typeof(Limb)).Length];
+	public GameObject[] fxLimbs = new GameObject[Enum.GetNames (typeof(Limb)).Length];
+	public GameObject[] fxLimbPrefabs = new GameObject[Enum.GetNames (typeof(Limb)).Length];
 	
 	enum Limb
 	{
@@ -21,31 +21,9 @@ public class PigmentBody : MonoBehaviour
 	
 	bool isReviving;
 	
-	/*
-	 * Called when a limb is done lerping back to its original game object.
-	 */
-	public void OnLimbDoneLerping()
-	{
-		foreach(GameObject limb in fxLimbs)
-		{
-			if(limb.GetComponent<FX_PigmentLimb> ().IsLerping) {
-				return;
-			}
-		}
-		
-		isReviving = false;
-			
-		GameManager.Instance.player.OnRagdollRestored();
-		
-		foreach(GameObject limb in fxLimbs)
-		{
-			Destroy (limb);
-		}
-	}
-	
 	public void SetColor (ColorWheel color, bool colorFX)
 	{
-		GameObject bodyToColor = colorFX ? fxLimbs[(int)Limb.Body] : limbs[(int)Limb.Body];
+		GameObject bodyToColor = colorFX ? fxLimbs [(int)Limb.Body] : limbs [(int)Limb.Body];
 		
 		// Get materials to color limbs with
 		Material armLegMat = ColorManager.Instance.red;
@@ -77,8 +55,7 @@ public class PigmentBody : MonoBehaviour
 	void ColorLimbs (Material mat, bool colorFX)
 	{
 		GameObject[] limbsToColor = colorFX ? fxLimbs : limbs;
-		foreach(GameObject limb in limbsToColor)
-		{
+		foreach (GameObject limb in limbsToColor) {
 			limb.renderer.material = mat;
 		}
 	}
@@ -89,28 +66,74 @@ public class PigmentBody : MonoBehaviour
 	 */
 	public void ReplaceWithRagdoll ()
 	{
+		// Spawn ragdoll limbs with force
 		float blockImpediment = 0.25f;
 		Vector3 force = GameManager.Instance.player.perceivedVelocity * blockImpediment;
-		for (int i = 0; i < Enum.GetNames(typeof(Limb)).Length; i++)
-		{
-			fxLimbs[i] = ReplaceLimb (limbs[i], fxLimbPrefabs[i], force);
+		for (int i = 0; i < Enum.GetNames(typeof(Limb)).Length; i++) {
+			fxLimbs [i] = ReplaceLimb (limbs [i], fxLimbPrefabs [i], force);
 		}
 		
+		// Color the limbs to match the body
 		SetColor (currentColor, true);
 		
+		// Disable the body from rendering
+		transform.gameObject.SetActive (false);
 	}
 	
 	/*
 	 * Revive the character from ragdoll by lerping all the limbs back to the body.
 	 */
-	public void RestoreFromRagdoll ()
+	public void StartReviving ()
 	{
 		isReviving = true;
 		
-		foreach (GameObject limb in fxLimbs)
-		{
+		foreach (GameObject limb in fxLimbs) {
 			limb.GetComponent<FX_PigmentLimb> ().SetLerping (true);
 		}
+	}
+	
+	/*
+	 * Called when a limb is done lerping back to its original game object.
+	 */
+	public void OnLimbDoneLerping ()
+	{
+		if (AreAllLimbsDoneLerping ()) {
+			FinishRevive ();
+		}
+	}
+	
+	/*
+	 * Returns true when all limbs are done lerping
+	 */
+	bool AreAllLimbsDoneLerping ()
+	{
+		foreach (GameObject limb in fxLimbs) {
+			if (limb.GetComponent<FX_PigmentLimb> ().IsLerping) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	/*
+	 * Performs all actions that must be done when the revive is finished.
+	 */
+	void FinishRevive ()
+	{
+		isReviving = false;
+		GameManager.Instance.player.OnBodyRevived ();
+	}
+	
+	/*
+	 * Destroys all the ragdolled limbs and restores the original.
+	 */
+	public void RestoreBody ()
+	{	
+		foreach (GameObject limb in fxLimbs) {
+			Destroy (limb);
+		}
+		
+		transform.gameObject.SetActive (true);
 	}
 	
 	/*

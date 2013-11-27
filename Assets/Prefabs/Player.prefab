@@ -255,7 +255,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100006}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: .666259885, z: -26.6882458}
+  m_LocalPosition: {x: 0, y: .5, z: -26.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400012}
@@ -933,9 +933,9 @@ MonoBehaviour:
   - {fileID: 2100000, guid: bde06d6856b724e6db4ffea655ce5ac1, type: 2}
   - {fileID: 2100000, guid: 2b476da2e6933794dbfdf579fffff3bf, type: 2}
   limbs:
+  - {fileID: 100002}
   - {fileID: 100008}
   - {fileID: 100004}
-  - {fileID: 100002}
   - {fileID: 100014}
   - {fileID: 100010}
   fxLimbs:
@@ -945,9 +945,9 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   fxLimbPrefabs:
+  - {fileID: 100002, guid: 6e1d5fe5ecec44036b45ecca6ef58c7d, type: 2}
   - {fileID: 100000, guid: bc77184e1ef7648cda394577d36917dc, type: 2}
   - {fileID: 100000, guid: 18f45017eab0b4ccaa1cc554a384df27, type: 2}
-  - {fileID: 100002, guid: 6e1d5fe5ecec44036b45ecca6ef58c7d, type: 2}
   - {fileID: 100000, guid: d8aff6dd4452b46818900862104d12c9, type: 2}
   - {fileID: 100000, guid: 6380e308cf45d425790fc75690ccfbf3, type: 2}
 --- !u!114 &11400002

@@ -12,7 +12,6 @@ public class Treadmill : MonoBehaviour
 	const int MIN_FREEBIE_DISTANCE = 350; // ~5 sections of 70m
 	const int MAX_FREEBIE_DISTANCE = 500;
 	int nextFreebieMarker;
-	
 	public const int HARD_THRESHOLD = 2000;
 	
 	const float STARTING_SPEED = 20.0f;
@@ -35,7 +34,10 @@ public class Treadmill : MonoBehaviour
 	float lerpToSpeed;
 	public bool lerping;
 	const int lerpSpeed = 5;
-
+	
+	// TODO This can be removed before launch, for debugging
+	Hashtable sectionCount = new Hashtable();
+	
 	Status status;
 	
 	enum Status {
@@ -51,6 +53,7 @@ public class Treadmill : MonoBehaviour
 		sectionKillZone = (Transform)GameObject.Find (ObjectNames.SECTION_KILLZONE).transform;
 		nextWildcardMarker = GenerateNextWildcardMarker ();
 		nextFreebieMarker = GenerateNextFreebieMarker ();
+		//AddAllSectionsToCounter ();
 	}
 	
 	void Update ()
@@ -262,6 +265,7 @@ public class Treadmill : MonoBehaviour
 		Vector3 rowSpacing = new Vector3 (0, 0, 1);
 		GameObject newSection = (GameObject)Instantiate (GetRandomSectionFromBucket (sectionBucket),
 				sectionSpawnZone.position + rowSpacing, Quaternion.identity);
+		CountSection (newSection.name);
 		sectionsInPlay.Add (newSection);
 	}
 	
@@ -313,6 +317,16 @@ public class Treadmill : MonoBehaviour
 		return sectionsInPlay [Mathf.Max (sectionsInPlay.Count - 1, 0)];
 	}
 	
+	void CountSection (string name)
+	{
+		if (sectionCount[name] != null) {
+			int oldval = (int) sectionCount[name];
+			sectionCount[name] = oldval + 1;
+		} else {
+			sectionCount.Add (name, 1);
+		}
+	}
+	
 	/*
 	 * Remove any references to the provided section and destroy it.
 	 */
@@ -356,4 +370,40 @@ public class Treadmill : MonoBehaviour
 		Debug.Log ("Spawned a new wildcard. Next wildcard at: " + nextWildcardMarker);
 	}
 	#endregion
+	
+	/*
+	 * When closing the program, report back which sections spawned and how many times.
+	 */
+	void OnDestroy ()
+	{
+		//PrintSectionCount ();
+	}
+
+	/*
+	 * Print all keys and values for the section count.
+	 */
+	void PrintSectionCount ()
+	{
+		// Print out the data on each section
+		foreach (string key in sectionCount.Keys) {
+			Debug.Log (key + ": " + sectionCount[key]);
+		}
+	}
+	
+	/*
+	 * Make sure we get 0 added for all of our possible sections to see
+	 * which sections are never instantiated.
+	 */
+	void AddAllSectionsToCounter ()
+	{
+		foreach (GameObject obj in normalSections) {
+			sectionCount.Add (obj.name, 0);
+		}
+		foreach (GameObject obj in challengeSections) {
+			sectionCount.Add (obj.name, 0);
+		}
+		foreach (GameObject obj in freebieSections) {
+			sectionCount.Add (obj.name, 0);
+		}
+	}
 }

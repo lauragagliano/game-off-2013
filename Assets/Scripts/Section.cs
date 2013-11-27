@@ -91,6 +91,20 @@ public class Section : MonoBehaviour
 	{
 		GameObject prefab = (GameObject)Instantiate(Resources.Load(resourceName, typeof(GameObject)), 
 			placeholder.position, Quaternion.identity);
+		
+		Vector3 PICKUP_Y_OFFSET = new Vector3 (0.0f, 1.5f, 0.0f);
+		Vector3 BLOCK_Y_OFFSET = new Vector3 (0.0f, 1.0f, 0.0f);
+		Vector3 prefabYOffset;
+		if(prefab.CompareTag(Tags.PICKUP)) {
+			prefabYOffset = PICKUP_Y_OFFSET;
+		}
+		else if (prefab.CompareTag(Tags.WILDCARD)) {
+			prefabYOffset = PICKUP_Y_OFFSET;
+		}
+		else {
+			prefabYOffset = BLOCK_Y_OFFSET;
+		}
+		prefab.transform.position = prefab.transform.position + prefabYOffset;
 		prefab.transform.parent = prefabParent;
 		Destroy (placeholder.gameObject);
 		return prefab;

@@ -2468,6 +2468,7 @@ MonoBehaviour:
   - {fileID: 100008}
   - {fileID: 100042}
   - {fileID: 100000}
+  - {fileID: 100088}
   - {fileID: 100092}
   selectedItem: 0
 --- !u!114 &11400012
@@ -2513,7 +2514,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   itemName: GreenMagnet
-  cost: 500
+  cost: 5
   wildcardMaterial: {fileID: 0}
 --- !u!114 &11400018
 MonoBehaviour:
@@ -2528,7 +2529,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   itemName: GreenMeterUpgrade
-  cost: 30
+  cost: 5
   wildcardMaterial: {fileID: 0}
 --- !u!114 &11400020
 MonoBehaviour:
@@ -2574,7 +2575,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   itemName: StrongerShields
-  cost: 300
+  cost: 5
   wildcardMaterial: {fileID: 0}
 --- !u!114 &11400026
 MonoBehaviour:
@@ -2589,7 +2590,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   itemName: GreenPowerUpgrade
-  cost: 750
+  cost: 5
   wildcardMaterial: {fileID: 0}
 --- !u!124 &12400000
 Behaviour:

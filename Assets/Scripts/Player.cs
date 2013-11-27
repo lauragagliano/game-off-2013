@@ -22,8 +22,9 @@ public class Player : MonoBehaviour
 
 	public RedPower redPower;
 	public GreenPower greenPower;
-	int shieldStrength = 3;
-	const int UPGRADED_SHIELD_STRENGTH = 10;
+	bool isShieldUp;
+	int shieldStrength = 4;
+	const int UPGRADED_SHIELD_STRENGTH = 6;
 	
 	public RGB playerRGB;
 	public float MAGNET_DIST = 10.0f;
@@ -307,8 +308,8 @@ public class Player : MonoBehaviour
 	 */
 	public void CollideWithBlock ()
 	{
-		if (curShields > 0) {
-			TakeShieldHit (1);
+		if (greenPower.IsPowerActive()) {
+			TakeShieldHit ();
 		} else {
 			// Subtract the health
 			curHealth = curHealth - 1;
@@ -537,8 +538,8 @@ public class Player : MonoBehaviour
 	{
 		audio.PlayOneShot (shieldUpSound);
 		shieldAnimation.Play (ObjectNames.FX_SHIELD_IDLE);
-		curShields = shieldStrength;
 		shieldObject.SetActive (true);
+		isShieldUp = true;
 	}
 	
 	/*
@@ -548,35 +549,48 @@ public class Player : MonoBehaviour
 	public void LowerShields ()
 	{
 		audio.PlayOneShot (shieldDownSound);
-		curShields = 0;
 		shieldObject.SetActive (false);
+		shieldAnimation.Stop ();
 		greenPower.ResetPower ();
+		isShieldUp = false;
 	}
 	
 	/*
 	 * Calculate a hit to the shields (as opposed to health). Play the right sound
 	 * depending on a shield being hit or going down.
 	 */
-	public void TakeShieldHit (int loss)
+	public void TakeShieldHit ()
 	{
-		int newShields = curShields - loss;
-		if (newShields > 0) {
+		float powerLoss = greenPower.maxValue / shieldStrength;
+		float newShieldPower = greenPower.curValue - powerLoss;
+		if (newShieldPower > 0) {
 			audio.PlayOneShot (shieldHitSound);
-			if (newShields == 1) {
-				shieldAnimation.Play (ObjectNames.FX_SHIELD_WEAK);
-			}
-		} else if (newShields == 0) {
+			greenPower.RemovePower (powerLoss);
+		} else if (newShieldPower <= 0) {
 			LowerShields ();
 		}
-		curShields = newShields;
+		greenPower.curValue = newShieldPower;
 	}
 	
 	/*
-	 * If shields are up but green power is all out, turn off shields.
+	 * If shields are up but green power is all out, turn off shields. Also,
+	 * show them as weak if time is almost up.
 	 */
 	void CheckShieldTimeout ()
 	{
-		if (curShields > 0 && !greenPower.IsPowerActive ()) {
+		if (greenPower.IsPowerActive ()) {
+			if (greenPower.curValue <= (greenPower.maxValue / shieldStrength)) {
+				// Play weak animation if within one hit away from breaking
+				if (!shieldAnimation.IsPlaying (ObjectNames.FX_SHIELD_WEAK)) {
+					shieldAnimation.Play (ObjectNames.FX_SHIELD_WEAK);
+				}
+			} else if (shieldAnimation.IsPlaying (ObjectNames.FX_SHIELD_WEAK)) {
+				// Play idle animation if player gained enough power to get out of weak
+				// threshold
+				shieldAnimation.Play (ObjectNames.FX_SHIELD_IDLE);
+			}
+		} else if (isShieldUp) {
+			// Shields timed out, lower them
 			LowerShields ();
 		}
 	}
@@ -644,6 +658,7 @@ public class Player : MonoBehaviour
 		greenPower.curValue = 0;
 		bluePower.curValue = 0;
 		isUsingSlowdown = false;
+		isShieldUp = false;
 		curHealth = 1;
 		
 		// Reset the number of wildcards that have been collected.

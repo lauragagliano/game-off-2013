@@ -13,7 +13,7 @@ public abstract class Power : MonoBehaviour
 	
 	// Power behavior
 	public float curValue = 0;
-	float maxValue = 20;
+	public float maxValue = 20;
 	const float UPGRADED_MAX = 15;
 	bool isPowerActive;
 	float powerDuration = 5;
@@ -78,7 +78,7 @@ public abstract class Power : MonoBehaviour
 	/*
 	 * Remove a provided amount of power.
 	 */
-	public void RemovePower (int amount)
+	public void RemovePower (float amount)
 	{
 		if (curValue > 0) {
 			curValue -= amount;

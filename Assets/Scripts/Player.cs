@@ -626,6 +626,9 @@ public class Player : MonoBehaviour
 		if (inventory.HasItem (ItemNames.SHIELD_STRENGTH_UPGRADE)) {
 			shieldStrength = UPGRADED_SHIELD_STRENGTH;
 		}
+		if (inventory.HasItem (ItemNames.GREEN_POWER_UPGRADE)) {
+			greenPower.UpgradeDuration ();
+		}
 		
 		// Also reset the same stats that should be reset on revive
 		InitializeStatsOnRevive ();

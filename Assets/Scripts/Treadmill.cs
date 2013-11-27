@@ -9,8 +9,8 @@ public class Treadmill : MonoBehaviour
 	const int MAX_WILDCARD_DISTANCE = 1000;
 	int nextWildcardMarker;
 	bool needsWildcard;
-	const int MIN_FREEBIE_DISTANCE = 150; // ~5 sections of 70m
-	const int MAX_FREEBIE_DISTANCE = 300;
+	const int MIN_FREEBIE_DISTANCE = 350; // ~5 sections of 70m
+	const int MAX_FREEBIE_DISTANCE = 500;
 	int nextFreebieMarker;
 	
 	public const int HARD_THRESHOLD = 2000;

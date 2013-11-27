@@ -42,6 +42,8 @@ public class Player : MonoBehaviour
 	public AudioClip shieldHitSound;
 	public AudioClip shieldDownSound;
 	public AudioClip laserSound;
+	Animation shieldAnimation;
+	
 	Treadmill treadmill;
 	GameObject playerGeo;
 	GameObject nodeLaser;
@@ -81,7 +83,8 @@ public class Player : MonoBehaviour
 		playerGeo = transform.FindChild ("PlayerGeo").gameObject;
 		
 		nodeLaser = playerGeo.transform.FindChild ("node_laser").gameObject;
-		shieldObject = transform.FindChild ("FX_Shield").gameObject;
+		shieldObject = transform.FindChild (ObjectNames.SHIELD).gameObject;
+		shieldAnimation = shieldObject.GetComponent<Animation> ();
 	}
 	
 	/*
@@ -534,6 +537,7 @@ public class Player : MonoBehaviour
 	public void RaiseShield ()
 	{
 		audio.PlayOneShot (shieldUpSound);
+		shieldAnimation.Play (ObjectNames.FX_SHIELD_IDLE);
 		curShields = shieldStrength;
 		shieldObject.SetActive (true);
 	}
@@ -559,6 +563,9 @@ public class Player : MonoBehaviour
 		int newShields = curShields - loss;
 		if (newShields > 0) {
 			audio.PlayOneShot (shieldHitSound);
+			if (newShields == 1) {
+				shieldAnimation.Play (ObjectNames.FX_SHIELD_WEAK);
+			}
 		} else if (newShields == 0) {
 			LowerShields ();
 		}

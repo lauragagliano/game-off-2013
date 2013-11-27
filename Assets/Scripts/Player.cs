@@ -247,7 +247,8 @@ public class Player : MonoBehaviour
 	 */
 	public void PullNearbyPickups ()
 	{
-		float noMagnetDist = transform.collider.bounds.extents.x;
+		float extraPullPadding = 0.5f;
+		float noMagnetDist = transform.collider.bounds.extents.x + extraPullPadding;
 		float pullDistance;
 		foreach (GameObject pickup in pickups) {
 			pullDistance = noMagnetDist;

@@ -12,7 +12,10 @@ public class Treadmill : MonoBehaviour
 	const int MIN_FREEBIE_DISTANCE = 350; // ~5 sections of 70m
 	const int MAX_FREEBIE_DISTANCE = 500;
 	int nextFreebieMarker;
-	public const int HARD_THRESHOLD = 2000;
+	public const int HARD_THRESHOLD = 1;
+	const int MIN_CHALLENGE_DISTANCE = 250;
+	const int MAX_CHALLENGE_DISTANCE = 750;
+	int nextChallengeMarker;
 	
 	const float STARTING_SPEED = 20.0f;
 	const float STARTING_ACCEL = 0.005f;
@@ -51,8 +54,9 @@ public class Treadmill : MonoBehaviour
 		sectionsInPlay = new List<GameObject> ();
 		sectionSpawnZone = (Transform)GameObject.Find (ObjectNames.SECTION_SPAWN).transform;
 		sectionKillZone = (Transform)GameObject.Find (ObjectNames.SECTION_KILLZONE).transform;
-		nextWildcardMarker = GenerateNextWildcardMarker ();
-		nextFreebieMarker = GenerateNextFreebieMarker ();
+		nextWildcardMarker = GenerateNextMarker (MIN_WILDCARD_DISTANCE, MAX_WILDCARD_DISTANCE);
+		nextFreebieMarker = GenerateNextMarker (MIN_FREEBIE_DISTANCE, MAX_FREEBIE_DISTANCE);
+		nextChallengeMarker = GenerateNextMarker (MAX_CHALLENGE_DISTANCE, MAX_CHALLENGE_DISTANCE);
 		//AddAllSectionsToCounter ();
 	}
 	
@@ -183,7 +187,7 @@ public class Treadmill : MonoBehaviour
 		lerping = false;
 		lerpToSpeed = STARTING_SPEED;
 		distanceTraveled = 0.0f;
-		nextWildcardMarker = GenerateNextWildcardMarker ();
+		nextWildcardMarker = GenerateNextMarker (MIN_WILDCARD_DISTANCE, MAX_WILDCARD_DISTANCE);
 	}
 	
 	/*
@@ -246,21 +250,22 @@ public class Treadmill : MonoBehaviour
 	{
 		// Determine which bucket of sections to draw from
 		List<GameObject> sectionBucket = normalSections;
-		if (GameManager.Instance.IsEasy ()) {
-		} /*else if (GameManager.Instance.IsMedium ()) {
-			// Only give an X% change of medium tiles when we're in it.
-			bool coinflip = RBRandom.PercentageChance (75f);
-			if (coinflip) {
-				sectionBucket = challengeSections;
-			}
-		}*/ else if (GameManager.Instance.IsHard ()) {
-			sectionBucket = challengeSections;
-		}
+
 		// Pull from the freebie bucket when nextFreebieMarker has been passed
 		if (distanceTraveled >= nextFreebieMarker) {
 			sectionBucket = freebieSections;
-			nextFreebieMarker = GenerateNextFreebieMarker ();
+			nextFreebieMarker = GenerateNextMarker (MIN_FREEBIE_DISTANCE, MAX_FREEBIE_DISTANCE);
 			Debug.Log ("Pulling a new freebie section. Next section at: " + nextFreebieMarker);
+		}
+		
+		// Pull from the challenge bucket when nextChallengeMarker has been passed
+		// -- takes a lower priority than freebie bucket
+		if (distanceTraveled >= nextChallengeMarker && GameManager.Instance.IsHard ()) {
+			// Force wildcard to spawn?
+			needsWildcard = true;
+			sectionBucket = challengeSections;
+			nextChallengeMarker = GenerateNextMarker (MIN_CHALLENGE_DISTANCE, MAX_CHALLENGE_DISTANCE);
+			Debug.Log ("Pulling a challenge section. Next challenge at: " + nextChallengeMarker);
 		}
 		Vector3 rowSpacing = new Vector3 (0, 0, 1);
 		GameObject newSection = (GameObject)Instantiate (GetRandomSectionFromBucket (sectionBucket),
@@ -339,17 +344,9 @@ public class Treadmill : MonoBehaviour
 	/*
 	 * Calculate where the next distance marker should be.
 	 */
-	int GenerateNextWildcardMarker ()
+	int GenerateNextMarker (int min, int max)
 	{
-		return (int) distanceTraveled + Random.Range (MIN_WILDCARD_DISTANCE, MAX_WILDCARD_DISTANCE);
-	}
-	
-	/*
-	 * Calculate where the next freebie should be spawned.
-	 */
-	int GenerateNextFreebieMarker ()
-	{
-		return (int) distanceTraveled + Random.Range (MIN_FREEBIE_DISTANCE, MAX_FREEBIE_DISTANCE);
+		return (int) distanceTraveled + Random.Range (min, max);
 	}
 	
 	/*
@@ -366,7 +363,7 @@ public class Treadmill : MonoBehaviour
 	public void OnWildcardSpawn ()
 	{
 		needsWildcard = false;
-		nextWildcardMarker = GenerateNextWildcardMarker ();
+		nextWildcardMarker = GenerateNextMarker (MIN_WILDCARD_DISTANCE, MAX_WILDCARD_DISTANCE);
 		Debug.Log ("Spawned a new wildcard. Next wildcard at: " + nextWildcardMarker);
 	}
 	#endregion

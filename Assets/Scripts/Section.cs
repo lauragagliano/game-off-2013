@@ -19,7 +19,6 @@ public class Section : MonoBehaviour
 		// Start by moving the new Section onto the Treadmill (as a child of the object)
 		treadmill = GameObject.Find(ObjectNames.TREADMILL).GetComponent<Treadmill> ();
 		transform.parent = treadmill.transform;
-
 	}
 	
 	void Start ()

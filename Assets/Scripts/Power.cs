@@ -15,15 +15,11 @@ public abstract class Power : MonoBehaviour
 	public float curValue = 0;
 	public float maxValue = 20;
 	const float UPGRADED_MAX = 15;
-	bool isPowerActive;
-	float powerDuration = 5;
-	const float UPGRADED_DURATION = 10;
-	RBTimer powerTimer = new RBTimer ();
+	protected bool isPowerActive;
+	protected float powerDuration = 5;
+	protected const float UPGRADED_DURATION = 10;
+	protected RBTimer powerTimer = new RBTimer ();
 
-	// Ability behavior
-	RBTimer abilityCooldownTimer = new RBTimer ();
-	float abilityCooldown = 3;
-	const float UPGRADED_COOLDOWN = 1;
 		
 	/*
 	 * Reset all timers. Set current value to default (0). Useful when starting
@@ -32,7 +28,6 @@ public abstract class Power : MonoBehaviour
 	public void ResetPower ()
 	{
 		isPowerActive = false;
-		abilityCooldownTimer.StopTimer ();
 		curValue = 0;
 	}
 	
@@ -41,12 +36,8 @@ public abstract class Power : MonoBehaviour
 		// Stop our timers when power and abilities are done being used
 		if (IsPowerActive ()) {
 			curValue = Mathf.Max (curValue - ((maxValue /powerDuration) * Time.deltaTime), 0);
-			if (abilityCooldownTimer.IsTimeUp ()) {
-				abilityCooldownTimer.StopTimer ();
-			}
 			if (curValue <= 0) {
 				isPowerActive = false;
-				abilityCooldownTimer.StopTimer ();
 			}
 		}
 	}
@@ -120,40 +111,13 @@ public abstract class Power : MonoBehaviour
 	}
 	
 	/*
-	 * Use the ability associated with this power. This sets the cooldown timer
-	 * and the ability behavior itself is controlled by the player.
-	 */
-	public void UseAbility ()
-	{
-		if (IsPowerActive () && !abilityCooldownTimer.IsRunning ()) {
-			abilityCooldownTimer.StartTimer (abilityCooldown);
-		}
-	}
-	
-	/*
-	 * Return true if the ability is on cooldown (unusable).
-	 */
-	public bool AbilityOnCooldown ()
-	{
-		return abilityCooldownTimer.IsRunning ();
-	}
-	
-	/*
 	 * Set our maximum charge value to the upgraded value.
 	 */
 	public void UpgradeMaximumCharge ()
 	{
 		maxValue = UPGRADED_MAX;
 	}
-	
-	/*
-	 * Set our cooldown duration to the upgraded value.
-	 */
-	public void UpgradeCooldown ()
-	{
-		abilityCooldown = UPGRADED_COOLDOWN;
-	}
-	
+
 	/*
 	 * Set the power duration to the upgraded value.
 	 */

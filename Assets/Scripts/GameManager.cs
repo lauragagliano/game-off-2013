@@ -204,7 +204,7 @@ public class GameManager : Singleton<GameManager>
 		numPointsThisRound  = 0;
 		difficulty = Difficulty.Easy;
 		
-		SpawnPlayer ();
+		player.Spawn (playerSpawn.position);
 		treadmill.ResetTreadmill ();
 	}
 	
@@ -213,18 +213,9 @@ public class GameManager : Singleton<GameManager>
 	 */
 	public void RevivePlayer ()
 	{
-		SpawnPlayer ();
+		player.Revive (playerSpawn.position);
 		GoToReviving();
 	}
-	
-	/*
-	 * Spawn the player entity or respawn him if he's dead.
-	 */
-	private void SpawnPlayer ()
-	{
-		player.Spawn (playerSpawn.position);
-	}
-	
 	/*
 	 * Ends the current run for the player.
 	 */

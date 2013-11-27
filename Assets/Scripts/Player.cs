@@ -23,8 +23,7 @@ public class Player : MonoBehaviour
 	public RedPower redPower;
 	public GreenPower greenPower;
 	int shieldStrength = 3;
-	// TODO If we add shield strength upgrade, do it in this class
-	//const int UPGRADED_SHIELD_STRENGTH = 2;
+	const int UPGRADED_SHIELD_STRENGTH = 10;
 	
 	public RGB playerRGB;
 	public float MAGNET_DIST = 10.0f;
@@ -623,6 +622,9 @@ public class Player : MonoBehaviour
 		}
 		if (inventory.HasItem (ItemNames.LASER_COOLDOWN_UPGRADE)) {
 			redPower.UpgradeCooldown ();
+		}
+		if (inventory.HasItem (ItemNames.SHIELD_STRENGTH_UPGRADE)) {
+			shieldStrength = UPGRADED_SHIELD_STRENGTH;
 		}
 		
 		// Also reset the same stats that should be reset on revive

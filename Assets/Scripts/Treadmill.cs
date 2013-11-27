@@ -264,7 +264,7 @@ public class Treadmill : MonoBehaviour
 		
 		// Pull from the challenge bucket when nextChallengeMarker has been passed
 		// -- takes a lower priority than freebie bucket
-		if (distanceTraveled >= nextChallengeMarker && GameManager.Instance.IsHard ()) {
+		else if (distanceTraveled >= nextChallengeMarker && GameManager.Instance.IsHard ()) {
 			// Force wildcard to spawn?
 			needsWildcard = true;
 			sectionBucket = challengeSections;

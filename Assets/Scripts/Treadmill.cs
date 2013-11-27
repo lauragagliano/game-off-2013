@@ -5,9 +5,15 @@ using System.Collections.Generic;
 public class Treadmill : MonoBehaviour
 {
 	// Section Algorithm Configurations
-	const int MIN_WILDCARD_DISTANCE = 200;
+	const int MIN_WILDCARD_DISTANCE = 400;
 	const int MAX_WILDCARD_DISTANCE = 1000;
-	public const int HARD_THRESHOLD = 200;
+	int nextWildcardMarker;
+	bool needsWildcard;
+	const int MIN_FREEBIE_DISTANCE = 150; // ~5 sections of 70m
+	const int MAX_FREEBIE_DISTANCE = 300;
+	int nextFreebieMarker;
+	
+	public const int HARD_THRESHOLD = 2000;
 	
 	const float STARTING_SPEED = 20.0f;
 	const float STARTING_ACCEL = 0.005f;
@@ -18,7 +24,7 @@ public class Treadmill : MonoBehaviour
 	float prevAccelerationPerFrame;
 	public float maxspeed = 50.0f;
 	public GameObject emptySection;
-	public List<GameObject> easySections;
+	public List<GameObject> normalSections;
 	public List<GameObject> challengeSections;
 	public List<GameObject> freebieSections;
 	
@@ -43,11 +49,17 @@ public class Treadmill : MonoBehaviour
 		sectionsInPlay = new List<GameObject> ();
 		sectionSpawnZone = (Transform)GameObject.Find (ObjectNames.SECTION_SPAWN).transform;
 		sectionKillZone = (Transform)GameObject.Find (ObjectNames.SECTION_KILLZONE).transform;
+		nextWildcardMarker = GenerateNextWildcardMarker ();
+		nextFreebieMarker = GenerateNextFreebieMarker ();
 	}
 	
 	void Update ()
 	{
 		if (status == Status.Started) {
+			if (!needsWildcard && distanceTraveled >= nextWildcardMarker) {
+				needsWildcard = true;
+			}
+			
 			if (lerping) {
 				UpdateLerping ();
 			} else {
@@ -168,6 +180,7 @@ public class Treadmill : MonoBehaviour
 		lerping = false;
 		lerpToSpeed = STARTING_SPEED;
 		distanceTraveled = 0.0f;
+		nextWildcardMarker = GenerateNextWildcardMarker ();
 	}
 	
 	/*
@@ -229,12 +242,8 @@ public class Treadmill : MonoBehaviour
 	void SpawnNextSection ()
 	{
 		// Determine which bucket of sections to draw from
-		List<GameObject> sectionBucket = easySections;
+		List<GameObject> sectionBucket = normalSections;
 		if (GameManager.Instance.IsEasy ()) {
-			bool coinflip = RBRandom.PercentageChance (10.0f);
-			if (coinflip) {
-				sectionBucket = freebieSections;
-			}
 		} /*else if (GameManager.Instance.IsMedium ()) {
 			// Only give an X% change of medium tiles when we're in it.
 			bool coinflip = RBRandom.PercentageChance (75f);
@@ -243,6 +252,12 @@ public class Treadmill : MonoBehaviour
 			}
 		}*/ else if (GameManager.Instance.IsHard ()) {
 			sectionBucket = challengeSections;
+		}
+		// Pull from the freebie bucket when nextFreebieMarker has been passed
+		if (distanceTraveled >= nextFreebieMarker) {
+			sectionBucket = freebieSections;
+			nextFreebieMarker = GenerateNextFreebieMarker ();
+			Debug.Log ("Pulling a new freebie section. Next section at: " + nextFreebieMarker);
 		}
 		Vector3 rowSpacing = new Vector3 (0, 0, 1);
 		GameObject newSection = (GameObject)Instantiate (GetRandomSectionFromBucket (sectionBucket),
@@ -305,6 +320,40 @@ public class Treadmill : MonoBehaviour
 	{
 		sectionsInPlay.Remove (sectionToKill);
 		Destroy (sectionToKill);
+	}
+	
+	/*
+	 * Calculate where the next distance marker should be.
+	 */
+	int GenerateNextWildcardMarker ()
+	{
+		return (int) distanceTraveled + Random.Range (MIN_WILDCARD_DISTANCE, MAX_WILDCARD_DISTANCE);
+	}
+	
+	/*
+	 * Calculate where the next freebie should be spawned.
+	 */
+	int GenerateNextFreebieMarker ()
+	{
+		return (int) distanceTraveled + Random.Range (MIN_FREEBIE_DISTANCE, MAX_FREEBIE_DISTANCE);
+	}
+	
+	/*
+	 * Return whether the treadmill needs a wilcard to be spawned.
+	 */
+	public bool NeedsWildcard ()
+	{
+		return needsWildcard;
+	}
+	
+	/*
+	 * Called when a wildcard is successfully spawned.
+	 */
+	public void OnWildcardSpawn ()
+	{
+		needsWildcard = false;
+		nextWildcardMarker = GenerateNextWildcardMarker ();
+		Debug.Log ("Spawned a new wildcard. Next wildcard at: " + nextWildcardMarker);
 	}
 	#endregion
 }

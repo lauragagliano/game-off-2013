@@ -12,12 +12,13 @@ public class Section : MonoBehaviour
 	public byte exitBitmap;
 	
 	GameObject tempPrefabHolder;
+	Treadmill treadmill;
 	
 	void Awake ()
 	{
 		// Start by moving the new Section onto the Treadmill (as a child of the object)
-		Transform treadmill = GameObject.Find(ObjectNames.TREADMILL).transform;
-		transform.parent = treadmill;
+		treadmill = GameObject.Find(ObjectNames.TREADMILL).GetComponent<Treadmill> ();
+		transform.parent = treadmill.transform;
 
 	}
 	
@@ -72,7 +73,12 @@ public class Section : MonoBehaviour
 				pickup.GetComponent<RGB> ().Refresh ();
 			}
 			else if (child.CompareTag (Tags.WILDCARD)) {
-				GameObject pickup = InstantiatePrefabAtPlaceholder (ObjectNames.WILDCARD_PREFAB, child, tempPrefabHolder.transform);
+				if (treadmill.NeedsWildcard ()) {
+					GameObject pickup = InstantiatePrefabAtPlaceholder (ObjectNames.WILDCARD_PREFAB, child, tempPrefabHolder.transform);
+					treadmill.OnWildcardSpawn ();
+				} else {
+					Destroy (child.gameObject);
+				}
 			}
 		}
 		GameManager.Instance.numPickupsPassed += numberOfPickups;

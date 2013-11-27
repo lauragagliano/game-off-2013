@@ -24,5 +24,9 @@ public class ObjectNames
 	public static string GUI_WILDCARD_REVEAL = "GUI_WildcardReveal";
 	public static string WILDCARD_PREFAB = "WildcardPickup";
 	public static string TUTORIAL_IMAGE = "TutorialImage";
+	public static string SHIELD = "FX_Shield";
+	// Animations
+	public static string FX_SHIELD_WEAK = "fx_shield_weak";
+	public static string FX_SHIELD_IDLE = "fx_shield_idle";
 }
 

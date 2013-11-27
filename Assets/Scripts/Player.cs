@@ -23,8 +23,7 @@ public class Player : MonoBehaviour
 	public RedPower redPower;
 	public GreenPower greenPower;
 	int shieldStrength = 3;
-	// TODO If we add shield strength upgrade, do it in this class
-	//const int UPGRADED_SHIELD_STRENGTH = 2;
+	const int UPGRADED_SHIELD_STRENGTH = 10;
 	
 	public RGB playerRGB;
 	public float MAGNET_DIST = 10.0f;
@@ -42,6 +41,8 @@ public class Player : MonoBehaviour
 	public AudioClip shieldHitSound;
 	public AudioClip shieldDownSound;
 	public AudioClip laserSound;
+	Animation shieldAnimation;
+	
 	Treadmill treadmill;
 	GameObject playerGeo;
 	GameObject nodeLaser;
@@ -81,7 +82,8 @@ public class Player : MonoBehaviour
 		playerGeo = transform.FindChild ("PlayerGeo").gameObject;
 		
 		nodeLaser = playerGeo.transform.FindChild ("node_laser").gameObject;
-		shieldObject = transform.FindChild ("FX_Shield").gameObject;
+		shieldObject = transform.FindChild (ObjectNames.SHIELD).gameObject;
+		shieldAnimation = shieldObject.GetComponent<Animation> ();
 	}
 	
 	/*
@@ -534,6 +536,7 @@ public class Player : MonoBehaviour
 	public void RaiseShield ()
 	{
 		audio.PlayOneShot (shieldUpSound);
+		shieldAnimation.Play (ObjectNames.FX_SHIELD_IDLE);
 		curShields = shieldStrength;
 		shieldObject.SetActive (true);
 	}
@@ -559,6 +562,9 @@ public class Player : MonoBehaviour
 		int newShields = curShields - loss;
 		if (newShields > 0) {
 			audio.PlayOneShot (shieldHitSound);
+			if (newShields == 1) {
+				shieldAnimation.Play (ObjectNames.FX_SHIELD_WEAK);
+			}
 		} else if (newShields == 0) {
 			LowerShields ();
 		}
@@ -616,6 +622,12 @@ public class Player : MonoBehaviour
 		}
 		if (inventory.HasItem (ItemNames.LASER_COOLDOWN_UPGRADE)) {
 			redPower.UpgradeCooldown ();
+		}
+		if (inventory.HasItem (ItemNames.SHIELD_STRENGTH_UPGRADE)) {
+			shieldStrength = UPGRADED_SHIELD_STRENGTH;
+		}
+		if (inventory.HasItem (ItemNames.GREEN_POWER_UPGRADE)) {
+			greenPower.UpgradeDuration ();
 		}
 		
 		// Also reset the same stats that should be reset on revive

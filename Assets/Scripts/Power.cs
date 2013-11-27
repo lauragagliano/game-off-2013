@@ -17,7 +17,7 @@ public abstract class Power : MonoBehaviour
 	const float UPGRADED_MAX = 15;
 	bool isPowerActive;
 	float powerDuration = 5;
-	const float UPGRADED_DURATION = 20;
+	const float UPGRADED_DURATION = 10;
 	RBTimer powerTimer = new RBTimer ();
 
 	// Ability behavior
@@ -152,5 +152,13 @@ public abstract class Power : MonoBehaviour
 	public void UpgradeCooldown ()
 	{
 		abilityCooldown = UPGRADED_COOLDOWN;
+	}
+	
+	/*
+	 * Set the power duration to the upgraded value.
+	 */
+	public void UpgradeDuration ()
+	{
+		powerDuration = UPGRADED_DURATION;
 	}
 }

@@ -20,5 +20,5 @@ public class ItemNames
 	
 	// Ability Upgrades
 	public static string LASER_COOLDOWN_UPGRADE = "FasterLaser";
-	public static string SHIELD_STRENGTH_UPGRADE = "StrongerShield";
+	public static string SHIELD_STRENGTH_UPGRADE = "StrongerShields";
 }

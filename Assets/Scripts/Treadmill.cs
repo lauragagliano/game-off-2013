@@ -187,7 +187,11 @@ public class Treadmill : MonoBehaviour
 		lerping = false;
 		lerpToSpeed = STARTING_SPEED;
 		distanceTraveled = 0.0f;
+		needsWildcard = false;
+		
 		nextWildcardMarker = GenerateNextMarker (MIN_WILDCARD_DISTANCE, MAX_WILDCARD_DISTANCE);
+		nextFreebieMarker = GenerateNextMarker (MIN_FREEBIE_DISTANCE, MAX_FREEBIE_DISTANCE);
+		nextChallengeMarker = GenerateNextMarker (MIN_CHALLENGE_DISTANCE, MAX_CHALLENGE_DISTANCE);
 	}
 	
 	/*

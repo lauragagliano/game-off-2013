@@ -142,9 +142,13 @@ public class StubHUD : MonoBehaviour
 		// Push our arrows to center
 		GUILayout.FlexibleSpace ();
 		GUILayout.BeginHorizontal ();
-		GUILayout.Button (leftArrowTexture, GUIStyle.none);
+		if (store.selectedItem != 0) {
+			GUILayout.Button (leftArrowTexture, GUIStyle.none);
+		}
 		GUILayout.FlexibleSpace ();
-		GUILayout.Button (rightArrowTexture, GUIStyle.none);
+		if (store.selectedItem != store.allItems.Length -1) {
+			GUILayout.Button (rightArrowTexture, GUIStyle.none);
+		}
 		GUILayout.EndHorizontal ();
 		GUILayout.FlexibleSpace ();
 		GUILayout.EndVertical ();

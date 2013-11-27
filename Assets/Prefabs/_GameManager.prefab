@@ -98,9 +98,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 780bd3973f2f1ed4581423093a0399c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  red: {fileID: 2100000, guid: cf78bba95c35d1848bdae4edb4f17228, type: 2}
-  green: {fileID: 2100000, guid: de95a5669d65fa341ba620ec66bb8a84, type: 2}
-  blue: {fileID: 2100000, guid: 45b9c557e9e5ee744a421c2855e33c6f, type: 2}
+  red: {fileID: 2100000, guid: 0208d5f738aa34bc1910117440dd6e73, type: 2}
+  green: {fileID: 2100000, guid: 737531e0790814ce68bdea00663dc599, type: 2}
+  blue: {fileID: 2100000, guid: 331806b08d0fd4f2e92ce17854caef51, type: 2}
   black: {fileID: 2100000, guid: 5545a405383484642bc6073294a996ed, type: 2}
   neutral: {fileID: 2100000, guid: 78c684e193c9bac45aef808f0e9e422a, type: 2}
 --- !u!114 &11400002
@@ -118,6 +118,7 @@ MonoBehaviour:
   difficulty: 0
   numPickupsPassed: 0
   numPointsThisRound: 0
+  treadmill: {fileID: 0}
   WildcardRevealGO: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:

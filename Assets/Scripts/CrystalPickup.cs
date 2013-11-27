@@ -14,13 +14,13 @@ public class CrystalPickup : Pickup
 	
 	protected override void AnimateIdle ()
 	{
-		// Do not animate crystal pickups yet.
+		transform.Rotate (new Vector3 (0, -60, 0u) * Time.deltaTime);
 	}
 	
 	/*
 	 * Start collecting the crystal
 	 */
-	public override void StartCollecting(GameObject pickingUpGameObject)
+	public override void StartCollecting (GameObject pickingUpGameObject)
 	{
 		base.StartCollecting (pickingUpGameObject);
 		

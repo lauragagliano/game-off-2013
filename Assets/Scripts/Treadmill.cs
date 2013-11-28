@@ -16,6 +16,7 @@ public class Treadmill : MonoBehaviour
 	const int MIN_CHALLENGE_DISTANCE = 250;
 	const int MAX_CHALLENGE_DISTANCE = 750;
 	int nextChallengeMarker;
+	int MAX_WILDCARDS = 9;
 	
 	const float STARTING_SPEED = 20.0f;
 	const float STARTING_ACCEL = 0.005f;
@@ -67,7 +68,7 @@ public class Treadmill : MonoBehaviour
 	{
 		if (status == Status.Started) {
 			if (!needsWildcard && distanceTraveled >= nextWildcardMarker) {
-				needsWildcard = true;
+				SetNeedsWildcard (true);
 			}
 			
 			if (lerping) {
@@ -97,6 +98,18 @@ public class Treadmill : MonoBehaviour
 			if (isSectionPastKillZone (sectionsInPlay [0])) {
 				KillSection (sectionsInPlay [0]);
 			}
+		}
+	}
+	
+	/*
+	 * Queues or unqueues the spawning of a wildcard, if able.
+	 */
+	void SetNeedsWildcard (bool wantsToSpawnWildcard) {
+		if(wantsToSpawnWildcard && GameManager.Instance.player.WildcardCount < MAX_WILDCARDS )
+		{
+			needsWildcard = true;
+		} else {
+			needsWildcard = false;
 		}
 	}
 	
@@ -200,7 +213,7 @@ public class Treadmill : MonoBehaviour
 		lerping = false;
 		lerpToSpeed = STARTING_SPEED;
 		distanceTraveled = 0.0f;
-		needsWildcard = false;
+		SetNeedsWildcard (false);
 		
 		nextWildcardMarker = GenerateNextMarker (MIN_WILDCARD_DISTANCE, MAX_WILDCARD_DISTANCE);
 		nextFreebieMarker = GenerateNextMarker (MIN_FREEBIE_DISTANCE, MAX_FREEBIE_DISTANCE);
@@ -300,7 +313,7 @@ public class Treadmill : MonoBehaviour
 		// -- takes a lower priority than freebie bucket
 		else if (distanceTraveled >= nextChallengeMarker && GameManager.Instance.IsHard ()) {
 			// Force wildcard to spawn?
-			needsWildcard = true;
+			SetNeedsWildcard (true);
 			sectionBucket = challengeSections;
 			nextChallengeMarker = GenerateNextMarker (MIN_CHALLENGE_DISTANCE, MAX_CHALLENGE_DISTANCE);
 			Debug.Log ("Pulling a challenge section. Next challenge at: " + nextChallengeMarker);

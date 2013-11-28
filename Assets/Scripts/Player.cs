@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
 	public int curShields;
 
 	public bool IsDead { get; private set; }
+	bool isWaitingToStart;
 	bool isReviving;
 	RBTimer reviveTimeout;
 	
@@ -17,6 +18,8 @@ public class Player : MonoBehaviour
 	public BluePower bluePower;
 	bool isUsingSlowdown;
 	float slowDownStrength = 20f;
+	bool isBoosting;
+	RBTimer boostTimer;
 	// TODO If we add improved slowdown upgrade
 	//const int UPGRADED_SLOWDOWN_STRENGTH = 25f;
 
@@ -110,8 +113,23 @@ public class Player : MonoBehaviour
 	
 	void Update ()
 	{
-		if(!IsDead) {
-			MatchSpeedToTreadmill ();
+		// Waiting to be told by GameManager to start running
+		if(isWaitingToStart) {
+			return;
+		}
+		
+		bool isAlive = !IsDead;
+		if(isAlive) {
+			// Update boosting speed
+			if(isBoosting) {
+				SetRunspeed(15.0f, treadmill.scrollspeed);
+				if(boostTimer.IsTimeUp()) {
+					StopBoosting();
+				}
+			} else {
+				// When not boosting, match with treadmill.
+				MatchSpeedToTreadmill ();
+			}
 	
 			TryMove ();
 			TryActivateAbilities ();
@@ -119,7 +137,10 @@ public class Player : MonoBehaviour
 			CheckShieldTimeout ();
 			CheckSlowDownTimeout ();
 			
-			ClampToWorldYZ (worldYClamp, worldZClamp);
+			if(!isBoosting) {
+				ClampToWorldYZ (worldYClamp, worldZClamp);
+			}
+			
 			// If no colors are active, go neutral
 			if (!bluePower.IsPowerActive () && !redPower.IsPowerActive () && !greenPower.IsPowerActive ()) {
 				ChangeColors (ColorWheel.neutral);
@@ -141,12 +162,21 @@ public class Player : MonoBehaviour
 	 */
 	void MatchSpeedToTreadmill ()
 	{
-		movespeed = treadmill.scrollspeed;
+		SetRunspeed(treadmill.scrollspeed, treadmill.scrollspeed);
+	}
+	
+	/*
+	 * Sets the character's left and right movespeed as well as forward apparent "movespeed"
+	 */
+	void SetRunspeed(float speedLeftRight, float speedForward)
+	{
+		movespeed = speedLeftRight;
 		
 		// Set animation playback speed on animation to match new movespeed
 		float ANIM_NORMAL_RUNSPEED = 30.0f;
-		playerGeo.animation ["pigment_run"].speed = movespeed / ANIM_NORMAL_RUNSPEED;
+		playerGeo.animation ["pigment_run"].speed = speedForward / ANIM_NORMAL_RUNSPEED;
 	}
+		
 	
 	/*
 	 * Refresh the current color on the character
@@ -189,6 +219,11 @@ public class Player : MonoBehaviour
 	 */
 	void TryActivateAbilities ()
 	{
+		// Don't let them activate their abilities while boosting
+		if(isBoosting) {
+			return;
+		}
+		
 		if (Input.GetKeyDown ("j")) {
 			if (redPower.IsChargedAndReady ()) {
 				SetActivePower (redPower, greenPower, bluePower);
@@ -308,6 +343,12 @@ public class Player : MonoBehaviour
 	 */
 	public void CollideWithBlock ()
 	{
+		// While boosting go straight through blocks like it's no thang.
+		if(isBoosting) {
+			return;
+		}
+			
+		
 		if (greenPower.IsPowerActive()) {
 			TakeShieldHit ();
 		} else {
@@ -351,6 +392,9 @@ public class Player : MonoBehaviour
 		return returnPower;
 	}
 	
+	/*
+	 * Kill the player
+	 */
 	public void Die ()
 	{
 		IsDead = true;
@@ -367,6 +411,7 @@ public class Player : MonoBehaviour
 	 */
 	public void Spawn (Vector3 spawnPosition)
 	{
+		isWaitingToStart = true;
 		IsDead = false;
 		collider.enabled = true;
 		
@@ -379,8 +424,12 @@ public class Player : MonoBehaviour
 		transform.position = spawnPosition;
 	}
 	
+	/*
+	 * Revives the player from being ragdoll
+	 */
 	public void Revive (Vector3 revivePosition)
 	{
+		isWaitingToStart = true;
 		InitializeStatsOnRevive ();
 		
 		// Restore ragdolled limbs
@@ -409,6 +458,16 @@ public class Player : MonoBehaviour
 		PigmentBody body = (PigmentBody)playerGeo.GetComponent<PigmentBody> ();
 		body.RestoreBody();
 		
+		DoBlockClearExplosion();
+		
+		GameManager.Instance.OnReviveDone ();
+	}
+	
+	/*
+	 * Explode blocks out of the way so the player doesn't have unfair deaths.
+	 */
+	void DoBlockClearExplosion ()
+	{
 		// Do an explosion to clear blocks out of the way
 		float explosionRadius = 25;
 		GameObject[] blackblocks = GameObject.FindGameObjectsWithTag (Tags.BLOCK);
@@ -417,8 +476,17 @@ public class Player : MonoBehaviour
 				block.GetComponent<BlockLogic> ().BlowUp (transform.position, 200, explosionRadius);
 			}
 		}
-		
-		GameManager.Instance.OnReviveDone ();
+	}
+	
+	/*
+	 * Tell the Player to start running along the treadmill
+	 */
+	public void StartRunning()
+	{
+		isWaitingToStart = false;
+		if(inventory.HasItem (ItemNames.BOOST) || true) {
+			StartBoosting ();
+		}
 	}
 		
 	/*
@@ -612,6 +680,29 @@ public class Player : MonoBehaviour
 		GameObject.Find (ObjectNames.TREADMILL).GetComponent<Treadmill> ().TemporarySlowDown (slowDownStrength);
 		bluePower.ActivatePower ();
 	}
+	
+	/*
+	 * Begin using the boost consumable
+	 */
+	void StartBoosting ()
+	{
+		isBoosting = true;
+		treadmill.StartBoostSpeed ();
+		boostTimer = new RBTimer ();
+		boostTimer.StartTimer (8.0f);
+		inventory.RemoveItem (ItemNames.BOOST);
+	}
+	
+	/*
+	 * Stop using the boost consumable
+	 */
+	void StopBoosting ()
+	{
+		isBoosting = false;
+		treadmill.StopBoostSpeed ();
+		DoBlockClearExplosion ();
+	}
+	
 	#endregion
 	
 	#region #5 Player Upgrades

@@ -215,6 +215,16 @@ public class Treadmill : MonoBehaviour
 		}
 	}
 	
+	public void StartBoostSpeed()
+	{
+		scrollspeed = maxspeed;
+	}
+	
+	public void StopBoostSpeed()
+	{
+		LerpToSpeed(STARTING_SPEED);
+	}
+	
 	/*
 	 * Return true if the treadmill has passed the distance for hard mode.
 	 */

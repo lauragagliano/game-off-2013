@@ -24,4 +24,7 @@ public class ItemNames
 	
 	// Power Upgrades
 	public static string GREEN_POWER_UPGRADE = "GreenPowerUpgrade";
+	
+	// Consumables
+	public static string BOOST = "Boost";
 }

@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class StubHUD : MonoBehaviour
+public class HUD : MonoBehaviour
 {
 	public Player player;
 	public GUIText finalDistanceLabelText;

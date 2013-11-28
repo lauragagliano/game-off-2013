@@ -13,4 +13,7 @@ public class Tags
 	public static string ITEM = "Item";
 	public static string WILDCARD = "Wildcard";
 	public static string PICKUP = "Pickup";
+	public static string RED_PICKUP = "RedPickup";
+	public static string GREEN_PICKUP = "GreenPickup";
+	public static string BLUE_PICKUP = "BluePickup";
 }

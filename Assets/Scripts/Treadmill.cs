@@ -26,6 +26,9 @@ public class Treadmill : MonoBehaviour
 	float prevAccelerationPerFrame;
 	public float maxspeed = 50.0f;
 	public GameObject emptySection;
+	public GameObject tutorialLessonLaser;
+	public GameObject tutorialLessonShields;
+	public GameObject tutorialLessonSlow;
 	public List<GameObject> normalSections;
 	public List<GameObject> challengeSections;
 	public List<GameObject> freebieSections;
@@ -75,12 +78,20 @@ public class Treadmill : MonoBehaviour
 			// Move our treadmill and add up the distance
 			float distance = scrollspeed * Time.deltaTime;
 			transform.Translate (new Vector3 (0, 0, -distance));
-			distanceTraveled += distance;
+			AddDistanceTraveled (distance);
 			// Check if our last section is on screen. If so, spawn another.
 			if (GetLastSectionInPlay () == null) {
-				SpawnNextSection ();
+				if (GameManager.Instance.SAVE_TUTORIAL_COMPLETE) {
+					SpawnNextSection ();
+				} else {
+					SpawnNextLesson ();
+				}
 			} else if (isSectionOnScreen (GetLastSectionInPlay ())) {
-				SpawnNextSection ();
+				if (GameManager.Instance.SAVE_TUTORIAL_COMPLETE) {
+					SpawnNextSection ();
+				} else {
+					SpawnNextLesson ();
+				}
 			}
 			// Check if the first section is past the kill line. If so, kill it!
 			if (isSectionPastKillZone (sectionsInPlay [0])) {
@@ -183,6 +194,8 @@ public class Treadmill : MonoBehaviour
 		for (int i = sectionsInPlay.Count-1; i >= 0; i--) {
 			KillSection (sectionsInPlay[i]);
 		}
+		scrollspeed = STARTING_SPEED;
+		previousScrollspeed = STARTING_SPEED;
 		accelerationPerFrame = STARTING_ACCEL;
 		lerping = false;
 		lerpToSpeed = STARTING_SPEED;
@@ -223,6 +236,17 @@ public class Treadmill : MonoBehaviour
 	public void StopBoostSpeed()
 	{
 		LerpToSpeed(STARTING_SPEED);
+	}
+	
+	/*
+	 * Add the provided distance to our distance stat. Ignore it if
+	 * the game is still in tutorial mode.
+	 */
+	void AddDistanceTraveled (float distance)
+	{
+		if (GameManager.Instance.SAVE_TUTORIAL_COMPLETE) {
+			distanceTraveled += distance;
+		}
 	}
 	
 	/*
@@ -281,8 +305,17 @@ public class Treadmill : MonoBehaviour
 			nextChallengeMarker = GenerateNextMarker (MIN_CHALLENGE_DISTANCE, MAX_CHALLENGE_DISTANCE);
 			Debug.Log ("Pulling a challenge section. Next challenge at: " + nextChallengeMarker);
 		}
+		
+		SpawnSection (GetRandomSectionFromBucket (sectionBucket));
+	}
+	
+	/*
+	 * Helper method to spawn a provided section at the spawn zone.
+	 */
+	void SpawnSection (GameObject sectionToSpawn)
+	{
 		Vector3 rowSpacing = new Vector3 (0, 0, 1);
-		GameObject newSection = (GameObject)Instantiate (GetRandomSectionFromBucket (sectionBucket),
+		GameObject newSection = (GameObject)Instantiate (sectionToSpawn,
 				sectionSpawnZone.position + rowSpacing, Quaternion.identity);
 		CountSection (newSection.name);
 		sectionsInPlay.Add (newSection);
@@ -379,6 +412,20 @@ public class Treadmill : MonoBehaviour
 		needsWildcard = false;
 		nextWildcardMarker = GenerateNextMarker (MIN_WILDCARD_DISTANCE, MAX_WILDCARD_DISTANCE);
 		Debug.Log ("Spawned a new wildcard. Next wildcard at: " + nextWildcardMarker);
+	}
+	
+	/*
+	 * Spawn the next lesson that the user hasn't seen.
+	 */
+	void SpawnNextLesson ()
+	{
+		if (!GameManager.Instance.SAVE_LASER_LESSON_COMPLETE) {
+			SpawnSection (tutorialLessonLaser);
+		} else if (!GameManager.Instance.SAVE_SHIELDS_LESSON_COMPLETE) {
+			SpawnSection (tutorialLessonShields);
+		} else if (!GameManager.Instance.SAVE_SLOW_LESSON_COMPLETE) {
+			SpawnSection (tutorialLessonSlow);
+		}
 	}
 	#endregion
 	

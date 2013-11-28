@@ -365,8 +365,10 @@ public class Player : MonoBehaviour
 				powerToCharge.AddPower (POWER_UNIT);
 			}
 			GameManager.Instance.AddPoint ();
-			// Add up our money
-			AddMoney (1);
+			// Add up our money (only if tutorial challenge is over)
+			if (GameManager.Instance.SAVE_TUTORIAL_COMPLETE) {
+				AddMoney (1);
+			}
 			
 			ForgetPickup (pickup);
 		} else if (pickup.CompareTag (Tags.WILDCARD)) {
@@ -792,7 +794,7 @@ public class Player : MonoBehaviour
 	/*
 	 * Call this to make sure new powers or necessary resets occur.
 	 */
-	void InitializeStatsOnSpawn ()
+	public void InitializeStatsOnSpawn ()
 	{
 		pickups = new List<GameObject> ();
 		

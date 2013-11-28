@@ -76,6 +76,7 @@ public class StubHUD : MonoBehaviour
 		distanceText.text = "Distance: " + Mathf.RoundToInt (treadmill.distanceTraveled);
 		PrintMoneyToScreen ();
 		if (GameManager.Instance.DEBUG_MODE) {
+			debugText.enabled = true;
 			debugText.text = string.Format ("Passed Pigments: {0}\nHealth: {1}\nWildcards: {2}\nDifficulty: {3}",
 				GameManager.Instance.numPickupsPassed, player.curHealth, player.WildcardCount,
 				GameManager.Instance.difficulty);
@@ -246,7 +247,6 @@ public class StubHUD : MonoBehaviour
 		pressSpaceTextShadow.enabled = enable;
 		moneyText.enabled = enable;
 		distanceText.enabled = enable;
-		debugText.enabled = enable;
 	}
 	
 	/*

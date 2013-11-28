@@ -5,8 +5,9 @@ public class RedPower : Power
 {
 	// Ability behavior
 	RBTimer abilityCooldownTimer = new RBTimer ();
-	float abilityCooldown = 3;
-	const float UPGRADED_COOLDOWN = 1;
+	float abilityCooldown = 1;
+	float abilityUsesPerMeter = 3;
+	const float UPGRADED_USES_PER_METER = 10;
 	
 	void Awake ()
 	{
@@ -47,6 +48,7 @@ public class RedPower : Power
 	{
 		if (IsPowerActive () && !abilityCooldownTimer.IsRunning ()) {
 			abilityCooldownTimer.StartTimer (abilityCooldown);
+			RemovePower (maxValue / abilityUsesPerMeter);
 		}
 	}
 	
@@ -59,11 +61,11 @@ public class RedPower : Power
 	}
 	
 	/*
-	 * Set our cooldown duration to the upgraded value.
+	 * Set our laser to use less power per use.
 	 */
-	public void UpgradeCooldown ()
+	public void UpgradeLaser ()
 	{
-		abilityCooldown = UPGRADED_COOLDOWN;
+		abilityUsesPerMeter = UPGRADED_USES_PER_METER;
 	}
 	
 }

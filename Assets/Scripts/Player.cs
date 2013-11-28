@@ -634,11 +634,14 @@ public class Player : MonoBehaviour
 		if (inventory.HasItem (ItemNames.GREEN_METER_UPGRADE)) {
 			greenPower.UpgradeMaximumCharge ();
 		}
-		if (inventory.HasItem (ItemNames.LASER_COOLDOWN_UPGRADE)) {
-			redPower.UpgradeCooldown ();
+		if (inventory.HasItem (ItemNames.LASER_EFFICIENCY_UPGRADE)) {
+			redPower.UpgradeLaser ();
 		}
 		if (inventory.HasItem (ItemNames.SHIELD_STRENGTH_UPGRADE)) {
 			shieldStrength = UPGRADED_SHIELD_STRENGTH;
+		}
+		if (inventory.HasItem (ItemNames.RED_POWER_UPGRADE)) {
+			redPower.UpgradeDuration ();
 		}
 		if (inventory.HasItem (ItemNames.GREEN_POWER_UPGRADE)) {
 			greenPower.UpgradeDuration ();

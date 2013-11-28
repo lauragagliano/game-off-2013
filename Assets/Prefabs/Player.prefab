@@ -255,7 +255,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100006}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: .666259885, z: -26.6882458}
+  m_LocalPosition: {x: 0, y: .5, z: -26.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400012}
@@ -1025,8 +1025,8 @@ MonoBehaviour:
   shieldHitSound: {fileID: 8300000, guid: 2f94bb284a54548a8b7a755b3acc468d, type: 3}
   shieldDownSound: {fileID: 8300000, guid: 2f94bb284a54548a8b7a755b3acc468d, type: 3}
   laserSound: {fileID: 8300000, guid: 653b9d604a9a242d9be6e1e4a5f1380a, type: 3}
+  boostFXPrefab: {fileID: 100000, guid: 7c09f659f187d4c0fb4b2b49a59a93dd, type: 2}
   laserBeamFX: {fileID: 100000, guid: 7480f0444bc4b4c3394ed8917da1619a, type: 2}
-  movespeed: 20
   perceivedVelocity: {x: 0, y: 0, z: 0}
 --- !u!114 &11400012
 MonoBehaviour:

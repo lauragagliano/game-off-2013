@@ -26,6 +26,7 @@ public class Treadmill : MonoBehaviour
 	float prevAccelerationPerFrame;
 	public float maxspeed = 50.0f;
 	public GameObject emptySection;
+	public GameObject tutorialChallenge;
 	public List<GameObject> normalSections;
 	public List<GameObject> challengeSections;
 	public List<GameObject> freebieSections;
@@ -75,10 +76,14 @@ public class Treadmill : MonoBehaviour
 			// Move our treadmill and add up the distance
 			float distance = scrollspeed * Time.deltaTime;
 			transform.Translate (new Vector3 (0, 0, -distance));
-			distanceTraveled += distance;
+			AddDistanceTraveled (distance);
 			// Check if our last section is on screen. If so, spawn another.
 			if (GetLastSectionInPlay () == null) {
-				SpawnNextSection ();
+				if (GameManager.Instance.SAVE_TUTORIAL_COMPLETE) {
+					SpawnNextSection ();
+				} else {
+					SpawnSection (tutorialChallenge);
+				}
 			} else if (isSectionOnScreen (GetLastSectionInPlay ())) {
 				SpawnNextSection ();
 			}
@@ -226,6 +231,17 @@ public class Treadmill : MonoBehaviour
 	}
 	
 	/*
+	 * Add the provided distance to our distance stat. Ignore it if
+	 * the game is still in tutorial mode.
+	 */
+	void AddDistanceTraveled (float distance)
+	{
+		if (GameManager.Instance.SAVE_TUTORIAL_COMPLETE) {
+			distanceTraveled += distance;
+		}
+	}
+	
+	/*
 	 * Return true if the treadmill has passed the distance for hard mode.
 	 */
 	public bool IsPastHardThreshold ()
@@ -281,8 +297,17 @@ public class Treadmill : MonoBehaviour
 			nextChallengeMarker = GenerateNextMarker (MIN_CHALLENGE_DISTANCE, MAX_CHALLENGE_DISTANCE);
 			Debug.Log ("Pulling a challenge section. Next challenge at: " + nextChallengeMarker);
 		}
+		
+		SpawnSection (GetRandomSectionFromBucket (sectionBucket));
+	}
+	
+	/*
+	 * Helper method to spawn a provided section at the spawn zone.
+	 */
+	void SpawnSection (GameObject sectionToSpawn)
+	{
 		Vector3 rowSpacing = new Vector3 (0, 0, 1);
-		GameObject newSection = (GameObject)Instantiate (GetRandomSectionFromBucket (sectionBucket),
+		GameObject newSection = (GameObject)Instantiate (sectionToSpawn,
 				sectionSpawnZone.position + rowSpacing, Quaternion.identity);
 		CountSection (newSection.name);
 		sectionsInPlay.Add (newSection);

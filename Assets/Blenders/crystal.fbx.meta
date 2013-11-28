@@ -1,17 +1,23 @@
 fileFormatVersion: 2
-guid: 9ac9c787d15d4475bbaafe0e883e495d
+guid: 051766738d0d741afa752e829f403ce5
 ModelImporter:
   serializedVersion: 15
   fileIDToRecycleName:
-    100000: //RootNode
-    400000: //RootNode
-    2300000: //RootNode
-    3300000: //RootNode
+    100000: Camera
+    100002: Crystal
+    100004: //RootNode
+    100006: Lamp
+    400000: Camera
+    400002: Crystal
+    400004: //RootNode
+    400006: Lamp
+    2300000: Crystal
+    3300000: Crystal
     4300000: Crystal
     7400000: Default Take
     9500000: //RootNode
   materials:
-    importMaterials: 0
+    importMaterials: 1
     materialName: 0
     materialSearch: 1
   animations:

@@ -14,7 +14,7 @@ public class GUI_WildcardReveal : MonoBehaviour
 	float timeStateEntered;
 	RevealState state = RevealState.Hidden;
 	bool allCardAreRevealed;
-	public Item headstart;
+	public Item boost;
 	public Item money;
 	public Item revive;
 	public Item bigMoney;
@@ -205,7 +205,9 @@ public class GUI_WildcardReveal : MonoBehaviour
 		// The first item has a high chance of being a headstart or revive
 		float rand = Random.Range (0, 100.0f);
 		if (rand > 66.6) {
-			itemsToGiveOut [0] = headstart;
+			itemsToGiveOut [0] = boost;
+			Inventory playerInventory = GameManager.Instance.player.GetComponent<Inventory> ();	
+			playerInventory.AddItem (ItemNames.BOOST);
 		} else if (rand > 33.3) {
 			itemsToGiveOut [0] = revive;
 		} else {

@@ -28,5 +28,6 @@ public class ObjectNames
 	// Animations
 	public static string FX_SHIELD_WEAK = "fx_shield_weak";
 	public static string FX_SHIELD_IDLE = "fx_shield_idle";
+	public static string FX_BOOST = "FX_Boost";
 }
 

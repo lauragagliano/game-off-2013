@@ -4,19 +4,37 @@ using System.Collections;
 public class FX_BoostLine : MonoBehaviour
 {
 	int vertexCount = 0;
-	static int MAX_VERTS = 15;
+	int maxVerts = 25;
 	LineRenderer lineRenderer;
-	Vector3[] vertexSet = new Vector3[MAX_VERTS];
+	Vector3[] vertexSet;
+	bool isEmitting;
 	
 	void Awake ()
 	{
+		isEmitting = true;
+		vertexSet = new Vector3[maxVerts];
 		LinkLineRenderers ();
 	}
 	
 	void Update ()
 	{
+		// When we stop emitting, reduce verts from the end until we get to 0.
+		if(!isEmitting) {
+			ReduceMaxVerts ();
+		}
 		ShiftVerteces ();
 		SpoofMoving ();
+	}
+	
+	/* Removes a vert from the end of the line
+	 */
+	void ReduceMaxVerts ()
+	{
+		maxVerts = Mathf.Max (maxVerts -1, 0);
+		// Notify parent we are done emitting. This requires this component comes from an FX_Boost.
+		if(maxVerts == 0) {
+			transform.parent.gameObject.GetComponent<FX_Boost> ().OnStoppedEmitting ();
+		}
 	}
 	
 	/*
@@ -34,9 +52,13 @@ public class FX_BoostLine : MonoBehaviour
 	void ShiftVerteces ()
 	{
 		// Add an extra vertex if not maxed
-		if (vertexCount < MAX_VERTS) {
+		if (vertexCount < maxVerts) {
 			lineRenderer.SetVertexCount (++vertexCount);
+		} else {
+			lineRenderer.SetVertexCount (maxVerts);
+			vertexCount = maxVerts;
 		}
+				
 		
 		// Shift verteces down
 		int i = vertexCount - 1;
@@ -45,8 +67,10 @@ public class FX_BoostLine : MonoBehaviour
 			vertexSet [i] = vertexSet [i - 1];
 			i--;
 		}
-		lineRenderer.SetPosition (0, transform.position);
-		vertexSet [0] = transform.position;
+		if(vertexCount > 0) {
+			lineRenderer.SetPosition (0, transform.position);
+			vertexSet [0] = transform.position;
+		}
 	}
 	
 	/*
@@ -65,5 +89,9 @@ public class FX_BoostLine : MonoBehaviour
 			lineRenderer.SetPosition (i, vertexSet [i]);
 			i++;
 		}
+	}
+	
+	public void StopEmitting () {
+		isEmitting = false;
 	}
 }

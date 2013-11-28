@@ -8,6 +8,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400000}
+  - 114: {fileID: 11400006}
   m_Layer: 0
   m_Name: FX_Boost
   m_TagString: Untagged
@@ -146,6 +147,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a72dacf6425184f96ba1f6bf844e6295, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11400006
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a690356b1e9046cf9b2208083bace4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  redLine: {fileID: 11400000}
+  greenLine: {fileID: 11400002}
+  blueLine: {fileID: 11400004}
 --- !u!120 &12000000
 LineRenderer:
   m_ObjectHideFlags: 1

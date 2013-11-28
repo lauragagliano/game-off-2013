@@ -3,45 +3,76 @@ using System.Collections;
 
 public class GUIMeter : MonoBehaviour
 {
-	float maxScale;
-	float maxSize;
-	public Power power;
+	float maxWidth;
+	Power power;
 	public GameObject fill;
 	public AnimationClip glowAnimation;
-	public Material fillMaterial;
+	Color originalColor;
+	
+	public PowerComponent powerComponent;
+	
+	public enum PowerComponent {
+		Red,
+		Blue,
+		Green
+	}
 	
 	void Start ()
 	{
+		power = GetPowerComponent (powerComponent);
+		
 		if (power == null) {
 			Debug.LogError ("Meter [" + name + "] not tied to a power.");
 		}
-		// Cache the scale of the fill meter.
-		maxScale = fill.transform.localScale.x;
 		
-		// Cache the size of the fillbar to be used to adjust the anchoring
-		maxSize = transform.renderer.bounds.extents.x;
+		// Cache the width of the fill meter.
+		maxWidth = fill.guiTexture.pixelInset.width;
+		originalColor = fill.guiTexture.color;
+	}
+	
+	/*
+	 * Gets the player's power associated with this meter
+	 */
+	Power GetPowerComponent (PowerComponent powerToGet)
+	{
+		Power returnPower;
+		switch (powerToGet ) {
+		case PowerComponent.Red :
+			returnPower = GameManager.Instance.player.redPower;
+			break;
+		case PowerComponent.Blue :
+			returnPower = GameManager.Instance.player.bluePower;
+			break;
+		case PowerComponent.Green :
+			returnPower = GameManager.Instance.player.greenPower;
+			break;
+		default :
+			returnPower = GameManager.Instance.player.redPower;
+			break;
+		}
+		return returnPower;
 	}
 	
 	void Update ()
 	{
 		float currentFillPercentage = power.GetFillPercentage ();
-		// Set scale to the current fill percentage
-		fill.transform.localScale = new Vector3 (currentFillPercentage * maxScale, fill.transform.localScale.y, 
-			fill.transform.localScale.z);
 		
-		// Adjust "anchoring" of the fill to always be to the left of the parent object
-		float missingX = maxSize * (1 - currentFillPercentage) * maxScale;
-		fill.transform.localPosition = new Vector3 (-missingX, fill.transform.localPosition.y,
-			fill.transform.localPosition.z);
+		// Set scale to the current fill percentage
+		Rect newInset = fill.guiTexture.pixelInset;
+		newInset.width = currentFillPercentage*maxWidth;
+		fill.guiTexture.pixelInset = newInset;
 		
 		// Glow an active meter
-		if (power.IsPowerActive ()) {
+		if (power.IsPowerActive () || power.IsChargedAndReady ()) {
 			Animation animation = GetComponent<Animation>();
 			animation.Play (glowAnimation.name);
+			// Animation is too fast so I am scaling it down.
+			animation[glowAnimation.name].speed = 0.5f;
 		} else {
 			Animation animation = GetComponent<Animation>();
 			animation.Stop();
-			fill.renderer.material = fillMaterial;
+			fill.guiTexture.color = originalColor;
 		}
+		
 	}
 }

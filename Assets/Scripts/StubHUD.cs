@@ -143,11 +143,15 @@ public class StubHUD : MonoBehaviour
 		GUILayout.FlexibleSpace ();
 		GUILayout.BeginHorizontal ();
 		if (store.selectedItem != 0) {
-			GUILayout.Button (leftArrowTexture, GUIStyle.none);
+			if (GUILayout.Button (leftArrowTexture, GUIStyle.none)) {
+				store.ScrollToPrevious ();
+			}
 		}
 		GUILayout.FlexibleSpace ();
 		if (store.selectedItem != store.allItems.Length -1) {
-			GUILayout.Button (rightArrowTexture, GUIStyle.none);
+			if (GUILayout.Button (rightArrowTexture, GUIStyle.none)) {
+				store.ScrollToNext ();
+			}
 		}
 		GUILayout.EndHorizontal ();
 		GUILayout.FlexibleSpace ();

@@ -32,7 +32,7 @@ public class Store : MonoBehaviour
 	 * Adjust our selected item index to the previous one in the array.
 	 * Prevent going out of bounds.
 	 */
-	void ScrollToPrevious ()
+	public void ScrollToPrevious ()
 	{
 		selectedItem--;
 		if (selectedItem < 0) {
@@ -44,7 +44,7 @@ public class Store : MonoBehaviour
 	 * Adjust our selected item index to the next one in the array. Cap
 	 * it out at the end of the array.
 	 */
-	void ScrollToNext ()
+	public void ScrollToNext ()
 	{
 		selectedItem++;
 		if (selectedItem >= allItems.Length) {

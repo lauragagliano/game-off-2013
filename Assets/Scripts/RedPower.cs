@@ -33,7 +33,7 @@ public class RedPower : Power
 	 * Reset all timers. Set current value to default (0). Useful when starting
 	 * a game.
 	 */
-	public void ResetPower ()
+	new public void ResetPower ()
 	{
 		isPowerActive = false;
 		abilityCooldownTimer.StopTimer ();

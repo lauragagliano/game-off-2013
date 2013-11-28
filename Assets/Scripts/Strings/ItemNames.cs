@@ -9,9 +9,9 @@ using System.Collections;
 public class ItemNames
 {
 	// Meter Upgrades
-	public static string RED_METER_UPGRADE = "RedMeterUpgrade";
-	public static string GREEN_METER_UPGRADE = "GreenMeterUpgrade";
-	public static string BLUE_METER_UPGRADE = "BlueMeterUpgrade";
+	public static string RED_FILLS_FASTER = "RedFillsFaster";
+	public static string GREEN_FILLS_FASTER = "GreenFillsFaster";
+	public static string BLUE_FILLS_FASTER = "BlueFillsFaster";
 	
 	// Magnet Upgrades
 	public static string RED_MAGNET = "RedMagnet";
@@ -19,12 +19,12 @@ public class ItemNames
 	public static string BLUE_MAGNET = "BlueMagnet";
 	
 	// Ability Upgrades
-	public static string LASER_EFFICIENCY_UPGRADE = "BetterLaser";
-	public static string SHIELD_STRENGTH_UPGRADE = "StrongerShields";
-	public static string SLOWER_MOVESPEED_UPGRADE = "BetterReflexes";
+	public static string RED_MORE_EFFECTIVE = "EfficientLaser";
+	public static string GREEN_MORE_EFFECTIVE = "StrongerShields";
+	public static string BLUE_MORE_EFFECTIVE = "BetterReflexes";
 	
 	// Power Upgrades
-	public static string RED_POWER_UPGRADE = "RedPowerUpgrade";
-	public static string GREEN_POWER_UPGRADE = "GreenPowerUpgrade";
-	public static string BLUE_POWER_UPGRADE = "BluePowerUpgrade";
+	public static string RED_LASTS_LONGER = "RedLastsLonger";
+	public static string GREEN_LASTS_LONGER = "GreenLastsLonger";
+	public static string BLUE_LASTS_LONGER = "BlueLastsLonger";
 }

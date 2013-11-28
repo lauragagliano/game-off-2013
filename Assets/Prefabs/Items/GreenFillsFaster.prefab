@@ -12,7 +12,7 @@ GameObject:
   - 23: {fileID: 2300000}
   - 114: {fileID: 11400000}
   m_Layer: 8
-  m_Name: GreenMeterUpgrade
+  m_Name: GreenFillsFaster
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42,7 +42,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16, y: 0, z: 0}
+  m_LocalPosition: {x: 80, y: 0, z: 0}
   m_LocalScale: {x: 7.5, y: 7.5, z: 7.31004477}
   m_Children:
   - {fileID: 400002}
@@ -134,8 +134,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  itemName: GreenMeterUpgrade
-  cost: 30
+  itemName: GreenFillsFaster
+  cost: 0
   wildcardMaterial: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:

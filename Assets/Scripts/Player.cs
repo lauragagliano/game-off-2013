@@ -17,7 +17,6 @@ public class Player : MonoBehaviour
 	public BluePower bluePower;
 	bool isUsingSlowdown;
 	float slowDownStrength = 20f;
-	float slowMovespeed;
 	const float UPGRADED_MOVESPEED = 40f;
 
 	public RedPower redPower;
@@ -66,7 +65,6 @@ public class Player : MonoBehaviour
 		// Set our health and powers
 		curHealth = BASE_HEALTH;
 		movespeed = DEFAULT_MOVESPEED;
-		slowMovespeed = movespeed;
 
 		// Remember their initial Y and Z position and keep them there forever.
 		worldZClamp = transform.position.z;
@@ -630,35 +628,36 @@ public class Player : MonoBehaviour
 		
 		// Give player their upgrades
 		// Charges Faster Upgrades
-		if (inventory.HasItem (ItemNames.BLUE_METER_UPGRADE)) {
+		if (inventory.HasItem (ItemNames.BLUE_FILLS_FASTER)) {
 			bluePower.UpgradeMaximumCharge ();
 		}
-		if (inventory.HasItem (ItemNames.RED_METER_UPGRADE)) {
+		if (inventory.HasItem (ItemNames.RED_FILLS_FASTER)) {
 			redPower.UpgradeMaximumCharge ();
 		}
-		if (inventory.HasItem (ItemNames.GREEN_METER_UPGRADE)) {
+		if (inventory.HasItem (ItemNames.GREEN_FILLS_FASTER)) {
 			greenPower.UpgradeMaximumCharge ();
 		}
 
 		// Stronger Item Upgrades
-		if (inventory.HasItem (ItemNames.LASER_EFFICIENCY_UPGRADE)) {
+		if (inventory.HasItem (ItemNames.RED_MORE_EFFECTIVE)) {
 			redPower.UpgradeLaser ();
 		}
-		if (inventory.HasItem (ItemNames.SHIELD_STRENGTH_UPGRADE)) {
+		if (inventory.HasItem (ItemNames.GREEN_MORE_EFFECTIVE)) {
 			shieldStrength = UPGRADED_SHIELD_STRENGTH;
 		}
-		if (inventory.HasItem (ItemNames.BLUE_POWER_UPGRADE)) {
-			slowMovespeed = UPGRADED_MOVESPEED;
+		if (inventory.HasItem (ItemNames.BLUE_MORE_EFFECTIVE)) {
+			//TODO Implement slowMovespeed here
+			//slowMovespeed = UPGRADED_MOVESPEED;
 		}
 
 		// Duration Upgrades
-		if (inventory.HasItem (ItemNames.RED_POWER_UPGRADE)) {
+		if (inventory.HasItem (ItemNames.RED_LASTS_LONGER)) {
 			redPower.UpgradeDuration ();
 		}
-		if (inventory.HasItem (ItemNames.GREEN_POWER_UPGRADE)) {
+		if (inventory.HasItem (ItemNames.GREEN_LASTS_LONGER)) {
 			greenPower.UpgradeDuration ();
 		}
-		if (inventory.HasItem (ItemNames.BLUE_POWER_UPGRADE)) {
+		if (inventory.HasItem (ItemNames.BLUE_LASTS_LONGER)) {
 			bluePower.UpgradeDuration ();
 		}
 		

@@ -23,6 +23,8 @@ public class GameManager : Singleton<GameManager>
 	float timeDeathDelayStarted;
 	float deathDelayTime = 1.0f;
 	
+	public bool DEBUG_MODE = false;
+	
 	// TODO make this private when we don't need to show difficulty on screen
 	public enum Difficulty
 	{

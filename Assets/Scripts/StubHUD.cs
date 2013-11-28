@@ -5,9 +5,13 @@ public class StubHUD : MonoBehaviour
 {
 	public Player player;
 	public GUIText finalDistanceLabelText;
+	public GUIText finalDistanceLabelTextShadow;
 	public GUIText finalDistanceText;
+	public GUIText finalDistanceTextShadow;
 	public GUIText crystalsCollectedLabelText;
+	public GUIText crystalsCollectedLabelTextShadow;
 	public GUIText crystalsCollectedText;
+	public GUIText crystalsCollectedTextShadow;
 	public GUIText moneyText;
 	public GUIText distanceText;
 	public GUIText debugText;
@@ -60,22 +64,22 @@ public class StubHUD : MonoBehaviour
 		EnableInGameText (true);
 		// Display the tutorial text
 		if (!treadmill.IsShowingTutorial ()) {
-			pressSpaceText.text = string.Empty;
-			pressSpaceTextShadow.text = string.Empty;
+			SetShadowGUIText (string.Empty, pressSpaceText, pressSpaceTextShadow);
 			pressSpaceText.enabled = false;
 			pressSpaceTextShadow.enabled = false;
 		} else {
-			pressSpaceText.text = "Press [Space] to Start";
-			pressSpaceTextShadow.text = "Press [Space] to Start";
+			SetShadowGUIText ("Press [Space] to Start", pressSpaceText, pressSpaceTextShadow);
 			pressSpaceText.enabled = true;
 			pressSpaceTextShadow.enabled = true;
 		}
 		EnableGameOverText (false);
 		distanceText.text = "Distance: " + Mathf.RoundToInt (treadmill.distanceTraveled);
 		PrintMoneyToScreen ();
-		debugText.text = string.Format ("Passed Pigments: {0}\nHealth: {1}\nWildcards: {2}\nDifficulty: {3}",
-			GameManager.Instance.numPickupsPassed, player.curHealth, player.WildcardCount,
-			GameManager.Instance.difficulty);
+		if (GameManager.Instance.DEBUG_MODE) {
+			debugText.text = string.Format ("Passed Pigments: {0}\nHealth: {1}\nWildcards: {2}\nDifficulty: {3}",
+				GameManager.Instance.numPickupsPassed, player.curHealth, player.WildcardCount,
+				GameManager.Instance.difficulty);
+		}
 	}
 	
 	/*
@@ -86,10 +90,13 @@ public class StubHUD : MonoBehaviour
 	{
 		EnableInGameText (false);
 		EnableGameOverText (true);
-		finalDistanceLabelText.text = ("You had\n a colorful run of");
-		finalDistanceText.text = Mathf.RoundToInt (treadmill.distanceTraveled) + "m";
-		crystalsCollectedLabelText.text = "Crystals Collected";
-		crystalsCollectedText.text = GameManager.Instance.numPointsThisRound.ToString ();
+		SetShadowGUIText ("You Survived For", finalDistanceLabelText, finalDistanceLabelTextShadow);
+		int finalDistance = Mathf.RoundToInt (treadmill.distanceTraveled);
+		SetShadowGUIText (finalDistance + "m", finalDistanceText, finalDistanceTextShadow);
+		SetShadowGUIText ("Crystals Collected", crystalsCollectedLabelText, crystalsCollectedLabelTextShadow);
+		SetShadowGUIText (GameManager.Instance.numPointsThisRound.ToString (), crystalsCollectedText,
+			crystalsCollectedTextShadow);
+
 		GUILayout.BeginArea (new Rect ((Screen.width - AREA_WIDTH)/2, (Screen.height - AREA_HEIGHT), AREA_WIDTH, AREA_HEIGHT), areaStyle);
 		// Push our buttons down to bottom of screen
 		GUILayout.BeginVertical ();
@@ -248,9 +255,21 @@ public class StubHUD : MonoBehaviour
 	void EnableGameOverText (bool enable)
 	{
 		finalDistanceLabelText.enabled = enable;
+		finalDistanceLabelTextShadow.enabled = enable;
 		finalDistanceText.enabled = enable;
+		finalDistanceTextShadow.enabled = enable;
 		crystalsCollectedText.enabled = enable;
+		crystalsCollectedTextShadow.enabled = enable;
 		crystalsCollectedLabelText.enabled = enable;
+		crystalsCollectedLabelTextShadow.enabled = enable;
 	}
-
+	
+	/*
+	 * Helper method to set provided GUITText and its shadow to a string.
+	 */
+	void SetShadowGUIText (string newText, GUIText guiText, GUIText guiTextShadow)
+	{
+		guiText.text = newText;
+		guiTextShadow.text = newText;
+	}
 }

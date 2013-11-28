@@ -5,7 +5,7 @@ public class RedPower : Power
 {
 	// Ability behavior
 	RBTimer abilityCooldownTimer = new RBTimer ();
-	float abilityCooldown = 1;
+	float abilityCooldown = 0.5f;
 	float abilityUsesPerMeter = 3;
 	const float UPGRADED_USES_PER_METER = 10;
 	

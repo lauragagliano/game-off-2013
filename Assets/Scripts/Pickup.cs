@@ -22,9 +22,7 @@ public class Pickup : MonoBehaviour
 	 */
 	protected virtual void InitializeSize ()
 	{
-		if (collider == null) {
-			size = 2.0f;
-		} else {
+		if (collider != null) {
 			size = collider.bounds.extents.x;
 		}
 	}

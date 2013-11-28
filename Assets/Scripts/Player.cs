@@ -17,8 +17,8 @@ public class Player : MonoBehaviour
 	public BluePower bluePower;
 	bool isUsingSlowdown;
 	float slowDownStrength = 20f;
-	// TODO If we add improved slowdown upgrade
-	//const int UPGRADED_SLOWDOWN_STRENGTH = 25f;
+	float slowMovespeed;
+	const float UPGRADED_MOVESPEED = 40f;
 
 	public RedPower redPower;
 	public GreenPower greenPower;
@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
 	const int UPGRADED_SHIELD_STRENGTH = 6;
 	
 	public RGB playerRGB;
-	public float MAGNET_DIST = 10.0f;
+	public float MAGNET_DIST = 10f;
 	Inventory inventory;
 
 	public int WildcardCount { get; private set; }
@@ -51,7 +51,9 @@ public class Player : MonoBehaviour
 	public GameObject laserBeamFX;
 	float worldZClamp;
 	float worldYClamp;
-	public float movespeed;
+	float movespeed;
+	const float DEFAULT_MOVESPEED = 20f;
+	
 	public Vector3 perceivedVelocity;
 	
 	#region #1 Awake and Update
@@ -63,6 +65,8 @@ public class Player : MonoBehaviour
 		
 		// Set our health and powers
 		curHealth = BASE_HEALTH;
+		movespeed = DEFAULT_MOVESPEED;
+		slowMovespeed = movespeed;
 
 		// Remember their initial Y and Z position and keep them there forever.
 		worldZClamp = transform.position.z;
@@ -625,6 +629,7 @@ public class Player : MonoBehaviour
 		
 		
 		// Give player their upgrades
+		// Charges Faster Upgrades
 		if (inventory.HasItem (ItemNames.BLUE_METER_UPGRADE)) {
 			bluePower.UpgradeMaximumCharge ();
 		}
@@ -634,17 +639,27 @@ public class Player : MonoBehaviour
 		if (inventory.HasItem (ItemNames.GREEN_METER_UPGRADE)) {
 			greenPower.UpgradeMaximumCharge ();
 		}
+
+		// Stronger Item Upgrades
 		if (inventory.HasItem (ItemNames.LASER_EFFICIENCY_UPGRADE)) {
 			redPower.UpgradeLaser ();
 		}
 		if (inventory.HasItem (ItemNames.SHIELD_STRENGTH_UPGRADE)) {
 			shieldStrength = UPGRADED_SHIELD_STRENGTH;
 		}
+		if (inventory.HasItem (ItemNames.BLUE_POWER_UPGRADE)) {
+			slowMovespeed = UPGRADED_MOVESPEED;
+		}
+
+		// Duration Upgrades
 		if (inventory.HasItem (ItemNames.RED_POWER_UPGRADE)) {
 			redPower.UpgradeDuration ();
 		}
 		if (inventory.HasItem (ItemNames.GREEN_POWER_UPGRADE)) {
 			greenPower.UpgradeDuration ();
+		}
+		if (inventory.HasItem (ItemNames.BLUE_POWER_UPGRADE)) {
+			bluePower.UpgradeDuration ();
 		}
 		
 		// Also reset the same stats that should be reset on revive

@@ -21,8 +21,10 @@ public class ItemNames
 	// Ability Upgrades
 	public static string LASER_EFFICIENCY_UPGRADE = "BetterLaser";
 	public static string SHIELD_STRENGTH_UPGRADE = "StrongerShields";
+	public static string SLOWER_MOVESPEED_UPGRADE = "BetterReflexes";
 	
 	// Power Upgrades
 	public static string RED_POWER_UPGRADE = "RedPowerUpgrade";
 	public static string GREEN_POWER_UPGRADE = "GreenPowerUpgrade";
+	public static string BLUE_POWER_UPGRADE = "BluePowerUpgrade";
 }

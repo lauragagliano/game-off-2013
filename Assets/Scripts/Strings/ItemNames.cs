@@ -27,4 +27,7 @@ public class ItemNames
 	public static string RED_LASTS_LONGER = "RedLastsLonger";
 	public static string GREEN_LASTS_LONGER = "GreenLastsLonger";
 	public static string BLUE_LASTS_LONGER = "BlueLastsLonger";
+	
+	// Consumables
+	public static string BOOST = "Boost";
 }

@@ -10,6 +10,8 @@ public class Player : MonoBehaviour
 	public int curShields;
 
 	public bool IsDead { get; private set; }
+
+	bool isWaitingToStart;
 	bool isReviving;
 	RBTimer reviveTimeout;
 	
@@ -18,13 +20,18 @@ public class Player : MonoBehaviour
 	bool isUsingSlowdown;
 	float slowDownStrength = 20f;
 	const float UPGRADED_MOVESPEED = 40f;
+	bool isBoosting;
+	bool isBoostBraking;
+	RBTimer boostTimer;
+	RBTimer boostBrakeTimer;
+	// TODO If we add improved slowdown upgrade
+	//const int UPGRADED_SLOWDOWN_STRENGTH = 25f;
 
 	public RedPower redPower;
 	public GreenPower greenPower;
 	bool isShieldUp;
 	int shieldStrength = 4;
 	const int UPGRADED_SHIELD_STRENGTH = 6;
-	
 	public RGB playerRGB;
 	public float MAGNET_DIST = 10f;
 	Inventory inventory;
@@ -42,11 +49,12 @@ public class Player : MonoBehaviour
 	public AudioClip shieldDownSound;
 	public AudioClip laserSound;
 	Animation shieldAnimation;
-	
 	Treadmill treadmill;
 	GameObject playerGeo;
 	GameObject nodeLaser;
 	GameObject shieldObject;
+	GameObject boostFX;
+	public GameObject boostFXPrefab;
 	public GameObject laserBeamFX;
 	float worldZClamp;
 	float worldYClamp;
@@ -112,8 +120,23 @@ public class Player : MonoBehaviour
 	
 	void Update ()
 	{
-		if(!IsDead) {
-			MatchSpeedToTreadmill ();
+		// Waiting to be told by GameManager to start running
+		if (isWaitingToStart) {
+			return;
+		}
+		
+		bool isAlive = !IsDead;
+		if (isAlive) {
+			
+			CheckBoostingFinish ();
+			
+			// Update boosting speed
+			if (isBoosting) {
+				SetRunspeed (15.0f, treadmill.scrollspeed);
+			} else {
+				// When not boosting, match with treadmill.
+				MatchSpeedToTreadmill ();
+			}
 	
 			TryMove ();
 			TryActivateAbilities ();
@@ -121,19 +144,35 @@ public class Player : MonoBehaviour
 			CheckShieldTimeout ();
 			CheckSlowDownTimeout ();
 			
-			ClampToWorldYZ (worldYClamp, worldZClamp);
+			UpdateYZPosition ();
+			
 			// If no colors are active, go neutral
 			if (!bluePower.IsPowerActive () && !redPower.IsPowerActive () && !greenPower.IsPowerActive ()) {
 				ChangeColors (ColorWheel.neutral);
 			}
 			RenderCurrentColor ();
 			PullNearbyPickups ();
-		}
-		else if (isReviving) {
+		} else if (isReviving) {
 			// Check if we need to force restore from ragdoll due to timeout
-			if (reviveTimeout.IsTimeUp()) {
-				OnBodyRevived();
+			if (reviveTimeout.IsTimeUp ()) {
+				OnBodyRevived ();
 			}
+		}
+	}
+	
+	/*
+	 * Adjusts the Player's Z position to reflect his current state.
+	 */
+	void UpdateYZPosition () {
+		// When boosting, we go up the board a bit.
+		if (isBoosting) {
+			if (isBoostBraking) {
+				LerpZToClamp ();
+			} else {
+				LerpZToBoostPosition ();
+			} 
+		} else {
+			ClampToWorldYZ (worldYClamp, worldZClamp);
 		}
 	}
 	
@@ -143,13 +182,21 @@ public class Player : MonoBehaviour
 	 */
 	void MatchSpeedToTreadmill ()
 	{
-		movespeed = treadmill.scrollspeed;
+		SetRunspeed (treadmill.scrollspeed, treadmill.scrollspeed);
+	}
+	
+	/*
+	 * Sets the character's left and right movespeed as well as forward apparent "movespeed"
+	 */
+	void SetRunspeed (float speedLeftRight, float speedForward)
+	{
+		movespeed = speedLeftRight;
 		
 		// Set animation playback speed on animation to match new movespeed
 		float ANIM_NORMAL_RUNSPEED = 30.0f;
-		playerGeo.animation ["pigment_run"].speed = movespeed / ANIM_NORMAL_RUNSPEED;
+		playerGeo.animation ["pigment_run"].speed = speedForward / ANIM_NORMAL_RUNSPEED;
 	}
-	
+		
 	/*
 	 * Refresh the current color on the character
 	 */
@@ -167,6 +214,24 @@ public class Player : MonoBehaviour
 	void ClampToWorldYZ (float worldY, float worldZ)
 	{
 		transform.position = new Vector3 (transform.position.x, worldY, worldZ);
+	}
+	
+	/*
+	 * Lerps the Player into the boost position
+	 */
+	void LerpZToBoostPosition ()
+	{
+		transform.position = Vector3.Lerp (transform.position, new Vector3 (transform.position.x, 
+			transform.position.y, -10.0f), 3.5f * Time.deltaTime);
+	}
+	
+	/*
+	 * Moves the player back from boost position into normal clamp position
+	 */
+	void LerpZToClamp ()
+	{
+		transform.position = Vector3.MoveTowards (transform.position, new Vector3 (transform.position.x, 
+			transform.position.y, worldZClamp), 0.5f);
 	}
 	#endregion
 	
@@ -191,6 +256,11 @@ public class Player : MonoBehaviour
 	 */
 	void TryActivateAbilities ()
 	{
+		// Don't let them activate their abilities while boosting
+		if (isBoosting) {
+			return;
+		}
+		
 		if (Input.GetKeyDown ("j")) {
 			if (redPower.IsChargedAndReady ()) {
 				SetActivePower (redPower, greenPower, bluePower);
@@ -310,7 +380,13 @@ public class Player : MonoBehaviour
 	 */
 	public void CollideWithBlock ()
 	{
-		if (greenPower.IsPowerActive()) {
+		// While boosting go straight through blocks like it's no thang.
+		if (isBoosting) {
+			return;
+		}
+			
+		
+		if (greenPower.IsPowerActive ()) {
 			TakeShieldHit ();
 		} else {
 			// Subtract the health
@@ -353,6 +429,9 @@ public class Player : MonoBehaviour
 		return returnPower;
 	}
 	
+	/*
+	 * Kill the player
+	 */
 	public void Die ()
 	{
 		IsDead = true;
@@ -369,6 +448,7 @@ public class Player : MonoBehaviour
 	 */
 	public void Spawn (Vector3 spawnPosition)
 	{
+		isWaitingToStart = true;
 		IsDead = false;
 		collider.enabled = true;
 		
@@ -381,8 +461,12 @@ public class Player : MonoBehaviour
 		transform.position = spawnPosition;
 	}
 	
+	/*
+	 * Revives the player from being ragdoll
+	 */
 	public void Revive (Vector3 revivePosition)
 	{
+		isWaitingToStart = true;
 		InitializeStatsOnRevive ();
 		
 		// Restore ragdolled limbs
@@ -394,8 +478,8 @@ public class Player : MonoBehaviour
 		
 		isReviving = true;
 		
-		reviveTimeout = new RBTimer();
-		reviveTimeout.StartTimer(2.0f);
+		reviveTimeout = new RBTimer ();
+		reviveTimeout.StartTimer (2.0f);
 	}
 	
 	/*
@@ -403,14 +487,24 @@ public class Player : MonoBehaviour
 	 */
 	public void OnBodyRevived ()
 	{
-		reviveTimeout.StopTimer();
+		reviveTimeout.StopTimer ();
 		isReviving = false;
 		IsDead = false;
 		collider.enabled = true;
 		
 		PigmentBody body = (PigmentBody)playerGeo.GetComponent<PigmentBody> ();
-		body.RestoreBody();
+		body.RestoreBody ();
 		
+		DoBlockClearExplosion ();
+		
+		GameManager.Instance.OnReviveDone ();
+	}
+	
+	/*
+	 * Explode blocks out of the way so the player doesn't have unfair deaths.
+	 */
+	public void DoBlockClearExplosion ()
+	{
 		// Do an explosion to clear blocks out of the way
 		float explosionRadius = 25;
 		GameObject[] blackblocks = GameObject.FindGameObjectsWithTag (Tags.BLOCK);
@@ -419,8 +513,17 @@ public class Player : MonoBehaviour
 				block.GetComponent<BlockLogic> ().BlowUp (transform.position, 200, explosionRadius);
 			}
 		}
-		
-		GameManager.Instance.OnReviveDone ();
+	}
+	
+	/*
+	 * Tell the Player to start running along the treadmill
+	 */
+	public void StartRunning ()
+	{
+		isWaitingToStart = false;
+		if (inventory.HasItem (ItemNames.BOOST)) {
+			StartBoosting ();
+		}
 	}
 		
 	/*
@@ -614,6 +717,69 @@ public class Player : MonoBehaviour
 		GameObject.Find (ObjectNames.TREADMILL).GetComponent<Treadmill> ().TemporarySlowDown (slowDownStrength);
 		bluePower.ActivatePower ();
 	}
+	
+	/*
+	 * Begin using the boost consumable
+	 */
+	void StartBoosting ()
+	{
+		// Set state variables
+		isBoosting = true;
+		isBoostBraking = false;
+		
+		treadmill.StartBoostSpeed ();
+		
+		// Start the boost timer.
+		boostTimer = new RBTimer ();
+		float BOOST_TIME = 8.0f;
+		boostTimer.StartTimer (BOOST_TIME);
+		
+		// Remove the inventory item if they had one
+		inventory.RemoveItem (ItemNames.BOOST);
+				
+		boostFX = (GameObject)Instantiate (boostFXPrefab, transform.position,
+			transform.rotation);
+		boostFX.transform.parent = transform;
+	}
+	/*
+	 * Starts restoring back to normal gameplay after a boost
+	 */
+	void StartBoostBraking ()
+	{
+		isBoostBraking = true;
+		boostFX.GetComponent<FX_Boost> ().StopEmitting ();
+		
+		float BRAKE_TIME = 0.9f;
+		boostBrakeTimer = new RBTimer ();
+		boostBrakeTimer.StartTimer (BRAKE_TIME);
+		
+		treadmill.StopBoostSpeed ();
+	}
+	
+	
+	/*
+	 * Handles stopping the boost functionality when the time is expired.
+	 */
+	void CheckBoostingFinish ()
+	{
+		if (isBoosting) {
+			if(boostTimer.IsTimeUp () && !isBoostBraking) {
+				StartBoostBraking ();
+			} else if (boostTimer.IsTimeUp () && boostBrakeTimer.IsTimeUp ()) {
+				StopBoosting ();
+			}
+		}
+	}
+	
+	
+	/*
+	 * Stop using the boost consumable
+	 */
+	void StopBoosting ()
+	{
+		isBoosting = false;
+	}
+	
 	#endregion
 	
 	#region #5 Player Upgrades

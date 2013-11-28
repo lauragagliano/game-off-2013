@@ -41,7 +41,7 @@ MonoBehaviour:
   wildcardPrefab: {fileID: 100000, guid: 174cba48c37b04ef389dd92985418608, type: 2}
   padding: 4
   numCardsPerRow: 3
-  headstart: {fileID: 11400000, guid: 6eb19d4239e7a4ea790408b67ef1584a, type: 2}
+  boost: {fileID: 11400000, guid: 6eb19d4239e7a4ea790408b67ef1584a, type: 2}
   money: {fileID: 11400000, guid: 80d1935d27c3146a9b85d792bc54dab6, type: 2}
   revive: {fileID: 11400000, guid: 10d512c0553fd4265b56d7411ccc79d4, type: 2}
   bigMoney: {fileID: 11400000, guid: 9efe022276e3e491bacf74544fe4ab7b, type: 2}

@@ -85,7 +85,7 @@ public class GameManager : Singleton<GameManager>
 	{
 		if (gameState == GameState.Tutorial) {
 			if (Input.GetKeyDown (KeyCode.Space)) {
-				GoToRunning(false);
+				GoToRunning (false);
 			}
 		} else if (gameState == GameState.Running && !IsHard ()) {
 			UpdateDifficulty ();
@@ -196,7 +196,7 @@ public class GameManager : Singleton<GameManager>
 		storeCamera.enabled = false;
 		
 		numPickupsPassed = 0;
-		numPointsThisRound  = 0;
+		numPointsThisRound = 0;
 		difficulty = Difficulty.Easy;
 		
 		player.Spawn (playerSpawn.position);
@@ -209,7 +209,7 @@ public class GameManager : Singleton<GameManager>
 	public void RevivePlayer ()
 	{
 		player.Revive (playerSpawn.position);
-		GoToReviving();
+		GoToReviving ();
 	}
 	/*
 	 * Ends the current run for the player.
@@ -248,11 +248,11 @@ public class GameManager : Singleton<GameManager>
 	/*
 	 * Called by the Player when he's done reviving.
 	 */
-	public void OnReviveDone()
+	public void OnReviveDone ()
 	{
 		// This can be called on Retry
 		if (gameState != GameState.Tutorial) {
-			GoToRunning(true);
+			GoToRunning (true);
 		}
 	}
 	
@@ -291,11 +291,12 @@ public class GameManager : Singleton<GameManager>
 	private void GoToRunning (bool isResuming)
 	{
 		gameState = GameState.Running;
-		if(isResuming) {
-			treadmill.ResumeTreadmill();
+		if (isResuming) {
+			treadmill.ResumeTreadmill ();
 		} else {
 			treadmill.StartScrolling ();
 		}
+		player.StartRunning ();
 	}
 	
 	/*

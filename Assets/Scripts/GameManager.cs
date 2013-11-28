@@ -24,6 +24,10 @@ public class GameManager : Singleton<GameManager>
 	float deathDelayTime = 1.0f;
 	
 	public bool SAVE_TUTORIAL_COMPLETE { get; private set; }
+	public bool SAVE_LASER_LESSON_COMPLETE { get; private set; }
+	public bool SAVE_SHIELDS_LESSON_COMPLETE { get; private set; }
+	public bool SAVE_SLOW_LESSON_COMPLETE { get; private set; }
+	
 	public bool DEBUG_MODE = false;
 	
 	// TODO make this private when we don't need to show difficulty on screen
@@ -332,5 +336,23 @@ public class GameManager : Singleton<GameManager>
 	public void MarkTutorialComplete ()
 	{
 		SAVE_TUTORIAL_COMPLETE = true;
+	}
+	
+	/*
+	 * Set the Save booleans when a lesson has been finished.
+	 */
+	public void MarkLessonComplete (TutorialLesson.Lesson lesson)
+	{
+		switch (lesson) {
+		case TutorialLesson.Lesson.Laser:
+			SAVE_LASER_LESSON_COMPLETE = true;
+			break;
+		case TutorialLesson.Lesson.Shields:
+			SAVE_SHIELDS_LESSON_COMPLETE = true;
+			break;
+		case TutorialLesson.Lesson.Slow:
+			SAVE_SLOW_LESSON_COMPLETE = true;
+			break;
+		}
 	}
 }

@@ -59,19 +59,18 @@ public class Section : MonoBehaviour
 			// Replace pickups with Pickup prefab.
 			//TODO Serious FPS slowdown when pickups are involved.
 			else if (child.CompareTag (Tags.PICKUP_GROUP_A)) {
-				GameObject pickup = InstantiatePrefabAtPlaceholder (ObjectNames.CRYSTAL_PREFAB, child, tempPrefabHolder.transform);
-				pickup.GetComponent<RGB> ().color = randomColorforPickupA;
-				pickup.GetComponent<RGB> ().Refresh ();
+				InstantiateColoredPickup (child, randomColorforPickupA);
 			} else if (child.CompareTag (Tags.PICKUP_GROUP_B)) {
-				GameObject pickup = InstantiatePrefabAtPlaceholder (ObjectNames.CRYSTAL_PREFAB, child, tempPrefabHolder.transform);
-				pickup.GetComponent<RGB> ().color = randomColorforPickupB;
-				pickup.GetComponent<RGB> ().Refresh ();
+				InstantiateColoredPickup (child, randomColorforPickupB);
 			} else if (child.CompareTag (Tags.PICKUP_GROUP_C)) {
-				GameObject pickup = InstantiatePrefabAtPlaceholder (ObjectNames.CRYSTAL_PREFAB, child, tempPrefabHolder.transform);
-				pickup.GetComponent<RGB> ().color = randomColorforPickupC;
-				pickup.GetComponent<RGB> ().Refresh ();
-			}
-			else if (child.CompareTag (Tags.WILDCARD)) {
+				InstantiateColoredPickup (child, randomColorforPickupC);
+			} else if (child.CompareTag (Tags.RED_PICKUP)) {
+				InstantiateColoredPickup (child, ColorWheel.red);
+			} else if (child.CompareTag (Tags.GREEN_PICKUP)) {
+				InstantiateColoredPickup (child, ColorWheel.green);
+			} else if (child.CompareTag (Tags.BLUE_PICKUP)) {
+				InstantiateColoredPickup (child, ColorWheel.blue);
+			} else if (child.CompareTag (Tags.WILDCARD)) {
 				if (treadmill.NeedsWildcard ()) {
 					InstantiatePrefabAtPlaceholder (ObjectNames.WILDCARD_PREFAB, child, tempPrefabHolder.transform);
 					treadmill.OnWildcardSpawn ();
@@ -108,6 +107,17 @@ public class Section : MonoBehaviour
 		prefab.transform.parent = prefabParent;
 		Destroy (placeholder.gameObject);
 		return prefab;
+	}
+	
+	/*
+	 * Helper method to spawn pickups of a given color at the provided location.
+	 */
+	void InstantiateColoredPickup (Transform location, ColorWheel pickupColor)
+	{
+		GameObject pickup = InstantiatePrefabAtPlaceholder (ObjectNames.CRYSTAL_PREFAB, 
+			location, tempPrefabHolder.transform);
+		pickup.GetComponent<RGB> ().color = pickupColor;
+		pickup.GetComponent<RGB> ().Refresh ();
 	}
 	
 	/*

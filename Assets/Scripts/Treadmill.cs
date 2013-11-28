@@ -26,7 +26,9 @@ public class Treadmill : MonoBehaviour
 	float prevAccelerationPerFrame;
 	public float maxspeed = 50.0f;
 	public GameObject emptySection;
-	public GameObject tutorialChallenge;
+	public GameObject tutorialLessonLaser;
+	public GameObject tutorialLessonShields;
+	public GameObject tutorialLessonSlow;
 	public List<GameObject> normalSections;
 	public List<GameObject> challengeSections;
 	public List<GameObject> freebieSections;
@@ -82,10 +84,14 @@ public class Treadmill : MonoBehaviour
 				if (GameManager.Instance.SAVE_TUTORIAL_COMPLETE) {
 					SpawnNextSection ();
 				} else {
-					SpawnSection (tutorialChallenge);
+					SpawnNextLesson ();
 				}
 			} else if (isSectionOnScreen (GetLastSectionInPlay ())) {
-				SpawnNextSection ();
+				if (GameManager.Instance.SAVE_TUTORIAL_COMPLETE) {
+					SpawnNextSection ();
+				} else {
+					SpawnNextLesson ();
+				}
 			}
 			// Check if the first section is past the kill line. If so, kill it!
 			if (isSectionPastKillZone (sectionsInPlay [0])) {
@@ -188,6 +194,8 @@ public class Treadmill : MonoBehaviour
 		for (int i = sectionsInPlay.Count-1; i >= 0; i--) {
 			KillSection (sectionsInPlay[i]);
 		}
+		scrollspeed = STARTING_SPEED;
+		previousScrollspeed = STARTING_SPEED;
 		accelerationPerFrame = STARTING_ACCEL;
 		lerping = false;
 		lerpToSpeed = STARTING_SPEED;
@@ -404,6 +412,20 @@ public class Treadmill : MonoBehaviour
 		needsWildcard = false;
 		nextWildcardMarker = GenerateNextMarker (MIN_WILDCARD_DISTANCE, MAX_WILDCARD_DISTANCE);
 		Debug.Log ("Spawned a new wildcard. Next wildcard at: " + nextWildcardMarker);
+	}
+	
+	/*
+	 * Spawn the next lesson that the user hasn't seen.
+	 */
+	void SpawnNextLesson ()
+	{
+		if (!GameManager.Instance.SAVE_LASER_LESSON_COMPLETE) {
+			SpawnSection (tutorialLessonLaser);
+		} else if (!GameManager.Instance.SAVE_SHIELDS_LESSON_COMPLETE) {
+			SpawnSection (tutorialLessonShields);
+		} else if (!GameManager.Instance.SAVE_SLOW_LESSON_COMPLETE) {
+			SpawnSection (tutorialLessonSlow);
+		}
 	}
 	#endregion
 	

@@ -12,4 +12,12 @@ public class Item : MonoBehaviour
 		consumable,
 		upgrade
 	}
+	
+	/* 
+	 * Returns true if the two items are the same kind
+	 */
+	public bool CompareItem ( Item comparisonItem )
+	{
+		return itemName == comparisonItem.itemName;
+	}
 }

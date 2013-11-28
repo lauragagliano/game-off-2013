@@ -175,11 +175,7 @@ public class GUI_WildcardReveal : MonoBehaviour
 	 */
 	void GoToFinish ()
 	{
-		if (transform.GetChild (0).GetComponent<GUI_Wildcard> ().myItem == revive) {
-			GameManager.Instance.RevivePlayer ();
-		} else {
-			GameManager.Instance.GoToGameOver ();
-		}
+		AwardItems ();
 		state = RevealState.Finish;
 		Destroy (gameObject);
 	}
@@ -206,8 +202,6 @@ public class GUI_WildcardReveal : MonoBehaviour
 		float rand = Random.Range (0, 100.0f);
 		if (rand > 66.6) {
 			itemsToGiveOut [0] = boost;
-			Inventory playerInventory = GameManager.Instance.player.GetComponent<Inventory> ();	
-			playerInventory.AddItem (ItemNames.BOOST);
 		} else if (rand > 33.3) {
 			itemsToGiveOut [0] = revive;
 		} else {
@@ -224,6 +218,41 @@ public class GUI_WildcardReveal : MonoBehaviour
 		foreach (Transform child in transform) {
 			child.gameObject.GetComponent<GUI_Wildcard> ().SetItem (itemsToGiveOut [i]);
 			i++;
+		}
+	}
+	
+	/*
+	 * Give the player items for each award
+	 */
+	void AwardItems ()
+	{
+		bool flagForRevive = false;
+		Player player = GameManager.Instance.player;
+		Inventory playerInventory = player.GetComponent<Inventory> ();
+		
+		int MONEY_AMOUNT = 50;
+		int BIG_MONEY_AMOUNT = 150;
+		
+		
+		// Iterate through the items and perform their awarding script
+		foreach (Transform child in transform) {
+			Item item = child.gameObject.GetComponent<GUI_Wildcard> ().myItem;
+			if (item.CompareItem (money )) {
+				player.AddMoney(MONEY_AMOUNT);
+			} else if ( item.CompareItem (bigMoney ) ) {
+				player.AddMoney(BIG_MONEY_AMOUNT);
+			} else if ( item.CompareItem (revive ) ) {
+				flagForRevive = true;
+			} else if ( item.CompareItem (boost) ) {
+				playerInventory.AddItem (ItemNames.BOOST);
+			}
+		}
+		
+		// Revive the player if he received a revive
+		if (flagForRevive) {
+			GameManager.Instance.RevivePlayer ();
+		} else {
+			GameManager.Instance.GoToGameOver ();
 		}
 	}
 	

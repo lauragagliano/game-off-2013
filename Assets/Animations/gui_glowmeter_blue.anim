@@ -18,61 +18,100 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: .281490862
-        inSlope: .981845856
-        outSlope: .981845856
+        value: 1
+        inSlope: 0
+        outSlope: 0
         tangentMode: 10
-      - time: .5
-        value: .77241379
-        inSlope: .981845856
-        outSlope: .981845856
-        tangentMode: 10
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-    attribute: _Color.g
-    path: MeterFill
-    classID: 21
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - time: 0
-        value: .118079588
-        inSlope: 1.11678195
-        outSlope: 1.11678195
-        tangentMode: 10
-      - time: .5
-        value: .676470578
-        inSlope: 1.11678195
-        outSlope: 1.11678195
-        tangentMode: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-    attribute: _Color.r
-    path: MeterFill
-    classID: 21
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - time: 0
-        value: .669117689
-        inSlope: .661764622
-        outSlope: .661764622
+      - time: .25
+        value: 1
+        inSlope: 0
+        outSlope: 0
         tangentMode: 10
       - time: .5
         value: 1
-        inSlope: .661764622
-        outSlope: .661764622
+        inSlope: 0
+        outSlope: 0
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
-    attribute: _Color.b
-    path: MeterFill
-    classID: 21
+    attribute: m_Enabled
+    path: HUD_Meter_Icon_Slowdown/HUD_Meter_Border_Slowdown/HUD_Meter_Fill_Slowdown
+    classID: 131
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: .153276399
+        inSlope: 1.26557088
+        outSlope: 1.26557088
+        tangentMode: 10
+      - time: .25
+        value: .469669133
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: .5
+        value: .153276399
+        inSlope: -1.26557088
+        outSlope: -1.26557088
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_Color.r
+    path: HUD_Meter_Icon_Slowdown/HUD_Meter_Border_Slowdown/HUD_Meter_Fill_Slowdown
+    classID: 131
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: .332533568
+        inSlope: 1.01822889
+        outSlope: 1.01822889
+        tangentMode: 10
+      - time: .25
+        value: .58709079
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: .5
+        value: .332533568
+        inSlope: -1.01822889
+        outSlope: -1.01822889
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_Color.g
+    path: HUD_Meter_Icon_Slowdown/HUD_Meter_Border_Slowdown/HUD_Meter_Fill_Slowdown
+    classID: 131
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: .772058845
+        inSlope: .411764622
+        outSlope: .411764622
+        tangentMode: 10
+      - time: .25
+        value: .875
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: .5
+        value: .772058845
+        inSlope: -.411764622
+        outSlope: -.411764622
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_Color.b
+    path: HUD_Meter_Icon_Slowdown/HUD_Meter_Border_Slowdown/HUD_Meter_Fill_Slowdown
+    classID: 131
     script: {fileID: 0}
   m_SampleRate: 60
-  m_WrapMode: 4
+  m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
@@ -96,58 +135,97 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: .281490862
-        inSlope: .981845856
-        outSlope: .981845856
+        value: 1
+        inSlope: 0
+        outSlope: 0
         tangentMode: 10
-      - time: .5
-        value: .77241379
-        inSlope: .981845856
-        outSlope: .981845856
-        tangentMode: 10
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-    attribute: _Color.g
-    path: MeterFill
-    classID: 21
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - time: 0
-        value: .118079588
-        inSlope: 1.11678195
-        outSlope: 1.11678195
-        tangentMode: 10
-      - time: .5
-        value: .676470578
-        inSlope: 1.11678195
-        outSlope: 1.11678195
-        tangentMode: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-    attribute: _Color.r
-    path: MeterFill
-    classID: 21
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - time: 0
-        value: .669117689
-        inSlope: .661764622
-        outSlope: .661764622
+      - time: .25
+        value: 1
+        inSlope: 0
+        outSlope: 0
         tangentMode: 10
       - time: .5
         value: 1
-        inSlope: .661764622
-        outSlope: .661764622
+        inSlope: 0
+        outSlope: 0
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
-    attribute: _Color.b
-    path: MeterFill
-    classID: 21
+    attribute: m_Enabled
+    path: HUD_Meter_Icon_Slowdown/HUD_Meter_Border_Slowdown/HUD_Meter_Fill_Slowdown
+    classID: 131
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: .153276399
+        inSlope: 1.26557088
+        outSlope: 1.26557088
+        tangentMode: 10
+      - time: .25
+        value: .469669133
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: .5
+        value: .153276399
+        inSlope: -1.26557088
+        outSlope: -1.26557088
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_Color.r
+    path: HUD_Meter_Icon_Slowdown/HUD_Meter_Border_Slowdown/HUD_Meter_Fill_Slowdown
+    classID: 131
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: .332533568
+        inSlope: 1.01822889
+        outSlope: 1.01822889
+        tangentMode: 10
+      - time: .25
+        value: .58709079
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: .5
+        value: .332533568
+        inSlope: -1.01822889
+        outSlope: -1.01822889
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_Color.g
+    path: HUD_Meter_Icon_Slowdown/HUD_Meter_Border_Slowdown/HUD_Meter_Fill_Slowdown
+    classID: 131
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: .772058845
+        inSlope: .411764622
+        outSlope: .411764622
+        tangentMode: 10
+      - time: .25
+        value: .875
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: .5
+        value: .772058845
+        inSlope: -.411764622
+        outSlope: -.411764622
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_Color.b
+    path: HUD_Meter_Icon_Slowdown/HUD_Meter_Border_Slowdown/HUD_Meter_Fill_Slowdown
+    classID: 131
     script: {fileID: 0}
   m_EulerEditorCurves: []
   m_Events: []

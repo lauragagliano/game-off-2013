@@ -18,61 +18,76 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: .661764741
-        inSlope: .676470518
-        outSlope: .676470518
+        value: .5
+        inSlope: 2
+        outSlope: 2
         tangentMode: 10
-      - time: .5
+      - time: .25
         value: 1
-        inSlope: .676470518
-        outSlope: .676470518
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: .5
+        value: .5
+        inSlope: -2
+        outSlope: -2
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
-    attribute: _Color.r
-    path: MeterFill
-    classID: 21
+    attribute: m_Color.r
+    path: HUD_Meter_Icon_Laser/HUD_Meter_Border_Laser/HUD_Meter_Fill_Laser
+    classID: 131
     script: {fileID: 0}
   - curve:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: .0583910234
-        inSlope: 1.09890425
-        outSlope: 1.09890425
+        value: .0992647111
+        inSlope: 1.75000012
+        outSlope: 1.75000012
+        tangentMode: 10
+      - time: .25
+        value: .536764741
+        inSlope: 0
+        outSlope: 0
         tangentMode: 10
       - time: .5
-        value: .607843161
-        inSlope: 1.09890425
-        outSlope: 1.09890425
+        value: .0992647111
+        inSlope: -1.75000012
+        outSlope: -1.75000012
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
-    attribute: _Color.g
-    path: MeterFill
-    classID: 21
+    attribute: m_Color.g
+    path: HUD_Meter_Icon_Laser/HUD_Meter_Border_Laser/HUD_Meter_Fill_Laser
+    classID: 131
     script: {fileID: 0}
   - curve:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: .0583910234
-        inSlope: 1.09890425
-        outSlope: 1.09890425
+        value: .0992647111
+        inSlope: 1.75000012
+        outSlope: 1.75000012
+        tangentMode: 10
+      - time: .25
+        value: .536764741
+        inSlope: 0
+        outSlope: 0
         tangentMode: 10
       - time: .5
-        value: .607843161
-        inSlope: 1.09890425
-        outSlope: 1.09890425
+        value: .0992647111
+        inSlope: -1.75000012
+        outSlope: -1.75000012
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
-    attribute: _Color.b
-    path: MeterFill
-    classID: 21
+    attribute: m_Color.b
+    path: HUD_Meter_Icon_Laser/HUD_Meter_Border_Laser/HUD_Meter_Fill_Laser
+    classID: 131
     script: {fileID: 0}
   m_SampleRate: 60
-  m_WrapMode: 4
+  m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
@@ -96,58 +111,73 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: .661764741
-        inSlope: .676470518
-        outSlope: .676470518
+        value: .5
+        inSlope: 2
+        outSlope: 2
         tangentMode: 10
-      - time: .5
+      - time: .25
         value: 1
-        inSlope: .676470518
-        outSlope: .676470518
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: .5
+        value: .5
+        inSlope: -2
+        outSlope: -2
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
-    attribute: _Color.r
-    path: MeterFill
-    classID: 21
+    attribute: m_Color.r
+    path: HUD_Meter_Icon_Laser/HUD_Meter_Border_Laser/HUD_Meter_Fill_Laser
+    classID: 131
     script: {fileID: 0}
   - curve:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: .0583910234
-        inSlope: 1.09890425
-        outSlope: 1.09890425
+        value: .0992647111
+        inSlope: 1.75000012
+        outSlope: 1.75000012
+        tangentMode: 10
+      - time: .25
+        value: .536764741
+        inSlope: 0
+        outSlope: 0
         tangentMode: 10
       - time: .5
-        value: .607843161
-        inSlope: 1.09890425
-        outSlope: 1.09890425
+        value: .0992647111
+        inSlope: -1.75000012
+        outSlope: -1.75000012
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
-    attribute: _Color.g
-    path: MeterFill
-    classID: 21
+    attribute: m_Color.g
+    path: HUD_Meter_Icon_Laser/HUD_Meter_Border_Laser/HUD_Meter_Fill_Laser
+    classID: 131
     script: {fileID: 0}
   - curve:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: .0583910234
-        inSlope: 1.09890425
-        outSlope: 1.09890425
+        value: .0992647111
+        inSlope: 1.75000012
+        outSlope: 1.75000012
+        tangentMode: 10
+      - time: .25
+        value: .536764741
+        inSlope: 0
+        outSlope: 0
         tangentMode: 10
       - time: .5
-        value: .607843161
-        inSlope: 1.09890425
-        outSlope: 1.09890425
+        value: .0992647111
+        inSlope: -1.75000012
+        outSlope: -1.75000012
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
-    attribute: _Color.b
-    path: MeterFill
-    classID: 21
+    attribute: m_Color.b
+    path: HUD_Meter_Icon_Laser/HUD_Meter_Border_Laser/HUD_Meter_Fill_Laser
+    classID: 131
     script: {fileID: 0}
   m_EulerEditorCurves: []
   m_Events: []

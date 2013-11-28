@@ -18,61 +18,95 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: .221617326
-        inSlope: .822612762
-        outSlope: .822612762
+        value: .0992647111
+        inSlope: 1.90549314
+        outSlope: 1.90549314
+        tangentMode: 10
+      - time: .25
+        value: .575637996
+        inSlope: 0
+        outSlope: 0
         tangentMode: 10
       - time: .5
-        value: .632923722
-        inSlope: .822612762
-        outSlope: .822612762
+        value: .0992647111
+        inSlope: -1.90549314
+        outSlope: -1.90549314
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
-    attribute: _Color.r
-    path: MeterFill
-    classID: 21
+    attribute: m_Color.r
+    path: HUD_Meter_Icon_Shield/HUD_Meter_Border_Shield/HUD_Meter_Fill_Shield
+    classID: 131
     script: {fileID: 0}
   - curve:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: .573529422
-        inSlope: .852941155
-        outSlope: .852941155
+        value: .5
+        inSlope: 1.44117641
+        outSlope: 1.44117641
+        tangentMode: 10
+      - time: .25
+        value: .860294104
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: .5
+        value: .5
+        inSlope: -1.44117641
+        outSlope: -1.44117641
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_Color.g
+    path: HUD_Meter_Icon_Shield/HUD_Meter_Border_Shield/HUD_Meter_Fill_Shield
+    classID: 131
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: .102028377
+        inSlope: 1.90229106
+        outSlope: 1.90229106
+        tangentMode: 10
+      - time: .25
+        value: .577601135
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: .5
+        value: .102028377
+        inSlope: -1.90229106
+        outSlope: -1.90229106
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_Color.b
+    path: HUD_Meter_Icon_Shield/HUD_Meter_Border_Shield/HUD_Meter_Fill_Shield
+    classID: 131
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
         tangentMode: 10
       - time: .5
         value: 1
-        inSlope: .852941155
-        outSlope: .852941155
+        inSlope: 0
+        outSlope: 0
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
-    attribute: _Color.g
-    path: MeterFill
-    classID: 21
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - time: 0
-        value: .109645329
-        inSlope: .808160365
-        outSlope: .808160365
-        tangentMode: 10
-      - time: .5
-        value: .513725519
-        inSlope: .808160365
-        outSlope: .808160365
-        tangentMode: 10
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-    attribute: _Color.b
-    path: MeterFill
-    classID: 21
+    attribute: m_Color.a
+    path: HUD_Meter_Icon_Shield/HUD_Meter_Border_Shield/HUD_Meter_Fill_Shield
+    classID: 131
     script: {fileID: 0}
   m_SampleRate: 60
-  m_WrapMode: 4
+  m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
@@ -96,58 +130,92 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: .221617326
-        inSlope: .822612762
-        outSlope: .822612762
+        value: .0992647111
+        inSlope: 1.90549314
+        outSlope: 1.90549314
+        tangentMode: 10
+      - time: .25
+        value: .575637996
+        inSlope: 0
+        outSlope: 0
         tangentMode: 10
       - time: .5
-        value: .632923722
-        inSlope: .822612762
-        outSlope: .822612762
+        value: .0992647111
+        inSlope: -1.90549314
+        outSlope: -1.90549314
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
-    attribute: _Color.r
-    path: MeterFill
-    classID: 21
+    attribute: m_Color.r
+    path: HUD_Meter_Icon_Shield/HUD_Meter_Border_Shield/HUD_Meter_Fill_Shield
+    classID: 131
     script: {fileID: 0}
   - curve:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: .573529422
-        inSlope: .852941155
-        outSlope: .852941155
+        value: .5
+        inSlope: 1.44117641
+        outSlope: 1.44117641
+        tangentMode: 10
+      - time: .25
+        value: .860294104
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: .5
+        value: .5
+        inSlope: -1.44117641
+        outSlope: -1.44117641
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_Color.g
+    path: HUD_Meter_Icon_Shield/HUD_Meter_Border_Shield/HUD_Meter_Fill_Shield
+    classID: 131
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: .102028377
+        inSlope: 1.90229106
+        outSlope: 1.90229106
+        tangentMode: 10
+      - time: .25
+        value: .577601135
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: .5
+        value: .102028377
+        inSlope: -1.90229106
+        outSlope: -1.90229106
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_Color.b
+    path: HUD_Meter_Icon_Shield/HUD_Meter_Border_Shield/HUD_Meter_Fill_Shield
+    classID: 131
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
         tangentMode: 10
       - time: .5
         value: 1
-        inSlope: .852941155
-        outSlope: .852941155
+        inSlope: 0
+        outSlope: 0
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
-    attribute: _Color.g
-    path: MeterFill
-    classID: 21
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - time: 0
-        value: .109645329
-        inSlope: .808160365
-        outSlope: .808160365
-        tangentMode: 10
-      - time: .5
-        value: .513725519
-        inSlope: .808160365
-        outSlope: .808160365
-        tangentMode: 10
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-    attribute: _Color.b
-    path: MeterFill
-    classID: 21
+    attribute: m_Color.a
+    path: HUD_Meter_Icon_Shield/HUD_Meter_Border_Shield/HUD_Meter_Fill_Shield
+    classID: 131
     script: {fileID: 0}
   m_EulerEditorCurves: []
   m_Events: []

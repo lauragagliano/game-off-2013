@@ -4,7 +4,7 @@ using System.Collections;
 public class FX_BoostLine : MonoBehaviour
 {
 	int vertexCount = 0;
-	int maxVerts = 25;
+	int maxVerts = 50;
 	LineRenderer lineRenderer;
 	Vector3[] vertexSet;
 	bool isEmitting;
@@ -30,7 +30,7 @@ public class FX_BoostLine : MonoBehaviour
 	 */
 	void ReduceMaxVerts ()
 	{
-		maxVerts = Mathf.Max (maxVerts -1, 0);
+		maxVerts = Mathf.Max (maxVerts -3, 0);
 		// Notify parent we are done emitting. This requires this component comes from an FX_Boost.
 		if(maxVerts == 0) {
 			transform.parent.gameObject.GetComponent<FX_Boost> ().OnStoppedEmitting ();

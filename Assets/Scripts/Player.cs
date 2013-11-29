@@ -795,6 +795,7 @@ public class Player : MonoBehaviour
 		pickups = new List<GameObject> ();
 		
 		
+		inventory.AddItem(ItemNames.BOOST);
 		// Give player their upgrades
 		// Charges Faster Upgrades
 		if (inventory.HasItem (ItemNames.BLUE_FILLS_FASTER)) {

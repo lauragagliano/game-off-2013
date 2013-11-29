@@ -22,6 +22,7 @@ public class GameManager : Singleton<GameManager>
 	const int HARD_THRESHOLD = 2000;
 	float timeDeathDelayStarted;
 	float deathDelayTime = 1.0f;
+	public bool didPlayerReviveThisRun {get; private set;}
 	
 	// Prefabs used for generating new sections
 	public GameObject redCrystalPrefab;
@@ -219,6 +220,7 @@ public class GameManager : Singleton<GameManager>
 		numPickupsPassed = 0;
 		numPointsThisRound = 0;
 		difficulty = Difficulty.Easy;
+		didPlayerReviveThisRun = false;
 		
 		player.Spawn (playerSpawn.position);
 		treadmill.ResetTreadmill ();
@@ -229,6 +231,7 @@ public class GameManager : Singleton<GameManager>
 	 */
 	public void RevivePlayer ()
 	{
+		didPlayerReviveThisRun = true;
 		player.Revive (playerSpawn.position);
 		GoToReviving ();
 	}

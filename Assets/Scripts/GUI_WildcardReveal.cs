@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class GUI_WildcardReveal : MonoBehaviour
 {
@@ -196,21 +197,40 @@ public class GUI_WildcardReveal : MonoBehaviour
 	void AssignItems ()
 	{
 		int numItems = transform.childCount;
-		Item[] itemsToGiveOut = new Item[numItems];
+		List<Item> itemsToGiveOut = new List<Item> ();
 		
 		// The first item has a high chance of being a headstart or revive
-		float rand = Random.Range (0, 100.0f);
-		if (rand > 66.6) {
-			itemsToGiveOut [0] = boost;
-		} else if (rand > 33.3) {
-			itemsToGiveOut [0] = revive;
-		} else {
-			itemsToGiveOut [0] = GetRandomUnlimitedItem ();
-		}
 		
-		int i = 1;
-		while (i < itemsToGiveOut.Length) {
-			itemsToGiveOut [i] = GetRandomUnlimitedItem ();
+		Player player = GameManager.Instance.player;
+		Inventory playerInventory = player.GetComponent<Inventory> ();
+		bool isReviveAllowed = !GameManager.Instance.didPlayerReviveThisRun;
+		bool isBoostAllowed = !playerInventory.HasItem(ItemNames.BOOST);
+		
+		float MAX_CHANCE = 100.0f;
+		int i = 0;
+		while(i < numItems) 
+		{
+			float rand = Random.Range (0, MAX_CHANCE);
+			float CHANCE_FOR_REVIVE = isReviveAllowed ? 10.0f : 0.0f;
+			float CHANCE_FOR_BOOST = isBoostAllowed ? 20.0f : 0.0f;
+			Debug.Log ("Giving out item1 -----");
+			Debug.Log ("Chance for revive: " + CHANCE_FOR_REVIVE);
+			Debug.Log ("Chance for boost: " + CHANCE_FOR_BOOST);
+			
+			Item itemtoGive;
+			if (rand > (MAX_CHANCE - CHANCE_FOR_REVIVE)) {
+				itemtoGive = revive;
+				// Only allow one revive
+				isReviveAllowed = false;
+			} else if (rand > (MAX_CHANCE- (CHANCE_FOR_REVIVE + CHANCE_FOR_BOOST))) {
+				itemtoGive = boost;
+				// Only allow one boost
+				isBoostAllowed = false;
+			} else {
+				itemtoGive = GetRandomUnlimitedItem ();
+			}
+			Debug.Log ("Giving Out: " + itemtoGive.itemName);
+			itemsToGiveOut.Add(itemtoGive);
 			i++;
 		}
 		
@@ -232,7 +252,6 @@ public class GUI_WildcardReveal : MonoBehaviour
 		
 		int MONEY_AMOUNT = 50;
 		int BIG_MONEY_AMOUNT = 150;
-		
 		
 		// Iterate through the items and perform their awarding script
 		foreach (Transform child in transform) {
@@ -262,8 +281,10 @@ public class GUI_WildcardReveal : MonoBehaviour
 	Item GetRandomUnlimitedItem ()
 	{
 		Item randomItem;
-		float rand = Random.Range (0, 100.0f);
-		if (rand > 66.6) {
+		float MAX_CHANCE = 100.0f;
+		float rand = Random.Range (0, MAX_CHANCE);
+		float CHANCE_FOR_BIG_MONEY = 20;
+		if (rand > MAX_CHANCE - CHANCE_FOR_BIG_MONEY) {
 			randomItem = bigMoney;
 		} else {
 			randomItem = money;

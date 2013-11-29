@@ -82,13 +82,13 @@ public class Treadmill : MonoBehaviour
 			AddDistanceTraveled (distance);
 			// Check if our last section is on screen. If so, spawn another.
 			if (GetLastSectionInPlay () == null) {
-				if (GameManager.Instance.SAVE_TUTORIAL_COMPLETE) {
+				if (GameManager.Instance.SAVE_TUTORIAL_COMPLETE || GameManager.Instance.DEBUG_SKIP_TUTORIAL) {
 					SpawnNextSection ();
 				} else {
 					SpawnNextLesson ();
 				}
 			} else if (isSectionOnScreen (GetLastSectionInPlay ())) {
-				if (GameManager.Instance.SAVE_TUTORIAL_COMPLETE) {
+				if (GameManager.Instance.SAVE_TUTORIAL_COMPLETE || GameManager.Instance.DEBUG_SKIP_TUTORIAL) {
 					SpawnNextSection ();
 				} else {
 					SpawnNextLesson ();

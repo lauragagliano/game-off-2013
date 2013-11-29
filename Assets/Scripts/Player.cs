@@ -291,9 +291,6 @@ public class Player : MonoBehaviour
 	void SetActivePower (Power activePower, Power inactivePower1, Power inactivePower2)
 	{
 		activePower.ActivatePower ();
-		// Add this back if we want powers to stomp eachother
-//		DeactivatePowerIfActive (inactivePower1);
-//		DeactivatePowerIfActive (inactivePower2);
 	}
 	
 	/*

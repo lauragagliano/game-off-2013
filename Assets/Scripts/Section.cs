@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Section : MonoBehaviour
 {
@@ -11,9 +12,9 @@ public class Section : MonoBehaviour
 	public byte entranceBitmap;
 	public byte exitBitmap;
 	
-	GameObject redCrystalPrefab;
-	GameObject greenCrystalPrefab;
-	GameObject blueCrystalPrefab;
+	public GameObject redCrystalPrefab;
+	public GameObject greenCrystalPrefab;
+	public GameObject blueCrystalPrefab;
 	GameObject blockPrefab;
 	GameObject wildcardPrefab;
 
@@ -49,35 +50,19 @@ public class Section : MonoBehaviour
 		// Move our prefabs now that they've been created
 		tempPrefabHolder.transform.parent = transform;
 		
-		//TODO Refactor this to be more clear and reusable (and not so INCORRECT!)
-		GameObject randomCrystalForPickupA = redCrystalPrefab;
-		GameObject randomCrystalForPickupB = greenCrystalPrefab;
-		GameObject randomCrystalForPickupC = blueCrystalPrefab;
-		int colorId = Random.Range (0,3);
-		if (colorId == 0) {
-			randomCrystalForPickupA = redCrystalPrefab;
-			randomCrystalForPickupB = greenCrystalPrefab;
-			randomCrystalForPickupC = blueCrystalPrefab;
-		} else if (colorId == 1) {
-			randomCrystalForPickupA = blueCrystalPrefab;
-			randomCrystalForPickupB = redCrystalPrefab;
-			randomCrystalForPickupC = greenCrystalPrefab;
-		} else if (colorId == 2) {
-			randomCrystalForPickupA = greenCrystalPrefab;
-			randomCrystalForPickupB = redCrystalPrefab;
-			randomCrystalForPickupC = blueCrystalPrefab;
-		} else if (colorId == 3) {
-			randomCrystalForPickupA = blueCrystalPrefab;
-			randomCrystalForPickupB = redCrystalPrefab;
-			randomCrystalForPickupC = greenCrystalPrefab;
-		}
+		// Shuffle the three crystal prefabs
+		List<GameObject> threeCrystals = new List<GameObject> {redCrystalPrefab, greenCrystalPrefab, blueCrystalPrefab};
+		RBRandom.Shuffle<GameObject> (threeCrystals);
+		GameObject randomCrystalForPickupA = threeCrystals[0];
+		GameObject randomCrystalForPickupB = threeCrystals[1];
+		GameObject randomCrystalForPickupC = threeCrystals[2];
+
 		foreach (Transform child in transform) {
 			// Replace placeholders with BlackBlock prefab
 			if (child.CompareTag (Tags.BLOCK)) {
 				InstantiatePrefabAtPlaceholder (blockPrefab, child, tempPrefabHolder.transform);
 			}
 			// Replace pickups with Pickup prefab.
-			//TODO Serious FPS slowdown when pickups are involved.
 			else if (child.CompareTag (Tags.PICKUP_GROUP_A)) {
 				InstantiatePrefabAtPlaceholder (randomCrystalForPickupA, child, tempPrefabHolder.transform);
 			} else if (child.CompareTag (Tags.PICKUP_GROUP_B)) {
@@ -101,7 +86,7 @@ public class Section : MonoBehaviour
 		}
 		GameManager.Instance.numPickupsPassed += numberOfPickups;
 	}
-	
+
 	/*
 	 * Create an instance of a prefab in resources at the same location as the placeholder. Also,
 	 * parent the prefab to any specified Transform. Then finally, kill the prefab.
@@ -114,7 +99,7 @@ public class Section : MonoBehaviour
 		Destroy (placeholder.gameObject);
 		return clonedPrefab;
 	}
-	
+
 	/*
 	 * Ensure our pickup count is set correctly. This should be called in the
 	 * Editor so that we can make calculations against prefabs before instantiating them.

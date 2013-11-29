@@ -37,7 +37,7 @@ public class GameManager : Singleton<GameManager>
 	
 	public bool DEBUG_MODE = false;
 	public bool DEBUG_SKIP_TUTORIAL = false;
-	
+
 	// TODO make this private when we don't need to show difficulty on screen
 	public enum Difficulty
 	{

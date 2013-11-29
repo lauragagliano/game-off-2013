@@ -13,7 +13,9 @@ public class ObjectNames
 	public static string BACK_EDGE = "BackEdge";
 	public static string FRONT_EDGE = "FrontEdge";
 	public static string BLOCK_PREFAB = "BlackBlock";
-	public static string CRYSTAL_PREFAB = "CrystalPickup";
+	public static string RED_CRYSTAL_PREFAB = "RedCrystalPickup";
+	public static string GREEN_CRYSTAL_PREFAB = "GreenCrystalPickup";
+	public static string BLUE_CRYSTAL_PREFAB = "BlueCrystalPickup";
 	public static string EMPTY_SECTION = "EmptySection";
 	public static string PLAYER_SPAWN = "PlayerSpawn";
 	public static string STORE = "Store";

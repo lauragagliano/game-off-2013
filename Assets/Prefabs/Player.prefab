@@ -1027,6 +1027,7 @@ MonoBehaviour:
   laserSound: {fileID: 8300000, guid: 653b9d604a9a242d9be6e1e4a5f1380a, type: 3}
   boostFXPrefab: {fileID: 100000, guid: 7c09f659f187d4c0fb4b2b49a59a93dd, type: 2}
   laserBeamFX: {fileID: 100000, guid: 7480f0444bc4b4c3394ed8917da1619a, type: 2}
+  wildcardFX: {fileID: 100004, guid: d706a5207d2244924b151c213d3e91a4, type: 2}
   perceivedVelocity: {x: 0, y: 0, z: 0}
 --- !u!114 &11400012
 MonoBehaviour:

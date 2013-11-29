@@ -2915,6 +2915,9 @@ MonoBehaviour:
   exitOpenings: 0000010100
   entranceBitmap: 14
   exitBitmap: 6
+  redCrystalPrefab: {fileID: 0}
+  greenCrystalPrefab: {fileID: 0}
+  blueCrystalPrefab: {fileID: 0}
 --- !u!114 &11400090
 MonoBehaviour:
   m_ObjectHideFlags: 1

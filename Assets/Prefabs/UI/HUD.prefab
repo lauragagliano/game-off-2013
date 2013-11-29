@@ -984,8 +984,8 @@ MonoBehaviour:
   redButtonStyle:
     m_Name: 
     m_Normal:
-      m_Background: {fileID: 2800000, guid: 795ef65163d0349a2bff0531d05f961e, type: 3}
-      m_TextColor: {r: 1, g: 1, b: 1, a: 1}
+      m_Background: {fileID: 2800000, guid: c049ee972536d4bcdbc84debb897c329, type: 3}
+      m_TextColor: {r: .678431392, g: .678431392, b: .678431392, a: 1}
     m_Hover:
       m_Background: {fileID: 2800000, guid: c049ee972536d4bcdbc84debb897c329, type: 3}
       m_TextColor: {r: .676470578, g: .676470578, b: .676470578, a: 1}
@@ -1161,8 +1161,8 @@ MonoBehaviour:
   greyButtonStyle:
     m_Name: 
     m_Normal:
-      m_Background: {fileID: 2800000, guid: 3f9982cffb2904d98bdc7445cf68b990, type: 3}
-      m_TextColor: {r: .742647052, g: .742647052, b: .742647052, a: 1}
+      m_Background: {fileID: 2800000, guid: ba3e097e4cf3e4e3e812640851f2ef51, type: 3}
+      m_TextColor: {r: .631372571, g: .631372571, b: .631372571, a: 1}
     m_Hover:
       m_Background: {fileID: 2800000, guid: ba3e097e4cf3e4e3e812640851f2ef51, type: 3}
       m_TextColor: {r: .632352948, g: .632352948, b: .632352948, a: 1}

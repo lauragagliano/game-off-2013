@@ -12,6 +12,11 @@ public class Section : MonoBehaviour
 	public byte exitBitmap;
 	
 	GameObject tempPrefabHolder;
+	
+	GameObject crystalPrefab;
+	GameObject blockPrefab;
+	GameObject wildcardPrefab;
+	
 	Treadmill treadmill;
 	
 	void Awake ()
@@ -19,6 +24,18 @@ public class Section : MonoBehaviour
 		// Start by moving the new Section onto the Treadmill (as a child of the object)
 		treadmill = GameObject.Find(ObjectNames.TREADMILL).GetComponent<Treadmill> ();
 		transform.parent = treadmill.transform;
+		
+		LoadPrefabs ();
+	}
+	
+	/*
+	 * Loads all the prefabs that Sections can spawn.
+	 */
+	void LoadPrefabs ()
+	{
+		crystalPrefab = (GameObject) Resources.Load(ObjectNames.CRYSTAL_PREFAB, typeof(GameObject));
+		blockPrefab = (GameObject) Resources.Load(ObjectNames.BLOCK_PREFAB, typeof(GameObject));
+		wildcardPrefab = (GameObject) Resources.Load(ObjectNames.WILDCARD_PREFAB, typeof(GameObject));
 	}
 	
 	void Start ()
@@ -54,7 +71,7 @@ public class Section : MonoBehaviour
 		foreach (Transform child in transform) {
 			// Replace placeholders with BlackBlock prefab
 			if (child.CompareTag (Tags.BLOCK)) {
-				InstantiatePrefabAtPlaceholder (ObjectNames.BLOCK_PREFAB, child, tempPrefabHolder.transform);
+				InstantiatePrefabAtPlaceholder (blockPrefab, child, tempPrefabHolder.transform);
 			}
 			// Replace pickups with Pickup prefab.
 			//TODO Serious FPS slowdown when pickups are involved.
@@ -72,7 +89,7 @@ public class Section : MonoBehaviour
 				InstantiateColoredPickup (child, ColorWheel.blue);
 			} else if (child.CompareTag (Tags.WILDCARD)) {
 				if (treadmill.NeedsWildcard ()) {
-					InstantiatePrefabAtPlaceholder (ObjectNames.WILDCARD_PREFAB, child, tempPrefabHolder.transform);
+					InstantiatePrefabAtPlaceholder (wildcardPrefab, child, tempPrefabHolder.transform);
 					treadmill.OnWildcardSpawn ();
 				} else {
 					Destroy (child.gameObject);
@@ -86,27 +103,13 @@ public class Section : MonoBehaviour
 	 * Create an instance of a prefab in resources at the same location as the placeholder. Also,
 	 * parent the prefab to any specified Transform. Then finally, kill the prefab.
 	 */
-	GameObject InstantiatePrefabAtPlaceholder (string resourceName, Transform placeholder, Transform prefabParent)
+	GameObject InstantiatePrefabAtPlaceholder (GameObject prefab, Transform placeholder, Transform prefabParent)
 	{
-		GameObject prefab = (GameObject)Instantiate(Resources.Load(resourceName, typeof(GameObject)), 
-			placeholder.position, Quaternion.identity);
-		
-		Vector3 PICKUP_Y_OFFSET = new Vector3 (0.0f, 1.5f, 0.0f);
-		Vector3 BLOCK_Y_OFFSET = new Vector3 (0.0f, 1.0f, 0.0f);
-		Vector3 prefabYOffset;
-		if(prefab.CompareTag(Tags.PICKUP)) {
-			prefabYOffset = PICKUP_Y_OFFSET;
-		}
-		else if (prefab.CompareTag(Tags.WILDCARD)) {
-			prefabYOffset = PICKUP_Y_OFFSET;
-		}
-		else {
-			prefabYOffset = BLOCK_Y_OFFSET;
-		}
-		prefab.transform.position = prefab.transform.position + prefabYOffset;
-		prefab.transform.parent = prefabParent;
+		GameObject clonedPrefab = (GameObject)Instantiate(prefab, placeholder.position, Quaternion.identity);
+
+		clonedPrefab.transform.parent = prefabParent;
 		Destroy (placeholder.gameObject);
-		return prefab;
+		return clonedPrefab;
 	}
 	
 	/*
@@ -114,7 +117,7 @@ public class Section : MonoBehaviour
 	 */
 	void InstantiateColoredPickup (Transform location, ColorWheel pickupColor)
 	{
-		GameObject pickup = InstantiatePrefabAtPlaceholder (ObjectNames.CRYSTAL_PREFAB, 
+		GameObject pickup = InstantiatePrefabAtPlaceholder (crystalPrefab, 
 			location, tempPrefabHolder.transform);
 		pickup.GetComponent<RGB> ().color = pickupColor;
 		pickup.GetComponent<RGB> ().Refresh ();

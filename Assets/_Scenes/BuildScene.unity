@@ -7167,6 +7167,10 @@ Prefab:
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 101832, guid: f50648e2669324f18ae9b9dc659ac426, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f50648e2669324f18ae9b9dc659ac426, type: 2}
   m_RootGameObject: {fileID: 1165000494}
@@ -9193,6 +9197,7 @@ MonoBehaviour:
   - {fileID: 100074, guid: 7b0bb1c098ac7194d8018ca2d3354318, type: 2}
   - {fileID: 100000, guid: e91e3dec08ec46f4d9389fc656eb494f, type: 2}
   - {fileID: 100048, guid: 34b522264fd3c664d9aeb4f8ce5640f4, type: 2}
+  - {fileID: 100000, guid: 2c0cbd849b4564d709f5b7290aba612a, type: 2}
   lerping: 0
 --- !u!23 &1165000497
 Renderer:
@@ -12652,6 +12657,7 @@ MonoBehaviour:
   treadmill: {fileID: 0}
   WildcardRevealGO: {fileID: 0}
   DEBUG_MODE: 0
+  DEBUG_SKIP_TUTORIAL: 0
 --- !u!82 &1651423744
 AudioSource:
   m_ObjectHideFlags: 0

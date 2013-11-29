@@ -4,7 +4,7 @@
 QualitySettings:
   m_ObjectHideFlags: 0
   serializedVersion: 5
-  m_CurrentQuality: 3
+  m_CurrentQuality: 6
   m_QualitySettings:
   - serializedVersion: 2
     name: Fastest
@@ -120,4 +120,28 @@ QualitySettings:
     maximumLODLevel: 0
     particleRaycastBudget: 4096
     excludedTargetPlatforms: []
-  m_PerPlatformDefaultQuality: {}
+  - serializedVersion: 2
+    name: GameOff
+    pixelLightCount: 0
+    shadows: 1
+    shadowResolution: 2
+    shadowProjection: 1
+    shadowCascades: 2
+    shadowDistance: 70
+    blendWeights: 4
+    textureQuality: 0
+    anisotropicTextures: 1
+    antiAliasing: 2
+    softParticles: 0
+    softVegetation: 1
+    vSyncCount: 0
+    lodBias: 2
+    maximumLODLevel: 0
+    particleRaycastBudget: 4096
+    excludedTargetPlatforms: []
+  m_PerPlatformDefaultQuality:
+    Android: 0
+    BlackBerry: 0
+    Standalone: 0
+    Web: 6
+    iPhone: 0

@@ -10,14 +10,14 @@ PlayerSettings:
   targetGlesGraphics: 1
   targetResolution: 0
   accelerometerFrequency: 60
-  companyName: DefaultCompany
+  companyName: RedBlueStudios
   productName: GameOff2013
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   defaultScreenWidth: 1024
   defaultScreenHeight: 768
-  defaultScreenWidthWeb: 500
-  defaultScreenHeightWeb: 800
+  defaultScreenWidthWeb: 400
+  defaultScreenHeightWeb: 640
   m_RenderingPath: 1
   m_ActiveColorSpace: 0
   m_MTRendering: 1

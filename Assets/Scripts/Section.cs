@@ -12,6 +12,13 @@ public class Section : MonoBehaviour
 	public byte exitBitmap;
 	
 	GameObject tempPrefabHolder;
+	
+	GameObject redCrystalPrefab;
+	GameObject greenCrystalPrefab;
+	GameObject blueCrystalPrefab;
+	GameObject blockPrefab;
+	GameObject wildcardPrefab;
+	
 	Treadmill treadmill;
 	
 	void Awake ()
@@ -19,6 +26,20 @@ public class Section : MonoBehaviour
 		// Start by moving the new Section onto the Treadmill (as a child of the object)
 		treadmill = GameObject.Find(ObjectNames.TREADMILL).GetComponent<Treadmill> ();
 		transform.parent = treadmill.transform;
+		
+		LoadPrefabs ();
+	}
+	
+	/*
+	 * Loads all the prefabs that Sections can spawn.
+	 */
+	void LoadPrefabs ()
+	{
+		redCrystalPrefab = (GameObject) Resources.Load(ObjectNames.RED_CRYSTAL_PREFAB, typeof(GameObject));
+		greenCrystalPrefab = (GameObject) Resources.Load(ObjectNames.GREEN_CRYSTAL_PREFAB, typeof(GameObject));
+		blueCrystalPrefab = (GameObject) Resources.Load(ObjectNames.BLUE_CRYSTAL_PREFAB, typeof(GameObject));
+		blockPrefab = (GameObject) Resources.Load(ObjectNames.BLOCK_PREFAB, typeof(GameObject));
+		wildcardPrefab = (GameObject) Resources.Load(ObjectNames.WILDCARD_PREFAB, typeof(GameObject));
 	}
 	
 	void Start ()
@@ -30,49 +51,49 @@ public class Section : MonoBehaviour
 		tempPrefabHolder.transform.parent = transform;
 		
 		//TODO Refactor this to be more clear and reusable (and not so INCORRECT!)
-		ColorWheel randomColorforPickupA = ColorWheel.green;
-		ColorWheel randomColorforPickupB = ColorWheel.red;
-		ColorWheel randomColorforPickupC = ColorWheel.green;
+		GameObject randomCrystalForPickupA = redCrystalPrefab;
+		GameObject randomCrystalForPickupB = greenCrystalPrefab;
+		GameObject randomCrystalForPickupC = blueCrystalPrefab;
 		int colorId = Random.Range (0,3);
 		if (colorId == 0) {
-			randomColorforPickupA = ColorWheel.red;
-			randomColorforPickupB = ColorWheel.green;
-			randomColorforPickupC = ColorWheel.blue;
+			randomCrystalForPickupA = redCrystalPrefab;
+			randomCrystalForPickupB = greenCrystalPrefab;
+			randomCrystalForPickupC = blueCrystalPrefab;
 		} else if (colorId == 1) {
-			randomColorforPickupA = ColorWheel.blue;
-			randomColorforPickupB = ColorWheel.red;
-			randomColorforPickupC = ColorWheel.green;
+			randomCrystalForPickupA = blueCrystalPrefab;
+			randomCrystalForPickupB = redCrystalPrefab;
+			randomCrystalForPickupC = greenCrystalPrefab;
 		} else if (colorId == 2) {
-			randomColorforPickupA = ColorWheel.green;
-			randomColorforPickupB = ColorWheel.red;
-			randomColorforPickupC = ColorWheel.blue;
+			randomCrystalForPickupA = greenCrystalPrefab;
+			randomCrystalForPickupB = redCrystalPrefab;
+			randomCrystalForPickupC = blueCrystalPrefab;
 		} else if (colorId == 3) {
-			randomColorforPickupA = ColorWheel.blue;
-			randomColorforPickupB = ColorWheel.red;
-			randomColorforPickupC = ColorWheel.green;
+			randomCrystalForPickupA = blueCrystalPrefab;
+			randomCrystalForPickupB = redCrystalPrefab;
+			randomCrystalForPickupC = greenCrystalPrefab;
 		}
 		foreach (Transform child in transform) {
 			// Replace placeholders with BlackBlock prefab
 			if (child.CompareTag (Tags.BLOCK)) {
-				InstantiatePrefabAtPlaceholder (ObjectNames.BLOCK_PREFAB, child, tempPrefabHolder.transform);
+				InstantiatePrefabAtPlaceholder (blockPrefab, child, tempPrefabHolder.transform);
 			}
 			// Replace pickups with Pickup prefab.
 			//TODO Serious FPS slowdown when pickups are involved.
 			else if (child.CompareTag (Tags.PICKUP_GROUP_A)) {
-				InstantiateColoredPickup (child, randomColorforPickupA);
+				InstantiatePrefabAtPlaceholder (randomCrystalForPickupA, child, tempPrefabHolder.transform);
 			} else if (child.CompareTag (Tags.PICKUP_GROUP_B)) {
-				InstantiateColoredPickup (child, randomColorforPickupB);
+				InstantiatePrefabAtPlaceholder (randomCrystalForPickupB, child, tempPrefabHolder.transform);
 			} else if (child.CompareTag (Tags.PICKUP_GROUP_C)) {
-				InstantiateColoredPickup (child, randomColorforPickupC);
+				InstantiatePrefabAtPlaceholder (randomCrystalForPickupC, child, tempPrefabHolder.transform);
 			} else if (child.CompareTag (Tags.RED_PICKUP)) {
-				InstantiateColoredPickup (child, ColorWheel.red);
+				InstantiatePrefabAtPlaceholder (redCrystalPrefab, child, tempPrefabHolder.transform);
 			} else if (child.CompareTag (Tags.GREEN_PICKUP)) {
-				InstantiateColoredPickup (child, ColorWheel.green);
+				InstantiatePrefabAtPlaceholder (greenCrystalPrefab, child, tempPrefabHolder.transform);
 			} else if (child.CompareTag (Tags.BLUE_PICKUP)) {
-				InstantiateColoredPickup (child, ColorWheel.blue);
+				InstantiatePrefabAtPlaceholder (blueCrystalPrefab, child, tempPrefabHolder.transform);
 			} else if (child.CompareTag (Tags.WILDCARD)) {
 				if (treadmill.NeedsWildcard ()) {
-					InstantiatePrefabAtPlaceholder (ObjectNames.WILDCARD_PREFAB, child, tempPrefabHolder.transform);
+					InstantiatePrefabAtPlaceholder (wildcardPrefab, child, tempPrefabHolder.transform);
 					treadmill.OnWildcardSpawn ();
 				} else {
 					Destroy (child.gameObject);
@@ -86,38 +107,13 @@ public class Section : MonoBehaviour
 	 * Create an instance of a prefab in resources at the same location as the placeholder. Also,
 	 * parent the prefab to any specified Transform. Then finally, kill the prefab.
 	 */
-	GameObject InstantiatePrefabAtPlaceholder (string resourceName, Transform placeholder, Transform prefabParent)
+	GameObject InstantiatePrefabAtPlaceholder (GameObject prefab, Transform placeholder, Transform prefabParent)
 	{
-		GameObject prefab = (GameObject)Instantiate(Resources.Load(resourceName, typeof(GameObject)), 
-			placeholder.position, Quaternion.identity);
-		
-		Vector3 PICKUP_Y_OFFSET = new Vector3 (0.0f, 1.5f, 0.0f);
-		Vector3 BLOCK_Y_OFFSET = new Vector3 (0.0f, 1.0f, 0.0f);
-		Vector3 prefabYOffset;
-		if(prefab.CompareTag(Tags.PICKUP)) {
-			prefabYOffset = PICKUP_Y_OFFSET;
-		}
-		else if (prefab.CompareTag(Tags.WILDCARD)) {
-			prefabYOffset = PICKUP_Y_OFFSET;
-		}
-		else {
-			prefabYOffset = BLOCK_Y_OFFSET;
-		}
-		prefab.transform.position = prefab.transform.position + prefabYOffset;
-		prefab.transform.parent = prefabParent;
+		GameObject clonedPrefab = (GameObject)Instantiate(prefab, placeholder.position, Quaternion.identity);
+
+		clonedPrefab.transform.parent = prefabParent;
 		Destroy (placeholder.gameObject);
-		return prefab;
-	}
-	
-	/*
-	 * Helper method to spawn pickups of a given color at the provided location.
-	 */
-	void InstantiateColoredPickup (Transform location, ColorWheel pickupColor)
-	{
-		GameObject pickup = InstantiatePrefabAtPlaceholder (ObjectNames.CRYSTAL_PREFAB, 
-			location, tempPrefabHolder.transform);
-		pickup.GetComponent<RGB> ().color = pickupColor;
-		pickup.GetComponent<RGB> ().Refresh ();
+		return clonedPrefab;
 	}
 	
 	/*

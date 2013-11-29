@@ -76,6 +76,8 @@ public class GameManager : Singleton<GameManager>
 		GameObject foundObject = GameObject.Find (ObjectNames.PLAYER_SPAWN);
 		if (foundObject != null) {
 			playerSpawn = (Transform)foundObject.transform;
+			// Move spawnpoint to the player's starting point.
+			playerSpawn.transform.position = player.transform.position;
 		}
 		
 		// Link Treadmill

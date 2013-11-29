@@ -23,7 +23,7 @@ public class Section : MonoBehaviour
 	void Awake ()
 	{
 		// Start by moving the new Section onto the Treadmill (as a child of the object)
-		treadmill = GameObject.Find(ObjectNames.TREADMILL).GetComponent<Treadmill> ();
+		treadmill = GameManager.Instance.treadmill;
 		transform.parent = treadmill.transform;
 		ReferencePrefabs ();
 	}
@@ -95,7 +95,7 @@ public class Section : MonoBehaviour
 					InstantiatePrefabAtPlaceholder (wildcardPrefab, child, tempPrefabHolder.transform);
 					treadmill.OnWildcardSpawn ();
 				} else {
-					Destroy (child.gameObject);
+					child.gameObject.SetActive (false);
 				}
 			}
 		}

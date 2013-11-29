@@ -12416,7 +12416,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: 8a8261b64285ea64b92d98d732c090fe, type: 2}
       propertyPath: DEBUG_SKIP_TUTORIAL
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8a8261b64285ea64b92d98d732c090fe, type: 2}
@@ -12667,7 +12667,7 @@ MonoBehaviour:
   treadmill: {fileID: 0}
   WildcardRevealGO: {fileID: 0}
   DEBUG_MODE: 0
-  DEBUG_SKIP_TUTORIAL: 1
+  DEBUG_SKIP_TUTORIAL: 0
 --- !u!82 &1651423744
 AudioSource:
   m_ObjectHideFlags: 0

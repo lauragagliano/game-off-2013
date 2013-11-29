@@ -13,8 +13,9 @@ public class Treadmill : MonoBehaviour
 	const int MAX_FREEBIE_DISTANCE = 500;
 	int nextFreebieMarker;
 	public const int HARD_THRESHOLD = 1;
-	const int MIN_CHALLENGE_DISTANCE = 250;
-	const int MAX_CHALLENGE_DISTANCE = 750;
+	const int MIN_CHALLENGE_DISTANCE = 500;
+	const int MAX_CHALLENGE_DISTANCE = 900;
+	bool isInChallengeSection;
 	int nextChallengeMarker;
 	int MAX_WILDCARDS = 9;
 	
@@ -298,7 +299,13 @@ public class Treadmill : MonoBehaviour
 	 * now as stale, to be destroyed next.
 	 */
 	void SpawnNextSection ()
-	{
+	{	
+		// Reset challenge marker when we finish with a challenge section.
+		if(isInChallengeSection) {
+			nextChallengeMarker = GenerateNextMarker (MIN_CHALLENGE_DISTANCE, MAX_CHALLENGE_DISTANCE);
+			isInChallengeSection = false;
+		}
+		
 		// Determine which bucket of sections to draw from
 		List<GameObject> sectionBucket = normalSections;
 
@@ -315,7 +322,7 @@ public class Treadmill : MonoBehaviour
 			// Force wildcard to spawn?
 			SetNeedsWildcard (true);
 			sectionBucket = challengeSections;
-			nextChallengeMarker = GenerateNextMarker (MIN_CHALLENGE_DISTANCE, MAX_CHALLENGE_DISTANCE);
+			isInChallengeSection = true;
 			Debug.Log ("Pulling a challenge section. Next challenge at: " + nextChallengeMarker);
 		}
 		

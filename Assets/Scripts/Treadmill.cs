@@ -9,22 +9,22 @@ public class Treadmill : MonoBehaviour
 	const int MAX_WILDCARD_DISTANCE = 1000;
 	int nextWildcardMarker;
 	bool needsWildcard;
-	const int MIN_FREEBIE_DISTANCE = 350; // ~5 sections of 70m
-	const int MAX_FREEBIE_DISTANCE = 500;
+	const int MIN_FREEBIE_DISTANCE = 500;
+	const int MAX_FREEBIE_DISTANCE = 800;
 	int nextFreebieMarker;
-	public const int HARD_THRESHOLD = 1;
-	const int MIN_CHALLENGE_DISTANCE = 500;
+	public const int HARD_THRESHOLD = 2400;
+	const int MIN_CHALLENGE_DISTANCE = 600;
 	const int MAX_CHALLENGE_DISTANCE = 900;
 	bool isInChallengeSection;
 	int nextChallengeMarker;
 	int MAX_WILDCARDS = 9;
 	
 	const float STARTING_SPEED = 20.0f;
-	const float STARTING_ACCEL = 0.005f;
+	const float STARTING_ACCEL = 0.0025f;
 	public float distanceTraveled;
 	public float scrollspeed;
 	float previousScrollspeed;
-	float accelerationPerFrame = 0.005f;
+	float accelerationPerFrame;
 	float prevAccelerationPerFrame;
 	public float maxspeed = 50.0f;
 	public GameObject emptySection;
@@ -32,8 +32,11 @@ public class Treadmill : MonoBehaviour
 	public GameObject tutorialLessonShields;
 	public GameObject tutorialLessonSlow;
 	public List<GameObject> normalSections;
-	public List<GameObject> challengeSections;
+	public List<GameObject> hardSections;
+	public List<GameObject> easyChallengeSections;
+	public List<GameObject> hardChallengeSections;
 	public List<GameObject> freebieSections;
+	List<GameObject> normalAndHardSections;
 	
 	List<GameObject> sectionsInPlay;
 	Transform sectionSpawnZone;
@@ -63,6 +66,9 @@ public class Treadmill : MonoBehaviour
 		nextFreebieMarker = GenerateNextMarker (MIN_FREEBIE_DISTANCE, MAX_FREEBIE_DISTANCE);
 		nextChallengeMarker = GenerateNextMarker (MAX_CHALLENGE_DISTANCE, MAX_CHALLENGE_DISTANCE);
 		//AddAllSectionsToCounter ();
+		normalAndHardSections = new List<GameObject> ();
+		normalAndHardSections.AddRange(normalSections);
+		normalAndHardSections.AddRange(hardSections);
 	}
 	
 	void Update ()
@@ -308,6 +314,9 @@ public class Treadmill : MonoBehaviour
 		
 		// Determine which bucket of sections to draw from
 		List<GameObject> sectionBucket = normalSections;
+		if(GameManager.Instance.IsHard()) {
+			sectionBucket = normalAndHardSections;
+		}
 
 		// Pull from the freebie bucket when nextFreebieMarker has been passed
 		if (distanceTraveled >= nextFreebieMarker) {
@@ -318,10 +327,14 @@ public class Treadmill : MonoBehaviour
 		
 		// Pull from the challenge bucket when nextChallengeMarker has been passed
 		// -- takes a lower priority than freebie bucket
-		else if (distanceTraveled >= nextChallengeMarker && GameManager.Instance.IsHard ()) {
+		else if (distanceTraveled >= nextChallengeMarker ) {
 			// Force wildcard to spawn?
 			SetNeedsWildcard (true);
-			sectionBucket = challengeSections;
+			if(GameManager.Instance.IsHard ()) {
+				sectionBucket = hardChallengeSections;
+			} else {
+				sectionBucket = easyChallengeSections;
+			}
 			isInChallengeSection = true;
 			Debug.Log ("Pulling a challenge section. Next challenge at: " + nextChallengeMarker);
 		}
@@ -485,7 +498,10 @@ public class Treadmill : MonoBehaviour
 		foreach (GameObject obj in normalSections) {
 			sectionCount.Add (obj.name, 0);
 		}
-		foreach (GameObject obj in challengeSections) {
+		foreach (GameObject obj in easyChallengeSections) {
+			sectionCount.Add (obj.name, 0);
+		}
+		foreach (GameObject obj in hardChallengeSections) {
 			sectionCount.Add (obj.name, 0);
 		}
 		foreach (GameObject obj in freebieSections) {

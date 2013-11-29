@@ -408,7 +408,7 @@ public class Player : MonoBehaviour
 	public void AwardWildcard ()
 	{
 		WildcardCount++;
-				GameObject fx = (GameObject)Instantiate (wildcardFX, transform.position,
+				GameObject fx = (GameObject)Instantiate (wildcardFX, transform.position + wildcardFX.transform.position,
 			wildcardFX.transform.rotation);
 		fx.transform.parent = transform;
 		Destroy (fx, 1.5f);

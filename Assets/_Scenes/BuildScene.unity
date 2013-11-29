@@ -12416,7 +12416,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: 8a8261b64285ea64b92d98d732c090fe, type: 2}
       propertyPath: DEBUG_SKIP_TUTORIAL
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8a8261b64285ea64b92d98d732c090fe, type: 2}
@@ -12666,8 +12666,13 @@ MonoBehaviour:
   numPointsThisRound: 0
   treadmill: {fileID: 0}
   WildcardRevealGO: {fileID: 0}
+  redCrystalPrefab: {fileID: 100000, guid: eaf63b0f0cd71924c9569d3532f75529, type: 2}
+  greenCrystalPrefab: {fileID: 100000, guid: beee98d300b6a4fd6a3423a8f58ab950, type: 2}
+  blueCrystalPrefab: {fileID: 100000, guid: 9366ecca6688d476abf8c6c06e9ddeec, type: 2}
+  blockPrefab: {fileID: 100000, guid: ea33b1b462fda9f4ebb49abe1a47a942, type: 2}
+  wildcardPrefab: {fileID: 100000, guid: e8f346d946fcd48b0b63623a492187d3, type: 2}
   DEBUG_MODE: 0
-  DEBUG_SKIP_TUTORIAL: 0
+  DEBUG_SKIP_TUTORIAL: 1
 --- !u!82 &1651423744
 AudioSource:
   m_ObjectHideFlags: 0

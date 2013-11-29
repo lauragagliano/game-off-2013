@@ -82,13 +82,13 @@ public class Treadmill : MonoBehaviour
 			AddDistanceTraveled (distance);
 			// Check if our last section is on screen. If so, spawn another.
 			if (GetLastSectionInPlay () == null) {
-				if (GameManager.Instance.SAVE_TUTORIAL_COMPLETE || GameManager.Instance.DEBUG_SKIP_TUTORIAL) {
+				if (GameManager.Instance.SAVE_TUTORIAL_COMPLETE) {
 					SpawnNextSection ();
 				} else {
 					SpawnNextLesson ();
 				}
 			} else if (isSectionOnScreen (GetLastSectionInPlay ())) {
-				if (GameManager.Instance.SAVE_TUTORIAL_COMPLETE || GameManager.Instance.DEBUG_SKIP_TUTORIAL) {
+				if (GameManager.Instance.SAVE_TUTORIAL_COMPLETE) {
 					SpawnNextSection ();
 				} else {
 					SpawnNextLesson ();
@@ -433,10 +433,18 @@ public class Treadmill : MonoBehaviour
 	void SpawnNextLesson ()
 	{
 		if (!GameManager.Instance.SAVE_LASER_LESSON_COMPLETE) {
+			// Award them half full meters so that they can fill up on the
+			// number of pickups we've placed.
+			RedPower power = GameManager.Instance.player.redPower;
+			power.AddPower(power.maxValue / 2);
 			SpawnSection (tutorialLessonLaser);
 		} else if (!GameManager.Instance.SAVE_SHIELDS_LESSON_COMPLETE) {
+			GreenPower power = GameManager.Instance.player.greenPower;
+			power.AddPower(power.maxValue / 2);
 			SpawnSection (tutorialLessonShields);
 		} else if (!GameManager.Instance.SAVE_SLOW_LESSON_COMPLETE) {
+			BluePower power = GameManager.Instance.player.bluePower;
+			power.AddPower(power.maxValue / 2);
 			SpawnSection (tutorialLessonSlow);
 		}
 	}

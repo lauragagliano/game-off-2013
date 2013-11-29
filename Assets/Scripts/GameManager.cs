@@ -55,6 +55,11 @@ public class GameManager : Singleton<GameManager>
 		LoadReferencedObjects ();
 		LinkSceneObjects ();
 		
+		// Pretend tutorial is scene if Debug skip is flagged.
+		if(DEBUG_SKIP_TUTORIAL) {
+			SAVE_TUTORIAL_COMPLETE = true;
+		}
+		
 		GoToMainMenu ();
 	}
 	

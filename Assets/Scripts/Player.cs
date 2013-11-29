@@ -39,7 +39,7 @@ public class Player : MonoBehaviour
 	public int WildcardCount { get; private set; }
 	
 	public List<GameObject> pickups;
-	const int POWER_UNIT = 1;
+	const float POWER_UNIT = 1.0f;
 	public AudioClip pickupSound;
 	public AudioClip deathSound;
 	public AudioClip slowDownSound;
@@ -115,8 +115,7 @@ public class Player : MonoBehaviour
 	 */
 	void LinkSceneReferences ()
 	{
-		GameObject treadmillGO = GameObject.FindGameObjectWithTag (Tags.TREADMILL);
-		treadmill = treadmillGO.GetComponent<Treadmill> ();
+		treadmill = GameManager.Instance.treadmill;
 	}
 	
 	void Update ()

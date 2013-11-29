@@ -13,14 +13,13 @@ public abstract class Power : MonoBehaviour
 	
 	// Power behavior
 	public float curValue = 0;
-	public float maxValue = 20;
-	const float UPGRADED_MAX = 15;
+	public float maxValue = 30;
+	const float UPGRADED_MAX = 25;
 	protected bool isPowerActive;
 	protected float powerDuration = 5;
 	protected const float UPGRADED_DURATION = 10;
 	protected RBTimer powerTimer = new RBTimer ();
-
-		
+	
 	/*
 	 * Reset all timers. Set current value to default (0). Useful when starting
 	 * a game.
@@ -53,15 +52,10 @@ public abstract class Power : MonoBehaviour
 	/*
 	 * Add a provided amount of power.
 	 */
-	public void AddPower (int amount)
+	public void AddPower (float amount)
 	{
-		float newVal = curValue + amount;
-		if (newVal < maxValue) {
-			curValue = newVal;
-		} else if (newVal >= maxValue) {
-			curValue = maxValue;
-		}
-		if (curValue == maxValue && !IsPowerActive ()) {
+		curValue = Mathf.Min (curValue + amount, maxValue);
+		if (IsChargedAndReady ()) {
 			audio.PlayOneShot (powerReadySound);
 		}
 	}
@@ -71,9 +65,7 @@ public abstract class Power : MonoBehaviour
 	 */
 	public void RemovePower (float amount)
 	{
-		if (curValue > 0) {
-			curValue -= amount;
-		}
+		curValue = Mathf.Max (curValue - amount, 0);
 	}
 	
 	/*

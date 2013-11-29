@@ -7858,7 +7858,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerReadySound: {fileID: 8300000, guid: 7ad350cc1a9100141808d8b7dc533b6e, type: 3}
   curValue: 0
-  maxValue: 20
+  maxValue: 30
 --- !u!114 &1041180136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7873,7 +7873,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerReadySound: {fileID: 8300000, guid: 727dd46b669931645927cad8c8b88b7c, type: 3}
   curValue: 0
-  maxValue: 20
+  maxValue: 30
 --- !u!114 &1041180137
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7888,7 +7888,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerReadySound: {fileID: 8300000, guid: 651ad5f1d07e32544a16ac659e51618c, type: 3}
   curValue: 0
-  maxValue: 20
+  maxValue: 30
 --- !u!114 &1041180138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12408,6 +12408,10 @@ Prefab:
       propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 8a8261b64285ea64b92d98d732c090fe, type: 2}
+      propertyPath: DEBUG_SKIP_TUTORIAL
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8a8261b64285ea64b92d98d732c090fe, type: 2}
   m_RootGameObject: {fileID: 1651423740}
@@ -14243,6 +14247,18 @@ Prefab:
     - target: {fileID: 400006, guid: 52520621251bda348a843f251043d56e, type: 2}
       propertyPath: m_LocalRotation.w
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400012, guid: 52520621251bda348a843f251043d56e, type: 2}
+      propertyPath: maxValue
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400014, guid: 52520621251bda348a843f251043d56e, type: 2}
+      propertyPath: maxValue
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400016, guid: 52520621251bda348a843f251043d56e, type: 2}
+      propertyPath: maxValue
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 52520621251bda348a843f251043d56e, type: 2}

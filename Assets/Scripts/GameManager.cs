@@ -23,6 +23,13 @@ public class GameManager : Singleton<GameManager>
 	float timeDeathDelayStarted;
 	float deathDelayTime = 1.0f;
 	
+	// Prefabs used for generating new sections
+	public GameObject redCrystalPrefab;
+	public GameObject greenCrystalPrefab;
+	public GameObject blueCrystalPrefab;
+	public GameObject blockPrefab;
+	public GameObject wildcardPrefab;
+	
 	public bool SAVE_TUTORIAL_COMPLETE { get; private set; }
 	public bool SAVE_LASER_LESSON_COMPLETE { get; private set; }
 	public bool SAVE_SHIELDS_LESSON_COMPLETE { get; private set; }
@@ -65,6 +72,7 @@ public class GameManager : Singleton<GameManager>
 	{
 		wildcardRevealerPrefab = (GameObject)Resources.Load (ObjectNames.GUI_WILDCARD_REVEAL, typeof(GameObject));
 	}
+
 	
 	/* Search for and assign references to scene objects the GameManager needs to know about.
 	 */

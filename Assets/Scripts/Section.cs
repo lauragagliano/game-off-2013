@@ -11,14 +11,13 @@ public class Section : MonoBehaviour
 	public byte entranceBitmap;
 	public byte exitBitmap;
 	
-	GameObject tempPrefabHolder;
-	
 	GameObject redCrystalPrefab;
 	GameObject greenCrystalPrefab;
 	GameObject blueCrystalPrefab;
 	GameObject blockPrefab;
 	GameObject wildcardPrefab;
-	
+
+	GameObject tempPrefabHolder;
 	Treadmill treadmill;
 	
 	void Awake ()
@@ -26,20 +25,20 @@ public class Section : MonoBehaviour
 		// Start by moving the new Section onto the Treadmill (as a child of the object)
 		treadmill = GameObject.Find(ObjectNames.TREADMILL).GetComponent<Treadmill> ();
 		transform.parent = treadmill.transform;
-		
-		LoadPrefabs ();
+		ReferencePrefabs ();
 	}
 	
+		
 	/*
-	 * Loads all the prefabs that Sections can spawn.
+	 * Reference all the prefabs that GameManager stores which sections can spawn.
 	 */
-	void LoadPrefabs ()
+	void ReferencePrefabs ()
 	{
-		redCrystalPrefab = (GameObject) Resources.Load(ObjectNames.RED_CRYSTAL_PREFAB, typeof(GameObject));
-		greenCrystalPrefab = (GameObject) Resources.Load(ObjectNames.GREEN_CRYSTAL_PREFAB, typeof(GameObject));
-		blueCrystalPrefab = (GameObject) Resources.Load(ObjectNames.BLUE_CRYSTAL_PREFAB, typeof(GameObject));
-		blockPrefab = (GameObject) Resources.Load(ObjectNames.BLOCK_PREFAB, typeof(GameObject));
-		wildcardPrefab = (GameObject) Resources.Load(ObjectNames.WILDCARD_PREFAB, typeof(GameObject));
+		redCrystalPrefab = GameManager.Instance.redCrystalPrefab;
+		greenCrystalPrefab = GameManager.Instance.greenCrystalPrefab;
+		blueCrystalPrefab = GameManager.Instance.blueCrystalPrefab;
+		blockPrefab = GameManager.Instance.blockPrefab;
+		wildcardPrefab = GameManager.Instance.wildcardPrefab;
 	}
 	
 	void Start ()

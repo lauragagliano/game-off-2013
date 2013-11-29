@@ -3926,7 +3926,7 @@ Light:
   m_Shadows:
     m_Type: 1
     m_Resolution: 3
-    m_Strength: 1
+    m_Strength: .5
     m_Bias: .0500000007
     m_Softness: 4
     m_SoftnessFade: 1
@@ -9177,24 +9177,31 @@ MonoBehaviour:
   - {fileID: 100000, guid: 7a78bf95646bafb40a82398e86d1051c, type: 2}
   - {fileID: 100000, guid: e84a23e06c1e9ef4290db4814a166cfc, type: 2}
   - {fileID: 100036, guid: 4e2750debfd42eb4ba2659ab508dac55, type: 2}
-  - {fileID: 100000, guid: c3a9421b6c78bc94cb41f51aa4ba6c5e, type: 2}
-  - {fileID: 100000, guid: 0ba4b21f4107ada47b1769c307df2d50, type: 2}
-  - {fileID: 100000, guid: 5c4a99aeb1ce6dd4abfb722f376c96ca, type: 2}
-  - {fileID: 100026, guid: ce1aaa508fbacd2439e2658984d3a685, type: 2}
+  - {fileID: 100006, guid: a1cee13e692e04b949bf15e33858bd5c, type: 2}
+  - {fileID: 100028, guid: 91a7de02bb9c348fca7b75a4e46c7830, type: 2}
+  - {fileID: 100122, guid: b0e09032bbfa64b5ebbf7df66ad14e19, type: 2}
+  - {fileID: 100054, guid: f5f227ef6655a4c898c3d24b7922d7db, type: 2}
+  hardSections:
+  - {fileID: 100018, guid: 08009899d0ba749379f0394a021933b7, type: 2}
+  - {fileID: 100012, guid: 3e3a33f2fe532435cb26ef154a14f2e6, type: 2}
   - {fileID: 100048, guid: 6e756bade2c01bf4cb88b5eb39854c94, type: 2}
   - {fileID: 100018, guid: c692ac515a9118c4f977ec94003d0430, type: 2}
   - {fileID: 100026, guid: 4a149fa6866fefc4ba4c0f423e022d54, type: 2}
   - {fileID: 100058, guid: 5a914ab1d4a08ae439f47bf1db12fef9, type: 2}
   - {fileID: 100090, guid: 5fec4345997770e43bf19a5e3ca9bf0d, type: 2}
   - {fileID: 100028, guid: b5477f8b264983c429220442806099e7, type: 2}
-  - {fileID: 100122, guid: b0e09032bbfa64b5ebbf7df66ad14e19, type: 2}
-  challengeSections:
-  - {fileID: 100154, guid: 612a3334f48f2499b843c9daa2ff3286, type: 2}
+  easyChallengeSections:
   - {fileID: 100040, guid: 65b5073e511d44b679915f1b44fa4739, type: 2}
   - {fileID: 100014, guid: 1b84bcf42d7234af0ba65edcd4a8fdf3, type: 2}
   - {fileID: 100164, guid: 53c0188e3c2734a83b0a5c1f741e43ba, type: 2}
   - {fileID: 100010, guid: f04fa8efe70fb4ddd9166f050cbee583, type: 2}
   - {fileID: 100096, guid: b3cf1a66027774ec5b768650928afedf, type: 2}
+  hardChallengeSections:
+  - {fileID: 100154, guid: 612a3334f48f2499b843c9daa2ff3286, type: 2}
+  - {fileID: 100024, guid: 21bd9818000d74188ad5d568977d6b49, type: 2}
+  - {fileID: 100202, guid: 831e96945b62c45d9b34796a77f18272, type: 2}
+  - {fileID: 100116, guid: 921cfacce4fd340a98ee21374deb3904, type: 2}
+  - {fileID: 100222, guid: a04f3deb9ed724cb4b467f2e6655adc0, type: 2}
   freebieSections:
   - {fileID: 100136, guid: 8218530cac53cc348bc2f875e9badf4c, type: 2}
   - {fileID: 100074, guid: 1d756b2af997e594c9502ece7dd6416f, type: 2}
@@ -12416,7 +12423,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: 8a8261b64285ea64b92d98d732c090fe, type: 2}
       propertyPath: DEBUG_SKIP_TUTORIAL
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8a8261b64285ea64b92d98d732c090fe, type: 2}
@@ -12672,7 +12679,7 @@ MonoBehaviour:
   blockPrefab: {fileID: 100000, guid: ea33b1b462fda9f4ebb49abe1a47a942, type: 2}
   wildcardPrefab: {fileID: 100000, guid: e8f346d946fcd48b0b63623a492187d3, type: 2}
   DEBUG_MODE: 0
-  DEBUG_SKIP_TUTORIAL: 1
+  DEBUG_SKIP_TUTORIAL: 0
 --- !u!82 &1651423744
 AudioSource:
   m_ObjectHideFlags: 0

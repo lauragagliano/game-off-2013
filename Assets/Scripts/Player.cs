@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
 
 	bool isWaitingToStart;
 	bool isReviving;
+	bool hitBlockThisFrame;
 	RBTimer reviveTimeout;
 	
 	// Abilities
@@ -124,6 +125,9 @@ public class Player : MonoBehaviour
 		if (isWaitingToStart) {
 			return;
 		}
+		
+		// Clear block hit flag every frame.
+		hitBlockThisFrame = false;
 		
 		bool isAlive = !IsDead;
 		if (isAlive) {
@@ -383,7 +387,12 @@ public class Player : MonoBehaviour
 		if (isBoosting) {
 			return;
 		}
-			
+		
+		// Don't let the player take double damage just for hitting two blocks at their seam.
+		if (hitBlockThisFrame) {
+			return;
+		}
+		hitBlockThisFrame = true;
 		
 		if (greenPower.IsPowerActive ()) {
 			TakeShieldHit ();

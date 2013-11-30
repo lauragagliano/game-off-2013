@@ -577,8 +577,9 @@ public class Player : MonoBehaviour
 	public void StartRunning ()
 	{
 		isWaitingToStart = false;
-		if (inventory.HasItem (ItemNames.BOOST)) {
-			StartBoosting ();
+		if (inventory.HasItem (ItemNames.BOOST) || inventory.HasItem(ItemNames.SUPERBOOST)) {
+			// Defaults to using the superboost first if they have both.
+			StartBoosting (inventory.HasItem(ItemNames.SUPERBOOST));
 		}
 	}
 		
@@ -778,7 +779,7 @@ public class Player : MonoBehaviour
 	/*
 	 * Begin using the boost consumable
 	 */
-	void StartBoosting ()
+	void StartBoosting (bool isSuperBoost)
 	{
 		// Set state variables
 		isBoosting = true;
@@ -788,11 +789,15 @@ public class Player : MonoBehaviour
 		
 		// Start the boost timer.
 		boostTimer = new RBTimer ();
-		float BOOST_TIME = 8.0f;
+		float BOOST_TIME = isSuperBoost ? 15.0f : 8.0f;
 		boostTimer.StartTimer (BOOST_TIME);
 		
 		// Remove the inventory item if they had one
-		inventory.RemoveItem (ItemNames.BOOST);
+		if(isSuperBoost) {
+			inventory.RemoveItem (ItemNames.BOOST);
+		} else {
+			inventory.RemoveItem (ItemNames.SUPERBOOST);
+		}
 				
 		boostFX = (GameObject)Instantiate (boostFXPrefab, transform.position,
 			transform.rotation);

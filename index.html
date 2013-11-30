@@ -2,7 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-		<title>Unity Web Player | GameOff2013</title>
+		<title>Color Quest | Github Gameoff 2013</title>
+
+		<!-- Bootstrap core CSS -->
+		<link href="./css/bootstrap.min.css" rel="stylesheet">
+		<link href="./css/color-quest.css" rel="stylesheet">
+
 		<script type='text/javascript' src='https://ssl-webplayer.unity3d.com/download_webplayer-3.x/3.0/uo/jquery.min.js'></script>
 		<script type="text/javascript">
 		<!--
@@ -15,13 +20,13 @@
 		<script type="text/javascript">
 		<!--
 			var config = {
-				width: 400, 
+				width: 400,
 				height: 640,
 				params: { enableDebugging:"0" }
-				
+
 			};
 			var u = new UnityObject2(config);
-			
+
 			jQuery(function() {
 
 				var $missingScreen = jQuery("#unityPlayer").find(".missing");
@@ -62,30 +67,10 @@
 		</script>
 		<style type="text/css">
 		<!--
-		body {
-			font-family: Helvetica, Verdana, Arial, sans-serif;
-			background-color: black;
-			color: white;
-			text-align: center;
-		}
-		a:link, a:visited {
-			color: #bfbfbf;
-		}
-		a:active, a:hover {
-			color: #bfbfbf;
-		}
-		p.header {
-			font-size: small;
-		}
-		p.header span {
-			font-weight: bold;
-		}
-		p.footer {
-			font-size: x-small;
-		}
-		div.content {
+		div.unity-content {
 			margin: auto;
 			width: 400px;
+			font-size: 10px;
 		}
 		div.broken,
 		div.missing {
@@ -116,8 +101,7 @@
 		</style>
 	</head>
 	<body>
-		<p class="header"><span>Unity Web Player | </span>GameOff2013</p>
-		<div class="content">
+		<div class="unity-content">
 			<div id="unityPlayer">
 				<div class="missing">
 					<a href="http://unity3d.com/webplayer/" title="Unity Web Player. Install now!">
@@ -125,7 +109,44 @@
 					</a>
 				</div>
 			</div>
+			<p class="footer text-center">&laquo; created with <a href="http://unity3d.com/unity/" title="Go to unity3d.com">Unity</a> &raquo;</p>
 		</div>
-		<p class="footer">&laquo; created with <a href="http://unity3d.com/unity/" title="Go to unity3d.com">Unity</a> &raquo;</p>
+
+		<div class="instructions">
+			<div class="row marketing">
+				<div class="col-lg-8 col-lg-offset-2">
+					<h2>Color Quest</h2>
+					<p>You play as Pigment, a black and white pixel on a quest to become a color pixel by collecting color diodes. You race through a forever-scrolling grayscale obstacle course, changing between the RGB colors you collect to survive. For example, changing to a blue pixel will allow you to slow down time and move with better reflexes. Traverse as much of the world as possible, while absorbing as much color as you can. Use absorbed colors to purchase upgrades in order to help Pigment achieve his colorful form.</p>
+					<h3>Movement</h3>
+					<p>Press the <strong>A</strong> and <strong>D</strong> keys to move left and right.</p>
+					<p>Press the <strong>J</strong>, <strong>K</strong>, and <strong>L</strong> keys to activate your powers.</p>
+
+					<h3>Powers</h3>
+					<div class="well">
+					<h2 class="red">Laser (Red)</h2>
+					<p>The laser allows you to break through blocks in your way. Each shot drains your meter slightly.</p>
+					<p><strong>Upgrade</strong> The laser upgrade makes each shot drain less power.</p>
+					<h2 class="green">Shields (Green)</h2>
+					<p>Shields allow you to take block hits without dying. Each hit drains your shield meter.</p>
+					<p><strong>Upgrade</strong> The shield upgrade makes each hit drain less power.</p>
+					<h2 class="blue">Slow Down (Blue)</h2>
+					<p>You can slow down the map when things get too dicey. This lets you move left and right a little faster and forward much slower.</p>
+					<p><strong>Upgrade</strong> The slow down upgrade makes Pigment move faster left and right.</p>
+				</div>
+				</div>
+				<div class="col-lg-8 col-lg-offset-2">
+					<h3>Shop</h3>
+					<p>You can upgrade each of Pigment's colors at the shop</p>
+					<h4>Consumables</h4>
+					<ul><li>Boost: Pigment gets a head start on next play.</li><li>Super Boost: Pigment gets an even bigger head start on next play.</li></ul>
+					<h4>Red Power Upgrades</h4>
+					<ul><li>Fill Faster: Meter a little faster.</li><li>Last Longer: Meter takes longer to deplete when active.</li><li>Magnet: Pull in nearby diodes of the same color.</li><li>Efficient Laser: Each shot takes less power, giving pigment more of them.</li></ul>
+					<h4>Blue Power Upgrades</h4>
+					<ul><li>Fill Faster: Meter a little faster.</li><li>Last Longer: Meter takes longer to deplete when active.</li><li>Magnet: Pull in nearby diodes of the same color.</li><li>Better Reflexes: Pigment can dodge faster left and right.</li></ul>
+					<h4>Green Power Upgrades</h4>
+					<ul><li>Fill Faster: Meter a little faster.</li><li>Last Longer: Meter takes longer to deplete when active.</li><li>Magnet: Pull in nearby diodes of the same color.</li><li>Stronger Shields: Each hit to Pigment's shields takes less energy.</li></ul>
+					</div>
+			</div>
+		</div>
 	</body>
-</html>
+	</html>

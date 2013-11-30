@@ -12,7 +12,7 @@ public class GameManager : Singleton<GameManager>
 	public Difficulty difficulty = Difficulty.Easy;
 	GameState gameState = GameState.Running;
 	public int numPickupsPassed;
-	public int numPointsThisRound;
+	public int numPickupsThisRound;
 	Transform playerSpawn;
 	public Treadmill treadmill;
 	GameObject wildcardRevealerPrefab;
@@ -23,6 +23,9 @@ public class GameManager : Singleton<GameManager>
 	float timeDeathDelayStarted;
 	float deathDelayTime = 1.0f;
 	public bool didPlayerReviveThisRun {get; private set;}
+	
+	public float highestScore {get; private set;}
+	HUD hud;
 	
 	// Prefabs used for generating new sections
 	public GameObject redCrystalPrefab;
@@ -85,7 +88,7 @@ public class GameManager : Singleton<GameManager>
 	void LinkSceneObjects ()
 	{
 		player = GameObject.FindGameObjectWithTag (Tags.PLAYER).GetComponent<Player> ();
-		
+		hud = GameObject.Find (ObjectNames.HUD).GetComponent<HUD> ();
 		// Link Player Spawn
 		GameObject foundObject = GameObject.Find (ObjectNames.PLAYER_SPAWN);
 		if (foundObject != null) {
@@ -117,6 +120,9 @@ public class GameManager : Singleton<GameManager>
 					GoToWildCardState ();
 				} else {
 					GoToGameOver ();
+					if (CheckForHighScore (treadmill.distanceTraveled)) {
+						hud.DisplayNewHighScore (true);
+					}
 				}
 			}
 		}
@@ -188,7 +194,7 @@ public class GameManager : Singleton<GameManager>
 	 */
 	public void AddPoint ()
 	{
-		numPointsThisRound++;
+		numPickupsThisRound++;
 	}
 	
 	/*
@@ -218,7 +224,7 @@ public class GameManager : Singleton<GameManager>
 		storeCamera.enabled = false;
 		
 		numPickupsPassed = 0;
-		numPointsThisRound = 0;
+		numPickupsThisRound = 0;
 		difficulty = Difficulty.Easy;
 		didPlayerReviveThisRun = false;
 		
@@ -338,6 +344,19 @@ public class GameManager : Singleton<GameManager>
 		gameCamera.enabled = false;
 		
 		treadmill.PauseScrolling ();
+	}
+	
+	/*
+	 * Return true and set the new high score if the provided distance
+	 * exceeds the saved high score.
+	 */
+	public bool CheckForHighScore (float distance)
+	{
+		if (distance > highestScore) {
+			highestScore = distance;
+			return true;
+		}
+		return false;
 	}
 	
 	/*

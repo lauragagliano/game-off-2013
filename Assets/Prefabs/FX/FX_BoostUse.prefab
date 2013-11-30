@@ -157,12 +157,12 @@ TextMesh:
   m_GameObject: {fileID: 100000}
   m_Text: Boost!
   m_OffsetZ: 0
-  m_CharacterSize: 1
+  m_CharacterSize: .649999976
   m_LineSpacing: 1
   m_Anchor: 4
   m_Alignment: 0
   m_TabSize: 4
-  m_FontSize: 26
+  m_FontSize: 40
   m_FontStyle: 0
   m_RichText: 1
   m_Font: {fileID: 12800000, guid: 56e3e49b48085453d8733d36bb8dbcb4, type: 3}
@@ -178,12 +178,12 @@ TextMesh:
   m_GameObject: {fileID: 100004}
   m_Text: Boost!
   m_OffsetZ: 0
-  m_CharacterSize: 1
+  m_CharacterSize: .649999976
   m_LineSpacing: 1
   m_Anchor: 4
   m_Alignment: 0
   m_TabSize: 4
-  m_FontSize: 26
+  m_FontSize: 40
   m_FontStyle: 0
   m_RichText: 1
   m_Font: {fileID: 12800000, guid: 56e3e49b48085453d8733d36bb8dbcb4, type: 3}

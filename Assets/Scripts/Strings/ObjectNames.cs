@@ -7,6 +7,7 @@ public class ObjectNames
 	public static string GAMEMANAGER = "_GameManager";
 	public static string MENU_CAMERA = "MenuCam";
 	public static string GAME_CAMERA = "OrthoCam";
+	public static string HUD = "HUD";
 	public static string TREADMILL = "Treadmill";
 	public static string SECTION_SPAWN = "SectionSpawn";
 	public static string SECTION_KILLZONE = "SectionKillzone";

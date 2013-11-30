@@ -30,4 +30,5 @@ public class ItemNames
 	
 	// Consumables
 	public static string BOOST = "Boost";
+	public static string SUPERBOOST = "SuperBoost";
 }

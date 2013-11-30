@@ -58,6 +58,7 @@ public class Player : MonoBehaviour
 	public GameObject boostFXPrefab;
 	public GameObject laserBeamFX;
 	public GameObject wildcardFX;
+	public GameObject explosionFX;
 	float worldZClamp;
 	float worldYClamp;
 	float movespeed;
@@ -525,6 +526,11 @@ public class Player : MonoBehaviour
 				block.GetComponent<BlockLogic> ().BlowUp (transform.position, 200, explosionRadius);
 			}
 		}
+		
+		// Spawn the explosion FX.
+		GameObject fx = (GameObject)Instantiate (explosionFX, transform.position,
+			transform.rotation);
+		Destroy (fx, 1.0f);
 	}
 	
 	/*
@@ -802,6 +808,7 @@ public class Player : MonoBehaviour
 	 */
 	public void InitializeStatsOnSpawn ()
 	{
+	
 		pickups = new List<GameObject> ();
 		
 		// Give player their upgrades

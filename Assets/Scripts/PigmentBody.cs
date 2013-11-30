@@ -90,7 +90,6 @@ public class PigmentBody : MonoBehaviour
 			crystalRigidBody.rigidbody.AddForce (force);
 			// Attach to any treadmill section so they will get cleaned up on retry.
 			crystalRigidBody.transform.parent = GameManager.Instance.treadmill.GetLastSectionInPlay ().transform;
-			Destroy (crystalRigidBody, 4.0f);
 		}
 	}
 	

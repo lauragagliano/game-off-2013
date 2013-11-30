@@ -5,10 +5,15 @@ using System;
 public class PigmentBody : MonoBehaviour
 {
 	ColorWheel currentColor;
-	public Material[] bodyMaterials = new Material[4];
+	public Material[] bodyMaterials = new Material[3];
+	public Material[] redBodyMaterials = new Material[3];
+	public Material[] greenBodyMaterials = new Material[3];
+	public Material[] blueBodyMaterials = new Material[3];
+	public Material[] bwBodyMaterials = new Material[3];
 	public GameObject[] limbs = new GameObject[Enum.GetNames (typeof(Limb)).Length];
 	public GameObject[] fxLimbs = new GameObject[Enum.GetNames (typeof(Limb)).Length];
 	public GameObject[] fxLimbPrefabs = new GameObject[Enum.GetNames (typeof(Limb)).Length];
+	public GameObject[] crystalPrefabs = new GameObject[3];
 	
 	enum Limb
 	{
@@ -25,23 +30,23 @@ public class PigmentBody : MonoBehaviour
 		
 		// Get materials to color limbs with
 		Material armLegMat = ColorManager.Instance.red;
-		Material bodyMat = ColorManager.Instance.red;
+		//Material bodyMat = ColorManager.Instance.red;
 		if (color == ColorWheel.red) {
 			armLegMat = ColorManager.Instance.red;
-			bodyMat = bodyMaterials [0];
+			bodyMaterials = redBodyMaterials;
 		} else if (color == ColorWheel.green) {
 			armLegMat = ColorManager.Instance.green;
-			bodyMat = bodyMaterials [1];
+			bodyMaterials = greenBodyMaterials;
 		} else if (color == ColorWheel.blue) {
 			armLegMat = ColorManager.Instance.blue;
-			bodyMat = bodyMaterials [2];
+			bodyMaterials = blueBodyMaterials;
 		} else if (color == ColorWheel.neutral) {
 			armLegMat = ColorManager.Instance.neutral;
-			bodyMat = bodyMaterials [3];
+			bodyMaterials = bwBodyMaterials;
 		}
 		
 		ColorLimbs (armLegMat, colorFX);
-		bodyToColor.renderer.material = bodyMat;
+		bodyToColor.renderer.materials = bodyMaterials;
 		currentColor = color;
 	}
 	
@@ -76,6 +81,15 @@ public class PigmentBody : MonoBehaviour
 		
 		// Disable the body from rendering
 		transform.gameObject.SetActive (false);
+		
+		foreach(GameObject crystalPrefab in crystalPrefabs)
+		{
+			GameObject crystalRigidBody = (GameObject)Instantiate (crystalPrefab, transform.position,
+				transform.rotation);
+			crystalRigidBody.rigidbody.AddForce (force);
+			crystalRigidBody.transform.parent = GameManager.Instance.treadmill.transform;
+			Destroy (crystalRigidBody, 4.0f);
+		}
 	}
 	
 	/*

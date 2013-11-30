@@ -8,6 +8,7 @@ public class Store : MonoBehaviour
 	public int selectedItem = 0;
 	Inventory playerInventory;
 	
+	public AudioClip purchaseSound;
 	Transform scroller;
 	
 	void Start ()
@@ -91,6 +92,7 @@ public class Store : MonoBehaviour
 		Item itemToBuy = allItems[selectedItem].GetComponent<Item> ();
 		playerInventory.AddItem (itemToBuy.itemName);
 		GameManager.Instance.player.RemoveMoney (itemToBuy.cost);
+		audio.PlayOneShot (purchaseSound);
 		Debug.Log (playerInventory.GetContentsAsJSON ());
 	}
 	

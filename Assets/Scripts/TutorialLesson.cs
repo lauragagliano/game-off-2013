@@ -4,7 +4,7 @@ using System.Collections;
 public class TutorialLesson : MonoBehaviour
 {
 	public Lesson lesson;
-	
+
 	public enum Lesson {
 		Laser,
 		Shields,

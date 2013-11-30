@@ -268,7 +268,7 @@ public class HUD : MonoBehaviour
 		GUILayout.BeginHorizontal ();
 		// Push buttons to the center of the screen
 		GUILayout.FlexibleSpace ();
-		if (GUILayout.Button ("Go to Store", greenButtonStyle)) {
+		if (GUILayout.Button ("Store", greenButtonStyle)) {
 			GameManager.Instance.GoToStore ();
 		}
 		if (GUILayout.Button ("Start Game [ENTER]", blueButtonStyle)) {

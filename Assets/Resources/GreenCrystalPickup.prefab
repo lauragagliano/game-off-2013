@@ -79,7 +79,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: 1
-  autoSetMaterial: 1
+  autoSetMaterial: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

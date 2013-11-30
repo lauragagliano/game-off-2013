@@ -157,7 +157,7 @@ TextMesh:
   m_GameObject: {fileID: 100002}
   m_Text: Revive!
   m_OffsetZ: 0
-  m_CharacterSize: 6.5
+  m_CharacterSize: .649999976
   m_LineSpacing: 1
   m_Anchor: 4
   m_Alignment: 0
@@ -178,7 +178,7 @@ TextMesh:
   m_GameObject: {fileID: 100004}
   m_Text: Revive!
   m_OffsetZ: 0
-  m_CharacterSize: 6.5
+  m_CharacterSize: .649999976
   m_LineSpacing: 1
   m_Anchor: 4
   m_Alignment: 0

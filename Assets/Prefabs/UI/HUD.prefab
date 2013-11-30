@@ -1380,7 +1380,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3527840ccc90b1e4dbd94f73bd22ab0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 11400010, guid: 52520621251bda348a843f251043d56e, type: 2}
   finalDistanceLabelText: {fileID: 13200018}
   finalDistanceLabelTextShadow: {fileID: 13200006}
   finalDistanceText: {fileID: 13200052}
@@ -1394,7 +1394,7 @@ MonoBehaviour:
   redMeter: {fileID: 100050}
   greenMeter: {fileID: 100030}
   blueMeter: {fileID: 100012}
-  lighting: {fileID: 0}
+  lighting: {fileID: 10800000, guid: 27bc252e818b0da46a2ad6725b509de5, type: 2}
   inGameCrystalsCountText: {fileID: 13200038}
   inGameCrystalsCountTextShadow: {fileID: 13200036}
   inGameCrystalsLabel: {fileID: 13200000}

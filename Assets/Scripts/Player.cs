@@ -653,7 +653,6 @@ public class Player : MonoBehaviour
 			
 			// Note this will not work if the blocks are rotated,and it assumes they are square
 			float blockWidth = block.collider.bounds.extents.x;
-			Debug.Log("BlockWidth: " + blockWidth);
 			float blockHeight = blockWidth;
 			// Is the block in range of my laser?
 			if (distanceToBlockRelativeToMyForward <= LASER_LENGTH + blockHeight) {

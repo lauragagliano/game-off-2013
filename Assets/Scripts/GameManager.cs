@@ -194,7 +194,9 @@ public class GameManager : Singleton<GameManager>
 	 */
 	public void AddPoint ()
 	{
-		numPickupsThisRound++;
+		if (SAVE_TUTORIAL_COMPLETE) {
+			numPickupsThisRound++;
+		}
 	}
 	
 	/*

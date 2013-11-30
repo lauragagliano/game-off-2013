@@ -517,7 +517,7 @@ public class Treadmill : MonoBehaviour
 			GreenPower power = GameManager.Instance.player.greenPower;
 			power.AddPower(power.maxValue / 2);
 			SpawnSection (tutorialLessonShields);
-		} else if (!GameManager.Instance.SAVE_SLOW_LESSON_COMPLETE) {
+		} else if (!GameManager.Instance.SAVE_SLOW_LESSON_COMPLETE || !GameManager.Instance.SAVE_TUTORIAL_COMPLETE) {
 			BluePower power = GameManager.Instance.player.bluePower;
 			power.AddPower(power.maxValue / 2);
 			SpawnSection (tutorialLessonSlow);

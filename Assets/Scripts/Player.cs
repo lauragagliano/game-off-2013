@@ -41,6 +41,10 @@ public class Player : MonoBehaviour
 	
 	public List<GameObject> pickups;
 	const float POWER_UNIT = 1.0f;
+
+	public AudioClip explosionSound;
+	public AudioClip blockHitSound;
+	public AudioClip wildcardSound;
 	public AudioClip pickupSound00;
 	public AudioClip pickupSound01;
 	public AudioClip deathSound;
@@ -89,7 +93,7 @@ public class Player : MonoBehaviour
 		// Disable shield FX
 		shieldObject.SetActive (false);
 	}
-	
+
 	/*
 	 * Sets references to our "node" empty game objects which are used for position and rotation values of the player.
 	 */
@@ -381,6 +385,7 @@ public class Player : MonoBehaviour
 			ForgetPickup (pickup);
 		} else if (pickup.CompareTag (Tags.WILDCARD)) {
 			AwardWildcard ();
+			audio.PlayOneShot (wildcardSound);
 		} else {
 			Debug.Log ("Player encountered unknown Pickup! Handle this with a new tag on the pickup.");
 		}
@@ -393,6 +398,7 @@ public class Player : MonoBehaviour
 	{
 		// While boosting go straight through blocks like it's no thang.
 		if (isBoosting) {
+			audio.PlayOneShot(blockHitSound);
 			return;
 		}
 		
@@ -531,6 +537,7 @@ public class Player : MonoBehaviour
 		foreach (GameObject block in blackblocks) {
 			if (Vector3.SqrMagnitude (block.transform.position - transform.position) <= Mathf.Pow (explosionRadius, 2.0f)) {
 				block.GetComponent<BlockLogic> ().BlowUp (transform.position, 200, explosionRadius);
+				audio.PlayOneShot(explosionSound);
 			}
 		}
 		

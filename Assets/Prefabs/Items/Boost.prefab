@@ -205,7 +205,7 @@ MonoBehaviour:
   itemName: Boost
   displayName: Boost
   cost: 750
-  wildcardMaterial: {fileID: 0}
+  wildcardMaterial: {fileID: 2100000, guid: 7e764cc0865544ccaacb2a0cfe1adca8, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

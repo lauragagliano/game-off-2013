@@ -41,12 +41,14 @@ public class Player : MonoBehaviour
 	
 	public List<GameObject> pickups;
 	const float POWER_UNIT = 1.0f;
-	public AudioClip pickupSound;
+	public AudioClip pickupSound00;
+	public AudioClip pickupSound01;
 	public AudioClip deathSound;
 	public AudioClip slowDownSound;
 	public AudioClip speedUpSound;
 	public AudioClip shieldUpSound;
 	public AudioClip shieldHitSound;
+	public AudioClip shieldWeakSound;
 	public AudioClip shieldDownSound;
 	public AudioClip laserSound;
 	Animation shieldAnimation;
@@ -358,7 +360,12 @@ public class Player : MonoBehaviour
 	{
 		if (pickup.GetComponent<CrystalPickup> () != null) {
 			RGB pickupRGB = pickup.GetComponent<RGB> ();
-			audio.PlayOneShot (pickupSound);
+			int randSound = Random.Range (0,2);
+			if (randSound == 1) {
+				audio.PlayOneShot (pickupSound01);
+			} else {
+				audio.PlayOneShot (pickupSound00);
+			}
 			Power powerToCharge = GetPowerForColor (pickupRGB);
 			if (powerToCharge.IsChargedAndReady ()) {
 				// Logic for spillover goes here
@@ -451,7 +458,7 @@ public class Player : MonoBehaviour
 		collider.enabled = false;
 		
 		GameManager.Instance.EndRun ();
-		
+		audio.PlayOneShot (deathSound);
 		PigmentBody body = (PigmentBody)playerGeo.GetComponent<PigmentBody> ();
 		body.ReplaceWithRagdoll ();
 	}
@@ -707,6 +714,7 @@ public class Player : MonoBehaviour
 				// Play weak animation if within one hit away from breaking
 				if (!shieldAnimation.IsPlaying (ObjectNames.FX_SHIELD_WEAK)) {
 					shieldAnimation.Play (ObjectNames.FX_SHIELD_WEAK);
+					audio.PlayOneShot (shieldWeakSound);
 				}
 			} else if (shieldAnimation.IsPlaying (ObjectNames.FX_SHIELD_WEAK)) {
 				// Play idle animation if player gained enough power to get out of weak

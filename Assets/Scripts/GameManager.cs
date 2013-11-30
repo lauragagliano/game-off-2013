@@ -120,9 +120,6 @@ public class GameManager : Singleton<GameManager>
 					GoToWildCardState ();
 				} else {
 					GoToGameOver ();
-					if (CheckForHighScore (treadmill.distanceTraveled)) {
-						hud.DisplayNewHighScore (true);
-					}
 				}
 			}
 		}
@@ -267,6 +264,9 @@ public class GameManager : Singleton<GameManager>
 	public void GoToGameOver ()
 	{
 		gameState = GameState.GameOver;
+		if (CheckForHighScore (treadmill.distanceTraveled)) {
+			hud.DisplayNewHighScore (true);
+		}
 	}
 	
 	/*

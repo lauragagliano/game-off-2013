@@ -17,7 +17,7 @@ public abstract class Power : MonoBehaviour
 	const float UPGRADED_MAX = 25;
 	protected bool isPowerActive;
 	protected float powerDuration = 5;
-	protected const float UPGRADED_DURATION = 10;
+	protected const float UPGRADED_DURATION = 7.5f;
 	protected RBTimer powerTimer = new RBTimer ();
 	
 	/*

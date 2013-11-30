@@ -33,7 +33,7 @@ public class Player : MonoBehaviour
 	int shieldStrength = 4;
 	const int UPGRADED_SHIELD_STRENGTH = 6;
 	public RGB playerRGB;
-	public float MAGNET_DIST = 10f;
+	public float MAGNET_DIST = 6f;
 	Inventory inventory;
 
 	public int WildcardCount { get; private set; }

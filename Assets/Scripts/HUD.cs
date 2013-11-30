@@ -136,7 +136,7 @@ public class HUD : MonoBehaviour
 		// Center our buttons with space on both sides
 		GUILayout.BeginHorizontal ();
 		GUILayout.FlexibleSpace ();
-		if (GUILayout.Button ("Go to Store", greenButtonStyle)) {
+		if (GUILayout.Button ("Store", greenButtonStyle)) {
 			GameManager.Instance.GoToStore ();
 		}
 		if (GUILayout.Button ("Retry [Enter]", blueButtonStyle)) {

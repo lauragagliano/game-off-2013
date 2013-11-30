@@ -11,7 +11,7 @@ GameObject:
   - 23: {fileID: 2300000}
   - 102: {fileID: 10200000}
   m_Layer: 0
-  m_Name: FX_BoostUseTextShadow
+  m_Name: FX_SuperBoostUseTextShadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,7 +28,7 @@ GameObject:
   - 33: {fileID: 3300000}
   - 23: {fileID: 2300002}
   m_Layer: 0
-  m_Name: FX_BoostUseIcon
+  m_Name: FX_SuperBoostUseIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,7 +46,7 @@ GameObject:
   - 102: {fileID: 10200002}
   - 111: {fileID: 11100000}
   m_Layer: 0
-  m_Name: FX_BoostUse
+  m_Name: FX_SuperBoostUse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -117,7 +117,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: d9a303d6fee0a49e5baed7ab83418855, type: 2}
+  - {fileID: 2100000, guid: 07441560d94094b198b3f72d6b6e7361, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -155,7 +155,7 @@ TextMesh:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Text: Boost!
+  m_Text: SuperBoost!
   m_OffsetZ: 0
   m_CharacterSize: .649999976
   m_LineSpacing: 1
@@ -176,7 +176,7 @@ TextMesh:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
-  m_Text: Boost!
+  m_Text: SuperBoost!
   m_OffsetZ: 0
   m_CharacterSize: .649999976
   m_LineSpacing: 1

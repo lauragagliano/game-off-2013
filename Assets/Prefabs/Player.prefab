@@ -292,8 +292,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.5, y: -.200000048, z: .600000381}
+  m_LocalRotation: {x: .608761489, y: 0, z: 0, w: .793353319}
+  m_LocalPosition: {x: 1.5, y: -.600000024, z: -.349999994}
   m_LocalScale: {x: .600000024, y: .600000024, z: 1.20000005}
   m_Children: []
   m_Father: {fileID: 400016}
@@ -304,7 +304,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100006}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: .666259885, z: -26.6882458}
+  m_LocalPosition: {x: 0, y: .5, z: -26}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400012}
@@ -316,8 +316,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100008}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.5, y: -.200000048, z: .600000381}
+  m_LocalRotation: {x: -.30070582, y: 0, z: 0, w: .953716934}
+  m_LocalPosition: {x: -1.50000346, y: 0, z: .899999976}
   m_LocalScale: {x: .600000024, y: .600000024, z: 1.20000005}
   m_Children: []
   m_Father: {fileID: 400016}
@@ -360,8 +360,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100018}
-  m_LocalRotation: {x: 0, y: 0, z: -.0348702222, w: .999391854}
-  m_LocalPosition: {x: 0, y: .100000001, z: 0}
+  m_LocalRotation: {x: -.300424963, y: .0431591272, z: -.0488387793, w: .951575994}
+  m_LocalPosition: {x: 0, y: .36257267, z: -.0755310059}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400008}
@@ -924,6 +924,7 @@ MonoBehaviour:
   wildcardFX: {fileID: 100004, guid: d706a5207d2244924b151c213d3e91a4, type: 2}
   reviveFX: {fileID: 100004, guid: a963f64fdbbfc4e01aa93c139c76e38e, type: 2}
   boostTextFX: {fileID: 100004, guid: aede57d480a4e4c76a2fea10154b64a8, type: 2}
+  superBoostTextFX: {fileID: 100004, guid: b42423232e02c4f8f8d1b09e205dccf7, type: 2}
   explosionFX: {fileID: 100000, guid: 6de7cefb1ea1948c4b3ec843c37ed74a, type: 2}
   perceivedVelocity: {x: 0, y: 0, z: 0}
 --- !u!114 &11400012

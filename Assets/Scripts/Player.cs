@@ -65,6 +65,7 @@ public class Player : MonoBehaviour
 	public GameObject wildcardFX;
 	public GameObject reviveFX;
 	public GameObject boostTextFX;
+	public GameObject superBoostTextFX;
 	public GameObject explosionFX;
 	float worldZClamp;
 	float worldYClamp;
@@ -794,9 +795,9 @@ public class Player : MonoBehaviour
 		
 		// Remove the inventory item if they had one
 		if(isSuperBoost) {
-			inventory.RemoveItem (ItemNames.BOOST);
-		} else {
 			inventory.RemoveItem (ItemNames.SUPERBOOST);
+		} else {
+			inventory.RemoveItem (ItemNames.BOOST);
 		}
 				
 		boostFX = (GameObject)Instantiate (boostFXPrefab, transform.position,
@@ -804,8 +805,9 @@ public class Player : MonoBehaviour
 		boostFX.transform.parent = transform;
 		
 		// Show Boost use Text
-		GameObject fx = (GameObject)Instantiate (boostTextFX, transform.position + boostTextFX.transform.position,
-			boostTextFX.transform.rotation);
+		GameObject fxPrefab = isSuperBoost ? superBoostTextFX : boostTextFX;
+		GameObject fx = (GameObject)Instantiate (fxPrefab, transform.position + fxPrefab.transform.position,
+			fxPrefab.transform.rotation);
 		fx.transform.parent = transform;
 		Destroy (fx, 1.5f);
 	}

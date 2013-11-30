@@ -3582,6 +3582,54 @@ Prefab:
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11400014, guid: 52520621251bda348a843f251043d56e, type: 2}
+      propertyPath: powerReadySound
+      value: 
+      objectReference: {fileID: 8300000, guid: 724d9609d5650416691659646b7b8078, type: 3}
+    - target: {fileID: 11400012, guid: 52520621251bda348a843f251043d56e, type: 2}
+      propertyPath: powerReadySound
+      value: 
+      objectReference: {fileID: 8300000, guid: 6335a3394b0ae4b38a7c9482cc9573f6, type: 3}
+    - target: {fileID: 11400016, guid: 52520621251bda348a843f251043d56e, type: 2}
+      propertyPath: powerReadySound
+      value: 
+      objectReference: {fileID: 8300000, guid: 5b12d2eddda014a00b977d23e18985b2, type: 3}
+    - target: {fileID: 11400010, guid: 52520621251bda348a843f251043d56e, type: 2}
+      propertyPath: wildcardSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 28d12a89b50164619a591ae234405765, type: 3}
+    - target: {fileID: 11400010, guid: 52520621251bda348a843f251043d56e, type: 2}
+      propertyPath: laserSound
+      value: 
+      objectReference: {fileID: 8300000, guid: fcadb206683984c418f8826c8f463de2, type: 3}
+    - target: {fileID: 11400010, guid: 52520621251bda348a843f251043d56e, type: 2}
+      propertyPath: pickupSound00
+      value: 
+      objectReference: {fileID: 8300000, guid: 1ea1b39ac323246a69a53efe1c33b30f, type: 3}
+    - target: {fileID: 11400010, guid: 52520621251bda348a843f251043d56e, type: 2}
+      propertyPath: pickupSound01
+      value: 
+      objectReference: {fileID: 8300000, guid: 1ea1b39ac323246a69a53efe1c33b30f, type: 3}
+    - target: {fileID: 11400010, guid: 52520621251bda348a843f251043d56e, type: 2}
+      propertyPath: blockHitSound
+      value: 
+      objectReference: {fileID: 8300000, guid: ac603d086377d4299a7b9a6ce34b5097, type: 3}
+    - target: {fileID: 11400010, guid: 52520621251bda348a843f251043d56e, type: 2}
+      propertyPath: explosionSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 5991eff678cce42b0a5c8b7e86053a4e, type: 3}
+    - target: {fileID: 8200004, guid: 52520621251bda348a843f251043d56e, type: 2}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 551a9347e6717460b9f962ed851bfd84, type: 3}
+    - target: {fileID: 8200004, guid: 52520621251bda348a843f251043d56e, type: 2}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400010, guid: 52520621251bda348a843f251043d56e, type: 2}
+      propertyPath: boostSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 551a9347e6717460b9f962ed851bfd84, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 52520621251bda348a843f251043d56e, type: 2}
   m_RootGameObject: {fileID: 1741557054}
@@ -6498,7 +6546,7 @@ MonoBehaviour:
   blockPrefab: {fileID: 100000, guid: ea33b1b462fda9f4ebb49abe1a47a942, type: 2}
   wildcardPrefab: {fileID: 100000, guid: e8f346d946fcd48b0b63623a492187d3, type: 2}
   DEBUG_MODE: 0
-  DEBUG_SKIP_TUTORIAL: 1
+  DEBUG_SKIP_TUTORIAL: 0
 --- !u!82 &1651423744
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6858,7 +6906,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: 8a8261b64285ea64b92d98d732c090fe, type: 2}
       propertyPath: DEBUG_SKIP_TUTORIAL
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8a8261b64285ea64b92d98d732c090fe, type: 2}
@@ -7055,7 +7103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63fb76cb6026b104aa12bfe33b8e5104, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerReadySound: {fileID: 8300000, guid: 7ad350cc1a9100141808d8b7dc533b6e, type: 3}
+  powerReadySound: {fileID: 8300000, guid: 724d9609d5650416691659646b7b8078, type: 3}
   curValue: 0
   maxValue: 30
 --- !u!114 &1741557064
@@ -7070,7 +7118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7206f00ac992a643b1471f409b48131, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerReadySound: {fileID: 8300000, guid: 727dd46b669931645927cad8c8b88b7c, type: 3}
+  powerReadySound: {fileID: 8300000, guid: 5b12d2eddda014a00b977d23e18985b2, type: 3}
   curValue: 0
   maxValue: 30
 --- !u!114 &1741557068
@@ -7085,7 +7133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c099a4d9d5fa104e810ffe6b52ad7dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerReadySound: {fileID: 8300000, guid: 651ad5f1d07e32544a16ac659e51618c, type: 3}
+  powerReadySound: {fileID: 8300000, guid: 6335a3394b0ae4b38a7c9482cc9573f6, type: 3}
   curValue: 0
   maxValue: 30
 --- !u!114 &1741557069
@@ -7109,8 +7157,11 @@ MonoBehaviour:
   playerRGB: {fileID: 0}
   MAGNET_DIST: 10
   pickups: []
-  pickupSound00: {fileID: 8300000, guid: c674d8535fb505a43995a1ad8dbcfe9e, type: 3}
-  pickupSound01: {fileID: 8300000, guid: c674d8535fb505a43995a1ad8dbcfe9e, type: 3}
+  explosionSound: {fileID: 8300000, guid: 5991eff678cce42b0a5c8b7e86053a4e, type: 3}
+  blockHitSound: {fileID: 8300000, guid: ac603d086377d4299a7b9a6ce34b5097, type: 3}
+  wildcardSound: {fileID: 8300000, guid: 28d12a89b50164619a591ae234405765, type: 3}
+  pickupSound00: {fileID: 8300000, guid: 1ea1b39ac323246a69a53efe1c33b30f, type: 3}
+  pickupSound01: {fileID: 8300000, guid: 1ea1b39ac323246a69a53efe1c33b30f, type: 3}
   deathSound: {fileID: 8300000, guid: 204de822c529143c399b8a8585a52455, type: 3}
   slowDownSound: {fileID: 8300000, guid: 899a1f7687ce84b96b44514220aa1a1d, type: 3}
   speedUpSound: {fileID: 8300000, guid: 2739fd81fd03f4b73b88120700f6c873, type: 3}
@@ -7118,10 +7169,11 @@ MonoBehaviour:
   shieldHitSound: {fileID: 8300000, guid: 39aaef216eada4fac92a50637e4ff1bd, type: 3}
   shieldWeakSound: {fileID: 8300000, guid: a2b75d266ca2e496085f0896f0cbc9e4, type: 3}
   shieldDownSound: {fileID: 8300000, guid: 673cdc2cad26b48cabff6d8c15cd3061, type: 3}
-  laserSound: {fileID: 8300000, guid: 653b9d604a9a242d9be6e1e4a5f1380a, type: 3}
+  laserSound: {fileID: 8300000, guid: fcadb206683984c418f8826c8f463de2, type: 3}
   boostFXPrefab: {fileID: 100000, guid: 7c09f659f187d4c0fb4b2b49a59a93dd, type: 2}
   laserBeamFX: {fileID: 100000, guid: 7480f0444bc4b4c3394ed8917da1619a, type: 2}
   wildcardFX: {fileID: 100004, guid: d706a5207d2244924b151c213d3e91a4, type: 2}
+  explosionFX: {fileID: 100000, guid: 6de7cefb1ea1948c4b3ec843c37ed74a, type: 2}
   perceivedVelocity: {x: 0, y: 0, z: 0}
 --- !u!82 &1741557070
 AudioSource:
@@ -7132,11 +7184,11 @@ AudioSource:
   m_GameObject: {fileID: 1741557054}
   m_Enabled: 1
   serializedVersion: 3
-  m_audioClip: {fileID: 8300000, guid: 651ad5f1d07e32544a16ac659e51618c, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 551a9347e6717460b9f962ed851bfd84, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Priority: 128
   DopplerLevel: 1

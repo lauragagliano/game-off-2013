@@ -347,7 +347,13 @@ public class Treadmill : MonoBehaviour
 	 */
 	void SpawnSection (GameObject sectionToSpawn)
 	{
-		Vector3 rowSpacing = new Vector3 (0, 0, 1);
+		GameObject newestSection = GetLastSectionInPlay ();
+		float zOverkill = 0.0f;
+		if(newestSection != null) {
+			Transform backEdge = (Transform)newestSection.transform.FindChild (ObjectNames.BACK_EDGE);
+			zOverkill = backEdge.position.z - sectionSpawnZone.position.z;
+		}
+		Vector3 rowSpacing = new Vector3 (0, 0, zOverkill);
 		GameObject newSection = (GameObject)Instantiate (sectionToSpawn,
 				sectionSpawnZone.position + rowSpacing, Quaternion.identity);
 		CountSection (newSection.name);

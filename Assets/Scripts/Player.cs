@@ -749,7 +749,7 @@ public class Player : MonoBehaviour
 	void CheckSlowDownTimeout ()
 	{
 		if (isUsingSlowdown && !bluePower.IsPowerActive ()) {
-			GameObject.Find (ObjectNames.TREADMILL).GetComponent<Treadmill> ().ResumeTreadmill ();
+			GameObject.Find (ObjectNames.TREADMILL).GetComponent<Treadmill> ().ResumeFromSlowdown ();
 			isUsingSlowdown = false;
 			audio.PlayOneShot (speedUpSound);
 		}
@@ -841,7 +841,6 @@ public class Player : MonoBehaviour
 	 */
 	public void InitializeStatsOnSpawn ()
 	{
-	
 		pickups = new List<GameObject> ();
 		
 		// Give player their upgrades

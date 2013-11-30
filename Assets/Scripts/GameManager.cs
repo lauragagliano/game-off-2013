@@ -229,7 +229,7 @@ public class GameManager : Singleton<GameManager>
 		didPlayerReviveThisRun = false;
 		
 		player.Spawn (playerSpawn.position);
-		treadmill.ResetTreadmill ();
+		treadmill.InitializeTreadmill ();
 	}
 	
 	/*
@@ -322,7 +322,7 @@ public class GameManager : Singleton<GameManager>
 	{
 		gameState = GameState.Running;
 		if (isResuming) {
-			treadmill.ResumeTreadmill ();
+			treadmill.UnpauseScrolling ();
 		} else {
 			treadmill.StartScrolling ();
 		}

@@ -213,9 +213,6 @@ public class GUI_WildcardReveal : MonoBehaviour
 			float rand = Random.Range (0, MAX_CHANCE);
 			float CHANCE_FOR_REVIVE = isReviveAllowed ? 10.0f : 0.0f;
 			float CHANCE_FOR_BOOST = isBoostAllowed ? 20.0f : 0.0f;
-			Debug.Log ("Giving out item1 -----");
-			Debug.Log ("Chance for revive: " + CHANCE_FOR_REVIVE);
-			Debug.Log ("Chance for boost: " + CHANCE_FOR_BOOST);
 			
 			Item itemtoGive;
 			if (rand > (MAX_CHANCE - CHANCE_FOR_REVIVE)) {
@@ -229,7 +226,6 @@ public class GUI_WildcardReveal : MonoBehaviour
 			} else {
 				itemtoGive = GetRandomUnlimitedItem ();
 			}
-			Debug.Log ("Giving Out: " + itemtoGive.itemName);
 			itemsToGiveOut.Add(itemtoGive);
 			i++;
 		}
@@ -247,6 +243,7 @@ public class GUI_WildcardReveal : MonoBehaviour
 	void AwardItems ()
 	{
 		bool flagForRevive = false;
+
 		Player player = GameManager.Instance.player;
 		Inventory playerInventory = player.GetComponent<Inventory> ();
 		

@@ -254,8 +254,10 @@ public class GUI_WildcardReveal : MonoBehaviour
 		foreach (Transform child in transform) {
 			Item item = child.gameObject.GetComponent<GUI_Wildcard> ().myItem;
 			if (item.CompareItem (money )) {
+				GameManager.Instance.AddPickupPoints (MONEY_AMOUNT);
 				player.AddMoney(MONEY_AMOUNT);
 			} else if ( item.CompareItem (bigMoney ) ) {
+				GameManager.Instance.AddPickupPoints (BIG_MONEY_AMOUNT);
 				player.AddMoney(BIG_MONEY_AMOUNT);
 			} else if ( item.CompareItem (revive ) ) {
 				flagForRevive = true;

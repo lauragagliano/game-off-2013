@@ -192,10 +192,10 @@ public class GameManager : Singleton<GameManager>
 	/*
 	 * Add a point to our score, to be displayed at the end of each round.
 	 */
-	public void AddPoint ()
+	public void AddPickupPoints (int numPickups)
 	{
 		if (SAVE_TUTORIAL_COMPLETE) {
-			numPickupsThisRound++;
+			numPickupsThisRound += numPickups;
 		}
 	}
 	

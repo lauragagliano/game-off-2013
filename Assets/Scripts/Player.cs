@@ -381,7 +381,7 @@ public class Player : MonoBehaviour
 			} else {
 				powerToCharge.AddPower (POWER_UNIT);
 			}
-			GameManager.Instance.AddPoint ();
+			GameManager.Instance.AddPickupPoints (1);
 			// Add up our money (only if tutorial challenge is over)
 			if (GameManager.Instance.SAVE_TUTORIAL_COMPLETE) {
 				AddMoney (1);
@@ -712,11 +712,11 @@ public class Player : MonoBehaviour
 	public void TakeShieldHit ()
 	{
 		float powerLoss = greenPower.maxValue / shieldStrength;
-		float newShieldPower = greenPower.curValue - powerLoss;
+		float newShieldPower = Mathf.Max (greenPower.curValue - powerLoss, 0);
 		if (newShieldPower > 0) {
 			audio.PlayOneShot (shieldHitSound);
 			greenPower.RemovePower (powerLoss);
-		} else if (newShieldPower <= 0) {
+		} else if (newShieldPower == 0) {
 			LowerShields ();
 		}
 		greenPower.curValue = newShieldPower;

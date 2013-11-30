@@ -2,7 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!1 &100000
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 400000}
   - 132: {fileID: 13200000}
   m_Layer: 8
-  m_Name: CrystalsText
+  m_Name: CrystalsLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34,7 +34,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &100004
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -42,7 +42,7 @@ GameObject:
   - 4: {fileID: 400004}
   - 132: {fileID: 13200002}
   m_Layer: 8
-  m_Name: DistanceText_Shadow
+  m_Name: DistanceLabel_Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -65,7 +65,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &100008
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -210,7 +210,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &100026
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -226,7 +226,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &100028
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -259,7 +259,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &100032
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -267,7 +267,7 @@ GameObject:
   - 4: {fileID: 400032}
   - 132: {fileID: 13200012}
   m_Layer: 8
-  m_Name: FinalDistance_Shadow
+  m_Name: NewHighScore_Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -275,7 +275,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &100034
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -323,7 +323,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &100040
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -339,7 +339,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &100042
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -355,7 +355,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &100044
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -371,7 +371,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &100046
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -484,7 +484,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &100060
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -492,7 +492,7 @@ GameObject:
   - 4: {fileID: 400060}
   - 132: {fileID: 13200026}
   m_Layer: 8
-  m_Name: BestDistanceText
+  m_Name: BestDistanceLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -500,7 +500,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &100062
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -508,7 +508,7 @@ GameObject:
   - 4: {fileID: 400062}
   - 132: {fileID: 13200028}
   m_Layer: 8
-  m_Name: BestDistanceText_Shadow
+  m_Name: BestDistanceLabel_Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -516,7 +516,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &100064
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -524,7 +524,7 @@ GameObject:
   - 4: {fileID: 400064}
   - 132: {fileID: 13200030}
   m_Layer: 8
-  m_Name: DistanceText
+  m_Name: DistanceLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -532,7 +532,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &100066
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -540,7 +540,213 @@ GameObject:
   - 4: {fileID: 400066}
   - 132: {fileID: 13200032}
   m_Layer: 8
-  m_Name: CrystalsText_Shadow
+  m_Name: TotalCrystalsLabel_Shadow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &100068
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400068}
+  - 132: {fileID: 13200034}
+  m_Layer: 8
+  m_Name: NewHighScore
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &100070
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400070}
+  - 132: {fileID: 13200036}
+  m_Layer: 8
+  m_Name: Crystals_Shadow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &100072
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400072}
+  - 132: {fileID: 13200038}
+  m_Layer: 8
+  m_Name: Crystals
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &100074
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400074}
+  m_Layer: 0
+  m_Name: EndGameText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &100076
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400076}
+  m_Layer: 0
+  m_Name: InGameText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &100078
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400078}
+  - 132: {fileID: 13200040}
+  m_Layer: 8
+  m_Name: Distance_Shadow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &100080
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400080}
+  - 132: {fileID: 13200042}
+  m_Layer: 8
+  m_Name: BestDistance
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &100082
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400082}
+  - 132: {fileID: 13200044}
+  m_Layer: 8
+  m_Name: BestDistance_Shadow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &100084
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400084}
+  - 132: {fileID: 13200046}
+  m_Layer: 8
+  m_Name: TotalCrystalsLabel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &100086
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400086}
+  - 132: {fileID: 13200048}
+  m_Layer: 8
+  m_Name: FinalDistance_Shadow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &100088
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400088}
+  - 132: {fileID: 13200050}
+  m_Layer: 8
+  m_Name: Distance
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &100090
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400090}
+  - 132: {fileID: 13200052}
+  m_Layer: 8
+  m_Name: FinalDistance
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &100092
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400092}
+  - 132: {fileID: 13200054}
+  m_Layer: 8
+  m_Name: CrystalsLabel_Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -553,10 +759,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .949999988, y: .779999971, z: 1}
+  m_LocalPosition: {x: .954999983, y: .889999986, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400002}
+  m_Father: {fileID: 400076}
 --- !u!4 &400002
 Transform:
   m_ObjectHideFlags: 1
@@ -567,25 +773,12 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 400074}
+  - {fileID: 400076}
   - {fileID: 400050}
   - {fileID: 400030}
   - {fileID: 400012}
-  - {fileID: 400066}
-  - {fileID: 400044}
-  - {fileID: 400028}
-  - {fileID: 400042}
-  - {fileID: 400040}
-  - {fileID: 400046}
-  - {fileID: 400064}
   - {fileID: 400006}
-  - {fileID: 400008}
-  - {fileID: 400034}
-  - {fileID: 400032}
-  - {fileID: 400026}
-  - {fileID: 400062}
-  - {fileID: 400060}
-  - {fileID: 400004}
-  - {fileID: 400000}
   m_Father: {fileID: 0}
 --- !u!4 &400004
 Transform:
@@ -594,10 +787,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .300000012, y: .839999974, z: .980000019}
+  m_LocalPosition: {x: .0199999996, y: .860000014, z: .980000019}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400002}
+  m_Father: {fileID: 400076}
 --- !u!4 &400006
 Transform:
   m_ObjectHideFlags: 1
@@ -618,10 +811,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100008}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .529999614, y: .25, z: 2}
+  m_LocalPosition: {x: .5, y: .398000002, z: .980000019}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400002}
+  m_Father: {fileID: 400074}
 --- !u!4 &400010
 Transform:
   m_ObjectHideFlags: 1
@@ -724,10 +917,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100026}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .529999614, y: .74000001, z: .899999976}
+  m_LocalPosition: {x: .5, y: .699999988, z: .980000019}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400002}
+  m_Father: {fileID: 400074}
 --- !u!4 &400028
 Transform:
   m_ObjectHideFlags: 1
@@ -738,7 +931,7 @@ Transform:
   m_LocalPosition: {x: .949999988, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400002}
+  m_Father: {fileID: 400076}
 --- !u!4 &400030
 Transform:
   m_ObjectHideFlags: 1
@@ -758,10 +951,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100032}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .529999614, y: .680000007, z: .899999976}
+  m_LocalPosition: {x: .5, y: .589999974, z: .980000019}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400002}
+  m_Father: {fileID: 400074}
 --- !u!4 &400034
 Transform:
   m_ObjectHideFlags: 1
@@ -769,10 +962,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100034}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .529999614, y: .300000012, z: 2}
+  m_LocalPosition: {x: .5, y: .449999988, z: .980000019}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400002}
+  m_Father: {fileID: 400074}
 --- !u!4 &400036
 Transform:
   m_ObjectHideFlags: 1
@@ -802,10 +995,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100040}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .529999971, y: .74000001, z: 1}
+  m_LocalPosition: {x: .5, y: .699999988, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400002}
+  m_Father: {fileID: 400074}
 --- !u!4 &400042
 Transform:
   m_ObjectHideFlags: 1
@@ -813,10 +1006,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100042}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .529999971, y: .680000007, z: 1}
+  m_LocalPosition: {x: .5, y: .639999986, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400002}
+  m_Father: {fileID: 400074}
 --- !u!4 &400044
 Transform:
   m_ObjectHideFlags: 1
@@ -824,10 +1017,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100044}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .529999971, y: .300000012, z: 2.32081413}
+  m_LocalPosition: {x: .5, y: .449999988, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400002}
+  m_Father: {fileID: 400074}
 --- !u!4 &400046
 Transform:
   m_ObjectHideFlags: 1
@@ -835,10 +1028,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100046}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .529999971, y: .25, z: 2.32081413}
+  m_LocalPosition: {x: .5, y: .398000002, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400002}
+  m_Father: {fileID: 400074}
 --- !u!4 &400048
 Transform:
   m_ObjectHideFlags: 1
@@ -916,10 +1109,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100060}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .300000012, y: .839999974, z: 1}
+  m_LocalPosition: {x: .0199999996, y: .916999996, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400002}
+  m_Father: {fileID: 400076}
 --- !u!4 &400062
 Transform:
   m_ObjectHideFlags: 1
@@ -927,10 +1120,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100062}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .300000012, y: .839999974, z: .980000019}
+  m_LocalPosition: {x: .0199999996, y: .916999996, z: .980000019}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400002}
+  m_Father: {fileID: 400076}
 --- !u!4 &400064
 Transform:
   m_ObjectHideFlags: 1
@@ -938,10 +1131,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100064}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .300000012, y: .839999974, z: 1}
+  m_LocalPosition: {x: .0199999996, y: .860000014, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400002}
+  m_Father: {fileID: 400076}
 --- !u!4 &400066
 Transform:
   m_ObjectHideFlags: 1
@@ -949,10 +1142,179 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100066}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .94999963, y: .779999971, z: .980000019}
+  m_LocalPosition: {x: .954999983, y: .889999986, z: .980000019}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
+  m_Father: {fileID: 400076}
+--- !u!4 &400068
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .5, y: .589999974, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 400074}
+--- !u!4 &400070
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100070}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .954999983, y: .855000019, z: .980000019}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 400076}
+--- !u!4 &400072
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100072}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .953000009, y: .855000019, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 400076}
+--- !u!4 &400074
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100074}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 400046}
+  - {fileID: 400008}
+  - {fileID: 400044}
+  - {fileID: 400034}
+  - {fileID: 400090}
+  - {fileID: 400068}
+  - {fileID: 400042}
+  - {fileID: 400086}
+  - {fileID: 400032}
+  - {fileID: 400040}
+  - {fileID: 400026}
   m_Father: {fileID: 400002}
+--- !u!4 &400076
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100076}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 400080}
+  - {fileID: 400060}
+  - {fileID: 400082}
+  - {fileID: 400062}
+  - {fileID: 400070}
+  - {fileID: 400084}
+  - {fileID: 400072}
+  - {fileID: 400000}
+  - {fileID: 400092}
+  - {fileID: 400066}
+  - {fileID: 400028}
+  - {fileID: 400088}
+  - {fileID: 400064}
+  - {fileID: 400078}
+  - {fileID: 400004}
+  m_Father: {fileID: 400002}
+--- !u!4 &400078
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100078}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .0199999996, y: .839999974, z: .980000019}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 400076}
+--- !u!4 &400080
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100080}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .0199999996, y: .894999981, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 400076}
+--- !u!4 &400082
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100082}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .0199999996, y: .894999981, z: .980000019}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 400076}
+--- !u!4 &400084
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100084}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .954999983, y: .889999986, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 400076}
+--- !u!4 &400086
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100086}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .5, y: .639999986, z: .980000019}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 400074}
+--- !u!4 &400088
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100088}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .0199999996, y: .839999974, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 400076}
+--- !u!4 &400090
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100090}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .5, y: .639999986, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 400074}
+--- !u!4 &400092
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100092}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .954999983, y: .889999986, z: .980000019}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 400076}
 --- !u!111 &11100000
 Animation:
   m_ObjectHideFlags: 1
@@ -1021,24 +1383,32 @@ MonoBehaviour:
   player: {fileID: 0}
   finalDistanceLabelText: {fileID: 13200018}
   finalDistanceLabelTextShadow: {fileID: 13200006}
-  finalDistanceText: {fileID: 13200020}
-  finalDistanceTextShadow: {fileID: 13200012}
+  finalDistanceText: {fileID: 13200052}
+  finalDistanceTextShadow: {fileID: 13200048}
   crystalsCollectedLabelText: {fileID: 13200022}
   crystalsCollectedLabelTextShadow: {fileID: 13200014}
   crystalsCollectedText: {fileID: 13200024}
   crystalsCollectedTextShadow: {fileID: 13200010}
-  inGameCrystalsCountText: {fileID: 0}
-  inGameCrystalsCountTextShadow: {fileID: 0}
-  inGameCrystalsLabel: {fileID: 0}
-  inGameCrystalsLabelShadow: {fileID: 0}
-  inGameDistanceText: {fileID: 0}
-  inGameDistanceTextShadow: {fileID: 0}
-  inGameDistanceLabel: {fileID: 0}
-  inGameDistanceLabelShadow: {fileID: 0}
-  bestDistanceText: {fileID: 13200026}
-  bestDistanceTextShadow: {fileID: 13200028}
-  bestDistanceLabel: {fileID: 0}
-  bestDistanceLabelShadow: {fileID: 0}
+  newHighScoreText: {fileID: 13200034}
+  newHighScoreTextShadow: {fileID: 13200012}
+  redMeter: {fileID: 100050}
+  greenMeter: {fileID: 100030}
+  blueMeter: {fileID: 100012}
+  lighting: {fileID: 0}
+  inGameCrystalsCountText: {fileID: 13200038}
+  inGameCrystalsCountTextShadow: {fileID: 13200036}
+  inGameCrystalsLabel: {fileID: 13200000}
+  inGameCrystalsLabelShadow: {fileID: 13200054}
+  inGameDistanceText: {fileID: 13200050}
+  inGameDistanceTextShadow: {fileID: 13200040}
+  inGameDistanceLabel: {fileID: 13200030}
+  inGameDistanceLabelShadow: {fileID: 13200002}
+  bestDistanceText: {fileID: 13200042}
+  bestDistanceTextShadow: {fileID: 13200044}
+  bestDistanceLabel: {fileID: 13200026}
+  bestDistanceLabelShadow: {fileID: 13200028}
+  storeCrystalsLabel: {fileID: 13200046}
+  storeCrystalsLabelShadow: {fileID: 13200032}
   debugText: {fileID: 13200008}
   pressSpaceText: {fileID: 13200016}
   pressSpaceTextShadow: {fileID: 13200004}
@@ -1617,7 +1987,7 @@ GUIText:
   m_GameObject: {fileID: 100000}
   m_Enabled: 0
   serializedVersion: 3
-  m_Text: 'Crystals:'
+  m_Text: Crystals
   m_Anchor: 8
   m_Alignment: 0
   m_PixelOffset: {x: 0, y: 0}
@@ -1640,8 +2010,8 @@ GUIText:
   m_GameObject: {fileID: 100004}
   m_Enabled: 0
   serializedVersion: 3
-  m_Text: 'Distance:'
-  m_Anchor: 8
+  m_Text: Distance
+  m_Anchor: 0
   m_Alignment: 0
   m_PixelOffset: {x: 1, y: -2}
   m_LineSpacing: 1
@@ -1686,7 +2056,7 @@ GUIText:
   m_GameObject: {fileID: 100026}
   m_Enabled: 0
   serializedVersion: 3
-  m_Text: '[final distance label]'
+  m_Text: You survived for
   m_Anchor: 4
   m_Alignment: 1
   m_PixelOffset: {x: 1, y: -2}
@@ -1744,7 +2114,7 @@ GUIText:
   m_FontStyle: 0
   m_Color:
     serializedVersion: 2
-    rgba: 4286204728
+    rgba: 4278190080
   m_PixelCorrect: 1
   m_RichText: 1
 --- !u!132 &13200012
@@ -1755,7 +2125,7 @@ GUIText:
   m_GameObject: {fileID: 100032}
   m_Enabled: 0
   serializedVersion: 3
-  m_Text: '[final distance]'
+  m_Text: New HIgh Score!
   m_Anchor: 4
   m_Alignment: 1
   m_PixelOffset: {x: 1, y: -2}
@@ -1763,11 +2133,11 @@ GUIText:
   m_TabSize: 4
   m_Font: {fileID: 12800000, guid: 56e3e49b48085453d8733d36bb8dbcb4, type: 3}
   m_Material: {fileID: 0}
-  m_FontSize: 50
+  m_FontSize: 30
   m_FontStyle: 0
   m_Color:
     serializedVersion: 2
-    rgba: 4279261556
+    rgba: 4278190080
   m_PixelCorrect: 1
   m_RichText: 1
 --- !u!132 &13200014
@@ -1778,7 +2148,7 @@ GUIText:
   m_GameObject: {fileID: 100034}
   m_Enabled: 0
   serializedVersion: 3
-  m_Text: '[crystals collected label]'
+  m_Text: Crystals Grabbed
   m_Anchor: 4
   m_Alignment: 1
   m_PixelOffset: {x: 1, y: -2}
@@ -1824,7 +2194,7 @@ GUIText:
   m_GameObject: {fileID: 100040}
   m_Enabled: 0
   serializedVersion: 3
-  m_Text: '[final distance label]'
+  m_Text: You survived for
   m_Anchor: 4
   m_Alignment: 1
   m_PixelOffset: {x: 0, y: 0}
@@ -1859,7 +2229,7 @@ GUIText:
   m_FontStyle: 0
   m_Color:
     serializedVersion: 2
-    rgba: 4287490806
+    rgba: 4285456886
   m_PixelCorrect: 1
   m_RichText: 1
 --- !u!132 &13200022
@@ -1870,7 +2240,7 @@ GUIText:
   m_GameObject: {fileID: 100044}
   m_Enabled: 0
   serializedVersion: 3
-  m_Text: '[crystals collected label]'
+  m_Text: Crystals Grabbed
   m_Anchor: 4
   m_Alignment: 1
   m_PixelOffset: {x: 0, y: 0}
@@ -1905,7 +2275,7 @@ GUIText:
   m_FontStyle: 0
   m_Color:
     serializedVersion: 2
-    rgba: 4294501829
+    rgba: 4284477104
   m_PixelCorrect: 1
   m_RichText: 1
 --- !u!132 &13200026
@@ -1916,9 +2286,9 @@ GUIText:
   m_GameObject: {fileID: 100060}
   m_Enabled: 0
   serializedVersion: 3
-  m_Text: 'Distance:'
-  m_Anchor: 8
-  m_Alignment: 0
+  m_Text: Best
+  m_Anchor: 0
+  m_Alignment: 2
   m_PixelOffset: {x: 0, y: 0}
   m_LineSpacing: 1
   m_TabSize: 4
@@ -1939,9 +2309,9 @@ GUIText:
   m_GameObject: {fileID: 100062}
   m_Enabled: 0
   serializedVersion: 3
-  m_Text: 'Distance:'
-  m_Anchor: 8
-  m_Alignment: 0
+  m_Text: Best
+  m_Anchor: 0
+  m_Alignment: 2
   m_PixelOffset: {x: 1, y: -2}
   m_LineSpacing: 1
   m_TabSize: 4
@@ -1962,8 +2332,8 @@ GUIText:
   m_GameObject: {fileID: 100064}
   m_Enabled: 0
   serializedVersion: 3
-  m_Text: 'Distance:'
-  m_Anchor: 8
+  m_Text: Distance
+  m_Anchor: 0
   m_Alignment: 0
   m_PixelOffset: {x: 0, y: 0}
   m_LineSpacing: 1
@@ -1985,7 +2355,260 @@ GUIText:
   m_GameObject: {fileID: 100066}
   m_Enabled: 0
   serializedVersion: 3
-  m_Text: 'Money:'
+  m_Text: Total Crystals
+  m_Anchor: 8
+  m_Alignment: 0
+  m_PixelOffset: {x: 1, y: -2}
+  m_LineSpacing: 1
+  m_TabSize: 4
+  m_Font: {fileID: 12800000, guid: 56e3e49b48085453d8733d36bb8dbcb4, type: 3}
+  m_Material: {fileID: 0}
+  m_FontSize: 0
+  m_FontStyle: 0
+  m_Color:
+    serializedVersion: 2
+    rgba: 4278190080
+  m_PixelCorrect: 1
+  m_RichText: 1
+--- !u!132 &13200034
+GUIText:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100068}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Text: New High Score!
+  m_Anchor: 4
+  m_Alignment: 1
+  m_PixelOffset: {x: 0, y: 0}
+  m_LineSpacing: 1
+  m_TabSize: 4
+  m_Font: {fileID: 12800000, guid: 56e3e49b48085453d8733d36bb8dbcb4, type: 3}
+  m_Material: {fileID: 0}
+  m_FontSize: 30
+  m_FontStyle: 0
+  m_Color:
+    serializedVersion: 2
+    rgba: 4278232319
+  m_PixelCorrect: 1
+  m_RichText: 1
+--- !u!132 &13200036
+GUIText:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100070}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Text: 1000
+  m_Anchor: 8
+  m_Alignment: 0
+  m_PixelOffset: {x: 1, y: -2}
+  m_LineSpacing: 1
+  m_TabSize: 4
+  m_Font: {fileID: 12800000, guid: 56e3e49b48085453d8733d36bb8dbcb4, type: 3}
+  m_Material: {fileID: 0}
+  m_FontSize: 22
+  m_FontStyle: 0
+  m_Color:
+    serializedVersion: 2
+    rgba: 4278190080
+  m_PixelCorrect: 1
+  m_RichText: 1
+--- !u!132 &13200038
+GUIText:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100072}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Text: 1000
+  m_Anchor: 8
+  m_Alignment: 0
+  m_PixelOffset: {x: 0, y: 0}
+  m_LineSpacing: 1
+  m_TabSize: 4
+  m_Font: {fileID: 12800000, guid: 56e3e49b48085453d8733d36bb8dbcb4, type: 3}
+  m_Material: {fileID: 0}
+  m_FontSize: 22
+  m_FontStyle: 0
+  m_Color:
+    serializedVersion: 2
+    rgba: 4284477104
+  m_PixelCorrect: 1
+  m_RichText: 1
+--- !u!132 &13200040
+GUIText:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100078}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Text: Distance
+  m_Anchor: 0
+  m_Alignment: 0
+  m_PixelOffset: {x: 1, y: -2}
+  m_LineSpacing: 1
+  m_TabSize: 4
+  m_Font: {fileID: 12800000, guid: 56e3e49b48085453d8733d36bb8dbcb4, type: 3}
+  m_Material: {fileID: 0}
+  m_FontSize: 22
+  m_FontStyle: 0
+  m_Color:
+    serializedVersion: 2
+    rgba: 4278190080
+  m_PixelCorrect: 1
+  m_RichText: 1
+--- !u!132 &13200042
+GUIText:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100080}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Text: 1871
+  m_Anchor: 0
+  m_Alignment: 0
+  m_PixelOffset: {x: 0, y: 0}
+  m_LineSpacing: 1
+  m_TabSize: 4
+  m_Font: {fileID: 12800000, guid: 56e3e49b48085453d8733d36bb8dbcb4, type: 3}
+  m_Material: {fileID: 0}
+  m_FontSize: 22
+  m_FontStyle: 0
+  m_Color:
+    serializedVersion: 2
+    rgba: 4285456886
+  m_PixelCorrect: 1
+  m_RichText: 1
+--- !u!132 &13200044
+GUIText:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100082}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Text: 1871
+  m_Anchor: 0
+  m_Alignment: 0
+  m_PixelOffset: {x: 1, y: -2}
+  m_LineSpacing: 1
+  m_TabSize: 4
+  m_Font: {fileID: 12800000, guid: 56e3e49b48085453d8733d36bb8dbcb4, type: 3}
+  m_Material: {fileID: 0}
+  m_FontSize: 22
+  m_FontStyle: 0
+  m_Color:
+    serializedVersion: 2
+    rgba: 4278190080
+  m_PixelCorrect: 1
+  m_RichText: 1
+--- !u!132 &13200046
+GUIText:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100084}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Text: Total Crystals
+  m_Anchor: 8
+  m_Alignment: 0
+  m_PixelOffset: {x: 0, y: 0}
+  m_LineSpacing: 1
+  m_TabSize: 4
+  m_Font: {fileID: 12800000, guid: 56e3e49b48085453d8733d36bb8dbcb4, type: 3}
+  m_Material: {fileID: 0}
+  m_FontSize: 0
+  m_FontStyle: 0
+  m_Color:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_PixelCorrect: 1
+  m_RichText: 1
+--- !u!132 &13200048
+GUIText:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100086}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Text: '[final distance]'
+  m_Anchor: 4
+  m_Alignment: 1
+  m_PixelOffset: {x: 1, y: -2}
+  m_LineSpacing: 1
+  m_TabSize: 4
+  m_Font: {fileID: 12800000, guid: 56e3e49b48085453d8733d36bb8dbcb4, type: 3}
+  m_Material: {fileID: 0}
+  m_FontSize: 50
+  m_FontStyle: 0
+  m_Color:
+    serializedVersion: 2
+    rgba: 4278190080
+  m_PixelCorrect: 1
+  m_RichText: 1
+--- !u!132 &13200050
+GUIText:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100088}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Text: Distance
+  m_Anchor: 0
+  m_Alignment: 0
+  m_PixelOffset: {x: 0, y: 0}
+  m_LineSpacing: 1
+  m_TabSize: 4
+  m_Font: {fileID: 12800000, guid: 56e3e49b48085453d8733d36bb8dbcb4, type: 3}
+  m_Material: {fileID: 0}
+  m_FontSize: 22
+  m_FontStyle: 0
+  m_Color:
+    serializedVersion: 2
+    rgba: 4285456886
+  m_PixelCorrect: 1
+  m_RichText: 1
+--- !u!132 &13200052
+GUIText:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100090}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Text: '[final distance]'
+  m_Anchor: 4
+  m_Alignment: 1
+  m_PixelOffset: {x: 0, y: 0}
+  m_LineSpacing: 1
+  m_TabSize: 4
+  m_Font: {fileID: 12800000, guid: 56e3e49b48085453d8733d36bb8dbcb4, type: 3}
+  m_Material: {fileID: 0}
+  m_FontSize: 50
+  m_FontStyle: 0
+  m_Color:
+    serializedVersion: 2
+    rgba: 4285456886
+  m_PixelCorrect: 1
+  m_RichText: 1
+--- !u!132 &13200054
+GUIText:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100092}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Text: Crystals
   m_Anchor: 8
   m_Alignment: 0
   m_PixelOffset: {x: 1, y: -2}

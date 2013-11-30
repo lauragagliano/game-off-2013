@@ -57,7 +57,6 @@ public class HUD : MonoBehaviour
 	
 	void Awake ()
 	{
-		SetItemTexts ();
 		treadmill = GameObject.Find (ObjectNames.TREADMILL).GetComponent<Treadmill> ();
 	}
 	
@@ -74,6 +73,7 @@ public class HUD : MonoBehaviour
 			lighting.intensity = LIGHTING_DARK;
 			DisplayDeadMenu ();
 		} else if (GameManager.Instance.IsShopping ()) {
+			SetItemTexts ();
 			lighting.intensity = LIGHTING_DEFAULT;
 			DisplayStoreMenu ();
 		} else {
@@ -234,11 +234,20 @@ public class HUD : MonoBehaviour
 	
 	void SetItemTexts ()
 	{
+		Store store = (Store)GameObject.Find (ObjectNames.STORE).GetComponent<Store> ();
 		GameObject[] itemObjs = GameObject.FindGameObjectsWithTag (Tags.ITEM);
 		foreach (GameObject obj in itemObjs) {
 			Item item = obj.GetComponent<Item> ();
-			TextMesh itemText = obj.GetComponentInChildren<TextMesh> ();
-			itemText.text = string.Format ("{0}\n\nCost: {1}", item.itemName, item.cost);
+			TextMesh[] itemTexts = obj.GetComponentsInChildren<TextMesh> ();
+
+			string displayText = "{0}\nCost: {1}";
+			if (store.IsAlreadyPurchased ()) {
+				displayText = "{0}\n(Already Owned)";
+			} else if (item.type == Item.Type.consumable) {
+				displayText = "{0}\n(Consumable)\nCost: {1}";
+			}
+			itemTexts[0].text = string.Format (displayText, item.displayName, item.cost);
+			itemTexts[1].text = string.Format (displayText, item.displayName, item.cost);
 		}
 	}
 	

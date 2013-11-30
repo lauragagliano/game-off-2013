@@ -60,6 +60,7 @@ public class Player : MonoBehaviour
 	public GameObject boostFXPrefab;
 	public GameObject laserBeamFX;
 	public GameObject wildcardFX;
+	public GameObject reviveFX;
 	public GameObject explosionFX;
 	float worldZClamp;
 	float worldYClamp;
@@ -421,7 +422,7 @@ public class Player : MonoBehaviour
 	public void AwardWildcard ()
 	{
 		WildcardCount++;
-				GameObject fx = (GameObject)Instantiate (wildcardFX, transform.position + wildcardFX.transform.position,
+		GameObject fx = (GameObject)Instantiate (wildcardFX, transform.position + wildcardFX.transform.position,
 			wildcardFX.transform.rotation);
 		fx.transform.parent = transform;
 		Destroy (fx, 1.5f);
@@ -500,6 +501,14 @@ public class Player : MonoBehaviour
 		
 		reviveTimeout = new RBTimer ();
 		reviveTimeout.StartTimer (2.0f);
+		
+		// Spawn the Revive FX at the Ragdoll's location.
+		GameObject ragdollTorso = body.GetRagdollBody ();
+		Vector3 torsoXZ = new Vector3( ragdollTorso.transform.position.x, 0.0f, ragdollTorso.transform.position.z);
+		Vector3 fxPosition = torsoXZ + new Vector3(0.0f, reviveFX.transform.position.y, reviveFX.transform.position.z);
+		GameObject fx = (GameObject)Instantiate (reviveFX, fxPosition, reviveFX.transform.rotation);
+		fx.transform.parent = transform;
+		Destroy (fx, 1.5f);
 	}
 	
 	/*

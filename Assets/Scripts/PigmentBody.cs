@@ -142,4 +142,12 @@ public class PigmentBody : MonoBehaviour
 		fx.GetComponent<FX_PigmentLimb> ().SetOriginalLimb (limb, transform.gameObject);
 		return fx;
 	}
+	
+	/*
+	 * Return the body ragdoll game object
+	 */
+	public GameObject GetRagdollBody ()
+	{
+		return (GameObject) fxLimbs[(int)Limb.Body];
+	}
 }

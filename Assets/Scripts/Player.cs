@@ -468,10 +468,20 @@ public class Player : MonoBehaviour
 		IsDead = true;
 		collider.enabled = false;
 		
+		// Change the background to neutral
+		ChangeColors (ColorWheel.neutral);
+		redPower.ResetPower ();
+		greenPower.ResetPower ();
+		bluePower.ResetPower ();
+		
 		GameManager.Instance.EndRun ();
 		audio.PlayOneShot (deathSound);
 		PigmentBody body = (PigmentBody)playerGeo.GetComponent<PigmentBody> ();
 		body.ReplaceWithRagdoll ();
+		
+		// pause running animation
+		playerGeo.animation["pigment_run"].speed = 0.0f;
+		
 	}
 	
 	/*
@@ -485,6 +495,7 @@ public class Player : MonoBehaviour
 		
 		PigmentBody body = (PigmentBody)playerGeo.GetComponent<PigmentBody> ();
 		body.RestoreBody ();
+		body.SetColor(ColorWheel.neutral);
 		
 		InitializeStatsOnSpawn ();
 		

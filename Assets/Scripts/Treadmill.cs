@@ -23,7 +23,9 @@ public class Treadmill : MonoBehaviour
 	const float STARTING_ACCEL = 0.0025f;
 	public float distanceTraveled;
 	public float scrollspeed;
-	float previousScrollspeed;
+	float speedBeforeSlowdown;
+	float speedBeforeBoost;
+	float resumeFromPauseSpeed;
 	float accelerationPerFrame;
 	float prevAccelerationPerFrame;
 	public float maxspeed = 50.0f;
@@ -159,7 +161,15 @@ public class Treadmill : MonoBehaviour
 			Debug.LogWarning ("Tried to pause speed when it was already at 0!");
 			return;
 		}
-		previousScrollspeed = scrollspeed;
+		// If dying mid-slowdown, set resume speed to the speed prior to slowdown.
+		if (speedBeforeSlowdown > 0 ) {
+			resumeFromPauseSpeed = speedBeforeSlowdown;
+		} else if (speedBeforeBoost > 0 ){
+			// If they somehow die during boost, restore to speed before boosting.
+			resumeFromPauseSpeed = speedBeforeBoost;
+		} else {
+			resumeFromPauseSpeed = scrollspeed;
+		}
 		scrollspeed = 0;
 	}
 
@@ -190,7 +200,7 @@ public class Treadmill : MonoBehaviour
 	 */
 	public void TemporarySlowDown (float amount)
 	{
-		previousScrollspeed = scrollspeed;
+		speedBeforeSlowdown = scrollspeed;
 		PauseAcceleration ();
 		LerpToSpeed (Mathf.Max (STARTING_SPEED, scrollspeed - amount));
 	}
@@ -198,16 +208,23 @@ public class Treadmill : MonoBehaviour
 	/*
 	 * Bring the treadmill back up to it's previous speed and acceleration.
 	 */
-	public void ResumeTreadmill ()
+	public void UnpauseScrolling ()
 	{
-		LerpToSpeed (previousScrollspeed);
+		LerpToSpeed (resumeFromPauseSpeed);
 		ResumeAcceleration ();
 		status = Status.Started;
 	}
 	
+	public void ResumeFromSlowdown () 
+	{
+		LerpToSpeed (speedBeforeSlowdown);
+		ResumeAcceleration ();
+		status = Status.Started;
+		speedBeforeSlowdown = 0.0f;
+	}
+	
 	/*
-	 * Reset treadmill to prepare for a new game. Values should be restored to default
-	 * and any sections in play should be destroyed.
+	 * Called mid-run to restart the treadmill as if from the beginning.
 	 */
 	public void ResetTreadmill ()
 	{
@@ -215,17 +232,40 @@ public class Treadmill : MonoBehaviour
 			KillSection (sectionsInPlay[i]);
 		}
 		scrollspeed = STARTING_SPEED;
-		previousScrollspeed = STARTING_SPEED;
-		accelerationPerFrame = STARTING_ACCEL;
+		if(speedBeforeSlowdown > 0 ) {
+			speedBeforeSlowdown = STARTING_SPEED;
+		}
+		if (speedBeforeBoost > 0 ) {
+			speedBeforeBoost = STARTING_SPEED;
+		}
+		distanceTraveled = 0.0f;
+		
+		// Stop lerping
 		lerping = false;
 		lerpToSpeed = STARTING_SPEED;
-		distanceTraveled = 0.0f;
+		
 		SetNeedsWildcard (false);
 		
 		nextWildcardMarker = GenerateNextMarker (MIN_WILDCARD_DISTANCE, MAX_WILDCARD_DISTANCE);
 		nextFreebieMarker = GenerateNextMarker (MIN_FREEBIE_DISTANCE, MAX_FREEBIE_DISTANCE);
 		nextChallengeMarker = GenerateNextMarker (MIN_CHALLENGE_DISTANCE, MAX_CHALLENGE_DISTANCE);
 	}
+	
+	/*
+	 * Initializes the treadmill to its default state for a new game. Should not be called mid-run.
+	 */
+	public void InitializeTreadmill ()
+	{
+		ResetTreadmill ();
+		
+		accelerationPerFrame = STARTING_ACCEL;
+		resumeFromPauseSpeed = 0.0f;
+		speedBeforeSlowdown = 0.0f;
+		speedBeforeBoost = 0.0f;
+		lerping = false;
+		lerpToSpeed = STARTING_SPEED;
+	}
+	
 	
 	/*
 	 * Handle the lerping process and turn off lerping when done.
@@ -250,12 +290,21 @@ public class Treadmill : MonoBehaviour
 	
 	public void StartBoostSpeed()
 	{
+		if(lerping) {
+			// Cancel the existing lerp but restore to the finished lerp speed.
+			speedBeforeBoost = lerpToSpeed;
+			lerping = false;
+			lerpToSpeed = STARTING_SPEED;
+		} else {
+			speedBeforeBoost = scrollspeed;
+		}
 		scrollspeed = maxspeed;
 	}
 	
 	public void StopBoostSpeed()
 	{
-		LerpToSpeed(STARTING_SPEED);
+		LerpToSpeed(speedBeforeBoost);
+		speedBeforeBoost = 0.0f;
 	}
 	
 	/*

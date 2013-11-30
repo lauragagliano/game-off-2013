@@ -20,13 +20,12 @@ public class Player : MonoBehaviour
 	public BluePower bluePower;
 	bool isUsingSlowdown;
 	float slowDownStrength = 20f;
-	const float UPGRADED_MOVESPEED = 40f;
+	float slowDownMovespeed = DEFAULT_MOVESPEED + 5f;
+	const float UPGRADED_MOVESPEED = DEFAULT_MOVESPEED + 10f;
 	bool isBoosting;
 	bool isBoostBraking;
 	RBTimer boostTimer;
 	RBTimer boostBrakeTimer;
-	// TODO If we add improved slowdown upgrade
-	//const int UPGRADED_SLOWDOWN_STRENGTH = 25f;
 
 	public RedPower redPower;
 	public GreenPower greenPower;
@@ -148,7 +147,11 @@ public class Player : MonoBehaviour
 				SetRunspeed (15.0f, treadmill.scrollspeed);
 			} else {
 				// When not boosting, match with treadmill.
-				MatchSpeedToTreadmill ();
+				if (isUsingSlowdown) {
+					SetRunspeed (slowDownMovespeed, treadmill.scrollspeed);
+				} else {
+					MatchSpeedToTreadmill ();
+				}
 			}
 	
 			TryMove ();
@@ -862,8 +865,7 @@ public class Player : MonoBehaviour
 			shieldStrength = UPGRADED_SHIELD_STRENGTH;
 		}
 		if (inventory.HasItem (ItemNames.BLUE_MORE_EFFECTIVE)) {
-			//TODO Implement slowMovespeed here
-			//slowMovespeed = UPGRADED_MOVESPEED;
+			slowDownMovespeed = UPGRADED_MOVESPEED;
 		}
 
 		// Duration Upgrades

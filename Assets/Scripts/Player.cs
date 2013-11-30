@@ -61,6 +61,7 @@ public class Player : MonoBehaviour
 	public GameObject laserBeamFX;
 	public GameObject wildcardFX;
 	public GameObject reviveFX;
+	public GameObject boostTextFX;
 	public GameObject explosionFX;
 	float worldZClamp;
 	float worldYClamp;
@@ -776,6 +777,12 @@ public class Player : MonoBehaviour
 		boostFX = (GameObject)Instantiate (boostFXPrefab, transform.position,
 			transform.rotation);
 		boostFX.transform.parent = transform;
+		
+		// Show Boost use Text
+		GameObject fx = (GameObject)Instantiate (boostTextFX, transform.position + boostTextFX.transform.position,
+			boostTextFX.transform.rotation);
+		fx.transform.parent = transform;
+		Destroy (fx, 1.5f);
 	}
 	/*
 	 * Starts restoring back to normal gameplay after a boost

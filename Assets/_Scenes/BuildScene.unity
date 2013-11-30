@@ -5830,6 +5830,18 @@ Prefab:
       propertyPath: DEBUG_SKIP_TUTORIAL
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 8a8261b64285ea64b92d98d732c090fe, type: 2}
+      propertyPath: SAVE_SLOW_LESSON_COMPLETE
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 8a8261b64285ea64b92d98d732c090fe, type: 2}
+      propertyPath: SAVE_SHIELDS_LESSON_COMPLETE
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 8a8261b64285ea64b92d98d732c090fe, type: 2}
+      propertyPath: SAVE_LASER_LESSON_COMPLETE
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8a8261b64285ea64b92d98d732c090fe, type: 2}
   m_RootGameObject: {fileID: 1651423740}
@@ -11665,8 +11677,7 @@ Prefab:
     - target: {fileID: 11400000, guid: d901da117d45be94799b5118765e21f2, type: 2}
       propertyPath: lighting
       value: 
-      objectReference: {fileID: 10800000, guid: 27bc252e818b0da46a2ad6725b509de5,
-        type: 2}
+      objectReference: {fileID: 460188912}
     - target: {fileID: 11400000, guid: d901da117d45be94799b5118765e21f2, type: 2}
       propertyPath: player
       value: 
@@ -14461,6 +14472,10 @@ MonoBehaviour:
   blueCrystalPrefab: {fileID: 100000, guid: 9366ecca6688d476abf8c6c06e9ddeec, type: 2}
   blockPrefab: {fileID: 100000, guid: ea33b1b462fda9f4ebb49abe1a47a942, type: 2}
   wildcardPrefab: {fileID: 100000, guid: e8f346d946fcd48b0b63623a492187d3, type: 2}
+  SAVE_TUTORIAL_COMPLETE: 0
+  SAVE_LASER_LESSON_COMPLETE: 0
+  SAVE_SHIELDS_LESSON_COMPLETE: 0
+  SAVE_SLOW_LESSON_COMPLETE: 0
   DEBUG_MODE: 0
   DEBUG_SKIP_TUTORIAL: 0
 --- !u!82 &1651423744
@@ -15163,7 +15178,7 @@ MonoBehaviour:
   redMeter: {fileID: 305648660}
   greenMeter: {fileID: 1991932725}
   blueMeter: {fileID: 974615398}
-  lighting: {fileID: 10800000, guid: 27bc252e818b0da46a2ad6725b509de5, type: 2}
+  lighting: {fileID: 460188912}
   inGameCrystalsCountText: {fileID: 1726678278}
   inGameCrystalsCountTextShadow: {fileID: 867450174}
   inGameCrystalsLabel: {fileID: 2097803984}

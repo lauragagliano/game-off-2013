@@ -15,7 +15,7 @@ public class PigmentBody : MonoBehaviour
 	public GameObject[] fxLimbPrefabs = new GameObject[Enum.GetNames (typeof(Limb)).Length];
 	public GameObject[] crystalPrefabs = new GameObject[3];
 	
-	enum Limb
+	enum Limb//
 	{
 		Body,
 		ArmL,
@@ -82,12 +82,14 @@ public class PigmentBody : MonoBehaviour
 		// Disable the body from rendering
 		transform.gameObject.SetActive (false);
 		
+		// Spawn the crystals as rigid bodies.
 		foreach(GameObject crystalPrefab in crystalPrefabs)
 		{
 			GameObject crystalRigidBody = (GameObject)Instantiate (crystalPrefab, transform.position,
 				transform.rotation);
 			crystalRigidBody.rigidbody.AddForce (force);
-			crystalRigidBody.transform.parent = GameManager.Instance.treadmill.transform;
+			// Attach to any treadmill section so they will get cleaned up on retry.
+			crystalRigidBody.transform.parent = GameManager.Instance.treadmill.GetLastSectionInPlay ().transform;
 			Destroy (crystalRigidBody, 4.0f);
 		}
 	}

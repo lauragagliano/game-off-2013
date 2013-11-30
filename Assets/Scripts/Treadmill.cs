@@ -394,7 +394,7 @@ public class Treadmill : MonoBehaviour
 	/*
 	 * Helper method to return the last section on the treadmill.
 	 */
-	GameObject GetLastSectionInPlay ()
+	public GameObject GetLastSectionInPlay ()
 	{
 		if (sectionsInPlay.Count == 0) {
 			return null;

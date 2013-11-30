@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 400000}
   - 132: {fileID: 13200000}
   m_Layer: 8
-  m_Name: MoneyText
+  m_Name: CrystalsText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42,7 +42,7 @@ GameObject:
   - 4: {fileID: 400004}
   - 132: {fileID: 13200002}
   m_Layer: 8
-  m_Name: DistanceText
+  m_Name: DistanceText_Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -482,6 +482,70 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &100060
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400060}
+  - 132: {fileID: 13200026}
+  m_Layer: 8
+  m_Name: BestDistanceText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &100062
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400062}
+  - 132: {fileID: 13200028}
+  m_Layer: 8
+  m_Name: BestDistanceText_Shadow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &100064
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400064}
+  - 132: {fileID: 13200030}
+  m_Layer: 8
+  m_Name: DistanceText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &100066
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400066}
+  - 132: {fileID: 13200032}
+  m_Layer: 8
+  m_Name: CrystalsText_Shadow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!4 &400000
 Transform:
   m_ObjectHideFlags: 1
@@ -489,7 +553,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .94999963, y: .779999971, z: 1}
+  m_LocalPosition: {x: .949999988, y: .779999971, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400002}
@@ -506,18 +570,22 @@ Transform:
   - {fileID: 400050}
   - {fileID: 400030}
   - {fileID: 400012}
-  - {fileID: 400000}
+  - {fileID: 400066}
   - {fileID: 400044}
   - {fileID: 400028}
   - {fileID: 400042}
   - {fileID: 400040}
   - {fileID: 400046}
-  - {fileID: 400004}
+  - {fileID: 400064}
   - {fileID: 400006}
   - {fileID: 400008}
   - {fileID: 400034}
   - {fileID: 400032}
   - {fileID: 400026}
+  - {fileID: 400062}
+  - {fileID: 400060}
+  - {fileID: 400004}
+  - {fileID: 400000}
   m_Father: {fileID: 0}
 --- !u!4 &400004
 Transform:
@@ -526,7 +594,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .94999963, y: .839999974, z: 1}
+  m_LocalPosition: {x: .300000012, y: .839999974, z: .980000019}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400002}
@@ -841,6 +909,50 @@ Transform:
   - {fileID: 400054}
   - {fileID: 400056}
   m_Father: {fileID: 400052}
+--- !u!4 &400060
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100060}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .300000012, y: .839999974, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 400002}
+--- !u!4 &400062
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100062}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .300000012, y: .839999974, z: .980000019}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 400002}
+--- !u!4 &400064
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100064}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .300000012, y: .839999974, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 400002}
+--- !u!4 &400066
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100066}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .94999963, y: .779999971, z: .980000019}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 400002}
 --- !u!111 &11100000
 Animation:
   m_ObjectHideFlags: 1
@@ -915,8 +1027,18 @@ MonoBehaviour:
   crystalsCollectedLabelTextShadow: {fileID: 13200014}
   crystalsCollectedText: {fileID: 13200024}
   crystalsCollectedTextShadow: {fileID: 13200010}
-  moneyText: {fileID: 13200000}
-  distanceText: {fileID: 13200002}
+  inGameCrystalsCountText: {fileID: 0}
+  inGameCrystalsCountTextShadow: {fileID: 0}
+  inGameCrystalsLabel: {fileID: 0}
+  inGameCrystalsLabelShadow: {fileID: 0}
+  inGameDistanceText: {fileID: 0}
+  inGameDistanceTextShadow: {fileID: 0}
+  inGameDistanceLabel: {fileID: 0}
+  inGameDistanceLabelShadow: {fileID: 0}
+  bestDistanceText: {fileID: 13200026}
+  bestDistanceTextShadow: {fileID: 13200028}
+  bestDistanceLabel: {fileID: 0}
+  bestDistanceLabelShadow: {fileID: 0}
   debugText: {fileID: 13200008}
   pressSpaceText: {fileID: 13200016}
   pressSpaceTextShadow: {fileID: 13200004}
@@ -1495,7 +1617,7 @@ GUIText:
   m_GameObject: {fileID: 100000}
   m_Enabled: 0
   serializedVersion: 3
-  m_Text: 'Money:'
+  m_Text: 'Crystals:'
   m_Anchor: 8
   m_Alignment: 0
   m_PixelOffset: {x: 0, y: 0}
@@ -1521,7 +1643,7 @@ GUIText:
   m_Text: 'Distance:'
   m_Anchor: 8
   m_Alignment: 0
-  m_PixelOffset: {x: 0, y: 0}
+  m_PixelOffset: {x: 1, y: -2}
   m_LineSpacing: 1
   m_TabSize: 4
   m_Font: {fileID: 12800000, guid: 56e3e49b48085453d8733d36bb8dbcb4, type: 3}
@@ -1530,7 +1652,7 @@ GUIText:
   m_FontStyle: 0
   m_Color:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4278190080
   m_PixelCorrect: 1
   m_RichText: 1
 --- !u!132 &13200004
@@ -1784,6 +1906,98 @@ GUIText:
   m_Color:
     serializedVersion: 2
     rgba: 4294501829
+  m_PixelCorrect: 1
+  m_RichText: 1
+--- !u!132 &13200026
+GUIText:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100060}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Text: 'Distance:'
+  m_Anchor: 8
+  m_Alignment: 0
+  m_PixelOffset: {x: 0, y: 0}
+  m_LineSpacing: 1
+  m_TabSize: 4
+  m_Font: {fileID: 12800000, guid: 56e3e49b48085453d8733d36bb8dbcb4, type: 3}
+  m_Material: {fileID: 0}
+  m_FontSize: 0
+  m_FontStyle: 0
+  m_Color:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_PixelCorrect: 1
+  m_RichText: 1
+--- !u!132 &13200028
+GUIText:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100062}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Text: 'Distance:'
+  m_Anchor: 8
+  m_Alignment: 0
+  m_PixelOffset: {x: 1, y: -2}
+  m_LineSpacing: 1
+  m_TabSize: 4
+  m_Font: {fileID: 12800000, guid: 56e3e49b48085453d8733d36bb8dbcb4, type: 3}
+  m_Material: {fileID: 0}
+  m_FontSize: 0
+  m_FontStyle: 0
+  m_Color:
+    serializedVersion: 2
+    rgba: 4278190080
+  m_PixelCorrect: 1
+  m_RichText: 1
+--- !u!132 &13200030
+GUIText:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100064}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Text: 'Distance:'
+  m_Anchor: 8
+  m_Alignment: 0
+  m_PixelOffset: {x: 0, y: 0}
+  m_LineSpacing: 1
+  m_TabSize: 4
+  m_Font: {fileID: 12800000, guid: 56e3e49b48085453d8733d36bb8dbcb4, type: 3}
+  m_Material: {fileID: 0}
+  m_FontSize: 0
+  m_FontStyle: 0
+  m_Color:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_PixelCorrect: 1
+  m_RichText: 1
+--- !u!132 &13200032
+GUIText:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100066}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Text: 'Money:'
+  m_Anchor: 8
+  m_Alignment: 0
+  m_PixelOffset: {x: 1, y: -2}
+  m_LineSpacing: 1
+  m_TabSize: 4
+  m_Font: {fileID: 12800000, guid: 56e3e49b48085453d8733d36bb8dbcb4, type: 3}
+  m_Material: {fileID: 0}
+  m_FontSize: 0
+  m_FontStyle: 0
+  m_Color:
+    serializedVersion: 2
+    rgba: 4278190080
   m_PixelCorrect: 1
   m_RichText: 1
 --- !u!1001 &100100000

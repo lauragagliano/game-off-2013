@@ -4,6 +4,7 @@ using System.Collections;
 public class HUD : MonoBehaviour
 {
 	public Player player;
+	// End game Text
 	public GUIText finalDistanceLabelText;
 	public GUIText finalDistanceLabelTextShadow;
 	public GUIText finalDistanceText;
@@ -12,8 +13,27 @@ public class HUD : MonoBehaviour
 	public GUIText crystalsCollectedLabelTextShadow;
 	public GUIText crystalsCollectedText;
 	public GUIText crystalsCollectedTextShadow;
-	public GUIText moneyText;
-	public GUIText distanceText;
+	public GUIText newHighScoreText;
+	public GUIText newHighScoreTextShadow;
+	// In Game GUI
+	public GameObject redMeter;
+	public GameObject greenMeter;
+	public GameObject blueMeter;
+	public Light lighting;
+	public GUIText inGameCrystalsCountText;
+	public GUIText inGameCrystalsCountTextShadow;
+	public GUIText inGameCrystalsLabel;
+	public GUIText inGameCrystalsLabelShadow;
+	public GUIText inGameDistanceText;
+	public GUIText inGameDistanceTextShadow;
+	public GUIText inGameDistanceLabel;
+	public GUIText inGameDistanceLabelShadow;
+	public GUIText bestDistanceText;
+	public GUIText bestDistanceTextShadow;
+	public GUIText bestDistanceLabel;
+	public GUIText bestDistanceLabelShadow;
+	public GUIText storeCrystalsLabel;
+	public GUIText storeCrystalsLabelShadow;
 	public GUIText debugText;
 	public GUIText pressSpaceText;
 	public GUIText pressSpaceTextShadow;
@@ -30,6 +50,9 @@ public class HUD : MonoBehaviour
 	const float AREA_WIDTH = 400.0f;
 	const float AREA_HEIGHT = 350.0f;
 	
+	const float LIGHTING_DEFAULT = 0.5f;
+	const float LIGHTING_DARK = 0.2f;
+	
 	Treadmill treadmill;
 	
 	void Awake ()
@@ -40,18 +63,21 @@ public class HUD : MonoBehaviour
 	
 	void Update ()
 	{
-
 	}
 	
 	void OnGUI ()
 	{
 		if (GameManager.Instance.IsOnMenu ()) {
+			lighting.intensity = LIGHTING_DEFAULT;
 			DisplayMainMenu ();
 		} else if (GameManager.Instance.IsGameOver ()) {
+			lighting.intensity = LIGHTING_DARK;
 			DisplayDeadMenu ();
 		} else if (GameManager.Instance.IsShopping ()) {
+			lighting.intensity = LIGHTING_DEFAULT;
 			DisplayStoreMenu ();
 		} else {
+			lighting.intensity = LIGHTING_DEFAULT;
 			DisplayInGameText ();
 		}
 	}
@@ -61,7 +87,9 @@ public class HUD : MonoBehaviour
 	 */
 	void DisplayInGameText ()
 	{
-		EnableInGameText (true);
+		EnableInGameGUI (true);
+		DisplayNewHighScore (false);
+
 		// Display the tutorial text
 		if (!treadmill.IsShowingTutorial ()) {
 			SetShadowGUIText (string.Empty, pressSpaceText, pressSpaceTextShadow);
@@ -72,9 +100,13 @@ public class HUD : MonoBehaviour
 			pressSpaceText.enabled = true;
 			pressSpaceTextShadow.enabled = true;
 		}
-		EnableGameOverText (false);
-		distanceText.text = "Distance: " + Mathf.RoundToInt (treadmill.distanceTraveled);
-		PrintMoneyToScreen ();
+		EnableGameOverGUI (false);
+		string bestDistance =  Mathf.RoundToInt (GameManager.Instance.highestScore).ToString ();
+		SetShadowGUIText (bestDistance, bestDistanceText, bestDistanceTextShadow);
+		string currentDistance = Mathf.RoundToInt (treadmill.distanceTraveled).ToString ();
+		SetShadowGUIText (currentDistance, inGameDistanceText, inGameDistanceTextShadow);
+		SetShadowGUIText (GameManager.Instance.numPickupsThisRound.ToString (),
+			inGameCrystalsCountText, inGameCrystalsCountTextShadow);
 		if (GameManager.Instance.DEBUG_MODE) {
 			debugText.enabled = true;
 			debugText.text = string.Format ("Passed Pigments: {0}\nHealth: {1}\nWildcards: {2}\nDifficulty: {3}",
@@ -89,13 +121,12 @@ public class HUD : MonoBehaviour
 	 */
 	void DisplayDeadMenu ()
 	{
-		EnableInGameText (false);
-		EnableGameOverText (true);
-		SetShadowGUIText ("You Survived For", finalDistanceLabelText, finalDistanceLabelTextShadow);
+		EnableInGameGUI (false);
+		EnableGameOverGUI (true);
+
 		int finalDistance = Mathf.RoundToInt (treadmill.distanceTraveled);
 		SetShadowGUIText (finalDistance + "m", finalDistanceText, finalDistanceTextShadow);
-		SetShadowGUIText ("Crystals Collected", crystalsCollectedLabelText, crystalsCollectedLabelTextShadow);
-		SetShadowGUIText (GameManager.Instance.numPointsThisRound.ToString (), crystalsCollectedText,
+		SetShadowGUIText (GameManager.Instance.numPickupsThisRound.ToString (), crystalsCollectedText,
 			crystalsCollectedTextShadow);
 
 		GUILayout.BeginArea (new Rect ((Screen.width - AREA_WIDTH)/2, (Screen.height - AREA_HEIGHT), AREA_WIDTH, AREA_HEIGHT), areaStyle);
@@ -111,7 +142,7 @@ public class HUD : MonoBehaviour
 		if (GUILayout.Button ("Retry [Enter]", blueButtonStyle)) {
 			//Application.LoadLevel (Application.loadedLevel);
 			GameManager.Instance.StartGame (true);
-			EnableInGameText (true);
+			EnableInGameGUI (true);
 		}
 		GUILayout.FlexibleSpace ();
 		GUILayout.EndHorizontal ();
@@ -120,17 +151,20 @@ public class HUD : MonoBehaviour
 		
 		if (Input.GetKeyDown (KeyCode.KeypadEnter) || Input.GetKeyDown (KeyCode.Return)) {
 			GameManager.Instance.StartGame (true);
-			EnableInGameText (true);
+			EnableInGameGUI (true);
 		}
 	}
 	
 	/*
 	 * Helper method to display money on GUIText object.
 	 */
-	void PrintMoneyToScreen ()
+	void PrintMoneyToShopScreen ()
 	{
-		moneyText.enabled = true;
-		moneyText.text = "Money: " + player.money;
+		inGameCrystalsCountText.enabled = true;
+		inGameCrystalsCountTextShadow.enabled = true;
+		storeCrystalsLabel.enabled = true;
+		storeCrystalsLabelShadow.enabled = true;
+		SetShadowGUIText (player.money.ToString(), inGameCrystalsCountText, inGameCrystalsCountTextShadow);
 	}
 	
 	/*
@@ -139,9 +173,11 @@ public class HUD : MonoBehaviour
 	 */
 	void DisplayStoreMenu ()
 	{
-		EnableGameOverText (false);
-		EnableInGameText (false);
-		PrintMoneyToScreen ();
+		EnableGameOverGUI (false);
+		EnableInGameGUI (false);
+		DisplayNewHighScore (false);
+
+		PrintMoneyToShopScreen ();
 		Store store = (Store)GameObject.Find (ObjectNames.STORE).GetComponent<Store> ();
 
 		// Add our left and right arrows
@@ -212,8 +248,10 @@ public class HUD : MonoBehaviour
 	 */
 	void DisplayMainMenu ()
 	{
-		EnableInGameText (false);
-		EnableGameOverText (false);
+		EnableInGameGUI (false);
+		EnableGameOverGUI (false);
+		DisplayNewHighScore (false);
+
 		GUILayout.BeginArea (new Rect ((Screen.width - AREA_WIDTH)/2, (Screen.height - AREA_HEIGHT), AREA_WIDTH, AREA_HEIGHT), areaStyle);
 		// Push buttons to the bottom of the screen
 		GUILayout.BeginVertical ();
@@ -241,18 +279,34 @@ public class HUD : MonoBehaviour
 	/*
 	 * Helper method to enable or disable in game text.
 	 */
-	void EnableInGameText (bool enable)
+	void EnableInGameGUI (bool enable)
 	{
+		redMeter.SetActive (enable);
+		greenMeter.SetActive (enable);
+		blueMeter.SetActive (enable);
 		pressSpaceText.enabled = enable;
 		pressSpaceTextShadow.enabled = enable;
-		moneyText.enabled = enable;
-		distanceText.enabled = enable;
+		inGameCrystalsCountText.enabled = enable;
+		inGameCrystalsCountTextShadow.enabled = enable;
+		inGameDistanceText.enabled = enable;
+		inGameDistanceTextShadow.enabled = enable;
+		bestDistanceText.enabled = enable;
+		bestDistanceTextShadow.enabled = enable;
+		inGameCrystalsLabel.enabled = enable;
+		inGameCrystalsLabelShadow.enabled = enable;
+		inGameDistanceLabel.enabled = enable;
+		inGameDistanceLabelShadow.enabled = enable;
+		bestDistanceLabel.enabled = enable;
+		bestDistanceLabelShadow.enabled = enable;
+		// Turn off store label for crystals
+		storeCrystalsLabel.enabled = false;
+		storeCrystalsLabelShadow.enabled = false;
 	}
 	
 	/*
 	 * Helper method to enable or disable game over text elements.
 	 */
-	void EnableGameOverText (bool enable)
+	void EnableGameOverGUI (bool enable)
 	{
 		finalDistanceLabelText.enabled = enable;
 		finalDistanceLabelTextShadow.enabled = enable;
@@ -262,6 +316,15 @@ public class HUD : MonoBehaviour
 		crystalsCollectedTextShadow.enabled = enable;
 		crystalsCollectedLabelText.enabled = enable;
 		crystalsCollectedLabelTextShadow.enabled = enable;
+	}
+	
+	/*
+	 * Show/hide the New High Score! label on the final distance screen.
+	 */
+	public void DisplayNewHighScore (bool display)
+	{
+		newHighScoreText.enabled = display;
+		newHighScoreTextShadow.enabled = display;
 	}
 	
 	/*

@@ -204,7 +204,7 @@ MonoBehaviour:
   type: 1
   itemName: BlueMagnet
   displayName: Blue Magnet
-  cost: 750
+  cost: 550
   wildcardMaterial: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:

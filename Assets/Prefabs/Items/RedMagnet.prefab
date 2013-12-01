@@ -204,7 +204,7 @@ MonoBehaviour:
   type: 1
   itemName: RedMagnet
   displayName: Red Magnet
-  cost: 750
+  cost: 550
   wildcardMaterial: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:

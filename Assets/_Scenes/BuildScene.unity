@@ -1792,7 +1792,7 @@ MonoBehaviour:
   type: 1
   itemName: StrongerShields
   displayName: Stronger Shields
-  cost: 450
+  cost: 500
   wildcardMaterial: {fileID: 0}
 --- !u!23 &178518515
 Renderer:
@@ -3171,7 +3171,7 @@ MonoBehaviour:
   type: 1
   itemName: BlueLastsLonger
   displayName: Blue Lasts Longer
-  cost: 600
+  cost: 450
   wildcardMaterial: {fileID: 0}
 --- !u!23 &326128241
 Renderer:
@@ -6046,7 +6046,7 @@ MonoBehaviour:
   type: 1
   itemName: RedMagnet
   displayName: Red Magnet
-  cost: 750
+  cost: 550
   wildcardMaterial: {fileID: 0}
 --- !u!23 &699344194
 Renderer:
@@ -6687,7 +6687,7 @@ MonoBehaviour:
   type: 1
   itemName: GreenLastsLonger
   displayName: Green Lasts Longer
-  cost: 600
+  cost: 450
   wildcardMaterial: {fileID: 0}
 --- !u!23 &751673003
 Renderer:
@@ -9920,6 +9920,50 @@ Prefab:
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11400024, guid: 21197d59f921df34a88bd6cc792c6a49, type: 2}
+      propertyPath: cost
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 21197d59f921df34a88bd6cc792c6a49, type: 2}
+      propertyPath: cost
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 21197d59f921df34a88bd6cc792c6a49, type: 2}
+      propertyPath: cost
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400020, guid: 21197d59f921df34a88bd6cc792c6a49, type: 2}
+      propertyPath: cost
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400022, guid: 21197d59f921df34a88bd6cc792c6a49, type: 2}
+      propertyPath: cost
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400008, guid: 21197d59f921df34a88bd6cc792c6a49, type: 2}
+      propertyPath: cost
+      value: 450
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400016, guid: 21197d59f921df34a88bd6cc792c6a49, type: 2}
+      propertyPath: cost
+      value: 450
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400018, guid: 21197d59f921df34a88bd6cc792c6a49, type: 2}
+      propertyPath: cost
+      value: 450
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400012, guid: 21197d59f921df34a88bd6cc792c6a49, type: 2}
+      propertyPath: cost
+      value: 550
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400026, guid: 21197d59f921df34a88bd6cc792c6a49, type: 2}
+      propertyPath: cost
+      value: 550
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400028, guid: 21197d59f921df34a88bd6cc792c6a49, type: 2}
+      propertyPath: cost
+      value: 550
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 21197d59f921df34a88bd6cc792c6a49, type: 2}
   m_RootGameObject: {fileID: 1959866644}
@@ -10747,7 +10791,7 @@ MonoBehaviour:
   type: 1
   itemName: RedLastsLonger
   displayName: Red Lasts Longer
-  cost: 600
+  cost: 450
   wildcardMaterial: {fileID: 0}
 --- !u!23 &1174465627
 Renderer:
@@ -11021,7 +11065,7 @@ MonoBehaviour:
   type: 1
   itemName: BetterReflexes
   displayName: Better Reflexes
-  cost: 450
+  cost: 500
   wildcardMaterial: {fileID: 0}
 --- !u!23 &1204133904
 Renderer:
@@ -11910,7 +11954,7 @@ MonoBehaviour:
   type: 1
   itemName: EfficientLaser
   displayName: Efficient Laser
-  cost: 450
+  cost: 500
   wildcardMaterial: {fileID: 0}
 --- !u!23 &1333720918
 Renderer:
@@ -11985,7 +12029,7 @@ MonoBehaviour:
   type: 0
   itemName: Boost
   displayName: Boost
-  cost: 500
+  cost: 300
   wildcardMaterial: {fileID: 0}
 --- !u!23 &1336835877
 Renderer:
@@ -13649,7 +13693,7 @@ MonoBehaviour:
   type: 1
   itemName: BlueMagnet
   displayName: Blue Magnet
-  cost: 750
+  cost: 550
   wildcardMaterial: {fileID: 0}
 --- !u!23 &1542047566
 Renderer:
@@ -17750,7 +17794,7 @@ MonoBehaviour:
   type: 0
   itemName: SuperBoost
   displayName: Super Boost
-  cost: 750
+  cost: 500
   wildcardMaterial: {fileID: 0}
 --- !u!23 &1888549673
 Renderer:
@@ -18960,7 +19004,7 @@ MonoBehaviour:
   type: 1
   itemName: GreenMagnet
   displayName: Green Magnet
-  cost: 750
+  cost: 550
   wildcardMaterial: {fileID: 0}
 --- !u!23 &2026000835
 Renderer:

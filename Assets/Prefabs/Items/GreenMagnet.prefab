@@ -204,7 +204,7 @@ MonoBehaviour:
   type: 1
   itemName: GreenMagnet
   displayName: Green Magnet
-  cost: 750
+  cost: 550
   wildcardMaterial: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:

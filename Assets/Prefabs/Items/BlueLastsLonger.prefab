@@ -204,7 +204,7 @@ MonoBehaviour:
   type: 1
   itemName: BlueLastsLonger
   displayName: Blue Lasts Longer
-  cost: 600
+  cost: 450
   wildcardMaterial: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:

@@ -204,7 +204,7 @@ MonoBehaviour:
   type: 1
   itemName: EfficientLaser
   displayName: Efficient Laser
-  cost: 450
+  cost: 500
   wildcardMaterial: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:

@@ -325,6 +325,15 @@ public class Treadmill : MonoBehaviour
 	{
 		return distanceTraveled > HARD_THRESHOLD;
 	}
+	
+	/*
+	 * Speed up our treadmill during blue lesson.
+	 */
+	void SetBlueLessonSpeed ()
+	{
+		LerpToSpeed(STARTING_SPEED + 20.0f);
+	}
+	
 	#endregion
 	
 	#region #2 Section Logic
@@ -520,6 +529,7 @@ public class Treadmill : MonoBehaviour
 		} else if (!GameManager.Instance.SAVE_SLOW_LESSON_COMPLETE || !GameManager.Instance.SAVE_TUTORIAL_COMPLETE) {
 			BluePower power = GameManager.Instance.player.bluePower;
 			power.AddPower(power.maxValue / 2);
+			SetBlueLessonSpeed ();
 			SpawnSection (tutorialLessonSlow);
 		}
 	}

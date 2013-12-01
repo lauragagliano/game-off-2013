@@ -33,7 +33,7 @@ GameObject:
   - 65: {fileID: 6500002}
   - 23: {fileID: 2300002}
   - 114: {fileID: 11400004}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: KillCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -207,7 +207,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyFX: {fileID: 100050, guid: 03e776341bd164135b79e4e87ce4cd3f, type: 2}
-  blockBreakSound: {fileID: 8300000, guid: ac603d086377d4299a7b9a6ce34b5097, type: 3}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -344,8 +344,6 @@ public class GameManager : Singleton<GameManager>
 		menuCamera.enabled = true;
 		storeCamera.enabled = false;
 		gameCamera.enabled = false;
-		
-		treadmill.PauseScrolling ();
 	}
 	
 	/*

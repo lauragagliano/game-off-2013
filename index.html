@@ -61,7 +61,7 @@
 						break;
 					}
 				});
-				u.initPlugin(jQuery("#unityPlayer")[0], "color-runner.unity3d");
+				u.initPlugin(jQuery("#unityPlayer")[0], "color-quest.unity3d");
 			});
 		-->
 		</script>
@@ -111,11 +111,12 @@
 			</div>
 			<p class="footer text-center">&laquo; created with <a href="http://unity3d.com/unity/" title="Go to unity3d.com">Unity</a> &raquo;</p>
 		</div>
-
+		<div class="logo text-center">
+			<img src="./assets/images/ui_title.png" alt="color quest logo"/>
+		</div>
 		<div class="instructions">
 			<div class="row marketing">
 				<div class="col-lg-8 col-lg-offset-2">
-					<h2>Color Quest</h2>
 					<p>You play as Pigment, a black and white pixel on a quest to become a color pixel by collecting color diodes. You race through a forever-scrolling grayscale obstacle course, changing between the RGB colors you collect to survive. For example, changing to a blue pixel will allow you to slow down time and move with better reflexes. Traverse as much of the world as possible, while absorbing as much color as you can. Use absorbed colors to purchase upgrades in order to help Pigment achieve his colorful form.</p>
 					<h3>Movement</h3>
 					<p>Press the <strong>A</strong> and <strong>D</strong> keys to move left and right.</p>
@@ -148,5 +149,21 @@
 					</div>
 			</div>
 		</div>
+<!-- Bootstrap core JavaScript
+	================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="js/jquery-2.0.3.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<!-- Google Analytics -->
+	<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-45863297-2', 'github.com');
+	ga('send', 'pageview');
+
+	</script>
 	</body>
 	</html>

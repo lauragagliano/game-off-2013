@@ -9,6 +9,7 @@ public class GUI_Wildcard : MonoBehaviour
 	public Item myItem;
 	public GameObject backFace;
 	public GameObject text;
+	public AudioClip revealSound;
 	
 	void Awake ()
 	{
@@ -36,5 +37,10 @@ public class GUI_Wildcard : MonoBehaviour
 		myItem = item;
 		backFace.renderer.material = item.wildcardMaterial;
 		text.GetComponent<TextMesh> ().text = item.itemName;
+	}
+	
+	public void PlaySound ()
+	{
+		audio.PlayOneShot (revealSound);
 	}
 }

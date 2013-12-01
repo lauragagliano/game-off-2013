@@ -204,7 +204,7 @@ MonoBehaviour:
   type: 0
   itemName: SuperBoost
   displayName: Super Boost
-  cost: 1500
+  cost: 500
   wildcardMaterial: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:

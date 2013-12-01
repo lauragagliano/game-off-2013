@@ -11,7 +11,18 @@ AnimationClip:
   m_Compressed: 0
   m_RotationCurves: []
   m_CompressedRotationCurves: []
-  m_PositionCurves: []
+  m_PositionCurves:
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: .183333337
+        value: {x: -.122524261, y: .500005066, z: -29.6803722}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    path: 
   m_ScaleCurves:
   - curve:
       serializedVersion: 2
@@ -32,9 +43,9 @@ AnimationClip:
         outSlope: {x: 18, y: 0, z: 0}
         tangentMode: -559038737
       - time: .166666672
-        value: {x: 1, y: 1, z: 60}
-        inSlope: {x: 13.499999, y: 0, z: 0}
-        outSlope: {x: 13.499999, y: 0, z: 0}
+        value: {x: 2, y: 1, z: 60}
+        inSlope: {x: 28.4999981, y: 0, z: 0}
+        outSlope: {x: 28.4999981, y: 0, z: 0}
         tangentMode: -559038737
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -253,9 +264,9 @@ AnimationClip:
         outSlope: 18
         tangentMode: 7
       - time: .166666672
-        value: 1
-        inSlope: 13.499999
-        outSlope: 13.499999
+        value: 2
+        inSlope: 28.4999981
+        outSlope: 28.4999981
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -493,6 +504,48 @@ AnimationClip:
     attribute: _Color.a
     path: FX_Laser_Beam
     classID: 21
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: .183333337
+        value: -.122524261
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_LocalPosition.x
+    path: 
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: .183333337
+        value: .500005066
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_LocalPosition.y
+    path: 
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: .183333337
+        value: -29.6803722
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_LocalPosition.z
+    path: 
+    classID: 4
     script: {fileID: 0}
   m_EulerEditorCurves: []
   m_Events: []

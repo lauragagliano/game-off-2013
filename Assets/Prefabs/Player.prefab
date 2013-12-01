@@ -940,7 +940,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerReadySound: {fileID: 8300000, guid: 6335a3394b0ae4b38a7c9482cc9573f6, type: 3}
   curValue: 0
-  maxValue: 40
+  maxValue: 35
 --- !u!114 &11400014
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -954,7 +954,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerReadySound: {fileID: 8300000, guid: 724d9609d5650416691659646b7b8078, type: 3}
   curValue: 0
-  maxValue: 40
+  maxValue: 35
 --- !u!114 &11400016
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -968,7 +968,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerReadySound: {fileID: 8300000, guid: 5b12d2eddda014a00b977d23e18985b2, type: 3}
   curValue: 0
-  maxValue: 40
+  maxValue: 35
 --- !u!114 &11400018
 MonoBehaviour:
   m_ObjectHideFlags: 1

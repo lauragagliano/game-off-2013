@@ -13,8 +13,8 @@ public abstract class Power : MonoBehaviour
 	
 	// Power behavior
 	public float curValue = 0;
-	public float maxValue = 40;
-	const float UPGRADED_MAX = 35;
+	public float maxValue = 35;
+	const float UPGRADED_MAX = 30;
 	protected bool isPowerActive;
 	protected float powerDuration = 5;
 	protected const float UPGRADED_DURATION = 7.5f;

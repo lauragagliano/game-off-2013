@@ -14,13 +14,13 @@ public class Treadmill : MonoBehaviour
 	int nextFreebieMarker;
 	public const int HARD_THRESHOLD = 2400;
 	const int MIN_CHALLENGE_DISTANCE = 600;
-	const int MAX_CHALLENGE_DISTANCE = 900;
+	const int MAX_CHALLENGE_DISTANCE = 800;
 	bool isInChallengeSection;
 	int nextChallengeMarker;
 	int MAX_WILDCARDS = 9;
 	
 	const float STARTING_SPEED = 20.0f;
-	const float STARTING_ACCEL = 0.0025f;
+	const float STARTING_ACCEL = 0.0030f;
 	public float distanceTraveled;
 	public float scrollspeed;
 	float speedBeforeSlowdown;
@@ -28,7 +28,7 @@ public class Treadmill : MonoBehaviour
 	float resumeFromPauseSpeed;
 	float accelerationPerFrame;
 	float prevAccelerationPerFrame;
-	public float maxspeed = 50.0f;
+	public float maxspeed = 60.0f;
 	public GameObject emptySection;
 	public GameObject tutorialLessonLaser;
 	public GameObject tutorialLessonShields;
@@ -374,7 +374,7 @@ public class Treadmill : MonoBehaviour
 		}
 
 		// Pull from the freebie bucket when nextFreebieMarker has been passed
-		if (distanceTraveled >= nextFreebieMarker) {
+		if (distanceTraveled >= nextFreebieMarker && !GameManager.Instance.IsHard ()) {
 			sectionBucket = freebieSections;
 			nextFreebieMarker = GenerateNextMarker (MIN_FREEBIE_DISTANCE, MAX_FREEBIE_DISTANCE);
 		}
@@ -503,16 +503,16 @@ public class Treadmill : MonoBehaviour
 			// Award them half full meters so that they can fill up on the
 			// number of pickups we've placed.
 			RedPower power = GameManager.Instance.player.redPower;
-			power.AddPower(power.maxValue / 2);
+			power.AddPower(power.maxValue * 0.66f);
 			SpawnSection (tutorialLessonLaser);
 		} else if (!GameManager.Instance.SAVE_SHIELDS_LESSON_COMPLETE) {
 			GreenPower power = GameManager.Instance.player.greenPower;
-			power.AddPower(power.maxValue / 2);
+			power.AddPower(power.maxValue * 0.66f);
 			SpawnSection (tutorialLessonShields);
 		} else if (!GameManager.Instance.SAVE_SLOW_LESSON_COMPLETE || !GameManager.Instance.SAVE_TUTORIAL_COMPLETE) {
 			BluePower power = GameManager.Instance.player.bluePower;
-			power.AddPower(power.maxValue / 2);
 			SetBlueLessonSpeed ();
+			power.AddPower(power.maxValue * 0.66f);
 			SpawnSection (tutorialLessonSlow);
 		}
 	}

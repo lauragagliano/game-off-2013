@@ -7355,7 +7355,7 @@ MonoBehaviour:
   - {fileID: 100090, guid: 5fec4345997770e43bf19a5e3ca9bf0d, type: 2}
   - {fileID: 100028, guid: b5477f8b264983c429220442806099e7, type: 2}
   easyChallengeSections:
-  - {fileID: 100246, guid: 1f79bbfc1b62543e8b119bbacc5250a4, type: 2}
+  - {fileID: 100180, guid: 4d8e22224ccf5473a99fdbf78bcd8a6d, type: 2}
   hardChallengeSections:
   - {fileID: 100154, guid: 612a3334f48f2499b843c9daa2ff3286, type: 2}
   - {fileID: 100024, guid: 21bd9818000d74188ad5d568977d6b49, type: 2}
@@ -8929,7 +8929,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerReadySound: {fileID: 8300000, guid: 724d9609d5650416691659646b7b8078, type: 3}
   curValue: 0
-  maxValue: 30
+  maxValue: 35
 --- !u!114 &1741557064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8944,7 +8944,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerReadySound: {fileID: 8300000, guid: 5b12d2eddda014a00b977d23e18985b2, type: 3}
   curValue: 0
-  maxValue: 30
+  maxValue: 35
 --- !u!114 &1741557068
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8959,7 +8959,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerReadySound: {fileID: 8300000, guid: 6335a3394b0ae4b38a7c9482cc9573f6, type: 3}
   curValue: 0
-  maxValue: 30
+  maxValue: 35
 --- !u!114 &1741557069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8979,7 +8979,7 @@ MonoBehaviour:
   redPower: {fileID: 0}
   greenPower: {fileID: 0}
   playerRGB: {fileID: 0}
-  MAGNET_DIST: 10
+  MAGNET_DIST: 6
   pickups: []
   explosionSound: {fileID: 8300000, guid: 5991eff678cce42b0a5c8b7e86053a4e, type: 3}
   blockHitSound: {fileID: 8300000, guid: ac603d086377d4299a7b9a6ce34b5097, type: 3}

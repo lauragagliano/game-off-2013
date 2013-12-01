@@ -561,10 +561,11 @@ public class Player : MonoBehaviour
 		foreach (GameObject block in blackblocks) {
 			if (Vector3.SqrMagnitude (block.transform.position - transform.position) <= Mathf.Pow (explosionRadius, 2.0f)) {
 				block.GetComponent<BlockLogic> ().BlowUp (transform.position, 200, explosionRadius);
-				audio.PlayOneShot(explosionSound);
+				
 			}
 		}
 		
+		audio.PlayOneShot(explosionSound);
 		// Spawn the explosion FX.
 		GameObject fx = (GameObject)Instantiate (explosionFX, transform.position,
 			transform.rotation);

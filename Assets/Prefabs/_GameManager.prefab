@@ -11,6 +11,7 @@ GameObject:
   - 114: {fileID: 11400000}
   - 114: {fileID: 11400002}
   - 82: {fileID: 8200000}
+  - 114: {fileID: 11400004}
   m_Layer: 0
   m_Name: _GameManager
   m_TagString: Untagged
@@ -37,11 +38,11 @@ AudioSource:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   serializedVersion: 3
-  m_audioClip: {fileID: 8300000, guid: 96dd5ba33f19148378249f1768b823bc, type: 3}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
   m_Volume: .769999981
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Priority: 128
   DopplerLevel: 1
@@ -117,7 +118,7 @@ MonoBehaviour:
   player: {fileID: 0}
   difficulty: 0
   numPickupsPassed: 0
-  numPointsThisRound: 0
+  numPickupsThisRound: 0
   treadmill: {fileID: 0}
   WildcardRevealGO: {fileID: 0}
   redCrystalPrefab: {fileID: 100000, guid: eaf63b0f0cd71924c9569d3532f75529, type: 2}
@@ -127,6 +128,22 @@ MonoBehaviour:
   wildcardPrefab: {fileID: 100000, guid: e8f346d946fcd48b0b63623a492187d3, type: 2}
   DEBUG_MODE: 0
   DEBUG_SKIP_TUTORIAL: 0
+--- !u!114 &11400004
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fd83e50ed9894303ae9d159ed41f585, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicTracks:
+  - {fileID: 8300000, guid: 96dd5ba33f19148378249f1768b823bc, type: 3}
+  - {fileID: 8300000, guid: 78760fb97fd6c41b4999fbef9bc8f603, type: 3}
+  - {fileID: 8300000, guid: ad26d62dad1f7441cb62cf93dfd42f4f, type: 3}
+  startOnRandomTrack: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

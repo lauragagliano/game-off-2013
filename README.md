@@ -1,6 +1,8 @@
 [#Git Hub Game Off 2013
 ## The Game
 
+Play the game at our Project page, here: [Color Quest](http://redbluegames.com/game-off-2013/)
+
 You play as Pigment, a black and white pixel on a quest to become a color pixel by collecting color diodes. You race through a forever-scrolling grayscale obstacle course, changing between the RGB colors you collect to survive. For example, changing to a blue pixel will allow you to slow down time and move with better reflexes. Traverse as much of the world as possible, while absorbing as much color as you can. Use absorbed colors to purchase upgrades in order to help Pigment achieve his colorful form.
 
 ## Tools

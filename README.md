@@ -56,7 +56,7 @@ available.
 The following music is or was at one point in our source code and may
 be used in the final cut.
 
-[The Factor](http://freemusicarchive.org/music/Multifaros/The_Factory/) by [multifaros aka boerd](http://multifaros.info.se/)
+[The Factory](http://freemusicarchive.org/music/Multifaros/The_Factory/) by [multifaros aka boerd](http://multifaros.info.se/)
 
 ### Fonts
 

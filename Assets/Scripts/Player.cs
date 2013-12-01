@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
 
 	bool isWaitingToStart;
 	bool isReviving;
-	bool hitBlockThisFrame;
+	float invulnerabilityTime;
 	RBTimer reviveTimeout;
 	
 	// Abilities
@@ -33,7 +33,7 @@ public class Player : MonoBehaviour
 	int shieldStrength = 4;
 	const int UPGRADED_SHIELD_STRENGTH = 6;
 	public RGB playerRGB;
-	public float MAGNET_DIST = 6f;
+	public float MAGNET_DIST = 6.0f;
 	Inventory inventory;
 
 	public int WildcardCount { get; private set; }
@@ -135,8 +135,8 @@ public class Player : MonoBehaviour
 			return;
 		}
 		
-		// Clear block hit flag every frame.
-		hitBlockThisFrame = false;
+		// Reduce invulnerability frames until none remain.
+		invulnerabilityTime = (int) Mathf.Max (invulnerabilityTime - Time.deltaTime, 0.0f);
 		
 		bool isAlive = !IsDead;
 		if (isAlive) {
@@ -408,10 +408,10 @@ public class Player : MonoBehaviour
 		}
 		
 		// Don't let the player take double damage just for hitting two blocks at their seam.
-		if (hitBlockThisFrame) {
+		if (invulnerabilityTime > 0) {
 			return;
 		}
-		hitBlockThisFrame = true;
+		invulnerabilityTime = 0.3f;
 		
 		if (greenPower.IsPowerActive ()) {
 			TakeShieldHit ();

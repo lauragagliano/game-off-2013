@@ -28,7 +28,7 @@ public class Treadmill : MonoBehaviour
 	float resumeFromPauseSpeed;
 	float accelerationPerFrame;
 	float prevAccelerationPerFrame;
-	public float maxspeed = 60.0f;
+	public float maxspeed = 55.0f;
 	public GameObject emptySection;
 	public GameObject tutorialLessonLaser;
 	public GameObject tutorialLessonShields;

@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &102680
 GameObject:
   m_ObjectHideFlags: 0
@@ -192,12 +192,15 @@ MonoBehaviour:
   - {fileID: 100164, guid: 53c0188e3c2734a83b0a5c1f741e43ba, type: 2}
   - {fileID: 100010, guid: f04fa8efe70fb4ddd9166f050cbee583, type: 2}
   - {fileID: 100096, guid: b3cf1a66027774ec5b768650928afedf, type: 2}
+  - {fileID: 100254, guid: 59f43bc6d5d464d9a95e429879ccce5a, type: 2}
+  - {fileID: 100180, guid: 4d8e22224ccf5473a99fdbf78bcd8a6d, type: 2}
   hardChallengeSections:
   - {fileID: 100154, guid: 612a3334f48f2499b843c9daa2ff3286, type: 2}
   - {fileID: 100024, guid: 21bd9818000d74188ad5d568977d6b49, type: 2}
   - {fileID: 100202, guid: 831e96945b62c45d9b34796a77f18272, type: 2}
   - {fileID: 100116, guid: 921cfacce4fd340a98ee21374deb3904, type: 2}
   - {fileID: 100222, guid: a04f3deb9ed724cb4b467f2e6655adc0, type: 2}
+  - {fileID: 100246, guid: 1f79bbfc1b62543e8b119bbacc5250a4, type: 2}
   freebieSections:
   - {fileID: 100136, guid: 8218530cac53cc348bc2f875e9badf4c, type: 2}
   - {fileID: 100074, guid: 1d756b2af997e594c9502ece7dd6416f, type: 2}

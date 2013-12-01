@@ -1,4 +1,3 @@
-[#Git Hub Game Off 2013
 ## The Game
 
 Play the game at our Project page, here: [Color Quest](http://redbluegames.com/game-off-2013/)

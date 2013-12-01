@@ -202,7 +202,6 @@ public class HUD : MonoBehaviour
 		GUILayout.EndVertical ();
 		GUILayout.EndArea ();
 		
-		// TODO Let's at least make the Buy/AlreadyOwned a 3d button on the item mesh
 		GUILayout.BeginArea (new Rect (Screen.width - AREA_WIDTH, (Screen.height - AREA_HEIGHT), AREA_WIDTH, AREA_HEIGHT), areaStyle);
 		// Push our buttons to bottom of screen
 		GUILayout.BeginVertical ();

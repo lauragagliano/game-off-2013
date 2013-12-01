@@ -48,9 +48,6 @@ public class Treadmill : MonoBehaviour
 	public bool lerping;
 	const int lerpSpeed = 5;
 	
-	// TODO This can be removed before launch, for debugging
-	Hashtable sectionCount = new Hashtable();
-	
 	Status status;
 	
 	enum Status {
@@ -371,7 +368,6 @@ public class Treadmill : MonoBehaviour
 		if (distanceTraveled >= nextFreebieMarker) {
 			sectionBucket = freebieSections;
 			nextFreebieMarker = GenerateNextMarker (MIN_FREEBIE_DISTANCE, MAX_FREEBIE_DISTANCE);
-			Debug.Log ("Pulling a new freebie section. Next section at: " + nextFreebieMarker);
 		}
 		
 		// Pull from the challenge bucket when nextChallengeMarker has been passed
@@ -385,7 +381,6 @@ public class Treadmill : MonoBehaviour
 				sectionBucket = easyChallengeSections;
 			}
 			isInChallengeSection = true;
-			Debug.Log ("Pulling a challenge section. Next challenge at: " + nextChallengeMarker);
 		}
 		
 		SpawnSection (GetRandomSectionFromBucket (sectionBucket));
@@ -405,7 +400,6 @@ public class Treadmill : MonoBehaviour
 		Vector3 rowSpacing = new Vector3 (0, 0, zOverkill);
 		GameObject newSection = (GameObject)Instantiate (sectionToSpawn,
 				sectionSpawnZone.position + rowSpacing, Quaternion.identity);
-		CountSection (newSection.name);
 		sectionsInPlay.Add (newSection);
 	}
 	
@@ -457,16 +451,6 @@ public class Treadmill : MonoBehaviour
 		return sectionsInPlay [Mathf.Max (sectionsInPlay.Count - 1, 0)];
 	}
 	
-	void CountSection (string name)
-	{
-		if (sectionCount[name] != null) {
-			int oldval = (int) sectionCount[name];
-			sectionCount[name] = oldval + 1;
-		} else {
-			sectionCount.Add (name, 1);
-		}
-	}
-	
 	/*
 	 * Remove any references to the provided section and destroy it.
 	 */
@@ -499,7 +483,6 @@ public class Treadmill : MonoBehaviour
 	{
 		needsWildcard = false;
 		nextWildcardMarker = GenerateNextMarker (MIN_WILDCARD_DISTANCE, MAX_WILDCARD_DISTANCE);
-		Debug.Log ("Spawned a new wildcard. Next wildcard at: " + nextWildcardMarker);
 	}
 	
 	/*
@@ -524,43 +507,5 @@ public class Treadmill : MonoBehaviour
 		}
 	}
 	#endregion
-	
-	/*
-	 * When closing the program, report back which sections spawned and how many times.
-	 */
-	void OnDestroy ()
-	{
-		//PrintSectionCount ();
-	}
 
-	/*
-	 * Print all keys and values for the section count.
-	 */
-	void PrintSectionCount ()
-	{
-		// Print out the data on each section
-		foreach (string key in sectionCount.Keys) {
-			Debug.Log (key + ": " + sectionCount[key]);
-		}
-	}
-	
-	/*
-	 * Make sure we get 0 added for all of our possible sections to see
-	 * which sections are never instantiated.
-	 */
-	void AddAllSectionsToCounter ()
-	{
-		foreach (GameObject obj in normalSections) {
-			sectionCount.Add (obj.name, 0);
-		}
-		foreach (GameObject obj in easyChallengeSections) {
-			sectionCount.Add (obj.name, 0);
-		}
-		foreach (GameObject obj in hardChallengeSections) {
-			sectionCount.Add (obj.name, 0);
-		}
-		foreach (GameObject obj in freebieSections) {
-			sectionCount.Add (obj.name, 0);
-		}
-	}
 }

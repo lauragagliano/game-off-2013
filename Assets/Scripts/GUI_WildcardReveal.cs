@@ -211,7 +211,7 @@ public class GUI_WildcardReveal : MonoBehaviour
 		while(i < numItems) 
 		{
 			float rand = Random.Range (0, MAX_CHANCE);
-			float CHANCE_FOR_REVIVE = isReviveAllowed ? 10.0f : 0.0f;
+			float CHANCE_FOR_REVIVE = isReviveAllowed ? 15.0f : 0.0f;
 			float CHANCE_FOR_BOOST = isBoostAllowed ? 20.0f : 0.0f;
 			
 			Item itemtoGive;

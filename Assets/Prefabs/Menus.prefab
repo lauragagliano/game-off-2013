@@ -4372,7 +4372,7 @@ MonoBehaviour:
   type: 1
   itemName: GreenFillsFaster
   displayName: Green Fills Faster
-  cost: 600
+  cost: 400
   wildcardMaterial: {fileID: 0}
 --- !u!114 &11400004
 MonoBehaviour:
@@ -4404,7 +4404,7 @@ MonoBehaviour:
   type: 1
   itemName: RedFillsFaster
   displayName: Red Fills Faster
-  cost: 600
+  cost: 400
   wildcardMaterial: {fileID: 0}
 --- !u!114 &11400008
 MonoBehaviour:
@@ -4480,7 +4480,7 @@ MonoBehaviour:
   type: 1
   itemName: BlueFillsFaster
   displayName: Blue Fills Faster
-  cost: 600
+  cost: 400
   wildcardMaterial: {fileID: 0}
 --- !u!114 &11400016
 MonoBehaviour:

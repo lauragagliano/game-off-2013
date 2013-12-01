@@ -4356,7 +4356,7 @@ MonoBehaviour:
   type: 0
   itemName: SuperBoost
   displayName: Super Boost
-  cost: 1500
+  cost: 750
   wildcardMaterial: {fileID: 0}
 --- !u!114 &11400002
 MonoBehaviour:
@@ -4560,7 +4560,7 @@ MonoBehaviour:
   type: 0
   itemName: Boost
   displayName: Boost
-  cost: 750
+  cost: 500
   wildcardMaterial: {fileID: 0}
 --- !u!114 &11400026
 MonoBehaviour:

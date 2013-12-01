@@ -219,7 +219,6 @@ public class Player : MonoBehaviour
 	 */
 	void RenderCurrentColor ()
 	{
-		// TODO Why on Update???
 		PigmentBody body = (PigmentBody)playerGeo.GetComponent<PigmentBody> ();
 		body.SetColor (playerRGB.color);
 	}
@@ -608,10 +607,13 @@ public class Player : MonoBehaviour
 	#endregion
 	
 	#region #4 Player Powers and Abilities
-
+	
+	/*
+	 * Remaps color wheel enum to a material in the color manager.
+	 * If we have time to come back to this, I'd probably refactor this.
+	 */
 	void ChangeColors (ColorWheel color)
 	{
-		//TODO Refactor this dumb switch
 		switch (color) {
 		case ColorWheel.blue:
 			Camera.main.backgroundColor = ColorManager.Instance.blue.color;
@@ -626,14 +628,7 @@ public class Player : MonoBehaviour
 			Camera.main.backgroundColor = ColorManager.Instance.black.color;
 			break;
 		}
-		playerRGB.color = color;/*
-		foreach (GameObject pickup in pickups) {
-			if (pickup.CompareTag (Tags.PICKUP)) {
-				RGB pickupRGB = pickup.GetComponent<RGB> ();
-				pickupRGB.color = color;
-				pickupRGB.Refresh ();
-			}
-		}*/
+		playerRGB.color = color;
 	}
 	
 	/*
@@ -771,9 +766,8 @@ public class Player : MonoBehaviour
 	public void SlowDown ()
 	{
 		isUsingSlowdown = true;
-		//TODO This is a case where we could have a protected get component call that null checks.
 		audio.PlayOneShot (slowDownSound);
-		GameObject.Find (ObjectNames.TREADMILL).GetComponent<Treadmill> ().TemporarySlowDown (slowDownStrength);
+		GameManager.Instance.treadmill.TemporarySlowDown (slowDownStrength);
 		bluePower.ActivatePower ();
 	}
 	

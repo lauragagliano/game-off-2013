@@ -3,13 +3,10 @@ using System.Collections;
 
 public class CrystalPickup : Pickup
 {
-	RGB crystalRGB;
 	
 	protected override void Start ()
 	{
 		base.Start ();
-		// Get the appropriate color for the crystal
-		crystalRGB = GetComponent<RGB> ();
 	}
 	
 	protected override void AnimateIdle ()

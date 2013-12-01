@@ -3,13 +3,7 @@ using System.Collections;
 
 public class BlockLogic : MonoBehaviour
 {
-	RGB blockRGB;
 	public GameObject destroyFX;
-	
-	void Start ()
-	{
-		blockRGB = GetComponent<RGB> ();
-	}
 	
 	/*
 	 * Blow up the block with default explosion parameters

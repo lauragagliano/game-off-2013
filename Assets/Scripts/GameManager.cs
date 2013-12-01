@@ -8,7 +8,6 @@ using System.Collections;
 public class GameManager : Singleton<GameManager>
 {
 	public Player player;
-	// TODO make this private when we don't need to show difficulty on screen
 	public Difficulty difficulty = Difficulty.Easy;
 	GameState gameState = GameState.Running;
 	public int numPickupsPassed;
@@ -42,7 +41,6 @@ public class GameManager : Singleton<GameManager>
 	public bool DEBUG_MODE = false;
 	public bool DEBUG_SKIP_TUTORIAL = false;
 
-	// TODO make this private when we don't need to show difficulty on screen
 	public enum Difficulty
 	{
 		Easy,
@@ -214,7 +212,6 @@ public class GameManager : Singleton<GameManager>
 	 */
 	private void InitializeGame ()
 	{
-		// TODO We could improve performance by turning off objects as well as cameras
 		Camera menuCamera = GameObject.Find (ObjectNames.MENU_CAMERA).camera;
 		Camera gameCamera = GameObject.Find (ObjectNames.GAME_CAMERA).camera;
 		Camera storeCamera = GameObject.Find (ObjectNames.STORE_CAMERA).camera;
@@ -308,7 +305,6 @@ public class GameManager : Singleton<GameManager>
 	public void GoToStore ()
 	{
 		gameState = GameState.Store;
-		// TODO We could improve performance by turning off objects as well as cameras
 		Camera menuCamera = GameObject.Find (ObjectNames.MENU_CAMERA).camera;
 		Camera gameCamera = GameObject.Find (ObjectNames.GAME_CAMERA).camera;
 		Camera storeCamera = GameObject.Find (ObjectNames.STORE_CAMERA).camera;
@@ -336,7 +332,6 @@ public class GameManager : Singleton<GameManager>
 	 */
 	public void GoToMainMenu ()
 	{
-		// TODO This is a good place to deactivate assets as well
 		gameState = GameState.Menu;
 		Camera menuCamera = GameObject.Find (ObjectNames.MENU_CAMERA).camera;
 		Camera gameCamera = GameObject.Find (ObjectNames.GAME_CAMERA).camera;

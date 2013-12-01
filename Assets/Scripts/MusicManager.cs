@@ -5,13 +5,13 @@ public class MusicManager : MonoBehaviour
 {
 	
 	public AudioClip[] musicTracks;
-	AudioSource audio;
+	AudioSource audioSource;
 	int currentTrack = -1;
 	public bool startOnRandomTrack = false;
 	
 	void Awake ()
 	{
-		audio = GetComponent<AudioSource> ();
+		audioSource = GetComponent<AudioSource> ();
 		if ( startOnRandomTrack ) {
 			currentTrack = Random.Range(0, musicTracks.Length);
 		}
@@ -19,9 +19,9 @@ public class MusicManager : MonoBehaviour
 	
 	void Update ()
 	{
-		if (audio.isPlaying == false) {
-			audio.clip = GetNextTrack ();
-			audio.Play ();
+		if (audioSource.isPlaying == false) {
+			audioSource.clip = GetNextTrack ();
+			audioSource.Play ();
 		}
 	}
 	

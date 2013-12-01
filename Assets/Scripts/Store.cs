@@ -88,7 +88,6 @@ public class Store : MonoBehaviour
 	 */
 	public void BuyItem ()
 	{
-		//TODO Growing my program, no validation
 		Item itemToBuy = allItems[selectedItem].GetComponent<Item> ();
 		playerInventory.AddItem (itemToBuy.itemName);
 		GameManager.Instance.player.RemoveMoney (itemToBuy.cost);

@@ -204,7 +204,7 @@ MonoBehaviour:
   type: 1
   itemName: BlueFillsFaster
   displayName: Blue Fills Faster
-  cost: 600
+  cost: 600400
   wildcardMaterial: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:

@@ -1,5 +1,6 @@
-## The Game
 ![color quest logo](https://raw.github.com/redbluestudios/game-off-2013/gh-pages/assets/readme/title_web.png "color quest")
+
+## The Game
 
 Play the game at our Project page, here: [Color Quest](http://redbluegames.com/game-off-2013/)
 

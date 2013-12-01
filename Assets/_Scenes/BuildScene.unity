@@ -10177,7 +10177,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   distanceTraveled: 0
   scrollspeed: 0
-  maxspeed: 55
+  maxspeed: 52.5
   emptySection: {fileID: 100004, guid: 4dc3171fa09da4c42a2a7cbdec8d2cdb, type: 2}
   tutorialLessonLaser: {fileID: 100482, guid: 24ee28698c69441388a8ae044abaf365, type: 2}
   tutorialLessonShields: {fileID: 100114, guid: b49e88698a6994f6ca26892e9d068d06,

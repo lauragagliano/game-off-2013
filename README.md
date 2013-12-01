@@ -62,3 +62,12 @@ be used in the final cut.
 
 * [Press Start 2P](http://www.google.com/fonts#QuickUsePlace:quickUse/Family:Press+Start+2P)
 * [Bowlby One](http://www.fontsquirrel.com/fonts/list/foundry/vernon-adams) by Vernon Adams
+
+## Deployment Instructions
+
+Here are some instructions on how to load the source and run the game using Unity 3d.
+
+1. Clone this repository
+2. Open the root directory of your cloned repository as the project root
+3. Open up BuildScene -- this is the scene we built our final cuts from
+4. Play the game in the Unity game player or build it

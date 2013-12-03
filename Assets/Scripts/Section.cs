@@ -19,6 +19,7 @@ public class Section : MonoBehaviour
 	GameObject wildcardPrefab;
 
 	GameObject tempPrefabHolder;
+	public Vector3[] nodePositions;
 	Treadmill treadmill;
 	
 	void Awake ()
@@ -56,14 +57,14 @@ public class Section : MonoBehaviour
 		GameObject randomCrystalForPickupA = threeCrystals[0];
 		GameObject randomCrystalForPickupB = threeCrystals[1];
 		GameObject randomCrystalForPickupC = threeCrystals[2];
-
+		
+		foreach (Vector3 blockPosition in nodePositions) {
+			InstantiatePrefabAtPosition (blockPrefab, blockPosition, tempPrefabHolder.transform);
+		}
+		
 		foreach (Transform child in transform) {
-			// Replace placeholders with BlackBlock prefab
-			if (child.CompareTag (Tags.BLOCK)) {
-				InstantiatePrefabAtPlaceholder (blockPrefab, child, tempPrefabHolder.transform);
-			}
 			// Replace pickups with Pickup prefab.
-			else if (child.CompareTag (Tags.PICKUP_GROUP_A)) {
+			if (child.CompareTag (Tags.PICKUP_GROUP_A)) {
 				InstantiatePrefabAtPlaceholder (randomCrystalForPickupA, child, tempPrefabHolder.transform);
 			} else if (child.CompareTag (Tags.PICKUP_GROUP_B)) {
 				InstantiatePrefabAtPlaceholder (randomCrystalForPickupB, child, tempPrefabHolder.transform);
@@ -99,33 +100,19 @@ public class Section : MonoBehaviour
 		Destroy (placeholder.gameObject);
 		return clonedPrefab;
 	}
+	
+	/*
+	 * Create an instance of a prefab in resources at the same location as the placeholder. Also,
+	 * parent the prefab to any specified Transform. Then finally, kill the prefab.
+	 */
+	GameObject InstantiatePrefabAtPosition (GameObject prefab, Vector3 placeholderPosition, Transform prefabParent)
+	{
+		GameObject clonedPrefab = (GameObject)Instantiate(prefab, transform.position + placeholderPosition, Quaternion.identity);
 
-	/*
-	 * Ensure our pickup count is set correctly. This should be called in the
-	 * Editor so that we can make calculations against prefabs before instantiating them.
-	 */
-	public void SetPickupCount ()
-	{
-		numberOfPickups = 0;
-		foreach (Transform child in transform) {
-			if (child.CompareTag (Tags.PICKUP_GROUP_A) ||
-				child.CompareTag (Tags.PICKUP_GROUP_B) ||
-				child.CompareTag (Tags.PICKUP_GROUP_C)) {
-				numberOfPickups++;
-			}
-		}
+		clonedPrefab.transform.parent = prefabParent;
+		return clonedPrefab;
 	}
-	
-	/*
-	 * Take our boolean blockage values for entrance and exit and set the
-	 * bitmaps that will be used to match up sequences.
-	 */
-	public void SetEntranceAndExitBitmaps ()
-	{
-		entranceBitmap = CalculateDecimalValue (entranceOpenings);
-		exitBitmap = CalculateDecimalValue (exitOpenings);
-	}
-	
+
 	/*
 	 * Take an array of booleans and calculate what they are as a bitmap if transposed
 	 * to the lowest bits. For example the values TFTT would be 0000 1011 as a byte.
@@ -163,4 +150,52 @@ public class Section : MonoBehaviour
 	{
 		return (exitBitmap & nextSection.entranceBitmap) > 0;
 	}
+	
+	#region Editor Tools
+	
+	/*
+	 * Ensure our pickup count is set correctly. This should be called in the
+	 * Editor so that we can make calculations against prefabs before instantiating them.
+	 */
+	public void SetPickupCount ()
+	{
+		numberOfPickups = 0;
+		foreach (Transform child in transform) {
+			if (child.CompareTag (Tags.PICKUP_GROUP_A) ||
+				child.CompareTag (Tags.PICKUP_GROUP_B) ||
+				child.CompareTag (Tags.PICKUP_GROUP_C)) {
+				numberOfPickups++;
+			}
+		}
+	}
+	
+	/*
+	 * Take our boolean blockage values for entrance and exit and set the
+	 * bitmaps that will be used to match up sequences.
+	 */
+	public void SetEntranceAndExitBitmaps ()
+	{
+		entranceBitmap = CalculateDecimalValue (entranceOpenings);
+		exitBitmap = CalculateDecimalValue (exitOpenings);
+	}
+	
+	/*
+	 * Set the vector array that stores positions of all nodes.
+	 */
+	public void SetNodePositions ()
+	{
+		string[] nodeTags = {Tags.BLOCK};//{Tags.PICKUP_GROUP_A, Tags.PICKUP_GROUP_B, Tags.PICKUP_GROUP_C,
+				//Tags.RED_PICKUP, Tags.GREEN_PICKUP, Tags.BLUE_PICKUP, Tags.BLOCK, Tags.WILDCARD};
+		List<Vector3> positions = new List<Vector3> ();
+		foreach (Transform child in transform) {
+			foreach (string tag in nodeTags) {
+				if (child.CompareTag (tag)) {
+					positions.Add (child.transform.localPosition);
+				}
+			}
+		}
+		nodePositions = positions.ToArray ();
+	}
+
+	#endregion
 }

@@ -19,7 +19,17 @@ public class Section : MonoBehaviour
 	GameObject wildcardPrefab;
 
 	GameObject tempPrefabHolder;
-	public Vector3[] nodePositions;
+	
+	// Placeholder arrays for instantiating in-game prefabs
+	public Vector3[] blockPlaceholders;
+	public Vector3[] pickupAPlaceholders;
+	public Vector3[] pickupBPlaceholders;
+	public Vector3[] pickupCPlaceholders;
+	public Vector3[] redPickupPlaceholders;
+	public Vector3[] greenPickupPlaceholders;
+	public Vector3[] bluePickupPlaceholders;
+	public Vector3[] wildcardPlaceholders;
+	
 	Treadmill treadmill;
 	
 	void Awake ()
@@ -58,59 +68,34 @@ public class Section : MonoBehaviour
 		GameObject randomCrystalForPickupB = threeCrystals[1];
 		GameObject randomCrystalForPickupC = threeCrystals[2];
 		
-		foreach (Vector3 blockPosition in nodePositions) {
-			InstantiatePrefabAtPosition (blockPrefab, blockPosition, tempPrefabHolder.transform);
-		}
-		
-		foreach (Transform child in transform) {
-			// Replace pickups with Pickup prefab.
-			if (child.CompareTag (Tags.PICKUP_GROUP_A)) {
-				InstantiatePrefabAtPlaceholder (randomCrystalForPickupA, child, tempPrefabHolder.transform);
-			} else if (child.CompareTag (Tags.PICKUP_GROUP_B)) {
-				InstantiatePrefabAtPlaceholder (randomCrystalForPickupB, child, tempPrefabHolder.transform);
-			} else if (child.CompareTag (Tags.PICKUP_GROUP_C)) {
-				InstantiatePrefabAtPlaceholder (randomCrystalForPickupC, child, tempPrefabHolder.transform);
-			} else if (child.CompareTag (Tags.RED_PICKUP)) {
-				InstantiatePrefabAtPlaceholder (redCrystalPrefab, child, tempPrefabHolder.transform);
-			} else if (child.CompareTag (Tags.GREEN_PICKUP)) {
-				InstantiatePrefabAtPlaceholder (greenCrystalPrefab, child, tempPrefabHolder.transform);
-			} else if (child.CompareTag (Tags.BLUE_PICKUP)) {
-				InstantiatePrefabAtPlaceholder (blueCrystalPrefab, child, tempPrefabHolder.transform);
-			} else if (child.CompareTag (Tags.WILDCARD)) {
-				if (treadmill.NeedsWildcard ()) {
-					InstantiatePrefabAtPlaceholder (wildcardPrefab, child, tempPrefabHolder.transform);
-					treadmill.OnWildcardSpawn ();
-				} else {
-					child.gameObject.SetActive (false);
-				}
+		// Place all our prefabs on the section
+		InstantiatePrefabsFromArray (blockPrefab, blockPlaceholders, tempPrefabHolder.transform);
+		InstantiatePrefabsFromArray (randomCrystalForPickupA, pickupAPlaceholders, tempPrefabHolder.transform);
+		InstantiatePrefabsFromArray (randomCrystalForPickupB, pickupBPlaceholders, tempPrefabHolder.transform);
+		InstantiatePrefabsFromArray (randomCrystalForPickupC, pickupCPlaceholders, tempPrefabHolder.transform);
+		InstantiatePrefabsFromArray (redCrystalPrefab, redPickupPlaceholders, tempPrefabHolder.transform);
+		InstantiatePrefabsFromArray (greenCrystalPrefab, greenPickupPlaceholders, tempPrefabHolder.transform);
+		InstantiatePrefabsFromArray (blueCrystalPrefab, bluePickupPlaceholders, tempPrefabHolder.transform);
+		if (treadmill.NeedsWildcard ()) {
+			foreach (Vector3 wildcardPostion in wildcardPlaceholders) {
+				GameObject clonedPrefab = (GameObject)Instantiate(wildcardPrefab, transform.position + wildcardPostion,
+					Quaternion.identity);
+				clonedPrefab.transform.parent = tempPrefabHolder.transform;
+				treadmill.OnWildcardSpawn ();
 			}
 		}
-		GameManager.Instance.numPickupsPassed += numberOfPickups;
-	}
-
-	/*
-	 * Create an instance of a prefab in resources at the same location as the placeholder. Also,
-	 * parent the prefab to any specified Transform. Then finally, kill the prefab.
-	 */
-	GameObject InstantiatePrefabAtPlaceholder (GameObject prefab, Transform placeholder, Transform prefabParent)
-	{
-		GameObject clonedPrefab = (GameObject)Instantiate(prefab, placeholder.position, Quaternion.identity);
-
-		clonedPrefab.transform.parent = prefabParent;
-		Destroy (placeholder.gameObject);
-		return clonedPrefab;
 	}
 	
 	/*
-	 * Create an instance of a prefab in resources at the same location as the placeholder. Also,
-	 * parent the prefab to any specified Transform. Then finally, kill the prefab.
+	 * Iterate over an array of positions and create an instance of a prefab in resources at the same
+	 * location as each placeholder. Also, parent the prefab to any specified Transform.
 	 */
-	GameObject InstantiatePrefabAtPosition (GameObject prefab, Vector3 placeholderPosition, Transform prefabParent)
+	void InstantiatePrefabsFromArray (GameObject prefab, Vector3[] positionArray, Transform prefabParent)
 	{
-		GameObject clonedPrefab = (GameObject)Instantiate(prefab, transform.position + placeholderPosition, Quaternion.identity);
-
-		clonedPrefab.transform.parent = prefabParent;
-		return clonedPrefab;
+		foreach (Vector3 prefabPosition in positionArray) {
+			GameObject clonedPrefab = (GameObject)Instantiate(prefab, transform.position + prefabPosition, Quaternion.identity);
+			clonedPrefab.transform.parent = prefabParent;
+		}
 	}
 
 	/*
@@ -184,18 +169,52 @@ public class Section : MonoBehaviour
 	 */
 	public void SetNodePositions ()
 	{
-		string[] nodeTags = {Tags.BLOCK};//{Tags.PICKUP_GROUP_A, Tags.PICKUP_GROUP_B, Tags.PICKUP_GROUP_C,
-				//Tags.RED_PICKUP, Tags.GREEN_PICKUP, Tags.BLUE_PICKUP, Tags.BLOCK, Tags.WILDCARD};
-		List<Vector3> positions = new List<Vector3> ();
+		List<Vector3> blocks = new List<Vector3> ();
+		List<Vector3> pickupsA = new List<Vector3> ();
+		List<Vector3> pickupsB = new List<Vector3> ();
+		List<Vector3> pickupsC = new List<Vector3> ();
+		List<Vector3> redPickups = new List<Vector3> ();
+		List<Vector3> greenPickups = new List<Vector3> ();
+		List<Vector3> bluePickups = new List<Vector3> ();
+		List<Vector3> wildcardPickups = new List<Vector3> ();
+		
 		foreach (Transform child in transform) {
-			foreach (string tag in nodeTags) {
-				if (child.CompareTag (tag)) {
-					positions.Add (child.transform.localPosition);
-				}
+			if (child.CompareTag (Tags.BLOCK)) {
+				AddPositionToList (child, ref blocks);
+			} else if (child.CompareTag (Tags.PICKUP_GROUP_A)) {
+				AddPositionToList (child, ref pickupsA);
+			} else if (child.CompareTag (Tags.PICKUP_GROUP_B)) {
+				AddPositionToList (child, ref pickupsB);
+			} else if (child.CompareTag (Tags.PICKUP_GROUP_C)) {
+				AddPositionToList (child, ref pickupsC);
+			} else if (child.CompareTag (Tags.RED_PICKUP)) {
+				AddPositionToList (child, ref redPickups);
+			} else if (child.CompareTag (Tags.GREEN_PICKUP)) {
+				AddPositionToList (child, ref greenPickups);
+			} else if (child.CompareTag (Tags.BLUE_PICKUP)) {
+				AddPositionToList (child, ref bluePickups);
+			} else if (child.CompareTag (Tags.WILDCARD)) {
+				AddPositionToList (child, ref wildcardPickups);
 			}
 		}
-		nodePositions = positions.ToArray ();
+		blockPlaceholders = blocks.ToArray ();
+		pickupAPlaceholders = pickupsA.ToArray ();
+		pickupBPlaceholders = pickupsB.ToArray ();
+		pickupCPlaceholders = pickupsC.ToArray ();
+		redPickupPlaceholders = redPickups.ToArray ();
+		greenPickupPlaceholders = greenPickups.ToArray ();
+		bluePickupPlaceholders = bluePickups.ToArray ();
+		wildcardPlaceholders = wildcardPickups.ToArray ();
 	}
-
+	
+	/*
+	 * Helper method that adds the location of a provided Transform to the provided
+	 * list of positions. List is passed by reference.
+	 */
+	void AddPositionToList (Transform transformToPlace, ref List<Vector3> listToAddTo)
+	{
+		listToAddTo.Add (transformToPlace.localPosition);
+	}
+	
 	#endregion
 }

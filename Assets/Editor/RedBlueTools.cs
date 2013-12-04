@@ -21,12 +21,20 @@ public class RedBlueTools : EditorWindow
 			CalculateSectionBitmapsAndPickups ();
 		}
 		if (GUILayout.Button ("Set Node Position Array")) {
-			SetNodePositions ();
+			if (EditorApplication.currentScene == "Assets/_Scenes/LevelDesigns.unity") {
+				SetNodePositions ();
+			} else {
+				Debug.LogWarning ("This tool can only be used on the LevelDesigns scene.");
+			}
 		}
 		if (GUILayout.Button ("Finalize Sections")) {
-			CalculateSectionBitmapsAndPickups ();
-			SetNodePositions ();
-			CopySectionsToPrefabs ();
+			if (EditorApplication.currentScene == "Assets/_Scenes/LevelDesigns.unity") {
+				CalculateSectionBitmapsAndPickups ();
+				SetNodePositions ();
+				CopySectionsToPrefabs ();
+			} else {
+				Debug.LogWarning ("This tool can only be used on the LevelDesigns scene.");
+			}
 		}
 	}
 	
@@ -73,6 +81,10 @@ public class RedBlueTools : EditorWindow
 		}
 	}
 	
+	/*
+	 * Iterate over all the sections in the scene, clean them up, and then make a copy
+	 * into the finalized sections folder. Create the folder if needed.
+	 */
 	void CopySectionsToPrefabs ()
 	{
 		// Create containing folder if it doesn't exist
@@ -81,27 +93,30 @@ public class RedBlueTools : EditorWindow
 		string fullPath = parentFolder + "/" + folderName;
 		if (!System.IO.Directory.Exists (fullPath)) {
 			AssetDatabase.CreateFolder (parentFolder, folderName);
-			
-			// Copy our sections from the scene into the containing folder, removing nodes as we go
-			GameObject[] allSections = GameObject.FindGameObjectsWithTag (Tags.SECTION);
-			List<GameObject> trash = new List<GameObject> ();
-			foreach (GameObject sectionObject in allSections) {
-				GameObject editedSection = (GameObject) GameObject.Instantiate (sectionObject);
-				foreach (Transform child in editedSection.transform) {
-					if (child.CompareTag (Tags.BLOCK)) {
+		}
+		
+		// Copy our sections from the scene into the containing folder, removing nodes as we go
+		string[] allTags = {Tags.BLOCK, Tags.PICKUP_GROUP_A, Tags.PICKUP_GROUP_B, Tags.PICKUP_GROUP_C,
+							Tags.RED_PICKUP, Tags.GREEN_PICKUP, Tags.BLUE_PICKUP, Tags.WILDCARD};
+		GameObject[] allSections = GameObject.FindGameObjectsWithTag (Tags.SECTION);
+		List<GameObject> trash = new List<GameObject> ();
+		foreach (GameObject sectionObject in allSections) {
+			GameObject editedSection = (GameObject) GameObject.Instantiate (sectionObject);
+			// Check all children for tags for objects that can be cleaned
+			// This assumes you've already set the node arrays for these objects
+			foreach (Transform child in editedSection.transform) {
+				foreach (string tag in allTags) {
+					if (child.CompareTag (tag)) {
 						trash.Add (child.gameObject);
 					}
 				}
-				foreach (GameObject child in trash) {
-					DestroyImmediate (child);
-				}
-				PrefabUtility.CreatePrefab (fullPath + "/" + sectionObject.name + ".prefab", editedSection,
-					ReplacePrefabOptions.ReplaceNameBased);
-				DestroyImmediate (editedSection);
 			}
-			//DestroyImmediate (trash);
-		} else {
-			Debug.LogWarning ("You need to delete the FinalizedPrefabs folder first!");
+			foreach (GameObject child in trash) {
+				DestroyImmediate (child);
+			}
+			PrefabUtility.CreatePrefab (fullPath + "/" + sectionObject.name + ".prefab", editedSection,
+				ReplacePrefabOptions.ReplaceNameBased);
+			DestroyImmediate (editedSection);
 		}
 	}
 }

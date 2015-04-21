@@ -4,15 +4,16 @@ using System.Collections.Generic;
 
 public class Player : MonoBehaviour
 {
-	public int money;
-	public int curHealth;
+	//Added private setters to prevent user hacking which Unity is prone to.
+	public int money {get; private set;}
+	public int curHealth {get; private set;}
 	const int BASE_HEALTH = 1;
 	public int curShields;
-
+	
 	public bool IsDead { get; private set; }
 
 	bool isWaitingToStart;
-	bool isReviving;
+	bool isReviving {get; private set;}
 	float invulnerabilityTime;
 	RBTimer reviveTimeout;
 	
